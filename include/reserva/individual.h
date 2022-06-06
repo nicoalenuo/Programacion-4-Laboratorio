@@ -42,6 +42,15 @@ class individual:public reserva{
         void setCosto(float c){
             costo=c;
         }
+        void finalizarSiEsReservaBuscada(string, string);
+        bool perteneceHusped(string);
+        string getTipoReserva();
+        void darBajaReserva();
+        map<int, DTEstadia*> obtenerEstadias();
+        DTEstadia* obtenerEstadia();
+        DTReserva* obtenerResrvaDeEst();
+        bool tieneEstadiaFinalizadaDeHuesped(string);
+        DTEstadia* darEstadiaDeHuesped(string);
         ~individual();
 };
 

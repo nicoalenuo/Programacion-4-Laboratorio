@@ -34,6 +34,10 @@ class estadia{
         void setCodigo(int c){
             codigo=c;
         }
+        bool estaActiva();
+        void finalizarEstadiaActiva();
+        void eliminarEstadia();
+        DTCalificacion* obtenerCalificacionDeEstadia();
         ~estadia();
 };
 

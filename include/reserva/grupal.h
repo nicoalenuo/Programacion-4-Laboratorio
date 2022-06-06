@@ -51,6 +51,7 @@ class grupal:public reserva{
         void setCantHuespedes(int ch){
             cantHuespedes=ch;
         }
+
         ~grupal();
         
 };

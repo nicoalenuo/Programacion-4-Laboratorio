@@ -14,7 +14,12 @@ class huespedIndividual{
 
         estadia* estadia;
     public:
-        ~huespedIndividual();                                                                                                                                                                        
+        void finalizarEstadiaActiva(string);
+        DTEstadia* darDatosEstadia();
+        DTReserva* obtenerReserva();
+        void DarBaja();
+        bool tieneEstFinalizadaDeHus();
+        ~huespedIndividual(); 
 };
 
 #endif

@@ -24,7 +24,12 @@ class calificacion{
         void setId(int);
         void setPuntuacion(int);
         void setComentario(string);
-        void setFecha(Date);   
+        void setFecha(Date); 
+        bool sinRespuesta();
+        void removerCalificacion();
+        DTRespuesta* obtenerRespuesta();
+        void ingresarRespuesta(string);
+        DTCalificacion* getDatosCalificacion();
         ~calificacion();  
 };
 

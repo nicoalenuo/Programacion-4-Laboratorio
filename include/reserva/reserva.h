@@ -28,6 +28,15 @@ class reserva{
         virtual void setCheckOut(Date)=0;
         virtual void setEstado(EstadoReserva)=0;
         virtual void setCosto(float)=0;
+        virtual void finalizarSiEsReservaBuscada(string, string)=0;
+        virtual bool perteneceHusped(string)=0;
+        virtual string getTipoReserva()=0;
+        virtual void darBajaReserva()=0;
+        virtual map<int, DTEstadia*> obtenerEstadias()=0;
+        virtual DTEstadia* obtenerEstadia()=0;
+        virtual DTReserva* obtenerResrvaDeEst()=0;
+        virtual bool tieneEstadiaFinalizadaDeHuesped(string)=0;
+        virtual DTEstadia* darEstadiaDeHuesped(string)=0;
         virtual ~reserva()=0;
 };
 

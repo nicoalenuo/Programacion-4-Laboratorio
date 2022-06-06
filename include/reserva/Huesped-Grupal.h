@@ -14,6 +14,12 @@ class huespedGrupal{
         estadia* estadia;
         
     public:
+        void finalizarEstadiaActiva(string);
+        DTEstadia* darDatosEstadia();
+        DTReserva* obtenerReserva();
+        void DarBaja();
+        bool tieneEstFinalizadaDeHus(string);
+        bool esDeHuesped(string);
         ~huespedGrupal();                                                                                                                                                                          
 };
 
