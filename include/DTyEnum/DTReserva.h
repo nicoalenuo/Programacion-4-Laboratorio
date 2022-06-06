@@ -13,10 +13,6 @@ class DTReserva {
         Date checkIn;
         Date checkOut;
         EstadoReserva estado;
-
-
-	
-
     public:
         ~DTReserva();
         
@@ -28,7 +24,7 @@ class DTReserva {
             (*this).codigo = codigo;
         }
 
-        public Date getCheckIn() {
+        Date getCheckIn() {
             return (*this).checkIn;
         }
 
