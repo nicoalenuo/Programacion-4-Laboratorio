@@ -12,7 +12,6 @@
 #include "../DTyEnum/Date.h"
 #include "../DTyEnum/DTHuesped.h"
 #include "../DTyEnum/DTHostal.h"
-#include "../DTyEnum/DTIdentificador.h"
 #include "../reserva/reserva.h"
 #include "../reserva/individual.h"
 #include "../reserva/grupal.h"
@@ -31,7 +30,7 @@ class IControladorReserva{
         virtual DTHuesped* DesignarPropietarioDeReserva(DTHuesped*)=0;
         virtual void IngresarHuespedEnReserva(DTHuesped*)=0;
         virtual void CancelarReserva()=0;
-        virtual DTIdentificador* confirmarReserva()=0; ///////////////////////////////////////////////////////////// ARREGLAR AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        virtual void confirmarReserva()=0; 
         virtual map<int,DTReserva*> ListarReservasNoCanceladasDeHuesped(DTHostal*, string)=0;
         virtual void confirmarBaja(DTHostal*, int);
         virtual void finalizarEstadiaActiva(string, string)=0;

@@ -11,7 +11,7 @@ class DTUsuario{
     protected:
 
     public:
-
+     ~DTUsuario();
 };
 
 #endif

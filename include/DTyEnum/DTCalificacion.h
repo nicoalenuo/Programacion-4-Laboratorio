@@ -9,7 +9,7 @@ class DTCalificacion {
     private:
 
     public:
-
+     ~DTCalificacion();
 };
 
 #endif

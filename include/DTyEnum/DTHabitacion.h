@@ -9,6 +9,7 @@ class DTHabitacion {
     private:
 
     public:
+     ~DTHabitacion();
 
 };
 

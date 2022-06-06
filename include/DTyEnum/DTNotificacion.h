@@ -9,6 +9,7 @@ class DTNotificacion{
     private:
 
     public:
+     ~DTNotificacion();
 
 };
 
