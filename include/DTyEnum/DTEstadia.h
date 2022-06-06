@@ -9,6 +9,7 @@ class DTEstadia {
     private:
 
     public:
+        ~DTEstadia();
 
 };
 

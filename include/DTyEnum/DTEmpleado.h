@@ -14,7 +14,7 @@ class DTEmpleado:public DTUsuario {
         DTEmpleado(string,string,string,Cargo);
         DTEmpleado();
        ~DTEmpleado();
-        int TipoCargo(){
+        int getTipoCargo(){
             return (*this).TipoCargo;
         }
         void setTipoCargo(TipoCargo c){

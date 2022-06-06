@@ -14,13 +14,13 @@ class DTHuesped:public DTUsuario{
         DTHuesped(string,string,string,bool);
         DTHuesped();
         ~DTHuesped();
-    bool isEsFinger() {
-		return (*this).esFinger;
-	}
+        bool isEsFinger() {
+            return (*this).esFinger;
+        }
 
-	void setEsFinger(bool esFinger) {
-		(*this).esFinger = esFinger;
-	}
+        void setEsFinger(bool esFinger) {
+            (*this).esFinger = esFinger;
+        }
 
 };
 

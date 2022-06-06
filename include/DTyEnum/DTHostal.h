@@ -15,37 +15,37 @@ class DTHostal{
         DTHostal(string,string,string,float);
         float getCalificacionPromedio();
         ~DTHostal();
-        
-    string getNombre() {
-        return (*this).nombre;
-    }
-	void setNombre(string nombre) {
-		(*this).nombre = nombre;
-	}
 
-	string getDireccion() {
-		return (*this).direccion;
-	}
+        string getNombre() {
+            return (*this).nombre;
+        }
+        void setNombre(string nombre) {
+            (*this).nombre = nombre;
+        }
 
-	void setDireccion(string direccion) {
-		(*this).direccion = direccion;
-	}
+        string getDireccion() {
+            return (*this).direccion;
+        }
 
-	string getTelefono() {
-		return (*this).telefono;
-	}
+        void setDireccion(string direccion) {
+            (*this).direccion = direccion;
+        }
 
-	void setTelefono(string telefono) {
-		(*this).telefono = telefono;
-	}
+        string getTelefono() {
+            return (*this).telefono;
+        }
 
-	float getCalificacionPromedio() {
-		return (*this).calificacionPromedio;
-	}
+        void setTelefono(string telefono) {
+            (*this).telefono = telefono;
+        }
 
-	void setCalificacionPromedio(float calificacionPromedio) {
-		(*this).calificacionPromedio = calificacionPromedio;
-	}
+        float getCalificacionPromedio() {
+            return (*this).calificacionPromedio;
+        }
+
+        void setCalificacionPromedio(float calificacionPromedio) {
+            (*this).calificacionPromedio = calificacionPromedio;
+        }
     
 };
 

@@ -11,7 +11,7 @@ class DTReservaIndividual:public DTReserva {
     private:
 
     public:
-
+    ~DTReservaIndividual();
 };
 
 #endif
