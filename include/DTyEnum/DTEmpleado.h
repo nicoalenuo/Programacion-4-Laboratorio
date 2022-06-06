@@ -14,6 +14,7 @@ class DTEmpleado:public DTUsuario {
     public:
         DTEmpleado(string,string,string,Cargo);
         ~DTEmpleado();
+        
         string getNombre() {
             return (*this).nombre;
         }

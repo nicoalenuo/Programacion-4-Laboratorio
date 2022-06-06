@@ -14,6 +14,7 @@ class DTCalificacion {
     public:
         DTCalificacion(int,int,string,Date);
         ~DTCalificacion();
+        
         int getIc(){
             return (*this).id;
         }

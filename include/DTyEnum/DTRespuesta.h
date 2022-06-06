@@ -11,6 +11,7 @@ class DTRespuesta {
         string email;
         string password;
     public:
+        DTRespuesta(string,string,string);
         ~DTRespuesta();
         
         string getNombre() {

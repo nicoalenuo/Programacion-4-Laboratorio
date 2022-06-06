@@ -13,6 +13,7 @@ class DTHabitacion {
     public:
         ~DTHabitacion();
         DTHabitacion(int,float,int);
+        
         int getNumero(){
             return numero;
         }

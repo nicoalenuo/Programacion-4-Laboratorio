@@ -13,6 +13,7 @@ class DTEstadia {
     public:
         DTEstadia(Date,Date,int);
         ~DTEstadia();
+        
         Date getFechaEntrada(){
             return fechaEntrada;
         }

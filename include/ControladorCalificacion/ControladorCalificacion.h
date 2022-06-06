@@ -21,8 +21,8 @@ class ControladorCalificacion:public IControladorCalificacion {
     public:
         static ControladorCalificacion* getInstance();
 
-        void agregarSuscripto(empleado);
-        void eliminarSuscripto(empleado);
+        void agregarSuscripto(empleado*);
+        void eliminarSuscripto(empleado*);
         map<int,DTEstadia*> obtenerEstadiasHuesped(string);
         void agregarCalificacion(string,int);
         map<int,DTCalificacion*> obtenerCalificaciones(string);

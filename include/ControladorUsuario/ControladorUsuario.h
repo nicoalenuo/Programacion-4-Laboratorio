@@ -34,7 +34,7 @@ class ControladorUsuario:public IControladorUsuario {
         map<string,DTEmpleado*> obtenerEmpleadosNoAsignados();
         map<string,DTEmpleado*> obtenerEmpleados();
         set<DTNotificacion*> consultarNotificaciones(string);
-        DTUsuario devolverDatos();
+        DTUsuario* devolverDatos();
         map<string,DTHuesped*> obtenerHuespedes();
         void AsignarEmpleadoAHostal(string);
         map<string,DTUsuario*> obtenerUsuarios();

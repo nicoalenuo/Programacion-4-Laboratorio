@@ -7,36 +7,36 @@ using namespace std;
 
 class DTNotificacion{
     private:
-    string NombreAutor;
-    string Comentario;
-    int Puntuacion;
+    string nombreAutor;
+    string comentario;
+    int puntuacion;
 
     public:
         DTNotificacion(string,string,int);
         ~DTNotificacion();
-        
+
         string getNombreAutor() {
-            return (*this).NombreAutor;
+            return (*this).nombreAutor;
         }
 
-        void setNombreAutor(string NombreAutor) {
-            (*this).NombreAutor = NombreAutor;
+        void setNombreAutor(string nombreAutor) {
+            (*this).nombreAutor = nombreAutor;
         }
 
         string getComentario() {
-            return (*this).Comentario;
+            return (*this).comentario;
         }
 
-        void setComentario(string Comentario) {
-            (*this).Comentario = Comentario;
+        void setComentario(string comentario) {
+            (*this).comentario = comentario;
         }
 
         int getPuntuacion() {
-            return (*this).Puntuacion;
+            return (*this).puntuacion;
         }
 
-        void setPuntuacion(int Puntuacion) {
-            (*this).Puntuacion = Puntuacion;
+        void setPuntuacion(int puntuacion) {
+            (*this).puntuacion = puntuacion;
         }
 
 };

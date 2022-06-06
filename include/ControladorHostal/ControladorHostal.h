@@ -21,8 +21,8 @@ class ControladorHostal:public IControladorHostal {
     public:
         static ControladorHostal* getInstance();
 
-        void asignarEmpleadoElegido(empleado);
-        hostal obtenerHostal(DTHostal*);
+        void asignarEmpleadoElegido(empleado*);
+        hostal* obtenerHostal(DTHostal*);
         bool existeHabEnHostal(int,string);
         map<string,DTEmpleado*> quitarAsignados(map<string,DTEmpleado*>);
         void IngresarDatosHostal(DTHostal*);
@@ -41,7 +41,7 @@ class ControladorHostal:public IControladorHostal {
         string mostrarHostal();
         float obtenerPromCalificacionesDeHostal();
         map<int,DTCalificacion*> obtenerCalificacionesDeHostal();
-        map<string,string> mostrarHabitacion(DTHabitacion*);
+        void mostrarHabitacion(DTHabitacion*);
         map<int,DTReserva*> obtenerReservasDeHostal();
         void liberarHostal();
         map<int,DTEstadia*> obtenerEstadiasDeHostal();

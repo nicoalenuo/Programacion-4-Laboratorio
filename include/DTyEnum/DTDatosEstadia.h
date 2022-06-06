@@ -20,6 +20,7 @@ class DTDatosEstadia {
     public:
         DTDatosEstadia(DTHostal*,DTHuesped*,DTHabitacion*,Date,Date);
         ~DTDatosEstadia();
+        
         DTHostal* getHostalDeEstadia(){
             return (*this).hostal;
         }

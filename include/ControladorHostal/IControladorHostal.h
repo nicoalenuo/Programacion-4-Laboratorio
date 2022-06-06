@@ -18,8 +18,8 @@ using namespace std;
 
 class IControladorHostal {
     public:
-        virtual void asignarEmpleadoElegido(empleado) = 0;
-        virtual hostal obtenerHostal(DTHostal*)=0;
+        virtual void asignarEmpleadoElegido(empleado*) = 0;
+        virtual hostal* obtenerHostal(DTHostal*)=0;
         virtual bool existeHabEnHostal(int,string)=0;
         virtual map<string,DTEmpleado*> quitarAsignados(map<string,DTEmpleado*>)=0;
         virtual void IngresarDatosHostal(DTHostal*)=0;
@@ -38,7 +38,7 @@ class IControladorHostal {
         virtual string mostrarHostal()=0;
         virtual float obtenerPromCalificacionesDeHostal()=0;
         virtual map<int,DTCalificacion*> obtenerCalificacionesDeHostal()=0;
-        virtual map<string,string> mostrarHabitacion(DTHabitacion*)=0;
+        virtual void mostrarHabitacion(DTHabitacion*)=0;
         virtual map<int,DTReserva*> obtenerReservasDeHostal()=0;
         virtual void liberarHostal()=0;
         virtual map<int,DTEstadia*> obtenerEstadiasDeHostal()=0;

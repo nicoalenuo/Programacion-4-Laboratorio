@@ -25,8 +25,8 @@ class IControladorCalificacion {
     private:
         virtual void notificarSuscriptos(string,int,string)=0;
     public:
-        virtual void agregarSuscripto(empleado)=0;
-        virtual void eliminarSuscripto(empleado)=0;
+        virtual void agregarSuscripto(empleado*)=0;
+        virtual void eliminarSuscripto(empleado*)=0;
         virtual map<int,DTEstadia*> obtenerEstadiasHuesped(string)=0;
         virtual void agregarCalificacion(string,int)=0;
         virtual map<int,DTCalificacion*> obtenerCalificaciones(string)=0;
