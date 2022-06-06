@@ -1,6 +1,6 @@
 #include "../include/hostal.h"
 
-DTHostal hostal::darDatos(){
+DTHostal* hostal::darDatos(){
     float calificacionPromedio=0;
     int punt;
     int cant=0;
@@ -15,7 +15,7 @@ DTHostal hostal::darDatos(){
         calificacionPromedio=calificacionPromedio/cant;
     
     
-    DTHostal resultado = DTHostal((*this).nombre , (*this).direccion , (*this).telefono , calificacionPromedio);
+    DTHostal* resultado = new DTHostal((*this).nombre , (*this).direccion , (*this).telefono , calificacionPromedio);
 
     return resultado;
 }

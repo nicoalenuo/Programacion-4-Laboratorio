@@ -42,8 +42,8 @@ class habitacion{
         void agregarReserva(reserva* r);
         bool perteneceAHostal(DTHostal* h);
         map<int, DTReserva*> obtenerReservas();
-        virtual map<int, DTEstadia*> obtenerEstadias();
-        DTDatosEstadias* obtenerDatos();
+        map<int, DTEstadia*> obtenerEstadias();
+        DTDatosEstadia* obtenerDatos();
         DTReserva* obtenerReservaDeEstadia();
 };    
 

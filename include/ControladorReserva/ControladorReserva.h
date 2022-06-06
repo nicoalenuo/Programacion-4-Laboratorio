@@ -29,7 +29,7 @@ class ControladorReserva:public IControladorReserva {
         DTHuesped* DesignarPropietarioDeReserva(DTHuesped*);
         void IngresarHuespedEnReserva(DTHuesped*);
         void CancelarReserva();
-        DTIdentificador* confirmarReserva(); ////////////////////////////////////ARREGLAR AAAAAAAAAAAAAAAAAAAAAAAAAAAAA 
+        void confirmarReserva();  
         map<int,DTReserva*> ListarReservasNoCanceladasDeHuesped(DTHostal*, string);
         void confirmarBaja(DTHostal*, int);
         void finalizarEstadiaActiva(string, string);

@@ -52,7 +52,6 @@ class hostal{
         DTDatosEstadia* obtenerDatos();
         DTReserva* obtenerReservaDeEstadia();
         bool trabajaEmpleado(string);
-        map<string,DTEmpleado*> quitarAsignados(map<string,DTEmpleado*>);
         DTHostal* darDatos();   
         float darCalifPromedio();
         map<string,DTEmpleado*> quitarAsignados(map<string,DTEmpleado*>);

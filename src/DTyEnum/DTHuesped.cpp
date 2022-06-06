@@ -6,10 +6,3 @@ DTHuesped::DTHuesped(string nombre,string email,string password,bool esFinger){
     (*this).password=password;
     (*this).esFinger=esFinger;
 }
-
-DTHuesped::DTHuesped(){
-    (*this).nombre="0";
-    (*this).email="0";
-    (*this).password="0";
-    (*this).esFinger=false;
-}

@@ -11,6 +11,7 @@
 #include <iostream>
 #include <stdio.h>
 using namespace std;
+#include <map>
 
 class usuario{
     protected:
@@ -37,7 +38,6 @@ class usuario{
             password= pass;
         };
         virtual ~usuario()=0;
-        DTUsuario* devolverDatos();
 };
 
 #endif

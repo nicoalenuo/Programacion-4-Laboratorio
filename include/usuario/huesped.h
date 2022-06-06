@@ -34,7 +34,7 @@ class huesped:public usuario {
         ~huesped();
 
         DTHuesped* darDatos();
-        multiset<int,DTEstadia*> obtenerEstadias();
+        map<int,DTEstadia*> obtenerEstadias();
 };
 
 #endif

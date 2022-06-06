@@ -6,10 +6,3 @@ DTEmpleado::DTEmpleado(string nombre,string email,string password,Cargo TipoCarg
     (*this).password=password;
     (*this).TipoCargo=TipoCargo;
 }
-
-DTEmpleado::DTEmpleado(){
-    (*this).nombre="0";
-    (*this).email="0";
-    (*this).password="0";
-    (*this).TipoCargo=Limpieza;
-}
