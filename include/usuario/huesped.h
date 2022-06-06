@@ -7,14 +7,31 @@ class huesped:public usuario {
     private:
         bool esFinger;
     public:
-        string getNombre();
-        string getEmail();
-        string getPassword();
-        bool getEsFinger();
-        void setNombre(string);
-        void setEmail(string);
-        void setPassword(string);
-        void setEsFinger(bool);
+        string getNombre(){
+            return nombre;
+        }
+        string getEmail(){
+            return email;
+        }
+        string getPassword(){
+            return password;
+        }
+        bool getEsFinger(){
+            return esFinger;
+        }
+        void setNombre(string n){
+            nombre=n;
+        }
+        void setEmail(string e){
+            email=e;
+        }
+        void setPassword(string p){
+            password=p;
+        }
+        void setEsFinger(bool ef){
+            esFinger=ef;
+        }
+        ~huesped();
 
         DTHuesped darDatos();
         DTEstadia obtenerEstadias();

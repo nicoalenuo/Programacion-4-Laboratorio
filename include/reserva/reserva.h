@@ -28,6 +28,7 @@ class reserva{
         virtual void setCheckOut(Date)=0;
         virtual void setEstado(EstadoReserva)=0;
         virtual void setCosto(float)=0;
+        virtual ~reserva()=0;
 };
 
 #endif

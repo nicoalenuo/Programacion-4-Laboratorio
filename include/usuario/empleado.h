@@ -14,14 +14,31 @@ class empleado:public usuario, public IObserver {
         set<notificacion*> notificaciones;
         
     public:
-        string getNombre();
-        string getEmail();
-        string getPassword();
-        Cargo getTipoCargo();
-        void setNombre(string);
-        void setEmail(string);
-        void setPassword(string);
-        void setTipoCargo(Cargo);
+        string getNombre(){
+            return nombre;
+        }
+        string getEmail(){
+            return email;
+        }
+        string getPassword(){
+            return password;
+        }
+        Cargo getTipoCargo(){
+            return TipoCargo;
+        }
+        void setNombre(string n){
+            nombre=n;
+        }
+        void setEmail(string e){
+            email=e;
+        }
+        void setPassword(string p){
+            password=p;
+        }
+        void setTipoCargo(Cargo c){
+            TipoCargo=c;
+        }
+        ~empleado();
 
         DTEmpleado darDatos();
         bool estaAsignado();

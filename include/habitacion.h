@@ -34,5 +34,7 @@ class habitacion{
         void setCapacidad(int c){
             (*this).capacidad=c;
         }
+        ~habitacion();
+        
 
 #endif

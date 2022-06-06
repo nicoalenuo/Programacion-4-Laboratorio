@@ -15,16 +15,25 @@ class estadia{
         Date fechaEntrada;
         Date fechaSalida;
         int codigo;
-        float totalConsumido;
     public:
-        Date getFechaEntrada();
-        Date getFechaSalida();
-        int getCodigo();
-        float getTotalConsumido();
-        void setFechaEntrada(Date);
-        void setFechaSalida(Date);
-        void setCodigo(int);
-        void setTotalConsumido(float);
+        Date getFechaEntrada(){
+            return fechaEntrada;
+        }
+        Date getFechaSalida(){
+            return fechaSalida;
+        }
+        int getCodigo(){
+            return codigo;
+        }
+        void setFechaEntrada(Date fe){
+            fechaEntrada=fe;
+        }
+        void setFechaSalida(Date fs){
+            fechaSalida=fs;
+        }
+        void setCodigo(int c){
+            codigo=c;
+        }
         ~estadia();
 };
 

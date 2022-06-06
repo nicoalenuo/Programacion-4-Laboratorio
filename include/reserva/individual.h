@@ -12,16 +12,37 @@ class individual:public reserva{
     private:
         huespedIndividual* huesInd;
     public:
-        int getCodigo();
-        Date getCheckIn();
-        Date getCheckOut();
-        EstadoReserva getEstado();
-        float getCosto();
-        void setCodigo(int);
-        void setCheckIn(Date);
-        void setCheckOut(Date);
-        void setEstado(EstadoReserva);
-        void setCosto(float);
+        int getCodigo(){
+            
+        }
+        Date getCheckIn(){
+
+        }
+        Date getCheckOut(){
+
+        }
+        EstadoReserva getEstado(){
+
+        }
+        float getCosto(){
+
+        }
+        void setCodigo(int){
+
+        }
+        void setCheckIn(Date){
+
+        }
+        void setCheckOut(Date){
+
+        }
+        void setEstado(EstadoReserva){
+
+        }
+        void setCosto(float){
+
+        }
+
 };
 
 #endif
