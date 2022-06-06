@@ -2,6 +2,9 @@
 #define HABITACION
 
 #include "reserva/reserva.h"
+#include "DTyEnum/DTHostal.h"
+#include "DTyEnum/DTEstadia.h"
+#include "DTyEnum/DTDatosEstadias.h"
 
 #include <iostream>
 #include <stdio.h>
@@ -17,25 +20,31 @@ class habitacion{
         int capacidad;
     public:
         int getNumero(){
-            return (*this).numero;
+            return numero;
         }
         float getPrecio(){
-            return (*this).precio;
+            return precio;
         }
         int getCapacidad(){
-            return (*this).capacidad;
+            return capacidad;
         }
         void setNumero(int n){
-            (*this).numero=n;
+            numero=n;
         }
         void setPrecio(float p){
-            (*this).precio=p;
+            precio=p;
         }
         void setCapacidad(int c){
-            (*this).capacidad=c;
+            capacidad=c;
         }
         ~habitacion();
-        
-};
+
+        void agregarReserva(reserva* r);
+        bool perteneceAHostal(DTHostal* h);
+        map<int, DTReserva*> obtenerReservas();
+        virtual map<int, DTEstadia*> obtenerEstadias();
+        DTDatosEstadias* obtenerDatos();
+        DTReserva* obtenerReservaDeEstadia();
+};    
 
 #endif
