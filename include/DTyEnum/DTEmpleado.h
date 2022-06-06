@@ -15,4 +15,11 @@ class DTEmpleado:public DTUsuario {
         DTEmpleado();
 };
 
+public getTipoCargo(): Cargo {
+    return this.TipoCargo;
+}
+
+public setTipoCargo(TipoCargo: Cargo): void {
+    this.TipoCargo = TipoCargo;
+}
 #endif

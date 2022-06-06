@@ -14,5 +14,11 @@ class DTHuesped:public DTUsuario{
         DTHuesped(string,string,string,bool);
         DTHuesped();
 };
+   public getEsFinger(): bool {
+        return this.esFinger;
+    }
 
+    public setEsFinger(esFinger: bool): void {
+        this.esFinger = esFinger;
+    }
 #endif
