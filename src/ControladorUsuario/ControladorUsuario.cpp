@@ -27,7 +27,7 @@ map<string,DTEmpleado*> ControladorUsuario::obtenerEmpleados(){
     map<string,empleado*>::iterator it;
     for (it=empleados.begin() ; it!=empleados.end() ; it++){
         DTEmpleado* dte;
-        (*dte)=(*(*it).second).darDatos();
+        dte = (*(*it).second).darDatos();
         resultado.insert(pair<string,DTEmpleado*>((*it).first,dte));
     }
     return resultado;
@@ -54,7 +54,7 @@ DTHuesped* ControladorUsuario::obtenerHuespedConEmail(string email){ //Pre: Exis
 DTEmpleado* ControladorUsuario::obtenerEmpleadoConEmail(string email){ //Pre: Existe un empleado con atributo email
     empleado* empleadoBuscado = (*empleados.find(email)).second;
     DTEmpleado* resultado;
-    (*resultado) = (*empleadoBuscado).darDatos();
+    resultado = (*empleadoBuscado).darDatos();
     return resultado;
 }
 
@@ -63,7 +63,7 @@ map<string,DTEmpleado*> ControladorUsuario::obtenerEmpleados(){
     map<string,empleado*>::iterator it;
     for (it=empleados.begin() ; it!=empleados.end() ; it++){
         DTEmpleado* dte;
-        (*dte)=(*(*it).second).darDatos();
+        dte=(*(*it).second).darDatos();
         resultado.insert(pair<string,DTEmpleado*>((*it).first,dte));
     }
 }
