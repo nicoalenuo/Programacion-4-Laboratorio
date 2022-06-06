@@ -13,7 +13,6 @@ class DTHostal{
         float calificacionPromedio;
     public:
         DTHostal(string,string,string,float);
-        float getCalificacionPromedio();
         ~DTHostal();
 
         string getNombre() {
