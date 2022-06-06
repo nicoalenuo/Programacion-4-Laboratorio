@@ -2,6 +2,7 @@
 #define CALIFICACION
 
 #include "DTyEnum/Date.h"
+#include "DTyEnum/DTCalificacion.h"
 #include "respuesta.h"
 
 #include <iostream>
@@ -50,6 +51,8 @@ class calificacion{
         void setFecha(Date d){
             fecha=d;
         }
+
+        DTCalificacion* darDatos();
         bool sinRespuesta();
         void removerCalificacion();
         DTRespuesta* obtenerRespuesta();

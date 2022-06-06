@@ -2,6 +2,7 @@
 #define ESTADIA
 
 #include "DTyEnum/Date.h"
+#include "DTyEnum/DTEstadia.h"
 #include "calificacion.h"
 
 #include <iostream>
@@ -43,6 +44,8 @@ class estadia{
         void setCodigo(int c){
             codigo=c;
         }
+
+        DTEstadia* darDatos();
         bool estaActiva();
         void finalizarEstadiaActiva();
         void eliminarEstadia();

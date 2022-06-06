@@ -2,7 +2,6 @@
 #define RESERVAINDIVIDUAL
 
 #include "reserva.h"
-#include "Huesped-Individual.h"
 
 #include <iostream>
 #include <stdio.h>
@@ -51,6 +50,8 @@ class individual:public reserva{
         void setCosto(float c){
             costo=c;
         }
+        
+        DTReservaIndividual* darDatos();
         void finalizarSiEsReservaBuscada(string, string);
         bool perteneceHusped(string);
         string getTipoReserva();

@@ -4,6 +4,7 @@
 #include "reserva/reserva.h"
 #include "DTyEnum/DTHostal.h"
 #include "DTyEnum/DTEstadia.h"
+#include "DTyEnum/DTHabitacion.h"
 #include "DTyEnum/DTDatosEstadia.h"
 
 #include <iostream>
@@ -41,6 +42,7 @@ class habitacion{
             capacidad=c;
         }
 
+        DTHabitacion* darDatos();
         void agregarReserva(reserva*);
         bool perteneceAHostal(DTHostal*);
         map<int, DTReserva*> obtenerReservas();

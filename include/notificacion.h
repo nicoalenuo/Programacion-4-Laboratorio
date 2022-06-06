@@ -1,6 +1,8 @@
 #ifndef NOTIFICACION
 #define NOTIFICACION
 
+#include "DTyEnum/DTNotificacion.h"
+
 #include <iostream>
 #include <stdio.h>
 using namespace std;
@@ -32,6 +34,8 @@ class notificacion{
         void setComentario(string com){
             (*this).comentario=com;
         }        
+
+        DTNotificacion* darDatos();
 };
 
 #endif

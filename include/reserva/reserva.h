@@ -3,6 +3,9 @@
 
 #include "../DTyEnum/EstadoReserva.h"
 #include "../habitacion.h"
+#include "Huesped-Individual.h"
+#include "../DTyEnum/DTReservaIndividual.h"
+#include "../DTyEnum/DTReservaGrupal.h"
 
 #include <iostream>
 #include <stdio.h>
