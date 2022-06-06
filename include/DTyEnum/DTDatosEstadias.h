@@ -12,47 +12,47 @@ using namespace std;
 
 class DTDatosEstadias {
     private:
-        DTHostal hostal;
-        DTHuesped huesped;
-        DTHabitacion habitacion;
+        DTHostal* hostal;
+        DTHuesped* huesped;
+        DTHabitacion* habitacion;
         Date checkIn;
         Date checkOut;
     public:
-        DTHostal getHostalDeEstadia(){
+        DTHostal* getHostalDeEstadia(){
             return (*this).hostal;
-        };
-        DTHuesped getHuespedDeEstadia(){
+        }
+        DTHuesped* getHuespedDeEstadia(){
             return (*this).huesped;
-        };
-        DTHabitacion getHabitacionDeEstadia(){
+        }
+        DTHabitacion* getHabitacionDeEstadia(){
             return (*this).habitacion;
-        };
+        }
         Date getFechaEntradaDeEstadia(){
             return (*this).checkIn;
-        };
+        }
         Date getFechaSalidaDeEstadia(){
             return (*this).checkOut;
-        };
+        }
 
-        void setHostal(DTHostal host){
+        void setHostal(DTHostal* host){
             (*this).hostal = host;
-        };
+        }
 
-        void setHuesped(DTHuesped hues){
+        void setHuesped(DTHuesped* hues){
             (*this).huesped = hues;
-        };
+        }
 
-        void setHostal(DTHabitacion hab){
+        void setHostal(DTHabitacion* hab){
             (*this).habitacion = hab;
-        };
+        }
 
         void setHostal(Date inicio){
             (*this).checkIn = inicio;
-        };
+        }
 
         void setHostal(Date final){
             (*this).checkOut = final;
-        };
+        }
 
         ~DTDatosEstadias();
 };

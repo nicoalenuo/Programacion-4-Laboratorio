@@ -2,7 +2,7 @@
 #define DTEMPLEADO
 
 #include "DTUsuario.h"
-#include "Cargo.h"
+#include "../DTyEnum/Cargo.h"
 
 #include <iostream>
 #include <stdio.h>

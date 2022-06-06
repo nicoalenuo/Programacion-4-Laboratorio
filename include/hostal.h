@@ -22,38 +22,38 @@ class hostal{
         string telefono;
     public:
         string getNombre(){
-            return (*this).nombre;
+            return nombre;
         }
         string getDireccion(){
-            return (*this).direccion;
+            return direccion;
         }
         string getTelefono(){
-            return (*this).telefono;
+            return telefono;
         }
         void setNombre(string n){
-            (*this).nombre=n;
+            nombre=n;
         }
         void setDireccion(string d){
-            (*this).direccion=d;
+            direccion=d;
         }
         void setTelefono(string t){
-            (*this).telefono=t;
+            telefono=t;
         }
         ~hostal();
 
-        void asignarEmpleado(empleado);
+        void asignarEmpleado(empleado*);
         bool tieneHab(int);
         map<int,DTCalificacion*> obtenerCalsYComs();
         map<int,DTCalificacion*> obtenerCalifSinCom();
         map<int,DTHabitacion*> obtenerHabitacionesDisponiblesEntre(Date checkIn, Date checkOut);
-        void removerCalificacion(calificacion c);
+        void removerCalificacion(calificacion* c);
         map<int,DTReserva*> obtenerReservas();
         map<int,DTEstadia*> obtenerEstadias();
-        DTDatosEstadias obtenerDatos();
-        DTReserva obtenerReservaDeEstadia();
+        DTDatosEstadias* obtenerDatos();
+        DTReserva* obtenerReservaDeEstadia();
         bool trabajaEmpleado(string);
-        map<string,DTEmpleado> quitarAsignados(map<string,DTEmpleado>);
-        DTHostal darDatos();   
+        map<string,DTEmpleado*> quitarAsignados(map<string,DTEmpleado*>);
+        DTHostal* darDatos();   
         float darCalifPromedio();  
         map<string,DTEmpleado*> quitarAsignados(map<string,DTEmpleado*>);
 };

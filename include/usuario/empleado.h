@@ -2,6 +2,7 @@
 #define EMPLEADO
 
 #include "usuario.h"
+#include "../DTyEnum/Cargo.h"
 
 #include <iostream>
 #include <stdio.h>
@@ -40,7 +41,7 @@ class empleado:public usuario, public IObserver {
         }
         ~empleado();
 
-        DTEmpleado darDatos();
+        DTEmpleado* darDatos();
         bool estaAsignado();
         void suscribirse();
         void notificar(string,int,string);

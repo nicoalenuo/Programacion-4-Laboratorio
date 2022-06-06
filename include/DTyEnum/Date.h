@@ -7,37 +7,27 @@ class Date{
         int mes;
         int dia;
 
-   
     public:
         Date();
         Date(int,int,int);
-        int getAnio();
-        int getMes();
-        int getDia();
+        int getAnio(){
+            return anio;
+        };
+        int getMes(){
+            return mes;
+        };
+        int getDia(){
+            return dia;
+        };
+        void setAnio(int a){
+            anio= a;
+        };
+        void setMes(int m){
+            mes= m;
+        };
+        void setDia(int d){
+            dia= d;
+        };
 };
- int getAnio() {
-        return this.anio;
-    }
-
-    public setAnio(anio: int): void {
-        this.anio = anio;
-    }
-
-    public getMes(): int {
-        return this.mes;
-    }
-
-    public setMes(mes: int): void {
-        this.mes = mes;
-    }
-
-    public getDia(): int {
-        return this.dia;
-    }
-
-    public setDia(dia: int): void {
-        this.dia = dia;
-    }
-
 
 #endif
