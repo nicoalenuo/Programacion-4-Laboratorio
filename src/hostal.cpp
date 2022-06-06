@@ -13,8 +13,7 @@ DTHostal* hostal::darDatos(){
     }
     if (cant!=0)
         calificacionPromedio=calificacionPromedio/cant;
-    
-    
+     
     DTHostal* resultado = new DTHostal((*this).nombre , (*this).direccion , (*this).telefono , calificacionPromedio);
 
     return resultado;
