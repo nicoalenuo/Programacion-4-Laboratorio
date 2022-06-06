@@ -9,46 +9,49 @@ using namespace std;
 
 class DTReserva {
     protected:
-        int Codigo;
-        Date CheckIn;
-        Date CheckOut;
-        EstadoReserva
+        int codigo;
+        Date checkIn;
+        Date checkOut;
+        EstadoReserva estado;
+
 
 	
 
     public:
-     ~DTReserva();
-    int getCodigo() {
-		return (*this).Codigo;
-	}
+        ~DTReserva();
+        
+        int getCodigo() {
+            return (*this).codigo;
+        }
 
-	void setCodigo(int Codigo) {
-		(*this).Codigo = Codigo;
-	}
+        void setCodigo(int codigo) {
+            (*this).codigo = codigo;
+        }
 
-	Date getCheckIn() {
-		return (*this).CheckIn;
-	}
+        public Date getCheckIn() {
+            return (*this).checkIn;
+        }
 
-	void setCheckIn(Date CheckIn) {
-		(*this).CheckIn = CheckIn;
-	}
+        void setCheckIn(Date checkIn) {
+            (*this).checkIn = checkIn;
+        }
 
-	Date getCheckOut() {
-		return (*this).CheckOut;
-	}
+        Date getCheckOut() {
+            return (*this).checkOut;
+        }
 
-	void setCheckOut(Date CheckOut) {
-		(*this).CheckOut = CheckOut;
-	}
+        void setCheckOut(Date checkOut) {
+            (*this).checkOut = checkOut;
+        }
 
-	Object getEstadoReserva() {
-		return (*this).EstadoReserva;
-	}
+        EstadoReserva getEstado() {
+            return (*this).estado;
+        }
 
-	void setEstadoReserva(Object EstadoReserva) {
-		(*this).EstadoReserva = EstadoReserva;
-	}
+        void setEstado(EstadoReserva estado) {
+            (*this).estado = estado;
+        }
+
 };
 
 #endif
