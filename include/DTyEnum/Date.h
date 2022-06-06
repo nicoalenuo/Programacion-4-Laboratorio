@@ -6,38 +6,29 @@ class Date{
         int anio;
         int mes;
         int dia;
-
-   
     public:
         Date();
         Date(int,int,int);
-        int getAnio();
-        int getMes();
-        int getDia();
+        int getAnio(){
+            return (*this).anio;
+        }
+        int getMes(){
+            return (*this).mes;
+        }
+        int getDia(){
+            return (*this).Dia;
+        }
+        void setAnio(int c){
+            (*this).capacidad=c;
+        }
+        void setMes(int c){
+            (*this).mes=c;
+        }
+        void getDia(int c){
+            (*this).dia=c;
+        }
+        ~Date();
 };
- int getAnio() {
-        return this.anio;
-    }
-
-    public setAnio(anio: int): void {
-        this.anio = anio;
-    }
-
-    public getMes(): int {
-        return this.mes;
-    }
-
-    public setMes(mes: int): void {
-        this.mes = mes;
-    }
-
-    public getDia(): int {
-        return this.dia;
-    }
-
-    public setDia(dia: int): void {
-        this.dia = dia;
-    }
 
 
 #endif

@@ -13,31 +13,31 @@ class DTRespuesta {
 
 
     public:
-     ~DTRespuesta();
-     
-	string getNombre() {
-		return (*this).nombre;
-	}
+        ~DTRespuesta();
+        
+        string getNombre() {
+            return (*this).nombre;
+        }
 
-	void setNombre(string nombre) {
-		(*this).nombre = nombre;
-	}
+        void setNombre(string nombre) {
+            (*this).nombre = nombre;
+        }
 
-	string getEmail() {
-		return (*this).email;
-	}
+        string getEmail() {
+            return (*this).email;
+        }
 
-	void setEmail(string email) {
-		(*this).email = email;
-	}
+        void setEmail(string email) {
+            (*this).email = email;
+        }
 
-	string getPassword() {
-		return (*this).password;
-	}
+        string getPassword() {
+            return (*this).password;
+        }
 
-	void setPassword(string password) {
-		(*this).password = password;
-	}
+        void setPassword(string password) {
+            (*this).password = password;
+        }
 
 };
 
