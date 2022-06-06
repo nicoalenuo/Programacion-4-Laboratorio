@@ -7,43 +7,59 @@ using namespace std;
 
 class DTCalificacion {
     private:
-        int ID;
-        int Puntuacion():int
-        string Comentario();
-        Date Fecha;
+        int ic;
+        int puntuacion();
+        string comentario();
+        Date fecha;
+
+    
 
     public:
         ~DTCalificacion();
-        int getID() {
-            return (*this).ID;
+      public
+        int getIc()
+        {
+            return this.ic;
         }
 
-        void setID(int ID) {
-            (*this).ID = ID;
+    
+        void setIc(int ic)
+        {
+            this.ic = ic;
         }
 
-        int getPuntuacion():Int() {
-            return (*this).Puntuacion():int;
+    
+        int getPuntuacion()
+        {
+            return this.puntuacion();
         }
 
-        void setPuntuacion():Int(int Puntuacion():int) {
-            (*this).Puntuacion():int = Puntuacion():int;
+
+        void setPuntuacion()(int puntuacion())
+        {
+            this.puntuacion() = puntuacion();
         }
 
-        string getComentario() {
-            return (*this).Comentario();
+        string getComentario()
+        {
+            return this.comentario();
         }
 
-        void setComentario()(string Comentario()) {
-            (*this).Comentario() = Comentario();
+        void setComentario()(string comentario())
+        {
+            this.comentario() = comentario();
         }
 
-        Date getFecha() {
-            return (*this).Fecha;
+    
+        Date getFecha()
+        {
+            return this.fecha;
         }
 
-        void setFecha(Date Fecha) {
-            (*this).Fecha = Fecha;
+    
+        void setFecha(Date fecha)
+        {
+            this.fecha = fecha;
         }
 };
 
