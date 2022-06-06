@@ -12,31 +12,14 @@ class DTUsuario{
         string nombre;
         string email;
         string password;
-
     public:
         ~DTUsuario();
-        string getNombre() {
-            return (*this).nombre;
-        }
-        void setNombre(string nombre) {
-            (*this).nombre = nombre;
-        }
-
-        string getMail() {
-            return (*this).email;
-        }
-
-        void setMail(string email) {
-            (*this).email = email;
-        }
-
-        string getPassword() {
-            return (*this).password;
-        }
-
-        void setPassword(string password) {
-            (*this).password = password;
-        }
+        virtual string getNombre()=0;
+        virtual void setNombre(string nombre)=0;
+        virtual string getMail()=0;
+        virtual void setMail(string email)=0;
+        virtual string getPassword()=0;
+        virtual void setPassword(string password)=0;
 };
 
 #endif

@@ -12,7 +12,9 @@ class DTNotificacion{
     int Puntuacion;
 
     public:
+        DTNotificacion(string,string,int);
         ~DTNotificacion();
+        
         string getNombreAutor() {
             return (*this).NombreAutor;
         }

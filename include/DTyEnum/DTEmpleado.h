@@ -13,8 +13,29 @@ class DTEmpleado:public DTUsuario {
         Cargo TipoCargo;
     public:
         DTEmpleado(string,string,string,Cargo);
-        DTEmpleado();
-       ~DTEmpleado();
+        ~DTEmpleado();
+        string getNombre() {
+            return (*this).nombre;
+        }
+        void setNombre(string nombre) {
+            (*this).nombre = nombre;
+        }
+
+        string getMail() {
+            return (*this).email;
+        }
+
+        void setMail(string email) {
+            (*this).email = email;
+        }
+
+        string getPassword() {
+            return (*this).password;
+        }
+
+        void setPassword(string password) {
+            (*this).password = password;
+        }
         int getTipoCargo(){
             return (*this).TipoCargo;
         }
@@ -22,6 +43,5 @@ class DTEmpleado:public DTUsuario {
             (*this).TipoCargo=c;
         }
 };
-
 
 #endif

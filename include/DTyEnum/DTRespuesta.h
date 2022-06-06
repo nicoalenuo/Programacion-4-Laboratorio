@@ -10,8 +10,6 @@ class DTRespuesta {
         string nombre;
         string email;
         string password;
-
-
     public:
         ~DTRespuesta();
         

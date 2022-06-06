@@ -18,6 +18,8 @@ class DTDatosEstadia {
         Date checkIn;
         Date checkOut;
     public:
+        DTDatosEstadia(DTHostal*,DTHuesped*,DTHabitacion*,Date,Date);
+        ~DTDatosEstadia();
         DTHostal* getHostalDeEstadia(){
             return (*this).hostal;
         }
@@ -53,8 +55,6 @@ class DTDatosEstadia {
         void setHostal(Date final){
             (*this).checkOut = final;
         }
-
-        ~DTDatosEstadia();
 };
 
 #endif

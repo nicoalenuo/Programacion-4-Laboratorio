@@ -9,6 +9,7 @@ class Date{
 
     public:
         Date();
+        
         Date(int,int,int);
         int getAnio(){
             return anio;

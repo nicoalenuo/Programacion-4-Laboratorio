@@ -15,40 +15,16 @@ class DTReserva {
         Date checkOut;
         EstadoReserva estado;
     public:
-        ~DTReserva();
+        virtual ~DTReserva()=0;
         
-        int getCodigo() {
-            return (*this).codigo;
-        }
-
-        void setCodigo(int codigo) {
-            (*this).codigo = codigo;
-        }
-
-        Date getCheckIn() {
-            return (*this).checkIn;
-        }
-
-        void setCheckIn(Date checkIn) {
-            (*this).checkIn = checkIn;
-        }
-
-        Date getCheckOut() {
-            return (*this).checkOut;
-        }
-
-        void setCheckOut(Date checkOut) {
-            (*this).checkOut = checkOut;
-        }
-
-        EstadoReserva getEstado() {
-            return (*this).estado;
-        }
-
-        void setEstado(EstadoReserva estado) {
-            (*this).estado = estado;
-        }
-
+        virtual int getCodigo()=0;
+        virtual void setCodigo(int codigo)=0;
+        virtual Date getCheckIn()=0;
+        virtual void setCheckIn(Date checkIn)=0;
+        virtual Date getCheckOut()=0;
+        virtual void setCheckOut(Date checkOut)=0;
+        virtual EstadoReserva getEstado()=0;
+        virtual void setEstado(EstadoReserva estado)=0;
 };
 
 #endif
