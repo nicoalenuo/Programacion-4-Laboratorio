@@ -27,11 +27,13 @@ class huespedIndividual{
         void setEstadia(estadia* h){
             estadiaAsoc=h;
         }
+
         void finalizarEstadiaActiva(string);
         DTEstadia* darDatosEstadia();
         DTReserva* obtenerReserva();
         void DarBaja();
-        bool tieneEstFinalizadaDeHus(); 
+        bool tieneEstFinalizadaDeHus(string); 
+        bool esDeHuesped(string);    
 };
 
 #endif
