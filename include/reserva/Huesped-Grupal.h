@@ -14,7 +14,7 @@ class huespedGrupal{
         estadia* estadia;
         
     public:
-                                                                                                                                                                                    
+        ~huespedGrupal();                                                                                                                                                                          
 };
 
 #endif

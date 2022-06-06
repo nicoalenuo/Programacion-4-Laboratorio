@@ -36,5 +36,6 @@ class habitacion{
         }
         ~habitacion();
         
+};
 
 #endif

@@ -16,7 +16,7 @@ class reserva{
         Date checkIn;
         Date checkOut;
         EstadoReserva estado;
-        float Costo;
+        float costo;
     public:
         virtual int getCodigo()=0;
         virtual Date getCheckIn()=0;

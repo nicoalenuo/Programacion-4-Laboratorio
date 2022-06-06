@@ -15,18 +15,43 @@ class grupal:public reserva{
 
         int cantHuespedes;
     public:
-        int getCodigo();
-        Date getCheckIn();
-        Date getCheckOut();
-        EstadoReserva getEstado();
-        float getCosto();
-        int getCantHuespedes();
-        void setCodigo(int);
-        void setCheckIn(Date);
-        void setCheckOut(Date);
-        void setEstado(EstadoReserva);
-        void setCosto(float);
-        void setCantHuespedes(int);
+        int getCodigo(){
+            return codigo;
+        }
+        Date getCheckIn(){
+            return checkIn;
+        }
+        Date getCheckOut(){
+            return checkOut;
+        }
+        EstadoReserva getEstado(){
+            return estado;
+        }
+        float getCosto(){
+            return costo;
+        }
+        int getCantHuespedes(){
+            return cantHuespedes;
+        }
+        void setCodigo(int c){
+            codigo=c;
+        }
+        void setCheckIn(Date d){
+            checkIn=d;
+        }
+        void setCheckOut(Date d){
+            checkOut=d;
+        }
+        void setEstado(EstadoReserva er){
+            estado=er;
+        }
+        void setCosto(float c){
+            costo=c;
+        }
+        void setCantHuespedes(int ch){
+            cantHuespedes=ch;
+        }
+        ~grupal();
         
 };
 
