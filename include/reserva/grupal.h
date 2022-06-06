@@ -51,7 +51,15 @@ class grupal:public reserva{
         void setCantHuespedes(int ch){
             cantHuespedes=ch;
         }
-
+        void finalizarSiEsReservaBuscada(string, string);
+        bool perteneceHusped(string);
+        string getTipoReserva();
+        void darBajaReserva();
+        map<int, DTEstadia*> obtenerEstadias();
+        DTEstadia* obtenerEstadia();
+        DTReserva* obtenerResrvaDeEst();
+        bool tieneEstadiaFinalizadaDeHuesped(string);
+        DTEstadia* darEstadiaDeHuesped(string);
         ~grupal();
         
 };
