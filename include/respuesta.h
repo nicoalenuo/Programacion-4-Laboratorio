@@ -9,8 +9,13 @@ class respuesta{
     private:
         string comentario;
     public:
-        string getComentario();
-        void setComentario(string);
+        string getComentario(){
+            return (*this).comentario;
+        }
+        void setComentario(string com){
+            (*this).comentario=com;
+        }
+        ~respuesta();
         
 };
 

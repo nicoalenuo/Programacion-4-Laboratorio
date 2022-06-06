@@ -16,12 +16,23 @@ class habitacion{
         float precio;
         int capacidad;
     public:
-        int getNumero();
-        float getPrecio();
-        int getCapacidad();
-        void setNumero(int);
-        void setPrecio(float);
-        void setCapacidad(int);
-};
+        int getNumero(){
+            return (*this).numero;
+        }
+        float getPrecio(){
+            return (*this).precio;
+        }
+        int getCapacidad(){
+            return (*this).capacidad;
+        }
+        void setNumero(int n){
+            (*this).numero=n;
+        }
+        void setPrecio(float p){
+            (*this).precio=p;
+        }
+        void setCapacidad(int c){
+            (*this).capacidad=c;
+        }
 
 #endif

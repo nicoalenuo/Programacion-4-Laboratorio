@@ -17,6 +17,7 @@ class FechaSistema{
         static FechaSistema* getInstance();
         Date getFechaActual();
         void setFechaActual(Date);
+        ~FechaSistema();
 };
 
 #endif

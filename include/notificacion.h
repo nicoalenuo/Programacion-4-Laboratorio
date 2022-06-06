@@ -11,12 +11,25 @@ class notificacion{
         int puntuacion;
         string comentario;
     public:
-        string getNombreAutor();
-        int getPuntuacion();
-        string getComentario();
-        void setNombreAutor(string);
-        void setPuntuacion(int);
-        void setComentario(string);
+        string getNombreAutor(){
+            return (*this).nombreAutor;
+        }
+        int getPuntuacion(){
+            return (*this).puntuacion;
+        }
+        string getComentario(){
+            return (*this).comentario;
+        }
+        void setNombreAutor(string nA){
+            (*this).nombreAutor=nA;
+        }
+        void setPuntuacion(int p){
+            (*this).puntuacion=p;
+        }
+        void setComentario(string com){
+            (*this).comentario=com;
+        }
+        ~notificacion();
         
 };
 

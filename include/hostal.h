@@ -15,20 +15,33 @@ class hostal{
     private:
         map<int,calificacion*> calificaciones;
         map<string,empleado*> empleados;
+        map<int,habitacion*> habitaciones;
 
         string nombre;
         string direccion;
         string telefono;
     public:
-        string getNombre();
-        string getDireccion();
-        string getTelefono();
-        void setNombre(string);
-        void setDireccion(string);
-        void setTelefono(string);
+        string getNombre(){
+            return (*this).nombre;
+        }
+        string getDireccion(){
+            return (*this).direccion;
+        }
+        string getTelefono(){
+            return (*this).telefono;
+        }
+        void setNombre(string n){
+            (*this).nombre=n;
+        }
+        void setDireccion(string d){
+            (*this).direccion=d;
+        }
+        void setTelefono(string t){
+            (*this).telefono=t;
+        }
+        ~hostal();
 
-        DTHostal darDatos();
-        
+        DTHostal darDatos();     
         map<string,DTEmpleado*> quitarAsignados(map<string,DTEmpleado*>);
 };
 

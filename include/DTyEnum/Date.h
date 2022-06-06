@@ -15,7 +15,7 @@ class Date{
         int getMes();
         int getDia();
 };
- public getAnio(): int {
+ int getAnio() {
         return this.anio;
     }
 

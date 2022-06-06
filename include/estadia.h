@@ -25,6 +25,7 @@ class estadia{
         void setFechaSalida(Date);
         void setCodigo(int);
         void setTotalConsumido(float);
+        ~estadia();
 };
 
 #endif

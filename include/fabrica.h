@@ -21,6 +21,7 @@ class fabrica{
         IControladorReserva* getIControladorReserva();
         IControladorCalificacion* getIControladorCalificacion();
         IControladorUsuario* getIControladorUsuario();
+        ~fabrica();
 };
 
 #endif
