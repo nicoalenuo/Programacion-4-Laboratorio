@@ -14,13 +14,13 @@ class DTEmpleado:public DTUsuario {
         DTEmpleado(string,string,string,Cargo);
         DTEmpleado();
        ~DTEmpleado();
+        int TipoCargo(){
+            return (*this).TipoCargo;
+        }
+        void setTipoCargo(TipoCargo c){
+            (*this).TipoCargo=c;
+        }
 };
 
-public getTipoCargo(): Cargo {
-    return this.TipoCargo;
-}
 
-public setTipoCargo(TipoCargo: Cargo): void {
-    this.TipoCargo = TipoCargo;
-}
 #endif
