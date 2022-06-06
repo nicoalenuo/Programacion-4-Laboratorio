@@ -38,7 +38,7 @@ map<string,DTHuesped*> ControladorUsuario::obtenerHuespedes(){
     map<string,huesped*>::iterator it;
     for (it=huespedes.begin() ; it!=huespedes.end() ; it++){
         DTHuesped* dth;
-        (*dth)=(*(*it).second).darDatos();
+        dth=(*(*it).second).darDatos();
         resultado.insert(pair<string,DTHuesped*>((*it).first,dth));
     }
     return resultado;   
@@ -47,7 +47,7 @@ map<string,DTHuesped*> ControladorUsuario::obtenerHuespedes(){
 DTHuesped* ControladorUsuario::obtenerHuespedConEmail(string email){ //Pre: Existe un huesped con atributo email
     huesped* huespedBuscado = (*huespedes.find(email)).second;
     DTHuesped* resultado;
-    (*resultado) = (*huespedBuscado).darDatos();
+    resultado = (*huespedBuscado).darDatos();
     return resultado;
 }
 
