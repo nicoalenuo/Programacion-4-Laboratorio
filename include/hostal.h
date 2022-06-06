@@ -41,21 +41,7 @@ class hostal{
         }
         ~hostal();
 
-        void asignarEmpleado(empleado*);
-        bool tieneHab(int);
-        map<int,DTCalificacion*> obtenerCalsYComs();
-        map<int,DTCalificacion*> obtenerCalifSinCom();
-        map<int,DTHabitacion*> obtenerHabitacionesDisponiblesEntre(Date checkIn, Date checkOut);
-        void removerCalificacion(calificacion* c);
-        map<int,DTReserva*> obtenerReservas();
-        map<int,DTEstadia*> obtenerEstadias();
-        DTDatosEstadias* obtenerDatos();
-        DTReserva* obtenerReservaDeEstadia();
-        bool trabajaEmpleado(string);
-        map<string,DTEmpleado*> quitarAsignados(map<string,DTEmpleado*>);
-        DTHostal* darDatos();   
-        float darCalifPromedio();  
-        map<string,DTEmpleado*> quitarAsignados(map<string,DTEmpleado*>);
+        
 };
 
 #endif
