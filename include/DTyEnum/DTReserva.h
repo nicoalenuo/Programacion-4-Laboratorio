@@ -2,6 +2,7 @@
 #define DTRESERVA
 
 #include "EstadoReserva.h"
+#include "Date.h"
 
 #include <iostream>
 #include <stdio.h>

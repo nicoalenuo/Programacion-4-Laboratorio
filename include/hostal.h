@@ -21,6 +21,8 @@ class hostal{
         string direccion;
         string telefono;
     public:
+        ~hostal();
+        hostal(string,string,string);
         string getNombre(){
             return nombre;
         }
@@ -38,8 +40,7 @@ class hostal{
         }
         void setTelefono(string t){
             telefono=t;
-        }
-        ~hostal();
+        };
 
         void asignarEmpleado(empleado*);
         bool tieneHab(int);

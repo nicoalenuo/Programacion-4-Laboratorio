@@ -7,6 +7,9 @@ class huesped:public usuario {
     private:
         bool esFinger;
     public:
+        ~huesped();
+        huesped(string,string,string,bool);
+
         string getNombre(){
             return nombre;
         }
@@ -31,7 +34,6 @@ class huesped:public usuario {
         void setEsFinger(bool ef){
             esFinger=ef;
         }
-        ~huesped();
 
         DTHuesped* darDatos();
         map<int,DTEstadia*> obtenerEstadias();

@@ -9,14 +9,15 @@ class respuesta{
     private:
         string comentario;
     public:
+        respuesta(string);
+        ~respuesta();
+
         string getComentario(){
             return (*this).comentario;
         }
         void setComentario(string com){
             (*this).comentario=com;
         }
-        ~respuesta();
-        
 };
 
 #endif

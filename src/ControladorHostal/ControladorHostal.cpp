@@ -21,7 +21,7 @@ map<string,DTHostal*> ControladorHostal::obtenerHostales(){
     map<string,hostal*>::iterator it;
     for (it=hostales.begin() ; it!=hostales.end() ; it++){
         DTHostal* dth;
-        (*dth) = (*(*it).second).darDatos();
+        dth = (*(*it).second).darDatos();
         resultado.insert(pair<string,DTHostal*>((*it).first,dth));
     }
     return resultado;

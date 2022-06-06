@@ -19,6 +19,9 @@ class habitacion{
         float precio;
         int capacidad;
     public:
+        ~habitacion();
+        habitacion(int,float,int);
+
         int getNumero(){
             return numero;
         }
@@ -37,7 +40,6 @@ class habitacion{
         void setCapacidad(int c){
             capacidad=c;
         }
-        ~habitacion();
 
         void agregarReserva(reserva* r);
         bool perteneceAHostal(DTHostal* h);

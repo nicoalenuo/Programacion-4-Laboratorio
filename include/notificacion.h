@@ -11,6 +11,9 @@ class notificacion{
         int puntuacion;
         string comentario;
     public:
+        notificacion(string,int,string); 
+        ~notificacion();
+
         string getNombreAutor(){
             return (*this).nombreAutor;
         }
@@ -28,9 +31,7 @@ class notificacion{
         }
         void setComentario(string com){
             (*this).comentario=com;
-        }
-        ~notificacion();
-        
+        }        
 };
 
 #endif

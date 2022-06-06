@@ -19,6 +19,7 @@ class usuario{
         string email;
         string password;
     public:
+        virtual ~usuario()=0;
         virtual string getNombre(){
             return nombre;
         };
@@ -37,7 +38,6 @@ class usuario{
         virtual void setPassword(string pass){
             password= pass;
         };
-        virtual ~usuario()=0;
 };
 
 #endif

@@ -15,6 +15,9 @@ class empleado:public usuario, public IObserver {
         set<notificacion*> notificaciones;
         
     public:
+        ~empleado();
+        empleado(string,string,string,Cargo);
+
         string getNombre(){
             return nombre;
         }
@@ -39,7 +42,6 @@ class empleado:public usuario, public IObserver {
         void setTipoCargo(Cargo c){
             TipoCargo=c;
         }
-        ~empleado();
 
         DTEmpleado* darDatos();
         bool estaAsignado();
