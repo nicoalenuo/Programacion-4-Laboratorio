@@ -16,7 +16,7 @@ class Date{
             return (*this).mes;
         }
         int getDia(){
-            return (*this).Dia;
+            return (*this).dia;
         }
         void setAnio(int c){
             (*this).anio=c;
