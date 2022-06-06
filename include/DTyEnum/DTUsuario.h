@@ -13,7 +13,7 @@ class DTUsuario{
         string email;
         string password;
     public:
-        ~DTUsuario();
+        virtual ~DTUsuario()=0;
         virtual string getNombre()=0;
         virtual void setNombre(string nombre)=0;
         virtual string getMail()=0;

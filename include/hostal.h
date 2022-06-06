@@ -46,7 +46,7 @@ class hostal{
         bool tieneHab(int);
         map<int,DTCalificacion*> obtenerCalsYComs();
         map<int,DTCalificacion*> obtenerCalifSinCom();
-        map<int,DTHabitacion*> obtenerHabitacionesDisponiblesEntre(Date checkIn, Date checkOut);
+        map<int,DTHabitacion*> obtenerHabitacionesDisponiblesEntre(Date, Date);
         void removerCalificacion(calificacion* c);
         map<int,DTReserva*> obtenerReservas();
         map<int,DTEstadia*> obtenerEstadias();

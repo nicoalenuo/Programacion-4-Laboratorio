@@ -41,8 +41,8 @@ class habitacion{
             capacidad=c;
         }
 
-        void agregarReserva(reserva* r);
-        bool perteneceAHostal(DTHostal* h);
+        void agregarReserva(reserva*);
+        bool perteneceAHostal(DTHostal*);
         map<int, DTReserva*> obtenerReservas();
         map<int, DTEstadia*> obtenerEstadias();
         DTDatosEstadia* obtenerDatos();
