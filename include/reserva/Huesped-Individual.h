@@ -14,7 +14,7 @@ class huespedIndividual{
 
         estadia* estadia;
     public:
-                                                                                                                                                                                    
+        ~huespedIndividual();                                                                                                                                                                        
 };
 
 #endif

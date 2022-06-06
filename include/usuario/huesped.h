@@ -33,8 +33,8 @@ class huesped:public usuario {
         }
         ~huesped();
 
-        DTHuesped darDatos();
-        DTEstadia obtenerEstadias();
+        DTHuesped* darDatos();
+        multiset<int,DTEstadia*> obtenerEstadias();
 };
 
 #endif
