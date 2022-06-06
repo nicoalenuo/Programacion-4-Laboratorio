@@ -9,34 +9,33 @@ using namespace std;
 
 class DTUsuario{
     protected:
-    string Nombre;
-    string Mail;
-    string Password;
+    string nombre;
+    string mail;
+    string password;
 
     public:
         ~DTUsuario();
         string getNombre() {
-            return (*this).Nombre;
+            return (*this).nombre;
         }
-
-        void setNombre(string Nombre) {
-            (*this).Nombre = Nombre;
+        void setNombre(string nombre) {
+            (*this).nombre = nombre;
         }
 
         string getMail() {
-            return (*this).Mail;
+            return (*this).mail;
         }
 
-        void setMail(string Mail) {
-            (*this).Mail = Mail;
+        void setMail(string mail) {
+            (*this).mail = mail;
         }
 
         string getPassword() {
-            return (*this).Password;
+            return (*this).password;
         }
 
-        void setPassword(string Password) {
-            (*this).Password = Password;
+        void setPassword(string password) {
+            (*this).password = password;
         }
 };
 
