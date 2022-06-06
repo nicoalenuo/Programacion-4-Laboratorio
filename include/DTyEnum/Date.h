@@ -19,7 +19,7 @@ class Date{
             return (*this).Dia;
         }
         void setAnio(int c){
-            (*this).capacidad=c;
+            (*this).anio=c;
         }
         void setMes(int c){
             (*this).mes=c;
