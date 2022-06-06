@@ -2,6 +2,7 @@
 #define DTEMPLEADO
 
 #include "DTUsuario.h"
+#include "Cargo.h"
 
 #include <iostream>
 #include <stdio.h>
@@ -14,10 +15,10 @@ class DTEmpleado:public DTUsuario {
         DTEmpleado(string,string,string,Cargo);
         DTEmpleado();
        ~DTEmpleado();
-        int getTipoCargo(){
+        int TipoCargo(){
             return (*this).TipoCargo;
         }
-        void setTipoCargo(TipoCargo c){
+        void setTipoCargo(Cargo c){
             (*this).TipoCargo=c;
         }
 };
