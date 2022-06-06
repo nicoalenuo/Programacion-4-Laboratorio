@@ -55,7 +55,7 @@ class hostal{
         map<string,DTEmpleado*> quitarAsignados(map<string,DTEmpleado*>);
         DTHostal* darDatos();   
         float darCalifPromedio();
-        map<string,DTEmpleado*> quitarAsignados(map<string,DTEmpleado*>);
+        map<string,DTEmpleado*> quitarAsignados(map<string,DTEmpleado*>);a
 };
 
 #endif
