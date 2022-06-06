@@ -20,24 +20,12 @@ class usuario{
         string password;
     public:
         virtual ~usuario()=0;
-        virtual string getNombre(){
-            return nombre;
-        };
-        virtual string getEmail(){
-            return email;
-        };
-        virtual string getPassword(){
-            return password;
-        };
-        virtual void setNombre(string nomb){
-            nombre=nomb;
-        };
-        virtual void setEmail(string ema){
-            email=ema;
-        };
-        virtual void setPassword(string pass){
-            password= pass;
-        };
+        virtual string getNombre()=0;
+        virtual string getEmail()=0;
+        virtual string getPassword()=0;
+        virtual void setNombre(string)=0;
+        virtual void setEmail(string)=0;
+        virtual void setPassword(string)=0;
 };
 
 #endif

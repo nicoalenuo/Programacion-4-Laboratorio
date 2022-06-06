@@ -10,7 +10,7 @@ using namespace std;
 
 class reserva{
     protected:
-        habitacion* habitacion;
+        habitacion* habitacionAsoc;
 
         int codigo;
         Date checkIn;
@@ -18,11 +18,14 @@ class reserva{
         EstadoReserva estado;
         float costo;
     public:
+        virtual ~reserva()=0;
+        virtual habitacion* getHabitacion()=0;
         virtual int getCodigo()=0;
         virtual Date getCheckIn()=0;
         virtual Date getCheckOut()=0;
         virtual EstadoReserva getEstado()=0;
         virtual float getCosto()=0;
+        virtual void setHabitacion()=0;
         virtual void setCodigo(int)=0;
         virtual void setCheckIn(Date)=0;
         virtual void setCheckOut(Date)=0;
@@ -37,7 +40,6 @@ class reserva{
         virtual DTReserva* obtenerResrvaDeEst()=0;
         virtual bool tieneEstadiaFinalizadaDeHuesped(string)=0;
         virtual DTEstadia* darEstadiaDeHuesped(string)=0;
-        virtual ~reserva()=0;
 };
 
 #endif

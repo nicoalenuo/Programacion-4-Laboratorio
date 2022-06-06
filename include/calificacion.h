@@ -10,27 +10,51 @@ using namespace std;
 
 class calificacion{
     private:
-        respuesta* respuesta;
+        respuesta* respuestaAsoc;
 
         int id;
         int puntuacion;
         string comentario;
         Date fecha;
     public:
-        int getId();
-        int getPuntuacion();
-        string getComentario();
-        Date getFecha();
-        void setId(int);
-        void setPuntuacion(int);
-        void setComentario(string);
-        void setFecha(Date); 
+        calificacion(int,int,string,Date);
+        ~calificacion();
+
+        respuesta* getRespuesta(){
+            return respuestaAsoc;
+        } 
+        int getId(){
+            return id;
+        }
+        int getPuntuacion(){
+            return puntuacion;
+        }
+        string getComentario(){
+            return comentario;
+        }
+        Date getFecha(){
+            return fecha;
+        }
+        void setRespuesta(respuesta* r){
+            respuestaAsoc=r;
+        }
+        void setId(int i){
+            id=i;
+        }
+        void setPuntuacion(int p){
+            puntuacion=p;
+        }
+        void setComentario(string c){
+            comentario=c;
+        }
+        void setFecha(Date d){
+            fecha=d;
+        }
         bool sinRespuesta();
         void removerCalificacion();
         DTRespuesta* obtenerRespuesta();
         void ingresarRespuesta(string);
-        DTCalificacion* getDatosCalificacion();
-        ~calificacion();  
+        DTCalificacion* getDatosCalificacion(); 
 };
 
 #endif

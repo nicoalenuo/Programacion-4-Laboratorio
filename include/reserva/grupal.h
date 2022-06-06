@@ -15,6 +15,9 @@ class grupal:public reserva{
 
         int cantHuespedes;
     public:
+        ~grupal();
+        grupal(int,Date,Date,EstadoReserva,float,int);
+
         int getCodigo(){
             return codigo;
         }
@@ -59,9 +62,7 @@ class grupal:public reserva{
         DTEstadia* obtenerEstadia();
         DTReserva* obtenerResrvaDeEst();
         bool tieneEstadiaFinalizadaDeHuesped(string);
-        DTEstadia* darEstadiaDeHuesped(string);
-        ~grupal();
-        
+        DTEstadia* darEstadiaDeHuesped(string);        
 };
 
 #endif

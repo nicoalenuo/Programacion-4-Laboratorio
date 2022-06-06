@@ -10,12 +10,18 @@ using namespace std;
 
 class estadia{
     private:
-        calificacion* calificacion;
+        calificacion* calificacionAsoc;
 
         Date fechaEntrada;
         Date fechaSalida;
         int codigo;
     public:
+        estadia(Date,Date,int);
+        ~estadia();
+
+        calificacion* getCalificacion(){
+            return calificacionAsoc;
+        }
         Date getFechaEntrada(){
             return fechaEntrada;
         }
@@ -24,6 +30,9 @@ class estadia{
         }
         int getCodigo(){
             return codigo;
+        }
+        void setCalificacion(calificacion* c){
+            calificacionAsoc=c;
         }
         void setFechaEntrada(Date fe){
             fechaEntrada=fe;
@@ -38,7 +47,6 @@ class estadia{
         void finalizarEstadiaActiva();
         void eliminarEstadia();
         DTCalificacion* obtenerCalificacionDeEstadia();
-        ~estadia();
 };
 
 #endif
