@@ -49,7 +49,7 @@ class hostal{
         void removerCalificacion(calificacion* c);
         map<int,DTReserva*> obtenerReservas();
         map<int,DTEstadia*> obtenerEstadias();
-        DTDatosEstadias* obtenerDatos();
+        DTDatosEstadia* obtenerDatos();
         DTReserva* obtenerReservaDeEstadia();
         bool trabajaEmpleado(string);
         map<string,DTEmpleado*> quitarAsignados(map<string,DTEmpleado*>);
