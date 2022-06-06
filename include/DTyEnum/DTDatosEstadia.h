@@ -1,5 +1,5 @@
-#ifndef DTDATOSESTADIAS
-#define DTDATOSESTADIAS
+#ifndef DTDATOSESTADIA
+#define DTDATOSESTADIA
 
 #include "DTHostal.h"
 #include "DTHuesped.h"
@@ -10,7 +10,7 @@
 #include <stdio.h>
 using namespace std;
 
-class DTDatosEstadias {
+class DTDatosEstadia {
     private:
         DTHostal* hostal;
         DTHuesped* huesped;
@@ -54,7 +54,7 @@ class DTDatosEstadias {
             (*this).checkOut = final;
         }
 
-        ~DTDatosEstadias();
+        ~DTDatosEstadia();
 };
 
 #endif
