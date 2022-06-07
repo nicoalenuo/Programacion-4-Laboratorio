@@ -77,3 +77,17 @@ bool ControladorHostal::existeHabEnHostal(int nHab,string nombreHostal){
     hostal* h = (*hostales.find(nombreHostal)).second;
     return (*h).tieneHab(nHab);
 }
+
+void ControladorHostal::FinalizarAsignacionDeEmpleados(){
+    if (datosHostal!=NULL){
+        delete datosHostal;
+        datosHostal=NULL;
+    }
+}
+
+void ControladorHostal::cancelarFinalizarEstadiaActiva(){
+    if (datosHostal!=NULL){
+        delete datosHostal;
+        datosHostal=NULL;
+    }
+}
