@@ -28,3 +28,21 @@ map<string,DTEmpleado*> hostal::quitarAsignados(map<string,DTEmpleado*> emps){
 
     return emps;
 }
+
+void hostal::asignarEmpleado(empleado* e){
+    empleados.insert(pair<string,empleado*>((*e).getEmail(),e));
+}
+
+map<int,DTCalificacion*> hostal::obtenerCalsYComs(){
+    map<int,DTCalificacion*> resultado;
+    map<int,calificacion*>::iterator it;
+    for (it=calificaciones.begin() ; it!=calificaciones.end() ; it++){
+        DTCalificacion* c = (*(*it).second).darDatos();
+        resultado.insert(pair<int,DTCalificacion*>((*c).getId(),c));
+    }
+    return resultado;
+}
+
+bool hostal::tieneHab(int nHab){
+    return habitaciones.find(nHab) != habitaciones.end();
+}

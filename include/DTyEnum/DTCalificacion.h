@@ -15,7 +15,7 @@ class DTCalificacion {
         DTCalificacion(int,int,string,Date);
         ~DTCalificacion();
         
-        int getIc(){
+        int getId(){ //ACA DECIA GETIC
             return (*this).id;
         }
         void setId(int id){

@@ -77,3 +77,34 @@ map<string,DTEmpleado*> ControladorUsuario::obtenerEmpleadosNoAsignados(){
 
     return resultado;
 }
+
+void ControladorUsuario::suscribirEmpleado(string emailEmpleado){
+    map<string,empleado*>::iterator it;
+    it=empleados.find(emailEmpleado);
+    empleado* e=(*it).second;
+    (*e).suscribirse();
+}
+
+void ControladorUsuario::desuscribirEmpleado(string emailEmpleado){
+    map<string,empleado*>::iterator it;
+    it=empleados.find(emailEmpleado);
+    empleado* e=(*it).second;
+    (*e).desuscribirse();
+}
+
+
+set<DTNotificacion*> ControladorUsuario::consultarNotificaciones(string emailEmpleado){
+    set<DTNotificacion*> resultado;
+    map<string,empleado*>::iterator it;
+    it=empleados.find(emailEmpleado);
+    empleado* e=(*it).second;
+    resultado = (*e).darNotificaciones();
+    return resultado;
+}
+
+void ControladorUsuario::AsignarEmpleadoAHostal(string emailEmpleado){
+    fabrica* f = fabrica::getInstance();
+    IControladorHostal* ch = (*f).getIControladorHostal();
+    empleado* e = (*empleados.find(emailEmpleado)).second;
+    (*ch).asignarEmpleadoElegido(e);
+}

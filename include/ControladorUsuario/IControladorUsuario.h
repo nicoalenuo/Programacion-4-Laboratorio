@@ -39,6 +39,8 @@ class IControladorUsuario {
         virtual map<string,DTUsuario*> obtenerUsuarios()=0;
         virtual void liberarUsuario()=0;
         virtual void suscribirEmpleado(string)=0;
+        //Cosas que agregue
+        virtual void desuscribirEmpleado(string)=0;
 };
 
 #endif

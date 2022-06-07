@@ -40,6 +40,8 @@ class ControladorUsuario:public IControladorUsuario {
         map<string,DTUsuario*> obtenerUsuarios();
         void liberarUsuario();
         void suscribirEmpleado(string);
+        //Cosas que agregue
+        void desuscribirEmpleado(string);
 };
 
 #endif
