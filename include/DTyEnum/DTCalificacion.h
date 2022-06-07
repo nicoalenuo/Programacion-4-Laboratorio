@@ -1,6 +1,8 @@
 #ifndef DTCALIFICACION
 #define DTCALIFICACION
 
+#include "Date.h" //Agregado
+
 #include <iostream>
 #include <stdio.h>
 using namespace std;

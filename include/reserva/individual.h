@@ -2,6 +2,8 @@
 #define RESERVAINDIVIDUAL
 
 #include "reserva.h"
+//Cosas que agregue
+#include "Huesped-Individual.h"
 
 #include <iostream>
 #include <stdio.h>

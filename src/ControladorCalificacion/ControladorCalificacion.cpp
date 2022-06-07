@@ -2,6 +2,9 @@
 
 ControladorCalificacion* ControladorCalificacion::instancia = NULL;
 
+ControladorCalificacion::~ControladorCalificacion(){
+}
+
 ControladorCalificacion::ControladorCalificacion(){
     calificaciones={};
     estadias={};
@@ -19,7 +22,6 @@ void ControladorCalificacion::agregarSuscripto(empleado* e){
 }
 
 void ControladorCalificacion::eliminarSuscripto(empleado* e){
-    static_cast<IObserver*>(e);
     observers.erase((*e).getEmail());
 }
 

@@ -1,5 +1,11 @@
 #include "../include/hostal.h"
 
+hostal::hostal(string nombre, string direccion,string telefono){
+    (*this).nombre=nombre;
+    (*this).direccion=direccion;
+    (*this).telefono=telefono;
+}
+
 DTHostal* hostal::darDatos(){
     float calificacionPromedio=0;
     int punt;

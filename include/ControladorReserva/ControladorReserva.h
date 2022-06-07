@@ -21,8 +21,10 @@ class ControladorReserva:public IControladorReserva {
         ControladorReserva();
     public:
         static ControladorReserva* getInstance();
+        ~ControladorReserva(); //AGREGADO
 
-        void finalizarEstadiaActiva(string,string);
+
+        //AQUI DECIA OTRA VEZ FINALIZAR ESTADIA ACTIVA
         void ingresarDatosReserva(DTHostal*, Date, Date);
         map<int,DTHabitacion*> obtenerHabitacionesDisponibles();
         void EscogerHabitacion(DTHabitacion*);

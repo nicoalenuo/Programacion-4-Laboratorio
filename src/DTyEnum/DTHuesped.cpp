@@ -1,5 +1,8 @@
 #include "../../include/DTyEnum/DTHuesped.h"
 
+DTHuesped::~DTHuesped(){
+}
+
 DTHuesped::DTHuesped(string nombre,string email,string password,bool esFinger){
     (*this).nombre=nombre;
     (*this).email=email;

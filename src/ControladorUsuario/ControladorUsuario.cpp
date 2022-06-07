@@ -3,6 +3,9 @@
 
 ControladorUsuario* ControladorUsuario::instancia = NULL;
 
+ControladorUsuario::~ControladorUsuario(){
+}
+
 ControladorUsuario::ControladorUsuario(){
     huespedes={};
     empleados={};
@@ -56,16 +59,6 @@ DTEmpleado* ControladorUsuario::obtenerEmpleadoConEmail(string email){ //Pre: Ex
     DTEmpleado* resultado;
     resultado = (*empleadoBuscado).darDatos();
     return resultado;
-}
-
-map<string,DTEmpleado*> ControladorUsuario::obtenerEmpleados(){
-    map<string,DTEmpleado*> resultado;
-    map<string,empleado*>::iterator it;
-    for (it=empleados.begin() ; it!=empleados.end() ; it++){
-        DTEmpleado* dte;
-        dte=(*(*it).second).darDatos();
-        resultado.insert(pair<string,DTEmpleado*>((*it).first,dte));
-    }
 }
 
 map<string,DTEmpleado*> ControladorUsuario::obtenerEmpleadosNoAsignados(){

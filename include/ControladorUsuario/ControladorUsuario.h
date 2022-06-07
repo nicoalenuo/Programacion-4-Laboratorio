@@ -22,7 +22,9 @@ class ControladorUsuario:public IControladorUsuario {
         ControladorUsuario();
     public:
         static ControladorUsuario* getInstance();
-        
+        ~ControladorUsuario(); //AGREGADO
+
+
         void IngresarDatosUsuario(DTUsuario*);
         void IngresarEmail(string);
         void cancelarAltaUsuario();

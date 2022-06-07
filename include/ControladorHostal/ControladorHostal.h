@@ -20,6 +20,7 @@ class ControladorHostal:public IControladorHostal {
         ControladorHostal();
     public:
         static ControladorHostal* getInstance();
+        ~ControladorHostal(); //AGREGADO
 
         void asignarEmpleadoElegido(empleado*);
         hostal* obtenerHostal(DTHostal*);
@@ -49,6 +50,10 @@ class ControladorHostal:public IControladorHostal {
         DTReserva* obtenerReservaDeEstadia();
         void liberarHostalEstadia();
         map<int,DTCalificacion*> obtenerCalificaciones(string);
+        //Cosas que agregue
+        map<string,hostal*> getHostales(){
+            return hostales;
+        }
 };
 
 #endif

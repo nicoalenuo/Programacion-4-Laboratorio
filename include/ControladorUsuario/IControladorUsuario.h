@@ -21,7 +21,7 @@ using namespace std;
 
 class IControladorUsuario {
     public:
-        virtual ~IControladorUsuario();
+        virtual ~IControladorUsuario()=0; //CAMBIADO
         virtual void IngresarDatosUsuario(DTUsuario*)=0;
         virtual void IngresarEmail(string)=0;
         virtual void cancelarAltaUsuario()=0;

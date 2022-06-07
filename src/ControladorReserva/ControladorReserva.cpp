@@ -3,6 +3,9 @@
 
 ControladorReserva* ControladorReserva::instancia = NULL;
 
+ControladorReserva::~ControladorReserva(){
+}
+
 ControladorReserva::ControladorReserva(){
     reservas={};
 

@@ -2,6 +2,9 @@
 
 ControladorHostal* ControladorHostal::instancia = NULL;
 
+ControladorHostal::~ControladorHostal(){
+}
+
 ControladorHostal::ControladorHostal(){
     hostales={};
     habitaciones={};
@@ -38,11 +41,6 @@ map<string,DTEmpleado*> ControladorHostal::quitarAsignados(map<string,DTEmpleado
 void ControladorHostal::asignarEmpleadoElegido(empleado* e){
     hostal* h = (*hostales.find((*datosHostal).getNombre())).second;
     (*h).asignarEmpleado(e);
-}
-
-void ControladorHostal::FinalizarAsignacionDeEmpleados(){
-    delete datosHostal;
-    datosHostal=NULL;
 }
 
 map<string,DTHostal*> ControladorHostal::obtenerTop3Hostales(){

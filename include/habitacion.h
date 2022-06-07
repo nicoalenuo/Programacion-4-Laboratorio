@@ -2,6 +2,7 @@
 #define HABITACION
 
 #include "reserva/reserva.h"
+#include "DTyEnum/DTReserva.h" //Agregado
 #include "DTyEnum/DTHostal.h"
 #include "DTyEnum/DTEstadia.h"
 #include "DTyEnum/DTHabitacion.h"
@@ -11,6 +12,8 @@
 #include <stdio.h>
 using namespace std;
 #include <map>
+
+class reserva; //Agregado
 
 class habitacion{
     private:

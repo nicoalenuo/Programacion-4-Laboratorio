@@ -20,6 +20,7 @@ class ControladorCalificacion:public IControladorCalificacion {
         void notificarSuscriptos(string,int,string);
     public:
         static ControladorCalificacion* getInstance();
+        ~ControladorCalificacion(); //AGREGADO
 
         void agregarSuscripto(empleado*);
         void eliminarSuscripto(empleado*);

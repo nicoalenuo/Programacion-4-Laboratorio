@@ -3,6 +3,8 @@
 
 #include "../usuario/huesped.h"
 #include "../estadia.h"
+//Cosas que agregue
+#include "../DTyEnum/DTReserva.h"
 
 #include <iostream>
 #include <stdio.h>

@@ -1,5 +1,18 @@
-#include "../include/usuario/empleado.h"
 #include "../../include/fabrica.h"
+
+empleado::~empleado(){
+    set<notificacion*>::iterator it;
+    for (it=notificaciones.begin() ; it!=notificaciones.end() ; it++){
+        delete (*it);
+    }
+}
+
+empleado::empleado(string nombre, string email, string password,Cargo c){
+    (*this).nombre=nombre;
+    (*this).email=email;
+    (*this).password=password;
+    (*this).TipoCargo=c;
+}
 
 DTEmpleado* empleado::darDatos(){
     DTEmpleado* resultado=new DTEmpleado((*this).nombre , (*this).email , (*this).password , (*this).TipoCargo);
