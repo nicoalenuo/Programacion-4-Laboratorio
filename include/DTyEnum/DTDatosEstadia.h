@@ -45,15 +45,15 @@ class DTDatosEstadia {
             (*this).huesped = hues;
         }
 
-        void setHostal(DTHabitacion* hab){
+        void setHabitacion(DTHabitacion* hab){
             (*this).habitacion = hab;
         }
 
-        void setHostal(Date inicio){
+        void setCheckIn(Date inicio){
             (*this).checkIn = inicio;
         }
 
-        void setHostal(Date final){
+        void setCheckOut(Date final){
             (*this).checkOut = final;
         }
 };
