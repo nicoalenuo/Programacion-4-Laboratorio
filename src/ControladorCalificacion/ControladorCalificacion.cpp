@@ -16,15 +16,12 @@ ControladorCalificacion* ControladorCalificacion::getInstance(){
     return instancia;
 }
 
-void ControladorCalificacion::agregarSuscripto(empleado* e){
-    static_cast<IObserver*>(e);
-    observers.insert(pair<string,IObserver*>((*e).getEmail(),e));
-}
-
 void ControladorCalificacion::eliminarSuscripto(empleado* e){
     observers.erase((*e).getEmail());
 }
-
+void ControladorCalificacion::agregarSuscripto(empleado* e){
+            observers.insert(pair<string,empleado*>((*e).getEmail(),e));
+};
 void ControladorCalificacion::notificarSuscriptos(string nombreAutor,int puntuacion,string comentario){
     map<string,IObserver*>::iterator it;
     for (it=observers.begin() ; it!=observers.end() ; it++){

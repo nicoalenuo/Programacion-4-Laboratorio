@@ -34,9 +34,7 @@ class ControladorCalificacion:public IControladorCalificacion {
         int obtenerCodigoDeEstadia();
         DTCalificacion* obtenerCalificacionDeEstadia();
         DTRespuesta* obtenerRespuesta(DTCalificacion*);
-        void agregarSuscripto(empleado* e){
-            observers.insert(pair<string,empleado*>((*e).getEmail(),e));
-        };
+        void agregarSuscripto(empleado*);
         void agregarCalificacionAMap(calificacion* c){
             calificaciones.insert(pair<int,calificacion*>((*c).getId(),c));
         }

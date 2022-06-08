@@ -51,7 +51,7 @@ class IControladorHostal {
         //Cosas que agregue
         virtual map<string,hostal*> getHostales()=0;
         virtual void agregarHostalAMap(hostal*)=0;
-        virtual void agregarHabitacionAMap(habitacion)=0;
+        virtual void agregarHabitacionAMap(habitacion*)=0;
 };
 
 #endif
