@@ -21,7 +21,10 @@ class ControladorReserva:public IControladorReserva {
         ControladorReserva();
     public:
         static ControladorReserva* getInstance();
-        ~ControladorReserva(); 
+        ~ControladorReserva(); //AGREGADO
+
+
+        //AQUI DECIA OTRA VEZ FINALIZAR ESTADIA ACTIVA
         void ingresarDatosReserva(DTHostal*, Date, Date);
         map<int,DTHabitacion*> obtenerHabitacionesDisponibles();
         void EscogerHabitacion(DTHabitacion*);
@@ -36,6 +39,9 @@ class ControladorReserva:public IControladorReserva {
         int obtenerNumeroDeHabitacion(DTHabitacion*);
         map<string,string> obtenerNombresDeReserva(DTReservaGrupal*); //////////////////////////////////////////////
         map<int,DTEstadia*> obtenerEstadiaHuesped(string);
+        void agregarReservaAMap(reserva * r){
+            reservas.insert(pair<int,reserva*>((*r).getCodigo(),r));
+        }
 };
 
 #endif

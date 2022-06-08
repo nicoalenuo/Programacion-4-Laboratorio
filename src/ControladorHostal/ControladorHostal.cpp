@@ -40,6 +40,7 @@ map<string,DTEmpleado*> ControladorHostal::quitarAsignados(map<string,DTEmpleado
 
 void ControladorHostal::asignarEmpleadoElegido(empleado* e){
     hostal* h = (*hostales.find((*datosHostal).getNombre())).second;
+    cout << (*h).getNombre() << endl;
     (*h).asignarEmpleado(e);
 }
 

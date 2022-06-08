@@ -65,6 +65,9 @@ class grupal:public reserva{
         DTReserva* obtenerResrvaDeEst();
         bool tieneEstadiaFinalizadaDeHuesped(string);
         DTEstadia* darEstadiaDeHuesped(string);
+        void agregarHuespedGrupalASet(huespedGrupal * hg){
+            huesGrup.insert(hg);
+        }
 };
 
 #endif

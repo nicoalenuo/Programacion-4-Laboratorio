@@ -22,7 +22,7 @@ class ControladorHostal:public IControladorHostal {
         static ControladorHostal* getInstance();
         ~ControladorHostal(); //AGREGADO
 
-        void asignarEmpleadoElegido(empleado*);
+        void asignarEmpleadoElegido(empleado*); 
         hostal* obtenerHostal(DTHostal*);
         bool existeHabEnHostal(int,string);
         map<string,DTEmpleado*> quitarAsignados(map<string,DTEmpleado*>);
@@ -57,6 +57,10 @@ class ControladorHostal:public IControladorHostal {
         void agregarHostalAMap(hostal* h){
             hostales.insert(pair<string,hostal*>((*h).getNombre(),h));
         }
+        void agregarHabitacionAMap(habitacion * h){
+            habitaciones.insert(pair<int,habitacion*>((*h).getNumero(),h));
+        }
+
 };
 
 #endif

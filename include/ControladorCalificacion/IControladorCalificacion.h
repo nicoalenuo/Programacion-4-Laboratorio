@@ -25,7 +25,7 @@ class IControladorCalificacion {
     private:
         virtual void notificarSuscriptos(string,int,string)=0;
     public:
-        virtual ~IControladorCalificacion()=0; 
+        virtual ~IControladorCalificacion()=0; //AGREGADO
 
         virtual void agregarSuscripto(empleado*)=0;
         virtual void eliminarSuscripto(empleado*)=0;
@@ -41,6 +41,8 @@ class IControladorCalificacion {
         virtual int obtenerCodigoDeEstadia()=0;
         virtual DTCalificacion* obtenerCalificacionDeEstadia()=0;
         virtual DTRespuesta* obtenerRespuesta(DTCalificacion*)=0;
+        virtual void agregarCalificacionAMap(calificacion*)=0;
+        virtual void agregarEstadiaAMap(estadia*)=0;
 };
 
 #endif

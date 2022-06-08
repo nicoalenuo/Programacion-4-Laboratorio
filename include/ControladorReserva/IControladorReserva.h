@@ -23,8 +23,8 @@ using namespace std;
 
 class IControladorReserva{
     public:
-        virtual ~IControladorReserva()=0; 
-        
+        virtual ~IControladorReserva()=0; //AGREGADO
+        //AQUI DECIA OTRA VEZ FINALIZAR ESTADIA ACTIVA
         virtual void ingresarDatosReserva(DTHostal*, Date, Date)=0;
         virtual map<int,DTHabitacion*> obtenerHabitacionesDisponibles()=0;
         virtual void EscogerHabitacion(DTHabitacion*)=0;
@@ -39,6 +39,7 @@ class IControladorReserva{
         virtual int obtenerNumeroDeHabitacion(DTHabitacion*)=0;
         virtual map<string,string> obtenerNombresDeReserva(DTReservaGrupal*)=0;
         virtual map<int,DTEstadia*> obtenerEstadiaHuesped(string)=0;
+        virtual void agregarReservaAMap(reserva * r)=0;
 };
 
 #endif

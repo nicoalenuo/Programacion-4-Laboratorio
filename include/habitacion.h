@@ -52,6 +52,9 @@ class habitacion{
         map<int, DTEstadia*> obtenerEstadias();
         DTDatosEstadia* obtenerDatos();
         DTReserva* obtenerReservaDeEstadia();
+        void agregarReservaAMap(reserva * r){
+            reservas.insert(pair<int,reserva*>((*r).getCodigo(),r));
+        }
 };    
 
 #endif

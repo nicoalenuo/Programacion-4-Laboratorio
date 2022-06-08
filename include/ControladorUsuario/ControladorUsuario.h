@@ -22,7 +22,7 @@ class ControladorUsuario:public IControladorUsuario {
         ControladorUsuario();
     public:
         static ControladorUsuario* getInstance();
-        ~ControladorUsuario(); 
+        ~ControladorUsuario(); //AGREGADO
 
 
         void IngresarDatosUsuario(DTUsuario*);
@@ -42,6 +42,7 @@ class ControladorUsuario:public IControladorUsuario {
         map<string,DTUsuario*> obtenerUsuarios();
         void liberarUsuario();
         void suscribirEmpleado(string);
+        //Cosas que agregue
         void desuscribirEmpleado(string);
         void agregarEmpleadoAMap(empleado* e){
             empleados.insert(pair<string,empleado*>((*e).getEmail(),e));
