@@ -3,6 +3,9 @@
 
 ControladorUsuario* ControladorUsuario::instancia = NULL;
 
+ControladorUsuario::~ControladorUsuario(){
+}
+
 ControladorUsuario::ControladorUsuario(){
     huespedes={};
     empleados={};
@@ -58,16 +61,6 @@ DTEmpleado* ControladorUsuario::obtenerEmpleadoConEmail(string email){ //Pre: Ex
     return resultado;
 }
 
-map<string,DTEmpleado*> ControladorUsuario::obtenerEmpleados(){
-    map<string,DTEmpleado*> resultado;
-    map<string,empleado*>::iterator it;
-    for (it=empleados.begin() ; it!=empleados.end() ; it++){
-        DTEmpleado* dte;
-        dte=(*(*it).second).darDatos();
-        resultado.insert(pair<string,DTEmpleado*>((*it).first,dte));
-    }
-}
-
 map<string,DTEmpleado*> ControladorUsuario::obtenerEmpleadosNoAsignados(){
     fabrica* f = fabrica::getInstance();
     IControladorHostal* ch=(*f).getIControladorHostal();
@@ -77,3 +70,47 @@ map<string,DTEmpleado*> ControladorUsuario::obtenerEmpleadosNoAsignados(){
 
     return resultado;
 }
+
+void ControladorUsuario::suscribirEmpleado(string emailEmpleado){
+    map<string,empleado*>::iterator it;
+    it=empleados.find(emailEmpleado);
+    empleado* e=(*it).second;
+    (*e).suscribirse();
+}
+
+void ControladorUsuario::desuscribirEmpleado(string emailEmpleado){
+    map<string,empleado*>::iterator it;
+    it=empleados.find(emailEmpleado);
+    empleado* e=(*it).second;
+    (*e).desuscribirse();
+}
+
+
+set<DTNotificacion*> ControladorUsuario::consultarNotificaciones(string emailEmpleado){
+    set<DTNotificacion*> resultado;
+    map<string,empleado*>::iterator it;
+    it=empleados.find(emailEmpleado);
+    empleado* e=(*it).second;
+    resultado = (*e).darNotificaciones();
+    return resultado;
+}
+
+void ControladorUsuario::AsignarEmpleadoAHostal(string emailEmpleado){
+    fabrica* f = fabrica::getInstance();
+    IControladorHostal* ch = (*f).getIControladorHostal();
+    empleado* e = (*empleados.find(emailEmpleado)).second;
+    (*ch).asignarEmpleadoElegido(e);
+}
+
+
+        void ControladorUsuario::IngresarEmail(string){}
+        void ControladorUsuario::cancelarAltaUsuario(){}
+        void ControladorUsuario::confirmarAltaUsuario(){}
+        string ControladorUsuario::obtenerNombreUsuario(DTUsuario*){return "a";}
+        string ControladorUsuario::obtenerEmailUsuario(DTUsuario*){return "a";}
+        DTUsuario* ControladorUsuario::devolverDatos(){return NULL;}
+        void ControladorUsuario::liberarUsuario(){}
+        map<string,DTUsuario*> ControladorUsuario::obtenerUsuarios(){
+            map<string,DTUsuario*> a;
+            return a;
+        }

@@ -1,5 +1,8 @@
 #include "../../include/DTyEnum/Date.h"
 
+Date::~Date(){  
+}
+
 Date::Date(){
     dia=0;
     mes=0;

@@ -59,5 +59,4 @@ class calificacion{
         void ingresarRespuesta(string);
         DTCalificacion* getDatosCalificacion(); 
 };
-
 #endif

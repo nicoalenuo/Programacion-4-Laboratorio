@@ -1,5 +1,13 @@
 #include "../include/hostal.h"
 
+hostal::hostal(string nombre, string direccion,string telefono){
+    empleados = {};
+
+    (*this).nombre=nombre;
+    (*this).direccion=direccion;
+    (*this).telefono=telefono;
+}
+
 DTHostal* hostal::darDatos(){
     float calificacionPromedio=0;
     int punt;
@@ -27,4 +35,27 @@ map<string,DTEmpleado*> hostal::quitarAsignados(map<string,DTEmpleado*> emps){
     }
 
     return emps;
+}
+
+void hostal::asignarEmpleado(empleado* e){
+    cout << "aea" << endl;
+    empleados.insert(pair<string,empleado*>((*e).getEmail(),e));
+}
+
+map<int,DTCalificacion*> hostal::obtenerCalsYComs(){
+    map<int,DTCalificacion*> resultado;
+    map<int,calificacion*>::iterator it;
+    for (it=calificaciones.begin() ; it!=calificaciones.end() ; it++){
+        DTCalificacion* c = (*(*it).second).darDatos();
+        resultado.insert(pair<int,DTCalificacion*>((*c).getId(),c));
+    }
+    return resultado;
+}
+
+bool hostal::tieneHab(int nHab){
+    return habitaciones.find(nHab) != habitaciones.end();
+}
+
+bool hostal::trabajaEmpleado(string emailEmpleado){
+    return empleados.find(emailEmpleado)!=empleados.end(); 
 }

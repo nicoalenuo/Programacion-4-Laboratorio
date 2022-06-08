@@ -1,6 +1,8 @@
 #ifndef DTESTADIA
 #define DTESTADIA
 
+#include "Date.h"
+
 #include <iostream>
 #include <stdio.h>
 using namespace std;

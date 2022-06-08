@@ -2,6 +2,8 @@
 #define RESERVAINDIVIDUAL
 
 #include "reserva.h"
+//Cosas que agregue
+#include "Huesped-Individual.h"
 
 #include <iostream>
 #include <stdio.h>
@@ -61,6 +63,14 @@ class individual:public reserva{
         DTReserva* obtenerResrvaDeEst();
         bool tieneEstadiaFinalizadaDeHuesped(string);
         DTEstadia* darEstadiaDeHuesped(string);
+
+        //Cosas que agregue
+        huespedIndividual* getHuespedIndividual(){
+            return huesInd;
+        }
+        void setHuespedIndividual(huespedIndividual* hi){
+            huesInd = hi;
+        }
 };
 
 #endif

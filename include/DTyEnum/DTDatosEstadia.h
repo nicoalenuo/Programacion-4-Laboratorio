@@ -44,7 +44,7 @@ class DTDatosEstadia {
         void setHuesped(DTHuesped* hues){
             (*this).huesped = hues;
         }
-
+//ACA LO CAMBIE
         void setHabitacion(DTHabitacion* hab){
             (*this).habitacion = hab;
         }

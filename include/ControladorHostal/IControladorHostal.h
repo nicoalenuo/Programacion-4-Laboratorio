@@ -18,6 +18,8 @@ using namespace std;
 
 class IControladorHostal {
     public:
+        virtual ~IControladorHostal()=0; //AGREGADO
+
         virtual void asignarEmpleadoElegido(empleado*) = 0;
         virtual hostal* obtenerHostal(DTHostal*)=0;
         virtual bool existeHabEnHostal(int,string)=0;
@@ -46,6 +48,9 @@ class IControladorHostal {
         virtual DTReserva* obtenerReservaDeEstadia()=0;
         virtual void liberarHostalEstadia()=0;
         virtual map<int,DTCalificacion*> obtenerCalificaciones(string)=0;
+        //Cosas que agregue
+        virtual map<string,hostal*> getHostales()=0;
+        virtual void agregarHostalAMap(hostal*)=0;
 };
 
 #endif

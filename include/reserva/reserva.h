@@ -11,6 +11,8 @@
 #include <stdio.h>
 using namespace std;
 
+class habitacion;//agregue esto XD
+
 class reserva{
     protected:
         habitacion* habitacionAsoc;

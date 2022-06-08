@@ -1,6 +1,10 @@
 #include "../../include/ControladorReserva/ControladorReserva.h"
+#include "../../include/fabrica.h"
 
 ControladorReserva* ControladorReserva::instancia = NULL;
+
+ControladorReserva::~ControladorReserva(){
+}
 
 ControladorReserva::ControladorReserva(){
     reservas={};
@@ -15,3 +19,44 @@ ControladorReserva* ControladorReserva::getInstance(){
         instancia = new ControladorReserva();
     return instancia; 
 }
+
+void ControladorReserva::finalizarEstadiaActiva(string emailHuesped, string nombreHostal){
+    fabrica* f = fabrica::getInstance();
+    IControladorHostal* ch = (*f).getIControladorHostal();
+    map<int,reserva*>::iterator it;
+
+    for (it=reservas.begin() ; it!=reservas.end() ; it++)
+        (*(*it).second).finalizarSiEsReservaBuscada(emailHuesped,nombreHostal);
+
+     (*ch).liberarDatosHostal();
+}
+
+        void ControladorReserva::ingresarDatosReserva(DTHostal*, Date, Date){}
+        map<int,DTHabitacion*> ControladorReserva::obtenerHabitacionesDisponibles(){
+            map<int,DTHabitacion*> a;
+            return a;
+        }
+        void ControladorReserva::EscogerHabitacion(DTHabitacion*){}
+        DTHuesped* ControladorReserva::DesignarPropietarioDeReserva(DTHuesped*){return NULL;}
+        void ControladorReserva::IngresarHuespedEnReserva(DTHuesped*){}
+        void ControladorReserva::CancelarReserva(){}
+        void ControladorReserva::confirmarReserva(){}  
+        map<int,DTReserva*> ControladorReserva::ListarReservasNoCanceladasDeHuesped(DTHostal*, string){
+            map<int,DTReserva*> a;
+            return a;
+        }
+        void ControladorReserva::confirmarBaja(DTHostal*, int){}
+        int ControladorReserva::obtenerNumeroDeHabitacion(DTHabitacion*){return 4;}
+        map<string,string> ControladorReserva::obtenerNombresDeReserva(DTReservaGrupal*){
+            map<string,string> a;
+            return a;
+        }
+        map<int,DTEstadia*> ControladorReserva::obtenerEstadiaHuesped(string){
+            map<int,DTEstadia*> a;
+            return a;
+        }
+        map<string,string> ControladorReserva::mostrarReserva(DTReserva*){
+            map<string,string> a;
+            return a;
+        }
+        

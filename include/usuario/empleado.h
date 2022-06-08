@@ -47,6 +47,9 @@ class empleado:public usuario, public IObserver {
         bool estaAsignado();
         void suscribirse();
         void notificar(string,int,string);
+        //Cosas que agregue
+        void desuscribirse();
+        set<DTNotificacion*> darNotificaciones();
 };
 
 #endif

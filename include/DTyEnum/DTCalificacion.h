@@ -1,6 +1,8 @@
 #ifndef DTCALIFICACION
 #define DTCALIFICACION
 
+#include "Date.h" //Agregado
+
 #include <iostream>
 #include <stdio.h>
 using namespace std;
@@ -15,7 +17,7 @@ class DTCalificacion {
         DTCalificacion(int,int,string,Date);
         ~DTCalificacion();
         
-        int getIc(){
+        int getId(){ //ACA DECIA GETIC
             return (*this).id;
         }
         void setId(int id){

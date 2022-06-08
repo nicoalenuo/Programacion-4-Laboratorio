@@ -5,6 +5,8 @@
 #include "DTyEnum/DTHostal.h"
 #include "DTyEnum/DTEmpleado.h"
 #include "usuario/empleado.h"
+//Cosas que agregue
+#include "habitacion.h"
 
 #include <iostream>
 #include <stdio.h>

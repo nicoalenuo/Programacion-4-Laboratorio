@@ -64,7 +64,7 @@ class grupal:public reserva{
         DTEstadia* obtenerEstadia();
         DTReserva* obtenerResrvaDeEst();
         bool tieneEstadiaFinalizadaDeHuesped(string);
-        DTEstadia* darEstadiaDeHuesped(string);        
+        DTEstadia* darEstadiaDeHuesped(string);
 };
 
 #endif

@@ -21,7 +21,7 @@ using namespace std;
 
 class IControladorUsuario {
     public:
-        virtual ~IControladorUsuario();
+        virtual ~IControladorUsuario()=0; //CAMBIADO
         virtual void IngresarDatosUsuario(DTUsuario*)=0;
         virtual void IngresarEmail(string)=0;
         virtual void cancelarAltaUsuario()=0;
@@ -39,6 +39,10 @@ class IControladorUsuario {
         virtual map<string,DTUsuario*> obtenerUsuarios()=0;
         virtual void liberarUsuario()=0;
         virtual void suscribirEmpleado(string)=0;
+        //Cosas que agregue
+        virtual void desuscribirEmpleado(string)=0;
+        virtual void agregarEmpleadoAMap(empleado*)=0;
+        virtual void agregarHuespedAMap(huesped*)=0;
 };
 
 #endif
