@@ -38,7 +38,6 @@ map<string,DTEmpleado*> hostal::quitarAsignados(map<string,DTEmpleado*> emps){
 }
 
 void hostal::asignarEmpleado(empleado* e){
-    cout << "aea" << endl;
     empleados.insert(pair<string,empleado*>((*e).getEmail(),e));
 }
 

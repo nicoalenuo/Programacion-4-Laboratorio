@@ -25,7 +25,7 @@ class IControladorCalificacion {
     private:
         virtual void notificarSuscriptos(string,int,string)=0;
     public:
-        virtual ~IControladorCalificacion()=0; //AGREGADO
+        virtual ~IControladorCalificacion()=0; 
 
         virtual void agregarSuscripto(empleado*)=0;
         virtual void eliminarSuscripto(empleado*)=0;
