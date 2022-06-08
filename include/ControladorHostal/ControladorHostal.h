@@ -53,6 +53,9 @@ class ControladorHostal:public IControladorHostal {
         //Cosas que agregue
         map<string,hostal*> getHostales(){
             return hostales;
+        } 
+        void agregarHostalAMap(hostal* h){
+            hostales.insert(pair<string,hostal*>((*h).getNombre(),h));
         }
 };
 

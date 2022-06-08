@@ -31,3 +31,22 @@ void ControladorCalificacion::notificarSuscriptos(string nombreAutor,int puntuac
         (*(*it).second).notificar(nombreAutor,puntuacion,comentario);
     }
 }
+
+        map<int,DTEstadia*> ControladorCalificacion::obtenerEstadiasHuesped(string){
+            map<int,DTEstadia*> a;
+            return a;
+        }
+        void ControladorCalificacion::agregarCalificacion(string,int){}
+        map<int,DTCalificacion*> ControladorCalificacion::obtenerCalificaciones(string){
+            map<int,DTCalificacion*> a;
+            return a;
+        }
+        void ControladorCalificacion::ingresarComentario(string){}
+        void ControladorCalificacion::liberarEstadia(){};
+        void ControladorCalificacion::eliminarCalificacion(){}
+        void ControladorCalificacion::RegistrarEstadia(DTHostal*, string, DTReserva*, DTEstadia*){}
+        void ControladorCalificacion::ingresarRespuesta(string){}
+        float ControladorCalificacion::obtenerPromocionDeEstadia(){return 1;}
+        int ControladorCalificacion::obtenerCodigoDeEstadia(){return 1;}
+        DTCalificacion* ControladorCalificacion::obtenerCalificacionDeEstadia(){return NULL;}
+        DTRespuesta* ControladorCalificacion::obtenerRespuesta(DTCalificacion*){return NULL;}

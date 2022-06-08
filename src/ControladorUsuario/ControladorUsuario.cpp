@@ -101,3 +101,16 @@ void ControladorUsuario::AsignarEmpleadoAHostal(string emailEmpleado){
     empleado* e = (*empleados.find(emailEmpleado)).second;
     (*ch).asignarEmpleadoElegido(e);
 }
+
+
+        void ControladorUsuario::IngresarEmail(string){}
+        void ControladorUsuario::cancelarAltaUsuario(){}
+        void ControladorUsuario::confirmarAltaUsuario(){}
+        string ControladorUsuario::obtenerNombreUsuario(DTUsuario*){return "a";}
+        string ControladorUsuario::obtenerEmailUsuario(DTUsuario*){return "a";}
+        DTUsuario* ControladorUsuario::devolverDatos(){return NULL;}
+        void ControladorUsuario::liberarUsuario(){}
+        map<string,DTUsuario*> ControladorUsuario::obtenerUsuarios(){
+            map<string,DTUsuario*> a;
+            return a;
+        }

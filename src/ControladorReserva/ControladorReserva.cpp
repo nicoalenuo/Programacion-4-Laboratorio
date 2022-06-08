@@ -30,3 +30,33 @@ void ControladorReserva::finalizarEstadiaActiva(string emailHuesped, string nomb
 
      (*ch).liberarDatosHostal();
 }
+
+        void ControladorReserva::ingresarDatosReserva(DTHostal*, Date, Date){}
+        map<int,DTHabitacion*> ControladorReserva::obtenerHabitacionesDisponibles(){
+            map<int,DTHabitacion*> a;
+            return a;
+        }
+        void ControladorReserva::EscogerHabitacion(DTHabitacion*){}
+        DTHuesped* ControladorReserva::DesignarPropietarioDeReserva(DTHuesped*){return NULL;}
+        void ControladorReserva::IngresarHuespedEnReserva(DTHuesped*){}
+        void ControladorReserva::CancelarReserva(){}
+        void ControladorReserva::confirmarReserva(){}  
+        map<int,DTReserva*> ControladorReserva::ListarReservasNoCanceladasDeHuesped(DTHostal*, string){
+            map<int,DTReserva*> a;
+            return a;
+        }
+        void ControladorReserva::confirmarBaja(DTHostal*, int){}
+        int ControladorReserva::obtenerNumeroDeHabitacion(DTHabitacion*){return 4;}
+        map<string,string> ControladorReserva::obtenerNombresDeReserva(DTReservaGrupal*){
+            map<string,string> a;
+            return a;
+        }
+        map<int,DTEstadia*> ControladorReserva::obtenerEstadiaHuesped(string){
+            map<int,DTEstadia*> a;
+            return a;
+        }
+        map<string,string> ControladorReserva::mostrarReserva(DTReserva*){
+            map<string,string> a;
+            return a;
+        }
+        

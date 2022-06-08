@@ -44,6 +44,13 @@ class ControladorUsuario:public IControladorUsuario {
         void suscribirEmpleado(string);
         //Cosas que agregue
         void desuscribirEmpleado(string);
+        void agregarEmpleadoAMap(empleado* e){
+            empleados.insert(pair<string,empleado*>((*e).getEmail(),e));
+        }
+        
+        void agregarHuespedAMap(huesped* h){
+            huespedes.insert(pair<string,huesped*>((*h).getEmail(),h));
+        }
 };
 
 #endif

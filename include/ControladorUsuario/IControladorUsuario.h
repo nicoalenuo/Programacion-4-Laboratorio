@@ -41,6 +41,8 @@ class IControladorUsuario {
         virtual void suscribirEmpleado(string)=0;
         //Cosas que agregue
         virtual void desuscribirEmpleado(string)=0;
+        virtual void agregarEmpleadoAMap(empleado*)=0;
+        virtual void agregarHuespedAMap(huesped*)=0;
 };
 
 #endif

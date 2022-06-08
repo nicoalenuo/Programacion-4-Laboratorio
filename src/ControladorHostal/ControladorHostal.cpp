@@ -40,6 +40,7 @@ map<string,DTEmpleado*> ControladorHostal::quitarAsignados(map<string,DTEmpleado
 
 void ControladorHostal::asignarEmpleadoElegido(empleado* e){
     hostal* h = (*hostales.find((*datosHostal).getNombre())).second;
+    cout << (*h).getNombre() << endl;
     (*h).asignarEmpleado(e);
 }
 
@@ -89,3 +90,42 @@ void ControladorHostal::cancelarFinalizarEstadiaActiva(){
         datosHostal=NULL;
     }
 }
+
+void ControladorHostal::IngresarDatosHostal(DTHostal* dth){
+    datosHostal=dth;
+}
+
+        hostal* ControladorHostal::obtenerHostal(DTHostal*){return NULL;}
+        void ControladorHostal::confirmarAltaHostal(){}
+        void ControladorHostal::cancelarAltaHostal(){}
+        void ControladorHostal::liberarDatosHostal(){}
+        void ControladorHostal::IngresarDatosHab(DTHabitacion*){}
+        void ControladorHostal::cancelarAltaHabitacion(){}
+        void ControladorHostal::confirmarAltaHabitacion(){}
+        map<int,DTReserva*> ControladorHostal::ListarReservas(DTHostal*){
+            map<int,DTReserva*> a;
+            return a;
+        }
+        string ControladorHostal::mostrarHostal(){return "a";}
+        float ControladorHostal::obtenerPromCalificacionesDeHostal(){return 1;}
+        map<int,DTCalificacion*> ControladorHostal::obtenerCalificacionesDeHostal(){
+            map<int,DTCalificacion*> a;
+            return a;
+        }
+        void ControladorHostal::mostrarHabitacion(DTHabitacion*){}
+        map<int,DTReserva*> ControladorHostal::obtenerReservasDeHostal(){
+            map<int,DTReserva*> a;
+            return a;
+        }
+        void ControladorHostal::liberarHostal(){}
+        map<int,DTEstadia*> ControladorHostal::obtenerEstadiasDeHostal(){
+            map<int,DTEstadia*> a;
+            return a;
+        }
+        DTEstadia* ControladorHostal::obtenerDatosEstadia(){return NULL;}
+        DTReserva* ControladorHostal::obtenerReservaDeEstadia(){return NULL;}
+        void ControladorHostal::liberarHostalEstadia(){}
+        map<int,DTCalificacion*> ControladorHostal::obtenerCalificaciones(string){
+            map<int,DTCalificacion*> a;
+            return a;
+        }

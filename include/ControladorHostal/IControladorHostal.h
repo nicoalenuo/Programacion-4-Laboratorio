@@ -50,6 +50,7 @@ class IControladorHostal {
         virtual map<int,DTCalificacion*> obtenerCalificaciones(string)=0;
         //Cosas que agregue
         virtual map<string,hostal*> getHostales()=0;
+        virtual void agregarHostalAMap(hostal*)=0;
 };
 
 #endif

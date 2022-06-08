@@ -1,6 +1,8 @@
 #include "../include/hostal.h"
 
 hostal::hostal(string nombre, string direccion,string telefono){
+    empleados = {};
+
     (*this).nombre=nombre;
     (*this).direccion=direccion;
     (*this).telefono=telefono;
@@ -36,6 +38,7 @@ map<string,DTEmpleado*> hostal::quitarAsignados(map<string,DTEmpleado*> emps){
 }
 
 void hostal::asignarEmpleado(empleado* e){
+    cout << "aea" << endl;
     empleados.insert(pair<string,empleado*>((*e).getEmail(),e));
 }
 
@@ -51,4 +54,8 @@ map<int,DTCalificacion*> hostal::obtenerCalsYComs(){
 
 bool hostal::tieneHab(int nHab){
     return habitaciones.find(nHab) != habitaciones.end();
+}
+
+bool hostal::trabajaEmpleado(string emailEmpleado){
+    return empleados.find(emailEmpleado)!=empleados.end(); 
 }
