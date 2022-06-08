@@ -1,6 +1,7 @@
 #include "../include/fabrica.h"
 
 int main(){
+    //ESTO ES UNA PRUEBA
     Date d = Date(1,1,1);
     fabrica* f = fabrica::getInstance();
     IControladorHostal* ch = (*f).getIControladorHostal();

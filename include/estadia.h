@@ -14,7 +14,7 @@ class estadia{
         calificacion* calificacionAsoc;
 
         Date fechaEntrada;
-        Date fechaSalida;
+        Date* fechaSalida;
         int codigo;
     public:
         estadia(Date,Date,int);
@@ -26,7 +26,7 @@ class estadia{
         Date getFechaEntrada(){
             return fechaEntrada;
         }
-        Date getFechaSalida(){
+        Date* getFechaSalida(){
             return fechaSalida;
         }
         int getCodigo(){
@@ -38,7 +38,7 @@ class estadia{
         void setFechaEntrada(Date fe){
             fechaEntrada=fe;
         }
-        void setFechaSalida(Date fs){
+        void setFechaSalida(Date* fs){
             fechaSalida=fs;
         }
         void setCodigo(int c){
