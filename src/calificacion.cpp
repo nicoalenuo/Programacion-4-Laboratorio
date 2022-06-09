@@ -1,4 +1,5 @@
 #include "../include/calificacion.h"
+#include "../include/respuesta.h"
 #include "../include/DTyEnum/DTCalificacion.h"
 
 calificacion::calificacion(int id,int puntuacion,string comentario,Date fecha){
@@ -17,15 +18,17 @@ bool calificacion::sinRespuesta(){
     return (getRespuesta()==NULL) ? true:false;
 }
 void calificacion::removerCalificacion(){
-
+    
 }
 DTRespuesta* calificacion::obtenerRespuesta(){
     DTRespuesta* send = (*this).respuestaAsoc->darDatos();
     return send;
 }
-void calificacion::ingresarRespuesta(string){
-
+void calificacion::ingresarRespuesta(string res){
+    respuesta* set = new respuesta(res);
+    setRespuesta(set);
 }
 DTCalificacion* calificacion::getDatosCalificacion(){
-    return NULL;
+    DTCalificacion* send = new DTCalificacion((*this).id, (*this).puntuacion,(*this).comentario,(*this).fecha);
+    return send;
 }

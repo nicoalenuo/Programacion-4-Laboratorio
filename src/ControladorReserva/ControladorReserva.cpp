@@ -52,6 +52,7 @@ void ControladorReserva::finalizarEstadiaActiva(string emailHuesped, string nomb
             return a;
         }
         map<int,DTEstadia*> ControladorReserva::obtenerEstadiaHuesped(string){
+            
             map<int,DTEstadia*> a;
             return a;
         }
