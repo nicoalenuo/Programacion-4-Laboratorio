@@ -110,7 +110,20 @@ void ControladorUsuario::AsignarEmpleadoAHostal(string emailEmpleado){
         string ControladorUsuario::obtenerEmailUsuario(DTUsuario*){return "a";}
         DTUsuario* ControladorUsuario::devolverDatos(){return NULL;}
         void ControladorUsuario::liberarUsuario(){}
-        map<string,DTUsuario*> ControladorUsuario::obtenerUsuarios(){
-            map<string,DTUsuario*> a;
-            return a;
-        }
+
+map<string,DTUsuario*> ControladorUsuario::obtenerUsuarios(){
+    map<string,DTUsuario*> usuarios={};
+    map<string,DTEmpleado*> dtempleados=obtenerEmpleados();
+    map<string,DTHuesped*> dthuespedes=obtenerHuespedes();
+    map<string,DTEmpleado*>::iterator it1;
+    map<string,DTHuesped*>::iterator it2;
+    for (it1=dtempleados.begin() ; it1!=dtempleados.end() ; it1++){
+        DTEmpleado* dte= (*it1).second;
+        usuarios.insert(pair<string,DTUsuario*>((*it1).first,dte));
+    }
+    for (it2=dthuespedes.begin() ; it2!=dthuespedes.end() ; it2++){
+        DTHuesped* dth = (*it2).second;
+        usuarios.insert(pair<string,DTUsuario*>((*it2).first,dth));
+    }
+    return usuarios;
+}
