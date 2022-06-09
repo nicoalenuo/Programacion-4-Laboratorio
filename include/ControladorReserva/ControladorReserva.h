@@ -39,6 +39,9 @@ class ControladorReserva:public IControladorReserva {
         int obtenerNumeroDeHabitacion(DTHabitacion*);
         map<string,string> obtenerNombresDeReserva(DTReservaGrupal*); //////////////////////////////////////////////
         map<int,DTEstadia*> obtenerEstadiaHuesped(string);
+        void agregarReservaAMap(reserva * r){
+            reservas.insert(pair<int,reserva*>((*r).getCodigo(),r));
+        }
 };
 
 #endif

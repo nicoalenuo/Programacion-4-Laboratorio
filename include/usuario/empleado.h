@@ -50,6 +50,9 @@ class empleado:public usuario, public IObserver {
         //Cosas que agregue
         void desuscribirse();
         set<DTNotificacion*> darNotificaciones();
+        void agregarNotificacionASet(notificacion * n){
+            notificaciones.insert(n);
+        }
 };
 
 #endif

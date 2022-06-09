@@ -52,6 +52,7 @@ class habitacion{
         map<int, DTEstadia*> obtenerEstadias();
         DTDatosEstadia* obtenerDatos();
         DTReserva* obtenerReservaDeEstadia();
+        void agregarReservaAMap(reserva * );
 };    
 
 #endif

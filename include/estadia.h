@@ -12,11 +12,12 @@ using namespace std;
 class estadia{
     private:
         calificacion* calificacionAsoc;
+
         Date fechaEntrada;
-        Date fechaSalida;
+        Date* fechaSalida;
         int codigo;
     public:
-        estadia(Date,Date,int);
+        estadia(Date,Date*,int);
         ~estadia();
 
         calificacion* getCalificacion(){
@@ -25,7 +26,7 @@ class estadia{
         Date getFechaEntrada(){
             return fechaEntrada;
         }
-        Date getFechaSalida(){
+        Date* getFechaSalida(){
             return fechaSalida;
         }
         int getCodigo(){
@@ -37,18 +38,18 @@ class estadia{
         void setFechaEntrada(Date fe){
             fechaEntrada=fe;
         }
-        void setFechaSalida(Date fs){
+        void setFechaSalida(Date* fs){
             fechaSalida=fs;
         }
         void setCodigo(int c){
             codigo=c;
         }
 
-        DTEstadia* darDatos();//retorna un DTEstadia con los datos
-        bool estaActiva();//retorna true sii la reserva esta activa
-        void finalizarEstadiaActiva();//termina la estadaia, pre cond: estaActiva true
-        void eliminarEstadia();//elimina la instancia de estadia
-        DTCalificacion* obtenerCalificacionDeEstadia();//retorna un DTCalificacion de la calificacion asociada
+        DTEstadia* darDatos();
+        bool estaActiva();
+        void finalizarEstadiaActiva();
+        void eliminarEstadia();
+        DTCalificacion* obtenerCalificacionDeEstadia();
 };
 
 #endif

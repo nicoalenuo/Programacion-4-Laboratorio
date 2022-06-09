@@ -21,8 +21,6 @@ class ControladorCalificacion:public IControladorCalificacion {
     public:
         static ControladorCalificacion* getInstance();
         ~ControladorCalificacion(); //AGREGADO
-
-        void agregarSuscripto(empleado*);
         void eliminarSuscripto(empleado*);
         map<int,DTEstadia*> obtenerEstadiasHuesped(string);
         void agregarCalificacion(string,int);
@@ -36,6 +34,14 @@ class ControladorCalificacion:public IControladorCalificacion {
         int obtenerCodigoDeEstadia();
         DTCalificacion* obtenerCalificacionDeEstadia();
         DTRespuesta* obtenerRespuesta(DTCalificacion*);
+        void agregarSuscripto(empleado*);
+        void agregarCalificacionAMap(calificacion* c){
+            calificaciones.insert(pair<int,calificacion*>((*c).getId(),c));
+        }
+        void agregarEstadiaAMap(estadia * e){
+            estadias.insert(pair<int,estadia*>((*e).getCodigo(), e));
+        }
+        
 };
 
 #endif
