@@ -20,9 +20,8 @@ void calificacion::removerCalificacion(){
 
 }
 DTRespuesta* calificacion::obtenerRespuesta(){
-    respuesta* aux = getRespuesta();
-    DTRespuesta* send = new DTRespuesta("","","");
-    return NULL;
+    DTRespuesta* send = (*this).respuestaAsoc->darDatos();
+    return send;
 }
 void calificacion::ingresarRespuesta(string){
 
