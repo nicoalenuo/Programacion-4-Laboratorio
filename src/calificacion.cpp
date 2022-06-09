@@ -14,7 +14,7 @@ DTCalificacion* calificacion::darDatos(){
     return resultado;
 }
 bool calificacion::sinRespuesta(){
-    return (getRespuesta==NULL) ? true:false;
+    return (getRespuesta()==NULL) ? true:false;
 }
 void calificacion::removerCalificacion(){
 

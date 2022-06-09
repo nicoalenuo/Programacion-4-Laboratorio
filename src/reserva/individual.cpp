@@ -35,7 +35,8 @@ void individual::darBajaReserva(){
 
 }
 map<int, DTEstadia*> individual::obtenerEstadias(){
-
+    map<int, DTEstadia*> send;
+    return send;
 }
 DTEstadia* individual::obtenerEstadia(){
     return NULL;
