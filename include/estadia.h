@@ -12,7 +12,6 @@ using namespace std;
 class estadia{
     private:
         calificacion* calificacionAsoc;
-
         Date fechaEntrada;
         Date fechaSalida;
         int codigo;
@@ -45,11 +44,11 @@ class estadia{
             codigo=c;
         }
 
-        DTEstadia* darDatos();
-        bool estaActiva();
-        void finalizarEstadiaActiva();
-        void eliminarEstadia();
-        DTCalificacion* obtenerCalificacionDeEstadia();
+        DTEstadia* darDatos();//retorna un DTEstadia con los datos
+        bool estaActiva();//retorna true sii la reserva esta activa
+        void finalizarEstadiaActiva();//termina la estadaia, pre cond: estaActiva true
+        void eliminarEstadia();//elimina la instancia de estadia
+        DTCalificacion* obtenerCalificacionDeEstadia();//retorna un DTCalificacion de la calificacion asociada
 };
 
 #endif

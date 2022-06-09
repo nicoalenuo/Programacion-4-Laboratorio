@@ -1,6 +1,18 @@
 #include "../../include/reserva/individual.h"
 #include "../../include/fabrica.h"
 
+individual::individual(int codigo,Date checkIn,Date checkOut,EstadoReserva estado,float costo){
+    (*this).codigo=codigo;
+    (*this).checkIn=checkIn;
+    (*this).checkOut=checkOut;
+    (*this).estado=estado;
+    (*this).costo=costo;
+}
+individual::~individual(){
+}
+DTReservaIndividual* darDatos(){
+    return NULL;
+}
 void individual::finalizarSiEsReservaBuscada(string emailHuesped,string nombreHostal){
     fabrica* f = fabrica::getInstance();
     IControladorHostal* ch = (*f).getIControladorHostal();
@@ -12,4 +24,28 @@ void individual::finalizarSiEsReservaBuscada(string emailHuesped,string nombreHo
         huespedIndividual* hi = getHuespedIndividual();
         (*hi).finalizarEstadiaActiva(emailHuesped);
     }
+}
+bool individual::perteneceHusped(string){
+    return false;
+}
+string individual::getTipoReserva(){
+    return "";
+}
+void individual::darBajaReserva(){
+
+}
+map<int, DTEstadia*> individual::obtenerEstadias(){
+
+}
+DTEstadia* individual::obtenerEstadia(){
+    return NULL;
+}
+DTReserva* individual::obtenerResrvaDeEst(){
+    return NULL;
+}
+bool individual::tieneEstadiaFinalizadaDeHuesped(string){
+    return false;
+}
+DTEstadia* individual::darEstadiaDeHuesped(string){
+    return NULL;
 }
