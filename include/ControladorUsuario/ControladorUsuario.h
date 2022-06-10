@@ -26,7 +26,7 @@ class ControladorUsuario:public IControladorUsuario {
 
 
         void IngresarDatosUsuario(DTUsuario*);
-        void IngresarEmail(string);
+        bool IngresarEmail(string email);
         void cancelarAltaUsuario();
         void confirmarAltaUsuario();
         string obtenerNombreUsuario(DTUsuario*);

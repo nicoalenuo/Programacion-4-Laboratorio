@@ -95,13 +95,35 @@ void ControladorHostal::IngresarDatosHostal(DTHostal* dth){
     datosHostal=dth;
 }
 
-        hostal* ControladorHostal::obtenerHostal(DTHostal*){return NULL;}
-        void ControladorHostal::confirmarAltaHostal(){}
-        void ControladorHostal::cancelarAltaHostal(){}
-        void ControladorHostal::liberarDatosHostal(){}
-        void ControladorHostal::IngresarDatosHab(DTHabitacion*){}
-        void ControladorHostal::cancelarAltaHabitacion(){}
-        void ControladorHostal::confirmarAltaHabitacion(){}
+hostal* ControladorHostal::obtenerHostal(DTHostal*){return NULL;}
+void ControladorHostal::confirmarAltaHostal(){}
+void ControladorHostal::cancelarAltaHostal(){}
+
+void ControladorHostal::liberarDatosHostal(){
+    delete datosHostal;
+    datosHostal = NULL;
+}
+
+void ControladorHostal::IngresarDatosHab(DTHabitacion* dthab){
+    datosHabitacion = dthab;
+}
+
+
+void ControladorHostal::cancelarAltaHabitacion(){
+    delete datosHabitacion;
+    datosHabitacion = NULL;
+}
+
+void ControladorHostal::confirmarAltaHabitacion(){
+    habitacion hab(datosHabitacion->getNumero(), datosHabitacion->getPrecio(),datosHabitacion->getCapacidad());
+    habitacion * Phab = &hab;
+    //string NombreHos = (*datosHostal).getNombre();
+    agregarHabitacionAMap(Phab);
+
+    delete datosHabitacion;
+    datosHabitacion = NULL;
+}
+
         map<int,DTReserva*> ControladorHostal::ListarReservas(DTHostal*){
             map<int,DTReserva*> a;
             return a;

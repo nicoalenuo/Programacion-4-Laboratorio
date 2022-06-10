@@ -103,14 +103,38 @@ void ControladorUsuario::AsignarEmpleadoAHostal(string emailEmpleado){
 }
 
 
-        void ControladorUsuario::IngresarEmail(string){}
-        void ControladorUsuario::cancelarAltaUsuario(){}
-        void ControladorUsuario::confirmarAltaUsuario(){}
-        string ControladorUsuario::obtenerNombreUsuario(DTUsuario*){return "a";}
-        string ControladorUsuario::obtenerEmailUsuario(DTUsuario*){return "a";}
-        DTUsuario* ControladorUsuario::devolverDatos(){return NULL;}
-        void ControladorUsuario::liberarUsuario(){}
-        map<string,DTUsuario*> ControladorUsuario::obtenerUsuarios(){
-            map<string,DTUsuario*> a;
-            return a;
+bool ControladorUsuario::IngresarEmail(string email){ //devuelve true si el mail se ingresó
+    bool existe = false;
+    fabrica* f = fabrica::getInstance();
+    IControladorUsuario* cu = (*f).getIControladorUsuario();
+    map<string,DTUsuario*> usuarios = (*cu).obtenerUsuarios();
+    map<string,DTUsuario*>::iterator it;
+    it = usuarios.begin();
+    while(!existe && it != usuarios.end()){
+        if (email == ((*it).second)->getMail()){
+            existe = true;
+        }else{
+            it++;
         }
+    };
+    bool agregado = !existe;
+    return agregado; 
+}
+
+void ControladorUsuario::cancelarAltaUsuario(){
+        delete datosUsuario;
+        datosUsuario=NULL;
+}
+
+void ControladorUsuario::confirmarAltaUsuario(){
+
+}
+
+string ControladorUsuario::obtenerNombreUsuario(DTUsuario*){return "a";}
+string ControladorUsuario::obtenerEmailUsuario(DTUsuario*){return "a";}
+DTUsuario* ControladorUsuario::devolverDatos(){return NULL;}
+void ControladorUsuario::liberarUsuario(){}
+map<string,DTUsuario*> ControladorUsuario::obtenerUsuarios(){
+    map<string,DTUsuario*> a;
+    return a;
+}
