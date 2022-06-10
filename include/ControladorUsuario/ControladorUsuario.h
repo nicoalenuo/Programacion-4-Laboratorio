@@ -26,7 +26,11 @@ class ControladorUsuario:public IControladorUsuario {
 
 
         void IngresarDatosUsuario(DTUsuario*);
+<<<<<<< Updated upstream
         bool IngresarEmail(string email);
+=======
+        bool IngresarEmail(string);
+>>>>>>> Stashed changes
         void cancelarAltaUsuario();
         void confirmarAltaUsuario();
         string obtenerNombreUsuario(DTUsuario*);

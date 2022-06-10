@@ -103,6 +103,7 @@ void ControladorUsuario::AsignarEmpleadoAHostal(string emailEmpleado){
 }
 
 
+<<<<<<< Updated upstream
 bool ControladorUsuario::IngresarEmail(string email){ //devuelve true si el mail se ingresó
     bool existe = false;
     fabrica* f = fabrica::getInstance();
@@ -138,3 +139,31 @@ map<string,DTUsuario*> ControladorUsuario::obtenerUsuarios(){
     map<string,DTUsuario*> a;
     return a;
 }
+=======
+bool ControladorUsuario::IngresarEmail(string email){
+    bool existe = false;
+    ControladorUsuario cu;
+    bool existe = false;
+    map<string,DTUsuario*> usuarios = cu.obtenerUsuarios();
+    map<string,DTUsuario*>::iterator it;
+        it = usuarios.begin();
+        while(!existe && it != usuarios.end()){
+            if (email == (*it).second->getMail()){
+                existe = true;
+            }else{
+                it++;
+            }
+        }; 
+    return existe; 
+}
+        void ControladorUsuario::cancelarAltaUsuario(){}
+        void ControladorUsuario::confirmarAltaUsuario(){}
+        string ControladorUsuario::obtenerNombreUsuario(DTUsuario*){return "a";}
+        string ControladorUsuario::obtenerEmailUsuario(DTUsuario*){return "a";}
+        DTUsuario* ControladorUsuario::devolverDatos(){return NULL;}
+        void ControladorUsuario::liberarUsuario(){}
+        map<string,DTUsuario*> ControladorUsuario::obtenerUsuarios(){
+            map<string,DTUsuario*> a;
+            return a;
+        }
+>>>>>>> Stashed changes
