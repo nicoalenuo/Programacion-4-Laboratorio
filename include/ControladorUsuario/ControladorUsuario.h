@@ -29,8 +29,8 @@ class ControladorUsuario:public IControladorUsuario {
         void IngresarEmail(string);
         void cancelarAltaUsuario();
         void confirmarAltaUsuario();
-        string obtenerNombreUsuario(DTUsuario*);
-        string obtenerEmailUsuario(DTUsuario*);
+        void obtenerNombreUsuario(DTUsuario*);
+        void obtenerEmailUsuario(DTUsuario*);
         DTHuesped* obtenerHuespedConEmail(string);
         DTEmpleado* obtenerEmpleadoConEmail(string);
         map<string,DTEmpleado*> obtenerEmpleadosNoAsignados();

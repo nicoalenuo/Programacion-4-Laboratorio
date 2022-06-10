@@ -106,8 +106,12 @@ void ControladorUsuario::AsignarEmpleadoAHostal(string emailEmpleado){
         void ControladorUsuario::IngresarEmail(string){}
         void ControladorUsuario::cancelarAltaUsuario(){}
         void ControladorUsuario::confirmarAltaUsuario(){}
-        string ControladorUsuario::obtenerNombreUsuario(DTUsuario*){return "a";}
-        string ControladorUsuario::obtenerEmailUsuario(DTUsuario*){return "a";}
+        void ControladorUsuario::obtenerNombreUsuario(DTUsuario* dtu){
+            cout << dtu->getNombre() << endl;
+        }
+        void ControladorUsuario::obtenerEmailUsuario(DTUsuario* dtu){
+            cout << dtu->getMail() << endl;
+        }
         DTUsuario* ControladorUsuario::devolverDatos(){return NULL;}
         void ControladorUsuario::liberarUsuario(){}
 
@@ -126,5 +130,6 @@ map<string,DTUsuario*> ControladorUsuario::obtenerUsuarios(){
         DTHuesped* dth = (*it2).second;
         usuarios.insert(pair<string,DTUsuario*>((*it2).first,dth));
     }
+    // en interfaz se retorna un elemento del map usuarios 
     return usuarios;
 }
