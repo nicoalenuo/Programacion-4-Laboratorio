@@ -112,7 +112,6 @@ void ControladorUsuario::obtenerNombreUsuario(DTUsuario* dtu){
 void ControladorUsuario::obtenerEmailUsuario(DTUsuario* dtu){
     cout << dtu->getMail() << endl;
 }
-        DTUsuario* ControladorUsuario::darDatos(){return NULL;}
         void ControladorUsuario::liberarUsuario(){}
 
 map<string,DTUsuario*> ControladorUsuario::obtenerUsuarios(){

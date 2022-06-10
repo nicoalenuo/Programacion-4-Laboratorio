@@ -33,7 +33,6 @@ class IControladorUsuario {
         virtual map<string,DTEmpleado*> obtenerEmpleadosNoAsignados()=0;
         virtual map<string,DTEmpleado*> obtenerEmpleados()=0;
         virtual set<DTNotificacion*> consultarNotificaciones(string)=0;
-        virtual DTUsuario* darDatos()=0;
         virtual map<string,DTHuesped*> obtenerHuespedes()=0;
         virtual void AsignarEmpleadoAHostal(string)=0;
         virtual map<string,DTUsuario*> obtenerUsuarios()=0;
