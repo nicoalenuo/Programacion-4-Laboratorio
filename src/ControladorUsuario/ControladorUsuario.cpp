@@ -13,6 +13,7 @@ ControladorUsuario::ControladorUsuario(){
     datosUsuario=NULL;
     datosHuesped=NULL;
     datosEmpleado=NULL;
+
 }
 
 ControladorUsuario* ControladorUsuario::getInstance(){
@@ -103,16 +104,22 @@ void ControladorUsuario::AsignarEmpleadoAHostal(string emailEmpleado){
 }
 
 
-        void ControladorUsuario::IngresarEmail(string){}
-        void ControladorUsuario::cancelarAltaUsuario(){}
-        void ControladorUsuario::confirmarAltaUsuario(){}
+    void ControladorUsuario::IngresarEmail(string){}
+    void ControladorUsuario::cancelarAltaUsuario(){}
+    void ControladorUsuario::confirmarAltaUsuario(){}
+    
 void ControladorUsuario::obtenerNombreUsuario(DTUsuario* dtu){
     cout << dtu->getNombre() << endl;
 }
 void ControladorUsuario::obtenerEmailUsuario(DTUsuario* dtu){
     cout << dtu->getMail() << endl;
 }
-        void ControladorUsuario::liberarUsuario(){}
+void ControladorUsuario::liberarUsuario(){
+    if(datosUsuario!=NULL){
+        delete datosUsuario;
+        datosUsuario=NULL;
+    }
+}
 
 map<string,DTUsuario*> ControladorUsuario::obtenerUsuarios(){
     map<string,DTUsuario*> usuarios={};
@@ -129,6 +136,10 @@ map<string,DTUsuario*> ControladorUsuario::obtenerUsuarios(){
         DTHuesped* dth = (*it2).second;
         usuarios.insert(pair<string,DTUsuario*>((*it2).first,dth));
     }
-    // en interfaz se retorna un elemento del map usuarios
+    /*
+    en interfaz se elige un elemento del map usuarios
+    y se guarda en datosUsuario
+    datosUsuario= interfaz...;
+    */
     return usuarios;
 }
