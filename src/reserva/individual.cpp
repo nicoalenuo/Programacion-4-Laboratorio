@@ -7,6 +7,7 @@ individual::individual(int codigo,Date checkIn,Date checkOut,EstadoReserva estad
     (*this).checkOut=checkOut;
     (*this).estado=estado;
     (*this).costo=costo;
+    (*this).huesInd=NULL;
 }
 individual::~individual(){
 }
@@ -48,5 +49,8 @@ bool individual::tieneEstadiaFinalizadaDeHuesped(string){
     return false;
 }
 DTEstadia* individual::darEstadiaDeHuesped(string){
+    return NULL;
+}
+huespedIndividual* individual::getHuespedIndividual(){
     return NULL;
 }
