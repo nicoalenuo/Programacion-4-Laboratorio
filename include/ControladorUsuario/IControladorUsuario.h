@@ -26,8 +26,8 @@ class IControladorUsuario {
         virtual void IngresarEmail(string)=0;
         virtual void cancelarAltaUsuario()=0;
         virtual void confirmarAltaUsuario()=0;
-        virtual string obtenerNombreUsuario(DTUsuario*)=0;
-        virtual string obtenerEmailUsuario(DTUsuario*)=0;
+        virtual void obtenerNombreUsuario(DTUsuario*)=0;
+        virtual void obtenerEmailUsuario(DTUsuario*)=0;
         virtual DTHuesped* obtenerHuespedConEmail(string)=0;
         virtual DTEmpleado* obtenerEmpleadoConEmail(string)=0;
         virtual map<string,DTEmpleado*> obtenerEmpleadosNoAsignados()=0;
