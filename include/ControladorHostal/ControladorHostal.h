@@ -39,7 +39,7 @@ class ControladorHostal:public IControladorHostal {
         map<string,DTHostal*> obtenerTop3Hostales();
         map<int,DTCalificacion*> obtenerCalificacionesYComentarios(string);
         void cancelarFinalizarEstadiaActiva();
-        string mostrarHostal();
+        void mostrarHostal();
         float obtenerPromCalificacionesDeHostal();
         map<int,DTCalificacion*> obtenerCalificacionesDeHostal();
         void mostrarHabitacion(DTHabitacion*);

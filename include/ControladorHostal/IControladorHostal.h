@@ -37,7 +37,7 @@ class IControladorHostal {
         virtual map<string,DTHostal*> obtenerTop3Hostales()=0;
         virtual map<int,DTCalificacion*> obtenerCalificacionesYComentarios(string)=0;
         virtual void cancelarFinalizarEstadiaActiva()=0;
-        virtual string mostrarHostal()=0;
+        virtual void mostrarHostal()=0;
         virtual float obtenerPromCalificacionesDeHostal()=0;
         virtual map<int,DTCalificacion*> obtenerCalificacionesDeHostal()=0;
         virtual void mostrarHabitacion(DTHabitacion*)=0;

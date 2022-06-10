@@ -106,8 +106,17 @@ void ControladorHostal::IngresarDatosHostal(DTHostal* dth){
             map<int,DTReserva*> a;
             return a;
         }
-        string ControladorHostal::mostrarHostal(){return "a";}
-        float ControladorHostal::obtenerPromCalificacionesDeHostal(){return 1;}
+void ControladorHostal::mostrarHostal(){ //precondición, existe un DTHostal en memoria
+    cout << datosHostal->getNombre() << endl;
+    cout << datosHostal->getDireccion() << endl;
+    cout << datosHostal->getTelefono() << endl; 
+    cout << datosHostal->getCalificacionPromedio() << endl;
+}
+
+float ControladorHostal::obtenerPromCalificacionesDeHostal(){
+    return datosHostal->getCalificacionPromedio();
+}
+        
         map<int,DTCalificacion*> ControladorHostal::obtenerCalificacionesDeHostal(){
             map<int,DTCalificacion*> a;
             return a;
