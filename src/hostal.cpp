@@ -59,3 +59,17 @@ bool hostal::tieneHab(int nHab){
 bool hostal::trabajaEmpleado(string emailEmpleado){
     return empleados.find(emailEmpleado)!=empleados.end(); 
 }
+
+float hostal::darCalifPromedio(){
+    map<int,calificacion*>::iterator it;
+    float resultado=0;
+    if(calificaciones.size() != 0){
+        for (it=calificaciones.begin() ; it!=calificaciones.end() ; it++){
+            calificacion* c= (*it).second;
+            resultado=resultado+ c->getPuntuacion();
+        }
+        return (resultado/calificaciones.size());
+    }else{
+        return 0;
+    }
+}
