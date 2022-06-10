@@ -26,6 +26,7 @@ class usuario{
         virtual void setNombre(string)=0;
         virtual void setEmail(string)=0;
         virtual void setPassword(string)=0;
+        virtual DTUsuario* darDatos()=0;
 };
 
 #endif
