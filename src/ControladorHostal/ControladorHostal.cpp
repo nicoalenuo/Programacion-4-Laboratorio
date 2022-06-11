@@ -1,4 +1,7 @@
 #include "../../include/ControladorHostal/ControladorHostal.h"
+#include "../../include/DTyEnum/DTHabitacion.h"
+#include "../../include/DTyEnum/DTHostal.h"
+
 
 ControladorHostal* ControladorHostal::instancia = NULL;
 
@@ -96,11 +99,10 @@ void ControladorHostal::IngresarDatosHostal(DTHostal* dth){
 }
 
 hostal* ControladorHostal::obtenerHostal(DTHostal*){return NULL;}
+
 void ControladorHostal::confirmarAltaHostal(){
     hostal * h = new hostal(datosHostal->getNombre(), datosHostal->getDireccion(), datosHostal->getTelefono());
     agregarHostalAMap(h);
-    delete h;
-    h = NULL;
     delete datosHostal;
     datosHostal = NULL;
 }
@@ -130,10 +132,9 @@ void ControladorHostal::confirmarAltaHabitacion(){
     string hostalElegido = datosHostal->getNombre();
     hostal* h = (*hostales.find(hostalElegido)).second;
     h->agregarHab(hab);
-    delete hab;
-    hab = NULL;
     delete datosHabitacion;
     datosHabitacion = NULL;
+    
 }
 
         map<int,DTReserva*> ControladorHostal::ListarReservas(DTHostal*){
