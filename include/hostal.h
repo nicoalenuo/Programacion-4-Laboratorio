@@ -61,11 +61,15 @@ class hostal{
         void agregarCalificacionAMap(calificacion * c){
             calificaciones.insert(pair<int,calificacion*>((*c).getId(),c));
         }
+        
         void agregarEmpleadoAMap(empleado * e){
             empleados.insert(pair<string,empleado*>((*e).getEmail(),e));
         }
         void agregarHabitacionAMap(habitacion * h){
             habitaciones.insert(pair<int,habitacion*>((*h).getNumero(),h));
+        }
+        void agregarHab(habitacion* h){
+            agregarHabitacionAMap(h);
         }
 };
 

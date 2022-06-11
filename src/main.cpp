@@ -10,6 +10,7 @@
 #include "../include/ControladorUsuario/ControladorUsuario.h"
 #include "../include/ControladorReserva/ControladorReserva.h"
 #include "../include/ControladorCalificacion/ControladorCalificacion.h"
+#include "../include/DTyEnum/Cargo.h"
 
 //funcion auxiliar
 DTHostal* ElegirHostal(){
@@ -55,11 +56,11 @@ DTHostal* ElegirHostal(){
 int main(){
     //----Declaración de variables----//
     char OpcionAux, esFingerAux, confirmarAlta;
-    int Opcion1, Opcion2, num, capacidad, dia1, mes1, anio1, dia2, mes2, anio2;
+    int Opcion1, Opcion2, num, capacidad, dia1, mes1, anio1, dia2, mes2, anio2, CargoAux;
     float precio;
-    string hostalSel, NombreHos, DirHos, TelHos, Nombre, pass, email, CargoAux;
+    string hostalSel, NombreHos, DirHos, TelHos, Nombre, pass, email;
     Cargo cargo;
-    bool existe, finalizar, esFinger;
+    bool existe, finalizar, esFinger, cargoCorrecto;
     finalizar = false;
     //-----------------------//
     while (!finalizar){
@@ -123,7 +124,8 @@ int main(){
                                     (*ICH).liberarDatosHostal();
                                     cout << "Ya existe un hostal de nombre " << NombreHos << endl;
                                 }
-                        }
+                        }//case 1 | Alta Hostal
+
                         case 2:{ //Alta Habitación
                             DTHostal* dth = ElegirHostal();
                             fabrica* f = fabrica::getInstance();
@@ -154,14 +156,15 @@ int main(){
                                 };
                             };
                             
-                        }
-                        case 3:{ //Consultar Hostal
+                        }// case 2 | Alta Habitación
+
+                        /*case 3:{ // Consultar Hostal
                             string NombreHos;
                             cout << "Por favor, indique el nombre del hostal que desea consultar: \n";
                             cin.ignore();
                             getline(cin,NombreHos);
                             //obtenerDatosHostal
-                        }
+                        }// case 3 | Consultar Hostal
                         case 4: {//Consultar Top 3 Hostales
                             int i;
                             fabrica * f = fabrica::getInstance();
@@ -175,12 +178,14 @@ int main(){
                                 std::cout << "Dirección : " << (*(*it).second).getDireccion() << std::endl;
                                 std::cout << "Teléfono : " << (*(*it).second).getTelefono() << std::endl;
                             }
-                        }
+                        }//case 4 | Consultar Top 3 Hostales
+
                         case 5:{} //Volver a menú 1
                         default:{
-                        cout<< "Por favor, seleccione una opción entre 1 y 5. \n";
+                            cout<< "Por favor, seleccione una opción entre 1 y 5. \n";
                         }
-                    };
+                    */
+                    }; //switch(Opcion2)
 
 
                 case 2: //Administración de Usuarios
@@ -197,10 +202,9 @@ int main(){
 
                     cin >> OpcionAux;
                     Opcion2 = (int)OpcionAux - '0'; //Control en caso de que se ingrese char en vez de int
+                    
                     switch(Opcion2){
                         case 1:{ //Alta Empleado
-                            
-                            bool existe;
                             cout<<"Por favor, ingrese los siguientes datos: \n";
                             cout<<"Nombre: \n";
                             cin.ignore();
@@ -208,27 +212,57 @@ int main(){
                             cout<<"Contraseña: \n";
                             cin.ignore();
                             getline(cin, pass);
-                            cout<<"Cargo: \n";                        
-                            cin.ignore();
-                            getline(cin, CargoAux);	
-                            //verificar que sea un cargo válido					
-                            cout<<"Email: \n";
+                            cargoCorrecto = false;
+                            cout<<"Seleccione el cargo: \n";
+                            while(!cargoCorrecto){
+                                cout<<"1. Administración \n";                 
+                                cout<<"2. Limpieza \n";
+                                cout<<"3. Recepción \n";
+                                cout<<"4. Infraestructura \n";      
+                                cin>>CargoAux;                                
+                                switch (CargoAux){
+                                    case 1:{ 
+                                        cargo = Administracion;
+                                        cargoCorrecto = true;
+                                    }
+                                    case 2:{ 
+                                        cargo = Limpieza;
+                                        cargoCorrecto = true;
+                                    }
+                                    case 3:{ 
+                                        cargo = Recepcion;
+                                        cargoCorrecto = true;
+                                    }
+                                    case 4:{ 
+                                        cargo = Infraestructura;
+                                        cargoCorrecto = true;
+                                    }
+                                    default:{ 
+                                        cout<<"Por favor, ingrese una opción válida: \n";
+                                        cin>>CargoAux;
+                                    }
+                                }//switch (CargoAux)
+                            }//while(!cargoCorrecto)
+                          
+                            cout<<"Mail: \n";
                             cin.ignore();
                             getline(cin, email);
                             fabrica* f = fabrica::getInstance();
                             IControladorUsuario *ICU = (*f).getIControladorUsuario();
-                            existe=true;
-                            DTEmpleado dte(Nombre,email,pass,cargo);
+                            existe=false;
+                            
                             while(!existe){
                                 existe = (*ICU).IngresarEmail(email);
                                 if (!existe){
                                     cout<<"El email ingresado ya existe, por favor ingrese otro. \n" ;
                                     cin.ignore();
                                     getline(cin, email);
-                                    dte.~DTEmpleado();
-                                    DTEmpleado dte(Nombre,email,pass,cargo);
+                                    
                                 }
                             };
+                            DTEmpleado* dte = new DTEmpleado(Nombre,email,pass,cargo);
+                            DTUsuario* dtu = dynamic_cast<DTUsuario*>(dte);
+                            (*ICU).IngresarDatosUsuario(dtu);
                             (*ICU).confirmarAltaUsuario();
                             cout<<"Se confirmó el alta de Empleado.\n";
                         }
@@ -259,22 +293,24 @@ int main(){
                             getline(cin, email);
                             fabrica* f = fabrica::getInstance();
                             IControladorUsuario *ICU = (*f).getIControladorUsuario();
-                            existe=true;
-                            DTHuesped dth(Nombre,email,pass,cargo);
-                            while(existe){
+                            existe=false;                            
+                            while(!existe){
                                 existe = (*ICU).IngresarEmail(email);
                                 if (!existe){
                                     cout<<"El email ingresado ya existe, por favor ingrese otro. \n";
                                     cin.ignore();
                                     getline(cin, email);
-                                    dth.~DTHuesped();
-                                    DTHuesped dth(Nombre,email,pass,esFinger);
                                 }
                             };
+                            DTHuesped* dth = new DTHuesped(Nombre,email,pass,cargo);
+                            DTUsuario* dtu = dynamic_cast<DTUsuario*>(dth);
+                            (*ICU).IngresarDatosUsuario(dtu);
                             (*ICU).confirmarAltaUsuario();
-                            cout<<"Se confirmó el alta del Huesped.\n";
-                        }
-                        case 3: {//Asignar Empleado a Hostal
+                            cout<<"Se confirmó el alta de Huesped.\n";
+
+                        }//case 2 | Alta Huesped
+
+                        /*case 3: {//Asignar Empleado a Hostal
                             DTHostal * dth = ElegirHostal();
                             fabrica* f = fabrica::getInstance();
                             IControladorHostal * ICH = (*f).getIControladorHostal();
@@ -348,11 +384,11 @@ int main(){
                         }
                         default:{
 
-                        }
+                        }*/
 
                     }
 
-                case 3: //Administración de Reservas 
+                /*case 3: //Administración de Reservas 
                     cout << "Seleccione la operación que desea realizar: \n";
                     cout << "1. Realizar Reserva \n";
                     cout << "2. Consultar Reserva \n";
@@ -407,7 +443,7 @@ int main(){
                             bool existe=false;
                             j = habs.begin();
                             while(j!=habs.end() && !existe){ //controlo que el numero ingresado corresponda a una habitacion disponible
-                                if(((*j).second).getNumero == num){
+                                if(((*j).second)->getNumero() == num){
                                     existe = true;
                                 };
                                 j++;
@@ -415,9 +451,9 @@ int main(){
                             while(!existe){ //si se ingreso un numero incorrecto, muestro las hab y pido reingresar
                                 cout<<"El número de habitación ingresado no corresponde a una habitación disponible.\n";
                                 for(j=habs.begin(); j!=habs.end(); j++){
-                                    std::cout<<"Numero: " << ((*j).second).getNumero() <<std::endl;
-                                    std::cout<<"Precio: " << ((*j).second).getPrecio() <<std::endl;
-                                    std::cout<<"Capacidad: " << ((*j).second).getCapacidad() <<std::endl;
+                                    std::cout<<"Numero: " << (*(*j).second).getNumero() <<std::endl;
+                                    std::cout<<"Precio: " << (*(*j).second).getPrecio() <<std::endl;
+                                    std::cout<<"Capacidad: " << (*(*j).second).getCapacidad() <<std::endl;
                                     cout<<"...............................................";
                                 };
                                 cout<< "Por favor, ingrese un número de habitación de la lista: \n";
@@ -505,6 +541,6 @@ int main(){
                 default: 
                 cout << "Por favor, ingrese una opción entre 1 y 6.\n";
                 break;			
-            }
+            }*/
     } //while (!finalizar)
 }//int main()
