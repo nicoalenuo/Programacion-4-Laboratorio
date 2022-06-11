@@ -1,5 +1,8 @@
 #include "../include/hostal.h"
 
+hostal::~hostal(){
+}
+
 hostal::hostal(string nombre, string direccion,string telefono){
     empleados = {};
 

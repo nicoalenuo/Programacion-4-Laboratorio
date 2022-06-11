@@ -1,5 +1,7 @@
 #include "../include/habitacion.h"
 
+habitacion::~habitacion(){
+}
 habitacion::habitacion(int numero, float precio, int capacidad){
         (*this).numero = numero;
         (*this).precio = precio;
