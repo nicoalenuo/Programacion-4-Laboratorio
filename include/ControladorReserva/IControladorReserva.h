@@ -28,7 +28,7 @@ class IControladorReserva{
         virtual void ingresarDatosReserva(DTHostal*, Date, Date)=0;
         virtual map<int,DTHabitacion*> obtenerHabitacionesDisponibles()=0;
         virtual void EscogerHabitacion(DTHabitacion*)=0;
-        virtual DTHuesped* DesignarPropietarioDeReserva(DTHuesped*)=0;
+        virtual void DesignarPropietarioDeReserva(DTHuesped*)=0;
         virtual void IngresarHuespedEnReserva(DTHuesped*)=0;
         virtual void CancelarReserva()=0;
         virtual void confirmarReserva()=0; 

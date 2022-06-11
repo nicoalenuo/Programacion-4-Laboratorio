@@ -8,6 +8,23 @@ hostal::hostal(string nombre, string direccion,string telefono){
     (*this).telefono=telefono;
 }
 
+map<int,DTHabitacion*> hostal::obtenerHabitacionesDisponiblesEntre(Date CheckIn, Date CheckOut){
+    map<int,DTHabitacion*> Resultado;
+    map<int,habitacion*>::iterator it;
+
+    for (it=habitaciones.begin() ; it !=habitaciones.end() ; it++){//Por cada habitacion
+        //Por cada reserva
+        map<int,habitacion*>::iterator ithab;
+        habitacion* Hab = (*it).second;
+        if(Hab->disponibleEn(CheckIn,CheckOut)){
+            Resultado.insert(pair<int,DTHabitacion*>(Hab->getNumero(),Hab->darDatos()));
+        }
+    }
+    return Resultado;
+}
+
+
+
 DTHostal* hostal::darDatos(){
     float calificacionPromedio=0;
     int punt;

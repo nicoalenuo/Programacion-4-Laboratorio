@@ -26,6 +26,7 @@ class IControladorUsuario {
         virtual void IngresarEmail(string)=0;
         virtual void cancelarAltaUsuario()=0;
         virtual void confirmarAltaUsuario()=0;
+        virtual huesped* getHuesped(DTHuesped*)=0;
         virtual string obtenerNombreUsuario(DTUsuario*)=0;
         virtual string obtenerEmailUsuario(DTUsuario*)=0;
         virtual DTHuesped* obtenerHuespedConEmail(string)=0;

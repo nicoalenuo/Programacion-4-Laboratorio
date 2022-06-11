@@ -14,6 +14,7 @@ class DTReserva {
         Date checkIn;
         Date checkOut;
         EstadoReserva estado;
+        float costo;
     public:
         virtual ~DTReserva()=0;
         
@@ -25,6 +26,8 @@ class DTReserva {
         virtual void setCheckOut(Date checkOut)=0;
         virtual EstadoReserva getEstado()=0;
         virtual void setEstado(EstadoReserva estado)=0;
+        virtual float getCosto()=0;
+        virtual void setCosto(float Costo)=0;
 };
 
 #endif

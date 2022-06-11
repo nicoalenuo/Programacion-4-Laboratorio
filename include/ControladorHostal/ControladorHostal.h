@@ -51,6 +51,7 @@ class ControladorHostal:public IControladorHostal {
         void liberarHostalEstadia();
         map<int,DTCalificacion*> obtenerCalificaciones(string);
         //Cosas que agregue
+        habitacion * getHab(DTHabitacion*);
         map<string,hostal*> getHostales(){
             return hostales;
         } 

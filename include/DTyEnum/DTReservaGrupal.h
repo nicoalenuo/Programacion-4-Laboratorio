@@ -12,7 +12,7 @@ class DTReservaGrupal:public DTReserva {
         int CantHuespedes;
 
     public:
-        DTReservaGrupal(string,string,string,int);
+        DTReservaGrupal(int,Date,Date,EstadoReserva,float,int);//codigo,checkin,checkout, estado, precio,cantHuespedes)
         ~DTReservaGrupal();
         
         int getCodigo() {
@@ -54,6 +54,13 @@ class DTReservaGrupal:public DTReserva {
         void setCantHuespedes(int CantHuespedes) {
             (*this).CantHuespedes = CantHuespedes;
         }        
+        float getCosto() {
+            return (*this).costo;
+        }
+
+        void setCosto(float Costo) {
+            (*this).costo = Costo;
+        }
 };
 
 #endif

@@ -9,8 +9,11 @@ class Date{
     public:
         Date();
         ~Date();
-
         Date(int,int,int);
+        bool operator<(Date);
+        bool operator>(Date);
+        bool operator==(Date);
+        int operator-(Date);//retorna la cantidad de dias entre this y el parametro
         int getAnio(){
             return anio;
         }
@@ -29,6 +32,7 @@ class Date{
         void setDia(int d){
             dia= d;
         }
+       
 };
 
 #endif

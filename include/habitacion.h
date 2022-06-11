@@ -48,6 +48,7 @@ class habitacion{
         DTHabitacion* darDatos();
         void agregarReserva(reserva*);
         bool perteneceAHostal(DTHostal*);
+        bool disponibleEn(Date,Date);
         map<int, DTReserva*> obtenerReservas();
         map<int, DTEstadia*> obtenerEstadias();
         DTDatosEstadia* obtenerDatos();

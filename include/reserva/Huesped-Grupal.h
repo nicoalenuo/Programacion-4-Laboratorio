@@ -16,7 +16,7 @@ class huespedGrupal{
         estadia* estadiaAsoc;      
     public:
         ~huespedGrupal();
-        huespedGrupal();
+        huespedGrupal(huesped*);
         huesped* getHuesped(){
             return huespedAsoc;
         }
@@ -32,6 +32,7 @@ class huespedGrupal{
         
         void finalizarEstadiaActiva(string);
         DTEstadia* darDatosEstadia();
+        DTReserva* obtenerReserva();
         void DarBaja();
         bool tieneEstFinalizadaDeHus(string);
         bool esDeHuesped(string);                                                                                                                                                                          

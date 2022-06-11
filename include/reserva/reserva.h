@@ -23,14 +23,14 @@ class reserva{
         EstadoReserva estado;
         float costo;
     public:
-        virtual ~reserva()=0;
+       // virtual ~reserva()=0;
         virtual habitacion* getHabitacion()=0;
         virtual int getCodigo()=0;
         virtual Date getCheckIn()=0;
         virtual Date getCheckOut()=0;
         virtual EstadoReserva getEstado()=0;
         virtual float getCosto()=0;
-        virtual void setHabitacion()=0;
+        virtual void setHabitacion(habitacion*)=0;
         virtual void setCodigo(int)=0;
         virtual void setCheckIn(Date)=0;
         virtual void setCheckOut(Date)=0;

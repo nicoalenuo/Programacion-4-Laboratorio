@@ -16,8 +16,8 @@ class grupal:public reserva{
         int cantHuespedes;
     public:
         ~grupal();
-        grupal(int,Date,Date,EstadoReserva,float,int);
-
+       // grupal(int,Date,Date,EstadoReserva,float,int);
+        grupal(DTReservaGrupal*, habitacion*,map<string,DTHuesped*>,DTHuesped*);
         int getCodigo(){
             return codigo;
         }
@@ -38,6 +38,12 @@ class grupal:public reserva{
         }
         void setCodigo(int c){
             codigo=c;
+        }
+        habitacion* getHabitacion(){
+            return habitacionAsoc;
+        }
+        void setHabitacion(habitacion* h){
+            habitacionAsoc=h;
         }
         void setCheckIn(Date d){
             checkIn=d;
@@ -62,7 +68,7 @@ class grupal:public reserva{
         void darBajaReserva();
         map<int, DTEstadia*> obtenerEstadias();
         DTEstadia* obtenerEstadia();
-        DTReserva* obtenerReservaDeEst();
+        DTReserva* obtenerResrvaDeEst();
         bool tieneEstadiaFinalizadaDeHuesped(string);
         DTEstadia* darEstadiaDeHuesped(string);
         void agregarHuespedGrupalASet(huespedGrupal * hg){

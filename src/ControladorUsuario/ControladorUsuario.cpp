@@ -106,12 +106,9 @@ void ControladorUsuario::AsignarEmpleadoAHostal(string emailEmpleado){
         void ControladorUsuario::IngresarEmail(string){}
         void ControladorUsuario::cancelarAltaUsuario(){}
         void ControladorUsuario::confirmarAltaUsuario(){}
-void ControladorUsuario::obtenerNombreUsuario(DTUsuario* dtu){
-    cout << dtu->getNombre() << endl;
-}
-void ControladorUsuario::obtenerEmailUsuario(DTUsuario* dtu){
-    cout << dtu->getMail() << endl;
-}
+        string ControladorUsuario::obtenerNombreUsuario(DTUsuario*){return "a";}
+        string ControladorUsuario::obtenerEmailUsuario(DTUsuario*){return "a";}
+        DTUsuario* ControladorUsuario::devolverDatos(){return NULL;}
         void ControladorUsuario::liberarUsuario(){}
         map<string,DTUsuario*> ControladorUsuario::obtenerUsuarios(){
             map<string,DTUsuario*> a;

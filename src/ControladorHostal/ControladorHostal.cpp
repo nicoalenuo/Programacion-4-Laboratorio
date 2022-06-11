@@ -29,6 +29,19 @@ map<string,DTHostal*> ControladorHostal::obtenerHostales(){
     }
     return resultado;
 }
+hostal* ControladorHostal::obtenerHostal(DTHostal * h){
+    map<string,hostal*>::iterator it;
+    bool Encontrado = false;
+    hostal* Resultado = NULL;
+    it=hostales.begin();
+    while(!Encontrado && it!=hostales.end()){
+        if(h->getNombre() == (*(*it).second).getNombre()){
+            Resultado = (*it).second;
+        }
+        it++;
+    }
+    return Resultado;
+}
 
 map<string,DTEmpleado*> ControladorHostal::quitarAsignados(map<string,DTEmpleado*> emps){
     map<string,hostal*>::iterator it;
@@ -76,7 +89,11 @@ bool ControladorHostal::existeHabEnHostal(int nHab,string nombreHostal){
     hostal* h = (*hostales.find(nombreHostal)).second;
     return (*h).tieneHab(nHab);
 }
-
+ habitacion * ControladorHostal::getHab(DTHabitacion* DTH){
+    map<int,habitacion*>::iterator it;
+    it =  habitaciones.find(DTH->getNumero());
+   return (*it).second;
+}
 void ControladorHostal::FinalizarAsignacionDeEmpleados(){
     if (datosHostal!=NULL){
         delete datosHostal;
@@ -94,8 +111,6 @@ void ControladorHostal::cancelarFinalizarEstadiaActiva(){
 void ControladorHostal::IngresarDatosHostal(DTHostal* dth){
     datosHostal=dth;
 }
-
-        hostal* ControladorHostal::obtenerHostal(DTHostal*){return NULL;}
         void ControladorHostal::confirmarAltaHostal(){}
         void ControladorHostal::cancelarAltaHostal(){}
         void ControladorHostal::liberarDatosHostal(){}
