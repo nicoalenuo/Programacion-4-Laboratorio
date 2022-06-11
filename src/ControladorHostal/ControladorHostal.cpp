@@ -101,8 +101,9 @@ void ControladorHostal::IngresarDatosHostal(DTHostal* dth){
 hostal* ControladorHostal::obtenerHostal(DTHostal*){return NULL;}
 
 void ControladorHostal::confirmarAltaHostal(){
-    hostal * h = new hostal(datosHostal->getNombre(), datosHostal->getDireccion(), datosHostal->getTelefono());
-    agregarHostalAMap(h);
+    hostal h(datosHostal->getNombre(), datosHostal->getDireccion(), datosHostal->getTelefono());
+    hostal* ph = &h;
+    agregarHostalAMap(ph);
     delete datosHostal;
     datosHostal = NULL;
 }
@@ -128,10 +129,11 @@ void ControladorHostal::cancelarAltaHabitacion(){
 }
 
 void ControladorHostal::confirmarAltaHabitacion(){
-    habitacion * hab = new habitacion(datosHabitacion->getNumero(), datosHabitacion->getPrecio(),datosHabitacion->getCapacidad());
+    habitacion hab(datosHabitacion->getNumero(), datosHabitacion->getPrecio(),datosHabitacion->getCapacidad()); 
+    habitacion * Phab = &hab;
     string hostalElegido = datosHostal->getNombre();
     hostal* h = (*hostales.find(hostalElegido)).second;
-    h->agregarHab(hab);
+    h->agregarHab(Phab);
     delete datosHabitacion;
     datosHabitacion = NULL;
     

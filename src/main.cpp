@@ -135,6 +135,7 @@ int main(){
                                 cin >> confirmarAlta; 
                                 if ((char) toupper(confirmarAlta) == 'S'){
                                     (*ICH).confirmarAltaHabitacion();
+                                    
                                 }else{
                                     if ((char) toupper(confirmarAlta) == 'N')
                                         (*ICH).cancelarAltaHabitacion();
@@ -142,6 +143,7 @@ int main(){
                                         cout << "La opción ingresada no es válida.\n";
                                 };
                             };
+                            (*ICH).liberarDatosHostal();
                             
                         }// case 2 | Alta Habitación
 
@@ -247,7 +249,8 @@ int main(){
                                     
                                 }
                             };
-                            DTEmpleado* dte = new DTEmpleado(Nombre,email,pass,cargo);
+                            DTEmpleado e(Nombre,email,pass,cargo); 
+                            DTEmpleado* dte = &e;
                             DTUsuario* dtu = dynamic_cast<DTUsuario*>(dte);
                             (*ICU).IngresarDatosUsuario(dtu);
                             (*ICU).confirmarAltaUsuario();
@@ -289,7 +292,8 @@ int main(){
                                     getline(cin, email);
                                 }
                             };
-                            DTHuesped* dth = new DTHuesped(Nombre,email,pass,cargo);
+                            DTHuesped hu(Nombre,email,pass,cargo);
+                            DTHuesped* dth = &hu;
                             DTUsuario* dtu = dynamic_cast<DTUsuario*>(dth);
                             (*ICU).IngresarDatosUsuario(dtu);
                             (*ICU).confirmarAltaUsuario();
