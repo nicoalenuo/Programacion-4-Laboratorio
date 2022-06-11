@@ -6,51 +6,38 @@
 #include <typeinfo>
 
 #include "../include/fabrica.h"
-#include "../include/ControladorHostal/ControladorHostal.h"
-#include "../include/ControladorUsuario/ControladorUsuario.h"
-#include "../include/ControladorReserva/ControladorReserva.h"
-#include "../include/ControladorCalificacion/ControladorCalificacion.h"
-#include "../include/DTyEnum/Cargo.h"
 
 //funcion auxiliar
 DTHostal* ElegirHostal(){
-	cout<< "Por favor, seleccione de la siguiente lista el hostal al que desea asignarle un nuevo empleado: \n";
+	cout<< "Por favor, seleccione de la siguiente lista el número del hostal al que desea asignarle un nuevo empleado: \n";
 	fabrica* f = fabrica::getInstance();
     IControladorHostal *ICH = (*f).getIControladorHostal();
     map<string,DTHostal*> listaHostales = (*ICH).obtenerHostales();
 	map<string,DTHostal*>::iterator it;
+    int cont = 1;
 	for(it=listaHostales.begin(); it!=listaHostales.end(); it++){
-		std::cout << "Nombre : " << (*(*it).second).getNombre() << std::endl;
+		std::cout << cont <<". Nombre: " << ((*it).second)->getNombre() << std::endl;
+        cont++;
 	}
 	bool existeH = false;
-	string nombreHostal;
-	cout<<"Escriba el nombre del hostal seleccionado: \n";
-	cin.ignore();
-	getline(cin, nombreHostal);
-	while(!existeH && it!=listaHostales.end()){ //verificar que el nombre coincida con un hostal, si coincide existeH = true
-		if(nombreHostal==(*(*it).second).getNombre())
-			existeH=true;
-		else
-			it++;
-	};
-	while(!existeH){ //verificar que el nombre coincida con un hostal, si coincide existeH = true
-		cout<<"El nombre ingresado no es correcto, por favor ingréselo nuevamente: \n";
-		for(it=listaHostales.begin(); it!=listaHostales.end(); it++){
-			std::cout << "Nombre : " << (*(*it).second).getNombre() << std::endl;
-		}
-		cin.ignore();
-		getline(cin, nombreHostal);
-		while(!existeH && it!=listaHostales.end()){
-			if(nombreHostal==(*(*it).second).getNombre())
-				existeH=true;
-			else
-				it++;
-		};
-				
-	};
-    //(*ICH).IngresarDatosHostal((*it).second);
-    return (*it).second;
-	
+	int numHostal;	
+	cin>>numHostal;
+	while(numHostal>cont or numHostal==0){ //verificar que el nombre coincida con un hostal, si coincide existeH = true
+		cout<<"El número ingresado no es correcto, por favor ingréselo nuevamente: \n";
+        cont = 1;
+	    for(it=listaHostales.begin(); it!=listaHostales.end(); it++){
+		    std::cout << cont <<". Nombre: " << ((*it).second)->getNombre() << std::endl;
+            cont++;
+	    }
+        cin>>numHostal;
+    };
+    cont = 1;
+    it = listaHostales.begin();
+    while(cont<numHostal){
+        it++;
+        cont++;
+    };
+    return (*it).second;	
 };
 
 int main(){
@@ -538,9 +525,11 @@ int main(){
                     finalizar = true;
                     break;
 
-                default: 
+                default:{
                 cout << "Por favor, ingrese una opción entre 1 y 6.\n";
-                break;			
-            }*/
-    } //while (!finalizar)
+                break;
+                }*/			
+            }
+      
+    }; //while (!finalizar)
 }//int main()
