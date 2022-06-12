@@ -556,4 +556,5 @@ int main(){
             }
       
     }; //while (!finalizar)
+    return 0;
 }//int main()

@@ -1,5 +1,9 @@
 #include "../../include/usuario/huesped.h"
 
+huesped::~huesped(){
+
+}
+
 DTHuesped* huesped::darDatos(){
     DTHuesped* resultado = new DTHuesped((*this).nombre , (*this).email , (*this).password , (*this).esFinger);
     return resultado;
