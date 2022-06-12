@@ -100,7 +100,20 @@ void ControladorHostal::FinalizarAsignacionDeEmpleados(){
         datosHostal=NULL;
     }
 }
-
+hostal* ControladorHostal::DarHostalDeHabitacion(habitacion* hab){
+    map<string,hostal*>::iterator it;
+    bool pr = false;
+    hostal* Solucion = NULL;
+    it = hostales.begin();
+    while(it != hostales.end() && !pr){
+        pr = (*it).second->tieneHab(hab->getNumero());
+        if(pr) {
+            Solucion= (*it).second;
+        }
+        it++;
+    }
+    return Solucion;
+};
 void ControladorHostal::cancelarFinalizarEstadiaActiva(){
     if (datosHostal!=NULL){
         delete datosHostal;

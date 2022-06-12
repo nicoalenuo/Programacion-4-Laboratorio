@@ -32,13 +32,48 @@ void grupal::finalizarSiEsReservaBuscada(string emailHuesped,string nombreHostal
         }
     }
 }
+DTHostal* grupal::getDTHostal(){
+    habitacion* hab = habitacionAsoc;
+    hostal * h = (*hab).darHostal();
+    DTHostal* DTH = h->darDatos();
+    return DTH;
+}
         DTReservaGrupal* grupal::darDatos(){return NULL;}
-        bool grupal::perteneceHusped(string){return 1;}
-        string grupal::getTipoReserva(){return "";}
+        bool grupal::perteneceHusped(string email){
+            set<huespedGrupal*>::iterator it;
+            bool Resultado = false;
+            it = huesGrup.begin();
+            while(it!= huesGrup.end() && !Resultado){
+                Resultado = ((*it)->getHuesped()->getEmail() == email);
+                it++;
+            }
+            return Resultado;
+        }
+        string grupal::getTipoReserva(){return "Grupal";}
         void grupal::darBajaReserva(){}
         map<int, DTEstadia*> grupal::obtenerEstadias(){
             map<int,DTEstadia*> a;
             return a;
+        }
+        DTReserva* grupal::getDTReserva(){
+            DTReserva* DTR = new DTReservaGrupal(this->codigo,this->checkIn,this->checkOut,this->estado,this->costo,this->cantHuespedes);
+            return DTR;
+        }
+        huespedGrupal* grupal::GetHuespedGrupalDeUsuario(string email){
+            set<huespedGrupal*>::iterator it;
+            it = huesGrup.begin();
+            bool Encontrado = false;
+            huespedGrupal* HG = NULL;
+            while(!Encontrado && it != huesGrup.end()){
+                huesped* hues = (*it)->getHuesped();
+                Encontrado = (hues->getEmail() ==email);
+                if(Encontrado){
+                    HG = *it;
+                }
+                it++;
+            }
+            return HG;
+
         }
         DTEstadia* grupal::obtenerEstadia(){return NULL;}
         DTReserva* grupal::obtenerResrvaDeEst(){return NULL;}

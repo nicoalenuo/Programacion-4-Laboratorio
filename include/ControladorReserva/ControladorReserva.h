@@ -44,6 +44,7 @@ class ControladorReserva:public IControladorReserva {
         void finalizarEstadiaActiva(string, string);
         map<string,string> mostrarReserva(DTReserva*); ////////////////////////////////////////
         int obtenerNumeroDeHabitacion(DTHabitacion*);
+        reserva* getReserva(DTReserva*);
         map<string,string> obtenerNombresDeReserva(DTReservaGrupal*); //////////////////////////////////////////////
         map<int,DTEstadia*> obtenerEstadiaHuesped(string);
         void agregarReservaAMap(reserva * r){

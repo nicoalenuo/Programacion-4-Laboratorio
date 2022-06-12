@@ -1,5 +1,5 @@
-#include "../../include/ControladorReserva/ControladorReserva.h"
 #include "../../include/fabrica.h"
+#include "../../include/ControladorReserva/ControladorReserva.h"
 
 ControladorReserva* ControladorReserva::instancia = NULL;
 
@@ -13,7 +13,21 @@ ControladorReserva::ControladorReserva(){
     datosIndividual=NULL;
     datosGrupal=NULL;
 }
-
+map<int,DTReserva*> ControladorReserva::ListarReservasNoCanceladasDeHuesped(DTHostal* Hostal, string Mail){
+      map<int,DTReserva*> Resultado;
+      map<int,reserva*>::iterator it;
+      for(it = reservas.begin(); it!= reservas.end();it++){
+        DTHostal * DTh = ((*it).second)->getDTHostal(); 
+        DTReserva * DTr = ((*it).second)->getDTReserva();
+        if(Hostal->getNombre() == DTh->getNombre() && DTr->getEstado() != Cancelado){
+            bool p = (*it).second->perteneceHusped(Mail);
+            if(p){ 
+                Resultado.insert(pair<int,DTReserva*>((*it).second->getCodigo(),(*it).second->getDTReserva()));
+            }
+        }
+      }
+      return Resultado;
+}
 ControladorReserva* ControladorReserva::getInstance(){
     if (instancia == NULL)
         instancia = new ControladorReserva();
@@ -23,6 +37,9 @@ void ControladorReserva::ingresarDatosReserva(DTHostal* DTHostal, Date CkeckIn, 
     (*this).Hos = DTHostal;
     (*this).CheckIn = CkeckIn; 
     (*this).CheckOut = CheckOut; 
+}
+reserva* ControladorReserva::getReserva(DTReserva* res){
+    return (*reservas.find(res->getCodigo())).second;
 }
 map<int,DTHabitacion*> ControladorReserva::obtenerHabitacionesDisponibles(){
     fabrica* Fab =fabrica::getInstance();
@@ -73,10 +90,6 @@ void ControladorReserva::finalizarEstadiaActiva(string emailHuesped, string nomb
             agregarReservaAMap(Res);
             CancelarReserva();//Libera la memoria correspondiente            
         }  
-        map<int,DTReserva*> ControladorReserva::ListarReservasNoCanceladasDeHuesped(DTHostal*, string){
-            map<int,DTReserva*> a;
-            return a;
-        }
         void ControladorReserva::confirmarBaja(DTHostal*, int){}
         int ControladorReserva::obtenerNumeroDeHabitacion(DTHabitacion*){return 4;}
        

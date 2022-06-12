@@ -62,7 +62,8 @@ class individual:public reserva{
         DTReserva* obtenerResrvaDeEst();
         bool tieneEstadiaFinalizadaDeHuesped(string);
         DTEstadia* darEstadiaDeHuesped(string);
-
+        DTReserva* getDTReserva();
+        DTHostal* getDTHostal();
         //Cosas que agregue
         huespedIndividual* getHuespedIndividual(){
             return huesInd;

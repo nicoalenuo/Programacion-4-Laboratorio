@@ -12,7 +12,7 @@
 using namespace std;
 
 class habitacion;//agregue esto XD
-
+class DTHostal;
 class reserva{
     protected:
         habitacion* habitacionAsoc;
@@ -43,8 +43,10 @@ class reserva{
         virtual map<int, DTEstadia*> obtenerEstadias()=0;
         virtual DTEstadia* obtenerEstadia()=0;
         virtual DTReserva* obtenerResrvaDeEst()=0;
+        virtual DTReserva* getDTReserva()=0;
         virtual bool tieneEstadiaFinalizadaDeHuesped(string)=0;
         virtual DTEstadia* darEstadiaDeHuesped(string)=0;
+        virtual DTHostal* getDTHostal()=0;
 };
 
 #endif

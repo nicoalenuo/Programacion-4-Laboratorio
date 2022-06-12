@@ -29,7 +29,7 @@ class huespedGrupal{
         void setEstadia(estadia* h){
             estadiaAsoc=h;
         }
-        
+        huespedGrupal* GetHuespedGrupalDeUsuario(string);
         void finalizarEstadiaActiva(string);
         DTEstadia* darDatosEstadia();
         DTReserva* obtenerReserva();

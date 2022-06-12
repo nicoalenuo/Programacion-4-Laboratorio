@@ -7,14 +7,14 @@
 #include "DTyEnum/DTEstadia.h"
 #include "DTyEnum/DTHabitacion.h"
 #include "DTyEnum/DTDatosEstadia.h"
-
+#include "hostal.h"
 #include <iostream>
 #include <stdio.h>
 using namespace std;
 #include <map>
 
 class reserva; //Agregado
-
+class hostal;
 class habitacion{
     private:
         map<int,reserva*> reservas;
@@ -44,7 +44,7 @@ class habitacion{
         void setCapacidad(int c){
             capacidad=c;
         }
-
+        hostal* darHostal();
         DTHabitacion* darDatos();
         void agregarReserva(reserva*);
         bool perteneceAHostal(DTHostal*);
@@ -54,6 +54,7 @@ class habitacion{
         DTDatosEstadia* obtenerDatos();
         DTReserva* obtenerReservaDeEstadia();
         void agregarReservaAMap(reserva * );
+       
 };    
 
 #endif

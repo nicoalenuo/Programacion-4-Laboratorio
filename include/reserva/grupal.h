@@ -12,7 +12,7 @@ using namespace std;
 class grupal:public reserva{
     private:
         set<huespedGrupal*> huesGrup;
-
+ 
         int cantHuespedes;
     public:
         ~grupal();
@@ -71,6 +71,9 @@ class grupal:public reserva{
         DTReserva* obtenerResrvaDeEst();
         bool tieneEstadiaFinalizadaDeHuesped(string);
         DTEstadia* darEstadiaDeHuesped(string);
+        DTReserva* getDTReserva();
+        huespedGrupal* GetHuespedGrupalDeUsuario(string);
+        DTHostal* getDTHostal();
         void agregarHuespedGrupalASet(huespedGrupal * hg){
             huesGrup.insert(hg);
         }

@@ -43,7 +43,9 @@ DTHostal* hostal::darDatos(){
 
     return resultado;
 }
-
+void hostal::agregarHabitacionAMap(habitacion * h){
+        (*this).habitaciones.insert(pair<int,habitacion*>((*h).getNumero(),h));
+    }
 map<string,DTEmpleado*> hostal::quitarAsignados(map<string,DTEmpleado*> emps){
     map<string,empleado*>::iterator it;
     for (it=empleados.begin() ; it!=empleados.end() ; it++){

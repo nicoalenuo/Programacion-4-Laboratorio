@@ -1,4 +1,5 @@
 #include "../include/habitacion.h"
+#include "../include/fabrica.h"
 void habitacion::agregarReservaAMap(reserva * r){
         (*this).reservas.insert(pair<int,reserva*>((*r).getCodigo(),r));
 }
@@ -13,6 +14,11 @@ bool habitacion::disponibleEn(Date CheckIn,Date CheckOut){
                 it++;
         }
         return Resultado;
+}
+hostal* habitacion::darHostal(){
+        fabrica* Fab =fabrica::getInstance();
+        IControladorHostal* CH = (*Fab).getIControladorHostal();
+        return CH->DarHostalDeHabitacion(this);
 }
 DTHabitacion* habitacion::darDatos(){
     DTHabitacion* resultado = new DTHabitacion((*this).numero , (*this).precio , (*this).capacidad);

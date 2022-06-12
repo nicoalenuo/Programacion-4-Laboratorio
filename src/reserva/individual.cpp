@@ -11,7 +11,12 @@ individual::individual(DTReservaIndividual* DTR, habitacion* Hab,DTHuesped* Prop
     this->huesInd = HI;
     this->habitacionAsoc = Hab;
 }
-
+DTHostal* individual::getDTHostal(){
+    habitacion* hab = habitacionAsoc;
+    hostal * h = (*hab).darHostal();
+    DTHostal* DTH = h->darDatos();
+    return DTH;
+}
 void individual::finalizarSiEsReservaBuscada(string emailHuesped,string nombreHostal){
     fabrica* f = fabrica::getInstance();
     IControladorHostal* ch = (*f).getIControladorHostal();
@@ -25,8 +30,10 @@ void individual::finalizarSiEsReservaBuscada(string emailHuesped,string nombreHo
     }
 }
         DTReservaIndividual* individual::darDatos(){return NULL;}
-        bool individual::perteneceHusped(string){return 0;}
-        string individual::getTipoReserva(){return "";}
+        bool individual::perteneceHusped(string email){
+            return (this->huesInd->getHuesped())->getEmail() == email;
+        }
+        string individual::getTipoReserva(){return "Individual";}
         void individual::darBajaReserva(){}
         map<int, DTEstadia*> individual::obtenerEstadias(){ 
             map<int,DTEstadia*> a;
@@ -35,5 +42,9 @@ void individual::finalizarSiEsReservaBuscada(string emailHuesped,string nombreHo
         DTReserva* individual::obtenerResrvaDeEst(){return NULL;}
         bool individual::tieneEstadiaFinalizadaDeHuesped(string){return 0;}
         DTEstadia* individual::darEstadiaDeHuesped(string){return NULL;}
+        DTReserva* individual::getDTReserva(){
+            DTReserva* DTR = new DTReservaIndividual(this->codigo,this->checkIn,this->checkOut,this->estado,this->costo);
+            return DTR;
+        }
 
 

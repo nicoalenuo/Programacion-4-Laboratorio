@@ -12,7 +12,7 @@
 #include <stdio.h>
 using namespace std;
 #include <map>
-
+class habitacion;
 class hostal{
     private:
         map<int,calificacion*> calificaciones;
@@ -64,9 +64,7 @@ class hostal{
         void agregarEmpleadoAMap(empleado * e){
             empleados.insert(pair<string,empleado*>((*e).getEmail(),e));
         }
-        void agregarHabitacionAMap(habitacion * h){
-            habitaciones.insert(pair<int,habitacion*>((*h).getNumero(),h));
-        }
+        void agregarHabitacionAMap(habitacion * h);
 };
 
 #endif
