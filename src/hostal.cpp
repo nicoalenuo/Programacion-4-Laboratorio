@@ -76,10 +76,14 @@ float hostal::darCalifPromedio(){
 
 map<int,DTReserva*> hostal:: obtenerReservas(){
     map<int,habitacion*>::iterator it;
-    map<int,DTReserva*> reservas;
+    map<int,DTReserva*> reservas, aux;
+    map<int,DTReserva*>::iterator itr;
     for(it=habitaciones.begin(); it!=habitaciones.end();it++){
         habitacion* h= (*it).second;
-        reservas= h->obtenerReservas();
+        aux= h->obtenerReservas();
+        for(itr=aux.begin();itr!=aux.end();itr++){
+            reservas.insert(pair<int,DTReserva*>((*itr).first,(*itr).second));
+        }
     }
     return reservas;
 }
