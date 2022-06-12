@@ -41,7 +41,7 @@ DTHostal* ElegirHostal(){
 };
 
 int main(){
-    //----Declaración de variables----//
+    //----Declaracion de variables----//
     char OpcionAux, esFingerAux, confirmarAlta;
     int Opcion1, Opcion2, num, capacidad, dia1, mes1, anio1, dia2, mes2, anio2, CargoAux, ind;
     float precio;
@@ -51,13 +51,14 @@ int main(){
     finalizar = false;
     //-----------------------//
     while (!finalizar){
-            cout << "Seleccione la operación que desea realizar: \n";
-            cout << "1. Administración de Hostales \n";
-            cout << "2. Administración de Usuarios \n";
-            cout << "3. Administración de Reservas \n";
-            cout << "4. Calificaciones \n";
+            cout << "Seleccione la operacion que desea realizar: \n";
+            cout << "1. Administracion de Hostales \n";
+            cout << "2. Administracion de Usuarios \n";
+            cout << "3. Administracion de Reservas \n";
+            cout << "4. Administracion de Calificaciones \n";
             cout << "5. Modificar Fecha de Sistema \n";
-            cout << "6. Salir \n";
+            cout << "6. Cargar datos de prueba \n";
+            cout << "7. Salir \n";
             cout << "-------------------------------\n";
             
             cin >> OpcionAux;
@@ -65,10 +66,10 @@ int main(){
 
             switch(Opcion1){
 
-                case 1: //Administración de Hostales
-                    cout << "Seleccione la operación que desea realizar: \n";
+                case 1: //Administracion de Hostales
+                    cout << "Seleccione la operacion que desea realizar: \n";
                     cout << "1. Alta Hostal \n";
-                    cout << "2. Alta Habitación \n";
+                    cout << "2. Alta Habitacion \n";
                     cout << "3. Consultar Hostal \n";
                     cout << "4. Consultar Top 3 Hostales \n";
                     cout << "5. Volver \n";
@@ -85,7 +86,7 @@ int main(){
                             cout << "Nombre del hostal: ";
                             cin.ignore();
                             getline(cin, NombreHos);
-                            cout << "Dirección del hostal: ";
+                            cout << "Direccion del hostal: ";
                             cin.ignore();
                             getline(cin, DirHos);
                             cout << "Teléfono del hostal: ";
@@ -113,18 +114,18 @@ int main(){
                                 }
                         }//case 1 | Alta Hostal
 
-                        case 2:{ //Alta Habitación
+                        case 2:{ //Alta Habitacion
                             DTHostal* dth = ElegirHostal();
                             fabrica* f = fabrica::getInstance();
                             IControladorHostal *ICH = (*f).getIControladorHostal();
                             (*ICH).IngresarDatosHostal(dth);
                             cout << "Por favor, ingrese los siguientes datos: \n";
-                            cout << "Numero de habitación: ";
+                            cout << "Numero de habitacion: ";
                             cin >> num;
                             //controlo que no exista ese numero de habitacion en el hostal seleccionado
-                            cout << "Precio de la habitación: ";
+                            cout << "Precio de la habitacion: ";
                             cin >> precio;
-                            cout << "Capacidad de la habitación: ";
+                            cout << "Capacidad de la habitacion: ";
                             cin >> capacidad;
                             DTHabitacion dthab(num,precio,capacidad);
                             DTHabitacion* pdthab = &dthab;
@@ -140,51 +141,57 @@ int main(){
                                     if ((char) toupper(confirmarAlta) == 'N')
                                         (*ICH).cancelarAltaHabitacion();
                                     else
-                                        cout << "La opción ingresada no es válida.\n";
+                                        cout << "La opcion ingresada no es válida.\n";
                                 };
                             };
                             (*ICH).liberarDatosHostal();
                             
-                        }// case 2 | Alta Habitación
+                        }// case 2 | Alta Habitacion
 
-                        case 3:{ // Consultar Hostal
+                        case 3:{/* // Consultar Hostal
                             DTHostal* dth = ElegirHostal();
                             fabrica* f = fabrica::getInstance();
                             IControladorHostal *ICH = (*f).getIControladorHostal();
                             
-                        }// case 3 | Consultar Hostal
-                        /*case 4: {//Consultar Top 3 Hostales
-                            int i;
+                        */}// case 3 | Consultar Hostal
+
+                        case 4: {//Consultar Top 3 Hostales
+                            
                             fabrica * f = fabrica::getInstance();
                             IControladorHostal *CHostal = (*f).getIControladorHostal();
                             map<string,DTHostal*> top3 = (*CHostal).obtenerTop3Hostales();
-                            map<string,DTHostal*>::iterator it;
-                            for (it=top3.begin(); it!=top3.end(); it++){
-                                i++;
-                                std::cout << "No. " << i << ": \n" << std::endl;
-                                std::cout << "Nombre : " << (*(*it).second).getNombre() << std::endl;
-                                std::cout << "Dirección : " << (*(*it).second).getDireccion() << std::endl;
-                                std::cout << "Teléfono : " << (*(*it).second).getTelefono() << std::endl;
+                            if(top3.size()==0){
+                                cout<<"No hay hostales registrados.";
+                            }else{
+                                ind = 1;
+                                map<string,DTHostal*>::iterator it;
+                                for (it=top3.begin(); it!=top3.end(); it++){
+                                    ind++;
+                                    std::cout << "No. " << ind << ": \n" << std::endl;
+                                    std::cout << "Nombre : " << ((*it).second)->getNombre() << std::endl;
+                                    std::cout << "Direccion : " << ((*it).second)->getDireccion() << std::endl;
+                                    std::cout << "Teléfono : " << ((*it).second)->getTelefono() << std::endl;
+                                }
                             }
                         }//case 4 | Consultar Top 3 Hostales
 
                         case 5:{} //Volver a menú 1
                         default:{
-                            cout<< "Por favor, seleccione una opción entre 1 y 5. \n";
+                            cout<< "Por favor, seleccione una opcion entre 1 y 5. \n";
                         }
-                    */
+                    
                     }; //switch(Opcion2)
 
 
-                case 2: //Administración de Usuarios
-                    cout << "Seleccione la operación que desea realizar: \n";
+                case 2: //Administracion de Usuarios
+                    cout << "Seleccione la operacion que desea realizar: \n";
                     cout << "1. Alta Empleado \n";
                     cout << "2. Alta Huesped \n";
                     cout << "3. Asignar Empleado a Hostal \n";
                     cout << "4. Consultar Usuario \n";
                     cout << "5. Suscribir a Notificaciones \n";
                     cout << "6. Consultar Notificaciones \n";
-                    cout << "7. Eliminar Suscripción \n";
+                    cout << "7. Eliminar Suscripcion \n";
                     cout << "8. Volver \n";
                     cout << "-------------------------------\n";
 
@@ -203,9 +210,9 @@ int main(){
                             cargoCorrecto = false;
                             cout<<"Seleccione el cargo: \n";
                             while(!cargoCorrecto){
-                                cout<<"1. Administración \n";                 
+                                cout<<"1. Administracion \n";                 
                                 cout<<"2. Limpieza \n";
-                                cout<<"3. Recepción \n";
+                                cout<<"3. Recepcion \n";
                                 cout<<"4. Infraestructura \n";      
                                 cin>>CargoAux;                                
                                 switch (CargoAux){
@@ -226,7 +233,7 @@ int main(){
                                         cargoCorrecto = true;
                                     }
                                     default:{ 
-                                        cout<<"Por favor, ingrese una opción válida: \n";
+                                        cout<<"Por favor, ingrese una opcion válida: \n";
                                         cin>>CargoAux;
                                     }
                                 }//switch (CargoAux)
@@ -253,7 +260,7 @@ int main(){
                             DTUsuario* dtu = dynamic_cast<DTUsuario*>(dte);
                             (*ICU).IngresarDatosUsuario(dtu);
                             (*ICU).confirmarAltaUsuario();
-                            cout<<"Se confirmó el alta de Empleado.\n";
+                            cout<<"Se confirmo el alta de Empleado.\n";
                         }
                         case 2: {//Alta Huesped
                             
@@ -274,7 +281,7 @@ int main(){
                                     if ((char) toupper(esFingerAux) == 'N')
                                         esFinger = false;
                                     else
-                                        cout << "La opción ingresada no es válida.\n";
+                                        cout << "La opcion ingresada no es válida.\n";
                                 };
                             };
                             cout<<"Email:\n";
@@ -296,7 +303,7 @@ int main(){
                             DTUsuario* dtu = dynamic_cast<DTUsuario*>(dth);
                             (*ICU).IngresarDatosUsuario(dtu);
                             (*ICU).confirmarAltaUsuario();
-                            cout<<"Se confirmó el alta de Huesped.\n";
+                            cout<<"Se confirmo el alta de Huesped.\n";
 
                         }//case 2 | Alta Huesped
 
@@ -387,7 +394,7 @@ int main(){
                         case 6:{ //Consultar Notificaciones
 
                         }
-                        case 7:{ //Eliminar Suscripción
+                        case 7:{ //Eliminar Suscripcion
 
                         }
                         case 8:{ //Volver
@@ -399,8 +406,8 @@ int main(){
 
                     }
 
-                /*case 3: //Administración de Reservas 
-                    cout << "Seleccione la operación que desea realizar: \n";
+                case 3: //Administracion de Reservas 
+                    cout << "Seleccione la operacion que desea realizar: \n";
                     cout << "1. Realizar Reserva \n";
                     cout << "2. Consultar Reserva \n";
                     cout << "3. Baja de Reserva \n";
@@ -436,11 +443,11 @@ int main(){
                             cout << "Anio:";
                             cin >> anio2;
                             Date ChOut(dia2,mes2,anio2); //DTFecha CheckIn
-                            IControladorReserva *CR = (*f).getIControladorReserva();
-                            (*CR).ingresarDatosReserva(dth,ChIn,ChOut);
-                            map<int,DTHabitacion*> habs = (*CR).obtenerHabitacionesDisponibles();
+                            IControladorReserva *ICR = (*f).getIControladorReserva();
+                            (*ICR).ingresarDatosReserva(dth,ChIn,ChOut);
+                            map<int,DTHabitacion*> habs = (*ICR).obtenerHabitacionesDisponibles();
                             map<int,DTHabitacion*>::iterator j;
-                            cout<<"Por favor, seleccione el número de la habitación que desea reservar: \n";
+                            cout<<"Por favor, seleccione el número de la habitacion que desea reservar: \n";
                             for(j=habs.begin(); j!=habs.end(); j++){
                                 std::cout<<"Numero: " << ((*(*j).second)).getNumero() << std::endl;
                                 std::cout<<"Precio: " << ((*(*j).second)).getPrecio() << std::endl;
@@ -460,14 +467,14 @@ int main(){
                                 j++;
                             };
                             while(!existe){ //si se ingreso un numero incorrecto, muestro las hab y pido reingresar
-                                cout<<"El número de habitación ingresado no corresponde a una habitación disponible.\n";
+                                cout<<"El número de habitacion ingresado no corresponde a una habitacion disponible.\n";
                                 for(j=habs.begin(); j!=habs.end(); j++){
                                     std::cout<<"Numero: " << (*(*j).second).getNumero() <<std::endl;
                                     std::cout<<"Precio: " << (*(*j).second).getPrecio() <<std::endl;
                                     std::cout<<"Capacidad: " << (*(*j).second).getCapacidad() <<std::endl;
                                     cout<<"...............................................";
                                 };
-                                cout<< "Por favor, ingrese un número de habitación de la lista: \n";
+                                cout<< "Por favor, ingrese un número de habitacion de la lista: \n";
                                 
                                 cin>>num;
                                 //controlar que sea un int
@@ -485,7 +492,7 @@ int main(){
                             (*ICR).EscogerHabitacion(dthab);
 
                         }
-                        case 2:{ //Consultar Reserva
+                        /*case 2:{ //Consultar Reserva
 
                         }
                         case 3:{ // Baja de Reserva
@@ -510,9 +517,9 @@ int main(){
                                          
 
                 case 4: //Calificaciones
-                    cout << "Seleccione la operación que desea realizar: \n";
+                    cout << "Seleccione la operacion que desea realizar: \n";
                     cout << "1. Calificar Estadía \n";
-                    cout << "2. Comentar Calificación \n";
+                    cout << "2. Comentar Calificacion \n";
                     cout << "3. Registrar Estadía \n";
                     cout << "4. Consultar Estadía \n";
                     cout << "5. Volver \n";
@@ -525,7 +532,7 @@ int main(){
                         case 1:{ //Calificar Estadía
 
                         }
-                        case 2:{ //Comentar Calificación
+                        case 2:{ //Comentar Calificacion
 
                         }
                         case 3:{ //Registrar Estadía
@@ -544,13 +551,216 @@ int main(){
                     
 
                 case 5: //Modificar fecha del sistema
+                */
+                case 6:{ //Cargar datos de prueba
+                    fabrica* f = fabrica::getInstance();
+                    IControladorHostal *ICH = (*f).getIControladorHostal(); 
+                    IControladorUsuario *ICU = (*f).getIControladorUsuario();
+                    IControladorReserva *ICR = (*f).getIControladorReserva();
+                    IControladorCalificacion *ICC = (*f).getIControladorCalificacion();
+                    
+                    //Alta Empleados
+                    DTEmpleado e("Emilia","emilia@mail.com","123",Recepcion); 
+                    DTEmpleado* dte = &e;
+                    DTUsuario* dtu = dynamic_cast<DTUsuario*>(dte);
+                    (*ICU).IngresarDatosUsuario(dtu);
+                    (*ICU).confirmarAltaUsuario();
 
-                case 6: //Salir
+                    DTEmpleado e("Leonardo","leo@mail.com","123",Recepcion); 
+                    DTEmpleado* dte = &e;
+                    DTUsuario* dtu = dynamic_cast<DTUsuario*>(dte);
+                    (*ICU).IngresarDatosUsuario(dtu);
+                    (*ICU).confirmarAltaUsuario();
+
+                    DTEmpleado e("Alina","alina@mail.com","123",Administracion); 
+                    DTEmpleado* dte = &e;
+                    DTUsuario* dtu = dynamic_cast<DTUsuario*>(dte);
+                    (*ICU).IngresarDatosUsuario(dtu);
+                    (*ICU).confirmarAltaUsuario();
+
+                    DTEmpleado e("Barliman","barli@mail.com","123",Recepcion); 
+                    DTEmpleado* dte = &e;
+                    DTUsuario* dtu = dynamic_cast<DTUsuario*>(dte);
+                    (*ICU).IngresarDatosUsuario(dtu);
+                    (*ICU).confirmarAltaUsuario();
+
+                    //Alta Huespedes
+                    DTHuesped hue1("Sofia","sofia@mail.com","123",true); 
+                    DTHuesped* Pdth1 = &hue1;
+                    DTUsuario* dtu1 = dynamic_cast<DTUsuario*>(Pdth1);
+                    (*ICU).IngresarDatosUsuario(dtu1);
+                    (*ICU).confirmarAltaUsuario();
+
+                    DTHuesped hue2("Frodo","frodo@mail.com","123",true); 
+                    DTHuesped* Pdth2 = &hue2;
+                    DTUsuario* dtu2 = dynamic_cast<DTUsuario*>(Pdth2);
+                    (*ICU).IngresarDatosUsuario(dtu2);
+                    (*ICU).confirmarAltaUsuario();
+
+                    DTHuesped hue3("Sam","sam@mail.com","123",false); 
+                    DTHuesped* Pdth3 = &hue3;
+                    DTUsuario* dtu3 = dynamic_cast<DTUsuario*>(Pdth3);
+                    (*ICU).IngresarDatosUsuario(dtu3);
+                    (*ICU).confirmarAltaUsuario();
+
+                    DTHuesped hue4("Merry","merry@mail.com","123",false); 
+                    DTHuesped* Pdth4 = &hue4;
+                    DTUsuario* dtu4 = dynamic_cast<DTUsuario*>(Pdth4);
+                    (*ICU).IngresarDatosUsuario(dtu4);
+                    (*ICU).confirmarAltaUsuario();
+
+                    DTHuesped hue5("Pippin","pippin@mail.com","123",false); 
+                    DTHuesped* Pdth5 = &hue5;
+                    DTUsuario* dtu5 = dynamic_cast<DTUsuario*>(Pdth5);
+                    (*ICU).IngresarDatosUsuario(dtu5);
+                    (*ICU).confirmarAltaUsuario();
+
+                    DTHuesped hue6("Seba","seba@mail.com","123",true); 
+                    DTHuesped* Pdth6 = &hue6;
+                    DTUsuario* dtu6 = dynamic_cast<DTUsuario*>(Pdth6);
+                    (*ICU).IngresarDatosUsuario(dtu6);
+                    (*ICU).confirmarAltaUsuario();
+
+                    //HO1
+                    DTHostal* pdth;
+                    DTHostal dth("La posada del finger","Av de la playa 123, Maldonado","099111111",0);
+                    DTHostal* pdth = &dth;
+                    (*ICH).IngresarDatosHostal(pdth);
+
+                    //HO1 - Habitaciones
+                    //HA1
+                    DTHabitacion dthab(1,40,2);
+                    DTHabitacion* pdthab = &dthab;
+                    (*ICH).IngresarDatosHab(pdthab);
+                    (*ICH).confirmarAltaHabitacion();
+
+                    //H01 - HA1 - Reserva R1
+                    
+                    Date ChIn(01,05,22);
+                    Date ChOut(10,05,22);
+                    (*ICR).ingresarDatosReserva(pdth,ChIn,ChOut);
+                    (*ICR).DesignarPropietarioDeReserva(Pdth1);                    
+                    (*ICR).confirmarReserva();
+
+                    //(*ICC).RegistrarEstadia(dth,"sofia@mail.com",res,est);
+
+                    //HA2
+                    DTHabitacion dthab(2,10,7);
+                    DTHabitacion* pdthab = &dthab;
+                    (*ICH).IngresarDatosHab(pdthab);
+                    (*ICH).confirmarAltaHabitacion();
+
+                    //HA3
+                    DTHabitacion dthab(3,30,3);
+                    DTHabitacion* pdthab = &dthab;
+                    (*ICH).IngresarDatosHab(pdthab);
+                    (*ICH).confirmarAltaHabitacion();
+
+                    //HO1 - HA3 / Reserva R3
+
+                    Date ChIn(07,06,22);
+                    Date ChOut(30,06,22);
+                    (*ICR).ingresarDatosReserva(pdth,ChIn,ChOut);
+                    (*ICR).DesignarPropietarioDeReserva(Pdth1);                    
+                    (*ICR).confirmarReserva();
+
+                    //HA4
+
+                    DTHabitacion dthab(4,5,12);
+                    DTHabitacion* pdthab = &dthab;
+                    (*ICH).IngresarDatosHab(pdthab);
+                    (*ICH).confirmarAltaHabitacion();
+
+                    //HO1 - Empleados
+
+                    (*ICU).AsignarEmpleadoAHostal("emilia@mail.com");
+                    (*ICH).FinalizarAsignacionDeEmpleados();
+
+                    (*ICH).liberarDatosHostal();
+
+                    //HO2
+                    DTHostal dth("Mochileros","Rambla Costanera 333, Rocha","42579512",0);
+                    DTHostal* pdth = &dth;
+                    (*ICH).IngresarDatosHostal(pdth);
+                    (*ICH).liberarDatosHostal();
+
+                    //HO2 - Empleados
+
+                    (*ICU).AsignarEmpleadoAHostal("leo@mail.com");
+                    (*ICH).FinalizarAsignacionDeEmpleados();
+
+                    (*ICU).AsignarEmpleadoAHostal("alina@mail.com");
+                    (*ICH).FinalizarAsignacionDeEmpleados();
+
+                    //HO3
+                    DTHostal dth("El Pony Pisador","Bree (preguntar por Gandalf)","000",0);
+                    DTHostal* pdth = &dth;
+                    (*ICH).IngresarDatosHostal(pdth);
+
+                    //HO3 - Habitaciones
+                    //HA6
+                    DTHabitacion dthab(1,9,5);
+                    DTHabitacion* pdthab = &dthab;
+                    (*ICH).IngresarDatosHab(pdthab);
+                    (*ICH).confirmarAltaHabitacion();
+                    
+                    //HO1 - HA6 - Reserva R3
+                    Date ChIn(04,01,01);
+                    Date ChOut(05,01,01);
+                    (*ICR).ingresarDatosReserva(pdth,ChIn,ChOut);
+                    (*ICR).DesignarPropietarioDeReserva(Pdth2); 
+                    (*ICR).IngresarHuespedEnReserva(Pdth3);
+                    (*ICR).IngresarHuespedEnReserva(Pdth4);
+                    (*ICR).IngresarHuespedEnReserva(Pdth5);                   
+                    (*ICR).confirmarReserva();
+
+                    //HO3 - Empleados
+
+                    (*ICU).AsignarEmpleadoAHostal("barli@mail.com");
+                    (*ICH).FinalizarAsignacionDeEmpleados();
+
+                    (*ICH).liberarDatosHostal();
+
+                    //HO4
+                    DTHostal dth("Altos de Fing","Av del Toro 1424","099892992",0);
+                    DTHostal* pdth = &dth;
+                    (*ICH).IngresarDatosHostal(pdth);
+                    (*ICH).liberarDatosHostal();
+
+                    //HO5
+                    DTHostal dth("Caverna Lujosa","Amaya 2515","233233235",0);
+                    DTHostal* pdth = &dth;
+                    (*ICH).IngresarDatosHostal(pdth);
+                    
+                    //HO5 - HA6
+
+                    DTHabitacion dthab(1,3,2);
+                    DTHabitacion* pdthab = &dthab;
+                    (*ICH).IngresarDatosHab(pdthab);
+                    (*ICH).confirmarAltaHabitacion();
+
+                    //HO5 - HA6 - Reserva R4
+
+                    Date ChIn(10,06,22);
+                    Date ChOut(30,06,22);
+                    (*ICR).ingresarDatosReserva(pdth,ChIn,ChOut);
+                    (*ICR).DesignarPropietarioDeReserva(Pdth6);                    
+                    (*ICR).confirmarReserva();                    
+
+                    (*ICH).liberarDatosHostal();
+                    
+
+
+
+
+
+                }
+                /*case 7: //Salir
                     finalizar = true;
                     break;
 
                 default:{
-                cout << "Por favor, ingrese una opción entre 1 y 6.\n";
+                cout << "Por favor, ingrese una opcion entre 1 y 6.\n";
                 break;
                 }*/			
             }
