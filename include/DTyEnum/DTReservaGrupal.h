@@ -59,8 +59,8 @@ class DTReservaGrupal:public DTReserva {
             return (*this).cantHuespedes;
         }
 
-        void setCantHuespedes(int CantHuespedes) {
-            (*this).cantHuespedes = CantHuespedes;
+        void setCantHuespedes(int cantHuespedes) {
+            (*this).cantHuespedes = cantHuespedes;
         }        
 };
 
