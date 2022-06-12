@@ -43,9 +43,9 @@ DTHostal* ElegirHostal(){
 int main(){
     //----Declaracion de variables----//
     char OpcionAux, esFingerAux, confirmarAlta;
-    int Opcion1, Opcion2, num, capacidad, dia1, mes1, anio1, dia2, mes2, anio2, CargoAux, ind, codReserva;
+    int nota, Opcion1, Opcion2, num, capacidad, dia1, mes1, anio1, dia2, mes2, anio2, CargoAux, ind, codReserva;
     float precio;
-    string hostalSel, NombreHos, DirHos, TelHos, Nombre, pass, email;
+    string hostalSel, NombreHos, DirHos, TelHos, Nombre, pass, email, Comentario;
     Cargo cargo;
     bool existe, finalizar, esFinger, cargoCorrecto, aux;
     finalizar = false;
@@ -751,70 +751,99 @@ int main(){
                     (*ICH).liberarDatosHostal();
                     
                     //Estadías
-                    //E1
+                    //ES1
                     DTHostal * Pdth = &dth1;                    
                     map<int,DTReserva*> res = (*ICR).ListarReservasNoCanceladasDeHuesped(Pdth, "sofia@mail.com");
                     map<int,DTReserva*>::iterator it;
                     it = res.begin();
                     Date d(01,05,22);
-                    DTEstadia dte(d, ((*it).second)->getCheckOut(), codReserva++);
-                    DTEstadia* Pdte;//= &dte;                  
-                    (*ICC).RegistrarEstadia(Pdth,"sofia@mail.com", (*it).second,Pdte);
+                    DTEstadia dtes1(d, ((*it).second)->getCheckOut(), codReserva++);
+                    DTEstadia * Pdte1 = &dtes1;                  
+                    (*ICC).RegistrarEstadia(Pdth,"sofia@mail.com", (*it).second,Pdte1);
 
-                    //E2
+                    (*ICR).finalizarEstadiaActiva("sofia@mail.com", (*Pdth).getNombre());
+
+                    //ES2
                     DTHostal * Pdth = &dth3;                    
                     map<int,DTReserva*> res = (*ICR).ListarReservasNoCanceladasDeHuesped(Pdth, "frodo@mail.com");
                     map<int,DTReserva*>::iterator it;
                     it = res.begin();
                     Date d(04,01,01);
-                    DTEstadia dte(d, (*it).second->getCheckOut(), codReserva++);
-                    DTEstadia* Pdte;// = &dte;
-                    (*ICC).RegistrarEstadia(Pdth,"frodo@mail.com",(*it).second,Pdte);
+                    DTEstadia dtes2(d, (*it).second->getCheckOut(), codReserva++);
+                    DTEstadia* Pdte2 = &dtes2;
+                    (*ICC).RegistrarEstadia(Pdth,"frodo@mail.com",(*it).second,Pdte2);
 
-                    //E3
+                    (*ICR).finalizarEstadiaActiva("frodo@mail.com", (*Pdth).getNombre());
+
+                    //ES3
                     DTHostal * Pdth = &dth3;                    
-                    map<int,DTReserva*> res = (*ICR).ListarReservasNoCanceladasDeHuesped(Pdth, "sam@mail.com ");
+                    map<int,DTReserva*> res = (*ICR).ListarReservasNoCanceladasDeHuesped(Pdth, "sam@mail.com");
                     map<int,DTReserva*>::iterator it;
                     it = res.begin();
                     Date d(04,01,01);
-                    DTEstadia dte(d, (*it).second->getCheckOut(), codReserva++);
-                    DTEstadia* Pdte;// = &dte;
-                    (*ICC).RegistrarEstadia(Pdth,"sam@mail.com ",(*it).second,Pdte);
+                    DTEstadia dte3(d, (*it).second->getCheckOut(), codReserva++);
+                    DTEstadia* Pdte3 = &dte3;
+                    (*ICC).RegistrarEstadia(Pdth,"sam@mail.com",(*it).second,Pdte3);
 
-                    //E4
+                    //ES4
                     DTHostal * Pdth = &dth3;                    
-                    map<int,DTReserva*> res = (*ICR).ListarReservasNoCanceladasDeHuesped(Pdth, "merry@mail.com ");
+                    map<int,DTReserva*> res = (*ICR).ListarReservasNoCanceladasDeHuesped(Pdth, "merry@mail.com");
                     map<int,DTReserva*>::iterator it;
                     it = res.begin();
                     Date d(04,01,01);
-                    DTEstadia dte(d, (*it).second->getCheckOut(), codReserva++);
-                    DTEstadia* Pdte;// = &dte;
-                    (*ICC).RegistrarEstadia(Pdth,"merry@mail.com ",(*it).second,Pdte);
+                    DTEstadia dte4(d, (*it).second->getCheckOut(), codReserva++);
+                    DTEstadia* Pdte4= &dte4;
+                    (*ICC).RegistrarEstadia(Pdth,"merry@mail.com",(*it).second,Pdte4);
 
-                    //E5
+                    //ES5
                     DTHostal * Pdth = &dth3;                    
-                    map<int,DTReserva*> res = (*ICR).ListarReservasNoCanceladasDeHuesped(Pdth, "pippin@mail.com ");
+                    map<int,DTReserva*> res = (*ICR).ListarReservasNoCanceladasDeHuesped(Pdth, "pippin@mail.com");
                     map<int,DTReserva*>::iterator it;
                     it = res.begin();
                     Date d(04,01,01);
-                    DTEstadia dte(d, (*it).second->getCheckOut(), codReserva++);
-                    DTEstadia* Pdte;// = &dte;
-                    (*ICC).RegistrarEstadia(Pdth,"pippin@mail.com ",(*it).second,Pdte);
+                    DTEstadia dte5(d, (*it).second->getCheckOut(), codReserva++);
+                    DTEstadia* Pdte5 = &dte5;
+                    (*ICC).RegistrarEstadia(Pdth,"pippin@mail.com",(*it).second,Pdte5);
 
-                    //E6
+                    //ES6
                     DTHostal * Pdth = &dth5;                    
-                    map<int,DTReserva*> res = (*ICR).ListarReservasNoCanceladasDeHuesped(Pdth, "seba@mail.com ");
+                    map<int,DTReserva*> res = (*ICR).ListarReservasNoCanceladasDeHuesped(Pdth, "seba@mail.com");
                     map<int,DTReserva*>::iterator it;
                     it = res.begin();
                     Date d(07,06,22);
-                    DTEstadia dte(d, (*it).second->getCheckOut(), codReserva++);
-                    DTEstadia* Pdte;// = &dte;
-                    (*ICC).RegistrarEstadia(Pdth,"seba@mail.com ",(*it).second,Pdte);
-                   
+                    DTEstadia dte6(d, (*it).second->getCheckOut(), codReserva++);
+                    DTEstadia* Pdte6 = &dte6;
+                    (*ICC).RegistrarEstadia(Pdth,"seba@mail.com",(*it).second,Pdte6);
 
+                    (*ICR).finalizarEstadiaActiva("seba@mail.com", (*Pdth).getNombre());
 
+                    //Calificar Estadia
 
+                    //ES1
+                    map<int,DTEstadia*> esHues = (*ICR).obtenerEstadiaHuesped("sofia@mail.com");
+                    map<int,DTEstadia*>::iterator it = esHues.begin();
+                    Comentario = "Un poco caro para lo que ofrecen. El famoso gimnasio era una caminadora (que hacía tremendo ruido) y 2 pesas, la piscina parecía el lago del Parque Rodó y el desayuno eran 2 tostadas con mermelada. Internet se pasaba,cayendo. No vuelvo";
+                    nota = 3;
+                    (*ICC).agregarCalificacion(Comentario, nota);
 
+                    //ES2
+                    map<int,DTEstadia*> esHues = (*ICR).obtenerEstadiaHuesped("frodo@mail.com");
+                    map<int,DTEstadia*>::iterator it = esHues.begin();
+                    Comentario = "Se pone peligroso de noche, no recomiendo. Además no hay caja fuerte para guardar anillos.";
+                    nota = 2;
+                    (*ICC).agregarCalificacion(Comentario, nota);
+
+                    //ES6
+                    map<int,DTEstadia*> esHues = (*ICR).obtenerEstadiaHuesped("seba@mail.com");
+                    map<int,DTEstadia*>::iterator it = esHues.begin();
+                    Comentario = "Había pulgas en la habitación. Que lugar más mamarracho!!";
+                    nota = 1;
+                    (*ICC).agregarCalificacion(Comentario, nota);
+
+                    //Comentar Calificacion
+                    map<int,DTCalificacion*> cals = (*ICC).obtenerCalificaciones("barli@mail.com");
+                    Comentario = "Desapareció y se fue sin pagar.";
+                    (*ICC).ingresarComentario(Comentario);
 
                 }
                 /*case 7: //Salir
