@@ -46,7 +46,9 @@ void ControladorReserva::finalizarEstadiaActiva(string emailHuesped, string nomb
             return a;
         }
         void ControladorReserva::confirmarBaja(DTHostal*, int){}
-        int ControladorReserva::obtenerNumeroDeHabitacion(DTHabitacion*){return 4;}
+int ControladorReserva::obtenerNumeroDeHabitacion(DTHabitacion* dth){
+    return dth->getNumero();
+}
         map<string,string> ControladorReserva::obtenerNombresDeReserva(DTReservaGrupal*){
             map<string,string> a;
             return a;
@@ -55,8 +57,17 @@ void ControladorReserva::finalizarEstadiaActiva(string emailHuesped, string nomb
             map<int,DTEstadia*> a;
             return a;
         }
-        map<string,string> ControladorReserva::mostrarReserva(DTReserva*){
-            map<string,string> a;
-            return a;
-        }
+
+void ControladorReserva::mostrarReserva(DTReserva* dtr){
+    //esto debería de estar en interfaz, pero lo pongo porque pinta
+    cout << dtr->getCodigo() << endl;
+    cout << dtr->getCheckIn().getDia() << endl;
+    cout << dtr->getCheckIn().getMes() << endl;
+    cout << dtr->getCheckIn().getAnio() << endl;
+    cout << dtr->getCheckOut().getDia() << endl;
+    cout << dtr->getCheckOut().getMes() << endl;
+    cout << dtr->getCheckOut().getAnio() << endl;
+    cout << dtr->getEstado() << endl;
+    cout << dtr->getCosto() << endl;
+}
         
