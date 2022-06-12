@@ -15,3 +15,11 @@ void grupal::finalizarSiEsReservaBuscada(string emailHuesped,string nombreHostal
         }
     }
 }
+
+void grupal::obtenerNombresDeReserva(){
+    set<huespedGrupal*>::iterator it;
+    for(it=huesGrup.begin();it!=huesGrup.end();it++){
+        huesped* h= (*it)->getHuesped();
+        cout << h->getNombre() << endl;
+    }
+}

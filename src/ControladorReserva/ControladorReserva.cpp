@@ -49,17 +49,19 @@ void ControladorReserva::finalizarEstadiaActiva(string emailHuesped, string nomb
 int ControladorReserva::obtenerNumeroDeHabitacion(DTHabitacion* dth){
     return dth->getNumero();
 }
-        map<string,string> ControladorReserva::obtenerNombresDeReserva(DTReservaGrupal*){
-            map<string,string> a;
-            return a;
-        }
+void ControladorReserva::obtenerNombresDeReserva(DTReservaGrupal* dtrg){
+    map<int,reserva*>::iterator it= reservas.find(dtrg->getCodigo());
+    //como siempre es grupal
+    grupal* gru= static_cast<grupal*>((*it).second);
+    gru->obtenerNombresDeReserva();
+}
+
         map<int,DTEstadia*> ControladorReserva::obtenerEstadiaHuesped(string){
             map<int,DTEstadia*> a;
             return a;
         }
 
 void ControladorReserva::mostrarReserva(DTReserva* dtr){
-    //esto debería de estar en interfaz, pero lo pongo porque pinta
     cout << dtr->getCodigo() << endl;
     cout << dtr->getCheckIn().getDia() << endl;
     cout << dtr->getCheckIn().getMes() << endl;

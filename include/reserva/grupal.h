@@ -63,6 +63,7 @@ class grupal:public reserva{
         map<int, DTEstadia*> obtenerEstadias();
         DTEstadia* obtenerEstadia();
         DTReserva* obtenerResrvaDeEst();
+        void obtenerNombresDeReserva();
         bool tieneEstadiaFinalizadaDeHuesped(string);
         DTEstadia* darEstadiaDeHuesped(string);
         void agregarHuespedGrupalASet(huespedGrupal * hg){
