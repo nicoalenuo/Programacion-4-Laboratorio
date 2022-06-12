@@ -1,4 +1,5 @@
 #include "../../include/ControladorUsuario/ControladorUsuario.h"
+#include "../../include/usuario/empleado.h"
 #include "../../include/fabrica.h"
 
 ControladorUsuario* ControladorUsuario::instancia = NULL;
@@ -127,16 +128,17 @@ void ControladorUsuario::cancelarAltaUsuario(){
 }
 
 void ControladorUsuario::confirmarAltaUsuario(){
-    empleado* de = dynamic_cast<empleado*>(datosUsuario);
+    DTEmpleado* de = dynamic_cast<DTEmpleado*>(datosUsuario);
     if(de!=NULL){
-        agregarEmpleadoAMap(de);
-        delete de;
-        de = NULL;
+        string nombre = "juan";
+        empleado e(nombre,de->getMail(),de->getPassword(),de->getTipoCargo());
+        empleado * Pe = &e;
+        agregarEmpleadoAMap(Pe);
     }else{
-        huesped * h = dynamic_cast<huesped*>(datosUsuario);
-        agregarHuespedAMap(h);
-        delete h;
-        h = NULL;
+        DTHuesped * dh = dynamic_cast<DTHuesped*>(datosUsuario);
+        huesped h(dh->getNombre(), dh->getMail(), dh->getPassword(),dh->getEsFinger());
+        huesped * Ph = &h;
+        agregarHuespedAMap(Ph);
     };
     delete datosUsuario;
     datosUsuario = NULL;

@@ -134,9 +134,10 @@ void ControladorHostal::confirmarAltaHabitacion(){
     string hostalElegido = datosHostal->getNombre();
     hostal* h = (*hostales.find(hostalElegido)).second;
     h->agregarHab(Phab);
+    agregarHabitacionAMap(Phab);
     delete datosHabitacion;
     datosHabitacion = NULL;
-    
+     
 }
 
         map<int,DTReserva*> ControladorHostal::ListarReservas(DTHostal*){
