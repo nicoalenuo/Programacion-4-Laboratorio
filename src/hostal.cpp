@@ -87,3 +87,17 @@ map<int,DTReserva*> hostal:: obtenerReservas(){
     }
     return reservas;
 }
+
+map<int,DTEstadia*> hostal:: obtenerEstadias(){
+    map<int,habitacion*>::iterator it;
+    map<int,DTEstadia*> habEst, aux;
+    map<int,DTEstadia*>::iterator itr;
+    for(it=habitaciones.begin(); it!=habitaciones.end();it++){
+        habitacion* h= (*it).second;
+        aux= h->obtenerEstadias();
+        for(itr=aux.begin();itr!=aux.end();itr++){
+            habEst.insert(pair<int,DTEstadia*>((*itr).first,(*itr).second));
+        }
+    }
+    return habEst;
+}

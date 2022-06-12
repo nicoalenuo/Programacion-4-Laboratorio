@@ -28,3 +28,16 @@ map<int,DTReserva*> habitacion::obtenerReservas(){
         }
         return resultado;
 }
+
+map<int,DTEstadia*> habitacion::obtenerEstadias(){
+        map<int,DTEstadia*> e, aux;
+        map<int,DTEstadia*>::iterator ite;
+        map<int,reserva*>::iterator itr;
+        for(itr= reservas.begin(); itr!=reservas.end();itr++){
+               aux = (*itr).second->obtenerEstadias();
+               for(ite= aux.begin(); ite!=aux.end();ite++){
+                        e.insert(pair<int,DTEstadia*>((*ite).first,(*ite).second));
+               }
+        }       
+        return e;
+}

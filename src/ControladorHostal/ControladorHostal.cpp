@@ -146,10 +146,15 @@ void ControladorHostal::liberarHostal(){
     }
 }
 
-        map<int,DTEstadia*> ControladorHostal::obtenerEstadiasDeHostal(){
-            map<int,DTEstadia*> a;
-            return a;
-        }
+map<int,DTEstadia*> ControladorHostal::obtenerEstadiasDeHostal(){
+    map<string,hostal*>::iterator it;
+    it = hostales.find(datosHostal->getNombre());
+    hostal* h= (*it).second;
+    map<int,DTEstadia*> dte;
+    dte= h->obtenerEstadias();
+    return dte;
+}
+
         DTEstadia* ControladorHostal::obtenerDatosEstadia(){return NULL;}
         DTReserva* ControladorHostal::obtenerReservaDeEstadia(){return NULL;}
         void ControladorHostal::liberarHostalEstadia(){}

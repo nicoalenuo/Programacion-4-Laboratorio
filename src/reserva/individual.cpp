@@ -13,3 +13,10 @@ void individual::finalizarSiEsReservaBuscada(string emailHuesped,string nombreHo
         (*hi).finalizarEstadiaActiva(emailHuesped);
     }
 }
+
+map<int,DTEstadia*> individual::obtenerEstadias(){
+        map<int,DTEstadia*> e;
+        DTEstadia* estadia= (*huesInd).obtenerEstadia();
+        e.insert(pair<int,DTEstadia*>(estadia->getCodigo(),estadia));
+        return e;
+}

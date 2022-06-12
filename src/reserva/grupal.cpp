@@ -23,3 +23,15 @@ void grupal::obtenerNombresDeReserva(){
         cout << h->getNombre() << endl;
     }
 }
+
+map<int,DTEstadia*> grupal::obtenerEstadias(){
+        map<int,DTEstadia*> e;
+        DTEstadia* aux;
+        map<int,DTEstadia*>::iterator ite;
+        set<huespedGrupal*>::iterator ithg;
+        for(ithg= huesGrup.begin(); ithg!=huesGrup.end();ithg++){
+                aux = (*ithg)->obtenerEstadia();
+                e.insert(pair<int,DTEstadia*>((*aux).getCodigo(),aux));
+        }       
+        return e;
+}

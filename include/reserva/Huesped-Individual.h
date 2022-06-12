@@ -4,7 +4,8 @@
 #include "../usuario/huesped.h"
 #include "../estadia.h"
 //Cosas que agregue
-#include "../DTyEnum/DTReserva.h"
+#include "../DTyEnum/DTEstadia.h"
+#include "../DTyEnum/DTDatosEstadia.h"
 
 #include <iostream>
 #include <stdio.h>
@@ -31,8 +32,8 @@ class huespedIndividual{
         }
 
         void finalizarEstadiaActiva(string);
-        DTEstadia* darDatosEstadia();
-        DTReserva* obtenerReserva();
+        DTDatosEstadia* darDatosEstadia();
+        DTEstadia* obtenerEstadia();
         void DarBaja();
         bool tieneEstFinalizadaDeHus(string); 
         bool esDeHuesped(string);    

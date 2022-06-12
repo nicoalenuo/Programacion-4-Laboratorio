@@ -10,3 +10,10 @@ void huespedGrupal::finalizarEstadiaActiva(string emailHuesped){
         }
     }
 }
+
+DTEstadia* huespedGrupal::obtenerEstadia(){
+    DTEstadia* pDTe;
+    DTEstadia dte= DTEstadia(estadiaAsoc->getFechaEntrada(),estadiaAsoc->getFechaSalida(),estadiaAsoc->getCodigo());
+    (*pDTe) = dte;
+    return pDTe;
+}
