@@ -130,8 +130,7 @@ void ControladorUsuario::cancelarAltaUsuario(){
 void ControladorUsuario::confirmarAltaUsuario(){
     DTEmpleado* de = dynamic_cast<DTEmpleado*>(datosUsuario);
     if(de!=NULL){
-        string nombre = "juan";
-        empleado e(nombre,de->getMail(),de->getPassword(),de->getTipoCargo());
+        empleado e(de->getNombre(),de->getMail(),de->getPassword(),de->getTipoCargo());
         empleado * Pe = &e;
         agregarEmpleadoAMap(Pe);
     }else{

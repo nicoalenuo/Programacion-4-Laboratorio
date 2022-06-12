@@ -43,11 +43,11 @@ DTHostal* ElegirHostal(){
 int main(){
     //----Declaración de variables----//
     char OpcionAux, esFingerAux, confirmarAlta;
-    int Opcion1, Opcion2, num, capacidad, dia1, mes1, anio1, dia2, mes2, anio2, CargoAux;
+    int Opcion1, Opcion2, num, capacidad, dia1, mes1, anio1, dia2, mes2, anio2, CargoAux, ind;
     float precio;
     string hostalSel, NombreHos, DirHos, TelHos, Nombre, pass, email;
     Cargo cargo;
-    bool existe, finalizar, esFinger, cargoCorrecto;
+    bool existe, finalizar, esFinger, cargoCorrecto, aux;
     finalizar = false;
     //-----------------------//
     while (!finalizar){
@@ -147,14 +147,13 @@ int main(){
                             
                         }// case 2 | Alta Habitación
 
-                        /*case 3:{ // Consultar Hostal
-                            string NombreHos;
-                            cout << "Por favor, indique el nombre del hostal que desea consultar: \n";
-                            cin.ignore();
-                            getline(cin,NombreHos);
-                            //obtenerDatosHostal
+                        case 3:{ // Consultar Hostal
+                            DTHostal* dth = ElegirHostal();
+                            fabrica* f = fabrica::getInstance();
+                            IControladorHostal *ICH = (*f).getIControladorHostal();
+                            
                         }// case 3 | Consultar Hostal
-                        case 4: {//Consultar Top 3 Hostales
+                        /*case 4: {//Consultar Top 3 Hostales
                             int i;
                             fabrica * f = fabrica::getInstance();
                             IControladorHostal *CHostal = (*f).getIControladorHostal();
@@ -301,59 +300,80 @@ int main(){
 
                         }//case 2 | Alta Huesped
 
-                        /*case 3: {//Asignar Empleado a Hostal
+                        case 3: {//Asignar Empleado a Hostal
                             DTHostal * dth = ElegirHostal();
                             fabrica* f = fabrica::getInstance();
                             IControladorHostal * ICH = (*f).getIControladorHostal();
                             (*ICH).IngresarDatosHostal(dth);
-                            //obtenerEmpleadosNoAsignados():
-                            bool existe = false;
-                            cout<<"Escriba el mail del empleado que desea asignar: \n";
-                            cin.ignore();
-                            getline(cin, email);
-                            //verificar que el nombre coincida con un email de empleado, si coincide existe = true	
+                            IControladorUsuario * ICU = (*f).getIControladorUsuario();
+                            map<string,DTEmpleado*> empsLibres = (*ICU).obtenerEmpleadosNoAsignados();
+                            map<string,DTEmpleado*>::iterator it;
+                            
+                            existe = false;
+                            aux = false;
                             while(!existe){
-                                cout<<"El mail ingresado no es correcto, por favor ingréselo nuevamente: \n";
-                                //mostrar lista de empleados de nuevo
-                                cin.ignore();
-                                getline(cin, email);
-                                //verificar que el email coincida con un email de empleado, si coincide existe = true		
-                            };	
-                            //asignarEmpleadoAHostal
-                            //FinalizarAsignacionDeEmpleado	
+                                if(aux){
+                                    cout<<"El número ingresado no es correcto. \n";
+                                }
+                                ind = 1;
+                                cout<<"Seleccione el número correspondiente al empleado que desea asignar de la siguiente lista: \n";
+                                for(it=empsLibres.begin(); it!=empsLibres.end(); it++){
+                                    std::cout<<ind<<". Nombre: "<<((*it).second)->getNombre() <<", Mail: "<<((*it).second)->getMail()<< std::endl;
+                                    ind++;
+                                }
+                                cin>>num;
+                                if(num>ind || num==0){
+                                    existe = false;
+                                    aux = true;
+                                };
+                            };
+                            ind = 1;
+                            it = empsLibres.begin();
+                            while(ind<num){
+                                it++;
+                                ind++;
+                            };
+                            (*ICU).AsignarEmpleadoAHostal((*it).second->getMail());
+                            (*ICH).FinalizarAsignacionDeEmpleados();	
                         }
-                        case 4:{ //Consultar Usuario
+                        /*case 4:{ //Consultar Usuario
                             DTHostal * dth = ElegirHostal();
                             fabrica* f = fabrica::getInstance();
                             IControladorHostal * ICH = (*f).getIControladorHostal();
                             (*ICH).IngresarDatosHostal(dth);
 
-                            IControladorUsuario *CU = (*f).getIControladorUsuario();
-                            map<string,DTUsuario*> us = (*CU).obtenerUsuarios();
+                            IControladorUsuario *ICU = (*f).getIControladorUsuario();
+                            map<string,DTUsuario*> us = (*ICU).obtenerUsuarios();
                             if(us.size()==0){
                                 cout<<"No hay usuarios ingresados.";
                             }else{
                                 map<string,DTUsuario*>::iterator it;
-                                for(it=us.begin(); it!=us.end(); it++){
-                                    std::cout << "Nombre : " << (*(*it).second).getNombre() << std::endl;
-                                    std::cout << "Email : " << (*(*it).second).getMail() << std::endl;
-                                };
-                                existe = false;                     
-                                cout<<"Escriba el mail del usuario seleccionado: \n";
-                                cin.ignore();
-                                getline(cin, email);
-                                //verificar que el nombre coincida con un email de empleado, si coincide existe = true	
+                                existe = false;
+                                aux = false;
                                 while(!existe){
-                                    cout<<"El email ingresado no existe, por favor ingréselo nuevamente: \n";
-                                    //mostrar lista de empleados de nuevo
+                                    if(aux){
+                                        cout<<"El número ingresado no es correcto. \n";
+                                    }
+                                    ind = 1;
+                                    cout<<"Seleccione el número correspondiente al usuario que desea seleccionar de la siguiente lista: \n";
                                     for(it=us.begin(); it!=us.end(); it++){
-                                        std::cout << "Nombre : " << (*(*it).second).getNombre() << std::endl;
-                                        std::cout << "Email : " << (*(*it).second).getMail() << std::endl;
+                                        std::cout<<ind<<". Nombre: "<<((*it).second)->getNombre() <<", Mail: "<<((*it).second)->getMail()<< std::endl;
+                                        ind++;
+                                    }
+                                    cin>>num;
+                                    if(num>ind || num==0){
+                                        existe = false;
+                                        aux = true;
                                     };
-                                    cin.ignore();
-                                    getline(cin, email);
-                                    //verificar que el email coincida con un email de usuario, si coincide existe = true	
                                 };
+                                ind = 1;
+                                it = us.begin();
+                                while(ind<num){
+                                    it++;
+                                    ind++;
+                                };
+
+                                
                                 //obtenerNombreUsuario
                                 //obtenerEmailUsuario
                                 //obtenerHuespedConEmail (mostrar esFinger) / obtenerEmpleadoConEmail (mostrar cargo y hostal)
