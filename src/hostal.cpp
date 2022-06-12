@@ -30,15 +30,14 @@ DTHostal* hostal::darDatos(){
 map<string,DTEmpleado*> hostal::quitarAsignados(map<string,DTEmpleado*> emps){
     map<string,empleado*>::iterator it;
     for (it=empleados.begin() ; it!=empleados.end() ; it++){
-        delete (*emps.find((*it).first)).second;
+        DTEmpleado* aBorrar =  (*emps.find((*it).first)).second;
         emps.erase((*it).first);
+        delete aBorrar;
     }
-
     return emps;
 }
 
 void hostal::asignarEmpleado(empleado* e){
-    cout << "aea" << endl;
     empleados.insert(pair<string,empleado*>((*e).getEmail(),e));
 }
 
