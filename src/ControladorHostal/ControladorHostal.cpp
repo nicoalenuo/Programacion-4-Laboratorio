@@ -27,6 +27,10 @@ map<string,DTHostal*> ControladorHostal::obtenerHostales(){
         dth = (*(*it).second).darDatos();
         resultado.insert(pair<string,DTHostal*>((*it).first,dth));
     }
+    /*
+    el sistema recuerda por memoria el hostal seleccionado por el usuario
+    pero de eso se encarga la interfaz
+    */
     return resultado;
 }
 
@@ -117,16 +121,31 @@ float ControladorHostal::obtenerPromCalificacionesDeHostal(){
     return datosHostal->getCalificacionPromedio();
 }
         
-        map<int,DTCalificacion*> ControladorHostal::obtenerCalificacionesDeHostal(){
-            map<int,DTCalificacion*> a;
-            return a;
-        }
-        void ControladorHostal::mostrarHabitacion(DTHabitacion*){}
-        map<int,DTReserva*> ControladorHostal::obtenerReservasDeHostal(){
-            map<int,DTReserva*> a;
-            return a;
-        }
-        void ControladorHostal::liberarHostal(){}
+map<int,DTCalificacion*> ControladorHostal::obtenerCalificacionesDeHostal(){//precondicion, exista DTHostal en memoria
+    string nombre= datosHostal->getNombre();
+    return obtenerCalificacionesYComentarios(nombre);
+}
+
+void ControladorHostal::mostrarHabitacion(DTHabitacion* habitacion){
+    cout << habitacion->getNumero() << endl;
+    cout << habitacion->getPrecio() << endl;
+    cout << habitacion->getCapacidad() << endl;
+}
+
+map<int,DTReserva*> ControladorHostal::obtenerReservasDeHostal(){
+    map<int,DTReserva*> reservas;
+    hostal* h= obtenerHostal(datosHostal);
+    reservas= h->obtenerReservas();
+    return reservas;
+}
+
+void ControladorHostal::liberarHostal(){
+    if(datosHostal!=NULL){
+        delete datosHostal;
+        datosHostal=NULL;
+    }
+}
+
         map<int,DTEstadia*> ControladorHostal::obtenerEstadiasDeHostal(){
             map<int,DTEstadia*> a;
             return a;

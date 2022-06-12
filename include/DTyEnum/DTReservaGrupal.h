@@ -9,10 +9,10 @@ using namespace std;
 
 class DTReservaGrupal:public DTReserva {
     private:
-        int CantHuespedes;
+        int cantHuespedes;
 
     public:
-        DTReservaGrupal(string,string,string,int);
+        DTReservaGrupal(int,Date,Date,EstadoReserva,float,int);
         ~DTReservaGrupal();
         
         int getCodigo() {
@@ -47,12 +47,20 @@ class DTReservaGrupal:public DTReserva {
             (*this).estado = estado;
         }
 
+        float getCosto() {
+            return (*this).costo;
+        }
+
+        void setCosto(float costo) {
+            (*this).costo = costo;
+        }
+
         int getCantHuespedes() {
-            return (*this).CantHuespedes;
+            return (*this).cantHuespedes;
         }
 
         void setCantHuespedes(int CantHuespedes) {
-            (*this).CantHuespedes = CantHuespedes;
+            (*this).cantHuespedes = CantHuespedes;
         }        
 };
 

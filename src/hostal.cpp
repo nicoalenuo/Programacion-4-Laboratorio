@@ -73,3 +73,13 @@ float hostal::darCalifPromedio(){
         return 0;
     }
 }
+
+map<int,DTReserva*> hostal:: obtenerReservas(){
+    map<int,habitacion*>::iterator it;
+    map<int,DTReserva*> reservas;
+    for(it=habitaciones.begin(); it!=habitaciones.end();it++){
+        habitacion* h= (*it).second;
+        reservas= h->obtenerReservas();
+    }
+    return reservas;
+}
