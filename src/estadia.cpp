@@ -12,7 +12,7 @@ DTEstadia* estadia::darDatos(){
     return NULL;
 }
 bool estadia::estaActiva(){
-    return false;
+    return (fechaSalida == NULL) ? true:false;
 }
 void estadia::finalizarEstadiaActiva(){
     if (estaActiva()){

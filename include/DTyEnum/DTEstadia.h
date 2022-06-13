@@ -10,16 +10,16 @@ using namespace std;
 class DTEstadia {
     private:
         Date fechaEntrada;
-        Date fechaSalida;
+        Date* fechaSalida;
         int codigo;
     public:
-        DTEstadia(Date,Date,int);
+        DTEstadia(Date,Date*,int);
         ~DTEstadia();
         
         Date getFechaEntrada(){
             return fechaEntrada;
         }
-        Date getFechaSalida(){
+        Date* getFechaSalida(){
             return fechaSalida;
         }
         int getCodigo(){
@@ -28,7 +28,7 @@ class DTEstadia {
         void setFechaEntrada(Date fe){
             fechaEntrada=fe;
         }
-        void setFechaSalida(Date fs){
+        void setFechaSalida(Date* fs){
             fechaSalida=fs;
         }
         void setCodigo(int c){

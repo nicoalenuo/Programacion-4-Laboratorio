@@ -45,12 +45,19 @@ DTEstadia* individual::obtenerEstadia(){
 DTReserva* individual::obtenerResrvaDeEst(){
     return NULL;
 }
-bool individual::tieneEstadiaFinalizadaDeHuesped(string){
-    return false;
+bool individual::tieneEstadiaFinalizadaDeHuesped(string e){
+    DTEstadia* a;
+    ((*this).huesInd==NULL) ? a=NULL : a=(*this).huesInd->darDatosEstadia();
+    if(a != NULL){
+        return (a->getFechaSalida() == NULL) ? false:true;
+    }else{
+        return false;
+    }
 }
-DTEstadia* individual::darEstadiaDeHuesped(string){
-    return NULL;
+DTEstadia* individual::darEstadiaDeHuesped(string e){
+    if(tieneEstadiaFinalizadaDeHuesped(e)==true){
+        DTEstadia* est = (*this).huesInd->darDatosEstadia();
+        return est;
+    }else{ return NULL; }
 }
-huespedIndividual* individual::getHuespedIndividual(){
-    return NULL;
-}
+
