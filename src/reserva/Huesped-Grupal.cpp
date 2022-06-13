@@ -18,7 +18,7 @@ void huespedGrupal::finalizarEstadiaActiva(string emailHuesped){
 }
 DTEstadia* huespedGrupal::darDatosEstadia(){
     DTEstadia* send = estadiaAsoc->darDatos();
-    return send;
+    return NULL;
 }
 DTReserva* huespedGrupal::obtenerReserva(){//cambiar por huesped
     return NULL;
@@ -26,7 +26,9 @@ DTReserva* huespedGrupal::obtenerReserva(){//cambiar por huesped
 void huespedGrupal::DarBaja(){
 }
 bool huespedGrupal::tieneEstFinalizadaDeHus(string email){
-    return (email == (*this).huespedAsoc->getEmail()) ? !(*this).estadiaAsoc->estaActiva():false;
+    if(huespedAsoc != NULL and estadiaAsoc != NULL and huespedAsoc->getEmail() == email){
+        return estadiaAsoc->estaActiva();
+    }else{ return false; }
 }
 bool huespedGrupal::esDeHuesped(string){
     return false;

@@ -51,10 +51,15 @@ map<string,string> ControladorReserva::obtenerNombresDeReserva(DTReservaGrupal*)
     map<string,string> a;
     return a;
 }
-map<int,DTEstadia*> ControladorReserva::obtenerEstadiaHuesped(string){
-    
-    map<int,DTEstadia*> a;
-    return a;
+map<int,DTEstadia*> ControladorReserva::obtenerEstadiaHuesped(string email){
+    map<int,DTEstadia*> send;
+    for(map<int,reserva*>::iterator it = reservas.begin(); it != reservas.end(); ++it){
+        if(it->second->tieneEstadiaFinalizadaDeHuesped(email)){
+            DTEstadia* aux = it->second->darEstadiaDeHuesped(email);
+            send.insert(pair<int,DTEstadia*>(aux->getCodigo(),aux));
+        }
+    }
+    return send;
 }
 map<string,string> ControladorReserva::mostrarReserva(DTReserva*){
     map<string,string> a;

@@ -23,7 +23,7 @@ class ControladorCalificacion:public IControladorCalificacion {
         ~ControladorCalificacion(); //AGREGADO
         void eliminarSuscripto(empleado*);
         map<int,DTEstadia*> obtenerEstadiasHuesped(string);
-        void agregarCalificacion(string,int);
+        void agregarCalificacion(string,string,int);
         map<int,DTCalificacion*> obtenerCalificaciones(string);
         void ingresarComentario(string);
         void liberarEstadia();

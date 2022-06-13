@@ -26,5 +26,5 @@ void estadia::eliminarEstadia(){
 
 }
 DTCalificacion* estadia::obtenerCalificacionDeEstadia(){
-    return NULL;
+    return calificacionAsoc->darDatos();
 }

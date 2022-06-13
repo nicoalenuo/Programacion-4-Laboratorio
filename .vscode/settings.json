@@ -5,6 +5,8 @@
         "*.tcc": "cpp",
         "compare": "cpp",
         "type_traits": "cpp",
-        "map": "cpp"
+        "map": "cpp",
+        "array": "cpp",
+        "string_view": "cpp"
     }
 }
