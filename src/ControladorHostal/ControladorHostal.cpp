@@ -104,8 +104,8 @@ void ControladorHostal::confirmarAltaHostal(){
     hostal h(datosHostal->getNombre(), datosHostal->getDireccion(), datosHostal->getTelefono());
     hostal* ph = &h;
     agregarHostalAMap(ph);
-    delete datosHostal;
-    datosHostal = NULL;
+
+    //datosHostal = NULL;
 }
 
 void ControladorHostal::cancelarAltaHostal(){

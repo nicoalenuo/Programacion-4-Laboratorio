@@ -9,7 +9,7 @@
 
 //funcion auxiliar
 DTHostal* ElegirHostal(){
-	cout<< "Por favor, seleccione de la siguiente lista el número del hostal al que desea asignarle un nuevo empleado: \n";
+	cout<< "Por favor, seleccione de la siguiente lista el numero del hostal al que desea asignarle un nuevo empleado: \n";
 	fabrica* f = fabrica::getInstance();
     IControladorHostal *ICH = (*f).getIControladorHostal();
     map<string,DTHostal*> listaHostales = (*ICH).obtenerHostales();
@@ -23,7 +23,7 @@ DTHostal* ElegirHostal(){
 	int numHostal;	
 	cin>>numHostal;
 	while(numHostal>cont or numHostal==0){ //verificar que el nombre coincida con un hostal, si coincide existeH = true
-		cout<<"El número ingresado no es correcto, por favor ingréselo nuevamente: \n";
+		cout<<"El número ingresado no es correcto, por favor ingreselo nuevamente: \n";
         cont = 1;
 	    for(it=listaHostales.begin(); it!=listaHostales.end(); it++){
 		    std::cout << cont <<". Nombre: " << ((*it).second)->getNombre() << std::endl;
@@ -101,7 +101,12 @@ int main(){
                             DTHostal* pdth = &dth;
                             (*ICH).IngresarDatosHostal(pdth);
                             (*ICH).confirmarAltaHostal();
-                            cout<<"Se ingreso el nuevo hostal";
+                            cout<<"Se ingreso el nuevo hostal \n";
+                            map<string,DTHostal*> listaHostales = (*ICH).obtenerHostales();
+                            map<string,DTHostal*>::iterator it;
+                            it=listaHostales.begin();
+                            std::cout  <<". Nombre: " << ((*it).second)->getNombre() << std::endl;                                
+	                        
                             /*try{
                                 map<string, hostal*> hostales = (*ICH).getHostales();
                                 map<string,hostal*>::iterator it;
@@ -127,7 +132,7 @@ int main(){
                         };
                         //case 1 | Alta Hostal
                         case 2:{ //Alta Habitacion
-                            cout<<"case2 \n";
+                            
                             DTHostal* dth = ElegirHostal();
                             fabrica* f = fabrica::getInstance();
                             IControladorHostal *ICH = (*f).getIControladorHostal();
