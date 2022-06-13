@@ -684,9 +684,11 @@ int main(){
                     DTHostal dth1("La posada del finger","Av de la playa 123, Maldonado","099111111",0);
                     DTHostal* pdth1 = &dth1;
                     (*ICH).IngresarDatosHostal(pdth1);
+                    (*ICH).confirmarAltaHostal();
 
                     //HO1 - Habitaciones
                     //HA1
+                    //buscar hostal
                     DTHabitacion dthab1(1,40,2);
                     DTHabitacion* pdthab1 = &dthab1;
                     (*ICH).IngresarDatosHab(pdthab1);
@@ -713,6 +715,8 @@ int main(){
                     DTHabitacion* pdthab3 = &dthab3;
                     (*ICH).IngresarDatosHab(pdthab3);
                     (*ICH).confirmarAltaHabitacion();
+
+                    
 
                     //HO1 - HA3 / Reserva R3
 
