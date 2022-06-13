@@ -39,7 +39,6 @@ class IControladorHostal {
         virtual void cancelarFinalizarEstadiaActiva()=0;
         virtual float obtenerPromCalificacionesDeHostal()=0;
         virtual map<int,DTCalificacion*> obtenerCalificacionesDeHostal()=0;
-        virtual void mostrarHabitacion(DTHabitacion*)=0;
         virtual map<int,DTReserva*> obtenerReservasDeHostal()=0;
         virtual void liberarHostal()=0;
         virtual map<int,DTEstadia*> obtenerEstadiasDeHostal()=0;

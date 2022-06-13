@@ -35,7 +35,6 @@ class IControladorReserva{
         virtual map<int,DTReserva*> ListarReservasNoCanceladasDeHuesped(DTHostal*, string)=0;
         virtual void confirmarBaja(DTHostal*, int)=0;
         virtual void finalizarEstadiaActiva(string, string)=0;
-        virtual void mostrarReserva(DTReserva*)=0;
         virtual int obtenerNumeroDeHabitacion(DTHabitacion*)=0;
         virtual void obtenerNombresDeReserva(DTReservaGrupal*)=0;
         virtual map<int,DTEstadia*> obtenerEstadiaHuesped(string)=0;

@@ -122,12 +122,6 @@ map<int,DTCalificacion*> ControladorHostal::obtenerCalificacionesDeHostal(){//pr
     return obtenerCalificacionesYComentarios(nombre);
 }
 
-void ControladorHostal::mostrarHabitacion(DTHabitacion* habitacion){
-    cout << habitacion->getNumero() << endl;
-    cout << habitacion->getPrecio() << endl;
-    cout << habitacion->getCapacidad() << endl;
-}
-
 map<int,DTReserva*> ControladorHostal::obtenerReservasDeHostal(){
     map<int,DTReserva*> reservas;
     hostal* h= obtenerHostal(datosHostal);

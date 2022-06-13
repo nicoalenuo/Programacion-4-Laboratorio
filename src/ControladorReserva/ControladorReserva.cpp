@@ -46,9 +46,11 @@ void ControladorReserva::finalizarEstadiaActiva(string emailHuesped, string nomb
             return a;
         }
         void ControladorReserva::confirmarBaja(DTHostal*, int){}
-int ControladorReserva::obtenerNumeroDeHabitacion(DTHabitacion* dth){
+
+int ControladorReserva::obtenerNumeroDeHabitacion(DTHabitacion* dth){ //dth es asociado a una reserva
     return dth->getNumero();
 }
+
 void ControladorReserva::obtenerNombresDeReserva(DTReservaGrupal* dtrg){
     map<int,reserva*>::iterator it= reservas.find(dtrg->getCodigo());
     //como siempre es grupal
@@ -59,17 +61,4 @@ void ControladorReserva::obtenerNombresDeReserva(DTReservaGrupal* dtrg){
         map<int,DTEstadia*> ControladorReserva::obtenerEstadiaHuesped(string){
             map<int,DTEstadia*> a;
             return a;
-        }
-
-void ControladorReserva::mostrarReserva(DTReserva* dtr){
-    cout << dtr->getCodigo() << endl;
-    cout << dtr->getCheckIn().getDia() << endl;
-    cout << dtr->getCheckIn().getMes() << endl;
-    cout << dtr->getCheckIn().getAnio() << endl;
-    cout << dtr->getCheckOut().getDia() << endl;
-    cout << dtr->getCheckOut().getMes() << endl;
-    cout << dtr->getCheckOut().getAnio() << endl;
-    cout << dtr->getEstado() << endl;
-    cout << dtr->getCosto() << endl;
-}
-        
+        }        

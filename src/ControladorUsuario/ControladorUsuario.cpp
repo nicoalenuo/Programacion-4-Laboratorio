@@ -108,12 +108,14 @@ void ControladorUsuario::AsignarEmpleadoAHostal(string emailEmpleado){
     void ControladorUsuario::cancelarAltaUsuario(){}
     void ControladorUsuario::confirmarAltaUsuario(){}
     
-void ControladorUsuario::obtenerNombreUsuario(DTUsuario* dtu){
-    cout << dtu->getNombre() << endl;
+string ControladorUsuario::obtenerNombreUsuario(DTUsuario* dtu){
+    return dtu->getNombre();
 }
-void ControladorUsuario::obtenerEmailUsuario(DTUsuario* dtu){
-    cout << dtu->getMail() << endl;
+
+string ControladorUsuario::obtenerEmailUsuario(DTUsuario* dtu){
+    return dtu->getMail();
 }
+
 void ControladorUsuario::liberarUsuario(){
     if(datosUsuario!=NULL){
         delete datosUsuario;

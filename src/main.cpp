@@ -21,4 +21,27 @@ int main(){
     cout << datos->getDireccion() << endl;
     cout << datos->getTelefono() << endl; 
     cout << datos->getCalificacionPromedio() << endl;
+
+    //mostrarHabitacion()
+    DTHabitacion* habitacion;
+    /*De alguna forma que no voy a indagar aún
+    se obtiene la habitacion asociada a la reserva elegida*/
+    cout << habitacion->getNumero() << endl;
+    cout << habitacion->getPrecio() << endl;
+    cout << habitacion->getCapacidad() << endl;
+
+    //mostrarReserva()
+    DTReserva* dtr;
+    /*De alguna forma que no voy a indagar aún
+    se obtiene para toda reserva, del hostal en memoria*/
+    cout << dtr->getCodigo() << endl;
+    cout << dtr->getCheckIn().getDia() << endl;
+    cout << dtr->getCheckIn().getMes() << endl;
+    cout << dtr->getCheckIn().getAnio() << endl;
+    cout << dtr->getCheckOut().getDia() << endl;
+    cout << dtr->getCheckOut().getMes() << endl;
+    cout << dtr->getCheckOut().getAnio() << endl;
+    cout << dtr->getEstado() << endl;
+    cout << dtr->getCosto() << endl;
+
 }

@@ -35,7 +35,6 @@ class ControladorReserva:public IControladorReserva {
         map<int,DTReserva*> ListarReservasNoCanceladasDeHuesped(DTHostal*, string);
         void confirmarBaja(DTHostal*, int);
         void finalizarEstadiaActiva(string, string);
-        void mostrarReserva(DTReserva*);
         int obtenerNumeroDeHabitacion(DTHabitacion*);
         void obtenerNombresDeReserva(DTReservaGrupal*); //////////////////////////////////////////////
         map<int,DTEstadia*> obtenerEstadiaHuesped(string);

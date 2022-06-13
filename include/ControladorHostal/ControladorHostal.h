@@ -41,7 +41,6 @@ class ControladorHostal:public IControladorHostal {
         void cancelarFinalizarEstadiaActiva();
         float obtenerPromCalificacionesDeHostal();
         map<int,DTCalificacion*> obtenerCalificacionesDeHostal();
-        void mostrarHabitacion(DTHabitacion*);
         map<int,DTReserva*> obtenerReservasDeHostal();
         void liberarHostal();
         map<int,DTEstadia*> obtenerEstadiasDeHostal();
