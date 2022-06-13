@@ -25,8 +25,8 @@ DTReserva* huespedGrupal::obtenerReserva(){//cambiar por huesped
 }
 void huespedGrupal::DarBaja(){
 }
-bool huespedGrupal::tieneEstFinalizadaDeHus(string){
-    return false;
+bool huespedGrupal::tieneEstFinalizadaDeHus(string email){
+    return (email == (*this).huespedAsoc->getEmail()) ? !(*this).estadiaAsoc->estaActiva():false;
 }
 bool huespedGrupal::esDeHuesped(string){
     return false;

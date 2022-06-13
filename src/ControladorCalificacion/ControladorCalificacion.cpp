@@ -41,11 +41,17 @@ void ControladorCalificacion::notificarSuscriptos(string nombreAutor,int puntuac
             map<int,DTCalificacion*> a;
             return a;
         }
-        void ControladorCalificacion::ingresarComentario(string){}
+void ControladorCalificacion::ingresarComentario(string coment){//repetida, se le cambio el nombre pero no se elimino
+
+}
         void ControladorCalificacion::liberarEstadia(){};
         void ControladorCalificacion::eliminarCalificacion(){}
         void ControladorCalificacion::RegistrarEstadia(DTHostal*, string, DTReserva*, DTEstadia*){}
-        void ControladorCalificacion::ingresarRespuesta(string){}
+void ControladorCalificacion::ingresarRespuesta(string resp, DTCalificacion* tcl){
+    map<int,calificacion*>::iterator aux = (*this).calificaciones.find(tcl->getId());
+    calificacion* aux2 = (*aux).second;
+    
+}
         float ControladorCalificacion::obtenerPromocionDeEstadia(){return 1;}
         int ControladorCalificacion::obtenerCodigoDeEstadia(){return 1;}
         DTCalificacion* ControladorCalificacion::obtenerCalificacionDeEstadia(){return NULL;}

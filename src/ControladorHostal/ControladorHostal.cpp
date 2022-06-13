@@ -95,7 +95,10 @@ void ControladorHostal::IngresarDatosHostal(DTHostal* dth){
     datosHostal=dth;
 }
 
-        hostal* ControladorHostal::obtenerHostal(DTHostal*){return NULL;}
+hostal* ControladorHostal::obtenerHostal(DTHostal* dth){
+    
+    return NULL;
+}
         void ControladorHostal::confirmarAltaHostal(){}
         void ControladorHostal::cancelarAltaHostal(){}
         void ControladorHostal::liberarDatosHostal(){}
@@ -125,7 +128,16 @@ void ControladorHostal::IngresarDatosHostal(DTHostal* dth){
         DTEstadia* ControladorHostal::obtenerDatosEstadia(){return NULL;}
         DTReserva* ControladorHostal::obtenerReservaDeEstadia(){return NULL;}
         void ControladorHostal::liberarHostalEstadia(){}
-        map<int,DTCalificacion*> ControladorHostal::obtenerCalificaciones(string){
-            map<int,DTCalificacion*> a;
-            return a;
+map<int,DTCalificacion*> ControladorHostal::obtenerCalificaciones(string empleado){
+    map<int,DTCalificacion*> send;
+    int aux = 1;
+    for(map<string,hostal*>::iterator it = (*this).hostales.begin(); it != (*this).hostales.end(); ++it){
+        if(it->second->trabajaEmpleado(empleado)){
+            
+            aux++;
         }
+    }
+
+    
+    return send;
+}

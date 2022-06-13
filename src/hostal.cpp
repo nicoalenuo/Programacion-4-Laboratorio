@@ -59,3 +59,13 @@ bool hostal::tieneHab(int nHab){
 bool hostal::trabajaEmpleado(string emailEmpleado){
     return empleados.find(emailEmpleado)!=empleados.end(); 
 }
+map<int,DTCalificacion*> hostal::obtenerCalifSinCom(){
+    map<int,DTCalificacion*> send;
+    for(map<int,calificacion*>::iterator it=(*this).calificaciones.begin(); it !=(*this).calificaciones.end(); ++it){
+        if(it->second->sinRespuesta()){
+            DTCalificacion* in = (*(*it).second).darDatos();
+            send.insert(pair<int,DTCalificacion*>((*it).first,in));
+        }
+    }
+    return send;
+}

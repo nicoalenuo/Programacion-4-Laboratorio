@@ -27,8 +27,8 @@ DTReserva* huespedIndividual::obtenerReserva(){//cambiar reserva por huesped
 }
 void huespedIndividual::DarBaja(){
 }
-bool huespedIndividual::tieneEstFinalizadaDeHus(string){
-    return false;
+bool huespedIndividual::tieneEstFinalizadaDeHus(string email){
+    return (email == (*this).huespedAsoc->getEmail()) ? !(*this).estadiaAsoc->estaActiva():false;
 }
 bool huespedIndividual::esDeHuesped(string){
     return false;
