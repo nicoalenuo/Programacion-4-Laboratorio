@@ -5,6 +5,7 @@
 #include "../estadia.h"
 //Cosas que agregue
 #include "../DTyEnum/DTEstadia.h"
+#include "../DTyEnum/DTHuesped.h"
 #include "../DTyEnum/DTDatosEstadia.h"
 
 #include <iostream>
@@ -36,7 +37,9 @@ class huespedGrupal{
         DTEstadia* obtenerEstadia();
         void DarBaja();
         bool tieneEstFinalizadaDeHus(string);
-        bool esDeHuesped(string);                                                                                                                                                                          
+        bool esDeHuesped(string);  
+        bool tieneEstadia(DTEstadia*);
+        DTHuesped* darDatosHuesped();                                                                                                                                                                        
 };
 
 #endif

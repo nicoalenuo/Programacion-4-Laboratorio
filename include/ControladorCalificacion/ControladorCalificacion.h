@@ -14,7 +14,9 @@ class ControladorCalificacion:public IControladorCalificacion {
         map<string,IObserver*> observers;
         map<int,estadia*> estadias;
 
+        DTCalificacion* datosCalificacion;
         DTEstadia* datosEstadia;
+
         static ControladorCalificacion* instancia;
         ControladorCalificacion();
 
@@ -22,8 +24,6 @@ class ControladorCalificacion:public IControladorCalificacion {
     public:
         static ControladorCalificacion* getInstance();
         ~ControladorCalificacion(); //AGREGADO
-        DTEstadia* getDatosEstadia();
-        void setDatosEstadia(DTEstadia* datosEstadia);
         void eliminarSuscripto(empleado*);
         map<int,DTEstadia*> obtenerEstadiasHuesped(string);
         void agregarCalificacion(string,int);
@@ -32,7 +32,7 @@ class ControladorCalificacion:public IControladorCalificacion {
         void liberarEstadia();
         void eliminarCalificacion();
         void RegistrarEstadia(DTHostal*, string, DTReserva*, DTEstadia*);
-        void ingresarRespuesta(string);
+        void ingresarRespuesta(string, DTCalificacion*);
         float obtenerPromocionDeEstadia();
         int obtenerCodigoDeEstadia();
         DTCalificacion* obtenerCalificacionDeEstadia();
@@ -43,6 +43,12 @@ class ControladorCalificacion:public IControladorCalificacion {
         }
         void agregarEstadiaAMap(estadia * e){
             estadias.insert(pair<int,estadia*>((*e).getCodigo(), e));
+        }
+        DTEstadia* getDatosEstadia(){
+            return datosEstadia;
+        }
+        void setDatosEstadia(DTEstadia* dte){
+            datosEstadia=dte;
         }
         
 };

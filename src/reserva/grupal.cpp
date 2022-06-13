@@ -38,8 +38,29 @@ map<int,DTEstadia*> grupal::obtenerEstadias(){
         return e;
 }
 
-bool grupal::tieneEstadia(){
+bool grupal::tieneEstadia(DTEstadia* dte){
     bool encontrado=false;
-    
+    set<huespedGrupal*>::iterator it;
+    for (it=huesGrup.begin() ; it!=huesGrup.end() ; it++){
+        encontrado = (*(*it)).tieneEstadia(dte);
+    }
+
     return encontrado;
+}
+
+DTHuesped* grupal::darHuespedConEstadia(DTEstadia* dte){
+    set<huespedGrupal*>::iterator it=huesGrup.begin();
+    bool encontrado=false;
+    while (!encontrado){
+        (*(*it)).tieneEstadia(dte);
+        if (!encontrado)
+            it++;
+    }
+    DTHuesped* h = (*(*it)).darDatosHuesped();
+    return h;
+}
+
+DTHabitacion* grupal::darDatosHabitacion(){
+    DTHabitacion* hab = (*habitacionAsoc).darDatos();
+    return hab;
 }

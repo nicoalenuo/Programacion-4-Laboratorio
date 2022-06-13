@@ -22,3 +22,20 @@ map<int,DTEstadia*> individual::obtenerEstadias(){
         }
         return e;
 }
+
+bool individual::tieneEstadia(DTEstadia* dte){
+    bool encontrado=false;
+    encontrado = (*huesInd).tieneEstadia(dte);
+
+    return encontrado;
+}
+
+DTHuesped* individual::darHuespedConEstadia(DTEstadia* dte){
+    DTHuesped* huesped = (*huesInd).darDatosHuesped();
+    return huesped;
+}
+
+DTHabitacion* individual::darDatosHabitacion(){
+    DTHabitacion* hab = (*habitacionAsoc).darDatos();
+    return hab;
+}

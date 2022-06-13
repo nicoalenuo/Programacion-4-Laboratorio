@@ -18,3 +18,12 @@ DTEstadia* huespedIndividual::obtenerEstadia(){
     }
     return pDTe;
 }
+
+bool huespedIndividual::tieneEstadia(DTEstadia* dte){
+    return (*estadiaAsoc).getCodigo() == (*dte).getCodigo();
+}
+
+DTHuesped* huespedIndividual::darDatosHuesped(){
+    DTHuesped* resultado = new DTHuesped((*huespedAsoc).getNombre() , (*huespedAsoc).getEmail() , (*huespedAsoc).getPassword() , (*huespedAsoc).getEsFinger());
+    return resultado;
+}
