@@ -59,8 +59,7 @@ class individual:public reserva{
         string getTipoReserva();
         void darBajaReserva();
         map<int, DTEstadia*> obtenerEstadias();
-        DTEstadia* obtenerEstadia();
-        DTReserva* obtenerResrvaDeEst();
+        bool tieneEstadia();
         bool tieneEstadiaFinalizadaDeHuesped(string);
         DTEstadia* darEstadiaDeHuesped(string);
 

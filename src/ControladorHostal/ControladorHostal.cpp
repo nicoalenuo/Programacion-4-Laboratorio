@@ -145,7 +145,6 @@ map<int,DTEstadia*> ControladorHostal::obtenerEstadiasDeHostal(){
     return dte;
 }
 
-        DTEstadia* ControladorHostal::obtenerDatosEstadia(){return NULL;}
         DTReserva* ControladorHostal::obtenerReservaDeEstadia(){return NULL;}
         void ControladorHostal::liberarHostalEstadia(){}
         map<int,DTCalificacion*> ControladorHostal::obtenerCalificaciones(string){

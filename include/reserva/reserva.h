@@ -41,8 +41,7 @@ class reserva{
         virtual string getTipoReserva()=0;
         virtual void darBajaReserva()=0;
         virtual map<int, DTEstadia*> obtenerEstadias()=0;
-        virtual DTEstadia* obtenerEstadia()=0;
-        virtual DTReserva* obtenerResrvaDeEst()=0;
+        virtual bool tieneEstadia()=0;
         virtual bool tieneEstadiaFinalizadaDeHuesped(string)=0;
         virtual DTEstadia* darEstadiaDeHuesped(string)=0;
 };

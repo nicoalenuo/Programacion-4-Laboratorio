@@ -10,6 +10,14 @@ ControladorCalificacion::ControladorCalificacion(){
     estadias={};
 }
 
+DTEstadia* ControladorCalificacion::getDatosEstadia(){
+    return (*this).datosEstadia;
+}
+
+void ControladorCalificacion::setDatosEstadia(DTEstadia* datosEstadia){
+    (*this).datosEstadia= datosEstadia;
+}
+
 ControladorCalificacion* ControladorCalificacion::getInstance(){
     if (instancia == NULL)
         instancia = new ControladorCalificacion();

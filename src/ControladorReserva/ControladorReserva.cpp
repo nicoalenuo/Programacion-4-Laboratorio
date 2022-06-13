@@ -62,3 +62,24 @@ void ControladorReserva::obtenerNombresDeReserva(DTReservaGrupal* dtrg){
             map<int,DTEstadia*> a;
             return a;
         }        
+
+DTDatosEstadia* ControladorReserva::obtenerDatosEstadia(){//Existe DTHostal y DTEstadia en memoria
+    fabrica* f= fabrica::getInstance();
+    IControladorCalificacion* icc= (*f).getIControladorCalificacion();
+    DTEstadia* dte= (*icc).getDatosEstadia();
+    IControladorHostal* ich= (*f).getIControladorHostal();
+    DTHostal* dthostal= (*ich).getDatosHostal();
+    
+    map<int,reserva*>::iterator itr;
+    reserva* r= (*this).obtenerReservaDeEstadia(dte);
+}
+
+reserva* ControladorReserva::obtenerReservaDeEstadia(DTEstadia* dte){
+    reserva* r;
+    bool encontrado= false; 
+    map<int,reserva*>::iterator it= reservas.begin();
+    while(encontrado != false){
+        encontrado= (*it).second->tieneEstadia();
+    }
+    return r;
+}

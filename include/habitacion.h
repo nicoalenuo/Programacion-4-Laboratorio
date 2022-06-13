@@ -50,8 +50,6 @@ class habitacion{
         bool perteneceAHostal(DTHostal*);
         map<int, DTReserva*> obtenerReservas();
         map<int, DTEstadia*> obtenerEstadias();
-        DTDatosEstadia* obtenerDatos();
-        DTReserva* obtenerReservaDeEstadia();
         void agregarReservaAMap(reserva * );
 };    
 

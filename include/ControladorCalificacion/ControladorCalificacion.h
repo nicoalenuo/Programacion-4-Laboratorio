@@ -14,6 +14,7 @@ class ControladorCalificacion:public IControladorCalificacion {
         map<string,IObserver*> observers;
         map<int,estadia*> estadias;
 
+        DTEstadia* datosEstadia;
         static ControladorCalificacion* instancia;
         ControladorCalificacion();
 
@@ -21,6 +22,8 @@ class ControladorCalificacion:public IControladorCalificacion {
     public:
         static ControladorCalificacion* getInstance();
         ~ControladorCalificacion(); //AGREGADO
+        DTEstadia* getDatosEstadia();
+        void setDatosEstadia(DTEstadia* datosEstadia);
         void eliminarSuscripto(empleado*);
         map<int,DTEstadia*> obtenerEstadiasHuesped(string);
         void agregarCalificacion(string,int);

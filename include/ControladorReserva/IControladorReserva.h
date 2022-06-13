@@ -37,6 +37,8 @@ class IControladorReserva{
         virtual void finalizarEstadiaActiva(string, string)=0;
         virtual int obtenerNumeroDeHabitacion(DTHabitacion*)=0;
         virtual void obtenerNombresDeReserva(DTReservaGrupal*)=0;
+        virtual DTDatosEstadia* obtenerDatosEstadia()=0;
+        virtual reserva* obtenerReservaDeEstadia(DTEstadia*)=0;
         virtual map<int,DTEstadia*> obtenerEstadiaHuesped(string)=0;
         virtual void agregarReservaAMap(reserva * r)=0;
 };

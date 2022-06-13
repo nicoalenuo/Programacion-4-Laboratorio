@@ -6,6 +6,7 @@
 #include "../DTyEnum/DTHabitacion.h"
 #include "../DTyEnum/DTCalificacion.h"
 #include "../DTyEnum/DTEstadia.h"
+#include "../DTyEnum/DTDatosEstadia.h"
 #include "../DTyEnum/DTEmpleado.h"
 #include "../usuario/empleado.h"
 #include "../hostal.h"
@@ -42,7 +43,6 @@ class IControladorHostal {
         virtual map<int,DTReserva*> obtenerReservasDeHostal()=0;
         virtual void liberarHostal()=0;
         virtual map<int,DTEstadia*> obtenerEstadiasDeHostal()=0;
-        virtual DTEstadia* obtenerDatosEstadia()=0;
         virtual DTReserva* obtenerReservaDeEstadia()=0;
         virtual void liberarHostalEstadia()=0;
         virtual map<int,DTCalificacion*> obtenerCalificaciones(string)=0;

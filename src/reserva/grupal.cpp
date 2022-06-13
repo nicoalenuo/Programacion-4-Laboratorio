@@ -31,7 +31,15 @@ map<int,DTEstadia*> grupal::obtenerEstadias(){
         set<huespedGrupal*>::iterator ithg;
         for(ithg= huesGrup.begin(); ithg!=huesGrup.end();ithg++){
                 aux = (*ithg)->obtenerEstadia();
-                e.insert(pair<int,DTEstadia*>((*aux).getCodigo(),aux));
+                if(aux!=NULL){
+                    e.insert(pair<int,DTEstadia*>((*aux).getCodigo(),aux));
+                }
         }       
         return e;
+}
+
+bool grupal::tieneEstadia(){
+    bool encontrado=false;
+    
+    return encontrado;
 }
