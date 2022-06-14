@@ -32,3 +32,5 @@ DTHuesped* huespedGrupal::darDatosHuesped(){
     DTHuesped* resultado = new DTHuesped((*huespedAsoc).getNombre() , (*huespedAsoc).getEmail() , (*huespedAsoc).getPassword() , (*huespedAsoc).getEsFinger());
     return resultado;
 }
+
+void huespedGrupal::darBaja(){}

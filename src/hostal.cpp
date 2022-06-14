@@ -91,3 +91,8 @@ map<int,DTEstadia*> hostal:: obtenerEstadias(){
     }
     return habEst;
 }
+
+map<int,DTReserva*> hostal::obtenerReservas(){
+    map<int,DTReserva*> a;
+    return a;
+};

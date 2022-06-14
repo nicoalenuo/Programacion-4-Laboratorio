@@ -125,6 +125,15 @@ map<int,DTEstadia*> ControladorHostal::obtenerEstadiasDeHostal(){
     return dte;
 }
 
+map<int,DTReserva*> ControladorHostal::ListarReservas(DTHostal* Hos){
+    map<int,DTReserva*> Resultado;
+    hostal* ho = (*hostales.find(Hos->getNombre())).second;
+    Resultado = (*ho).obtenerReservas();// PREGUNTAR A JULIO SI LO PROGRAMO
+    return Resultado;
+}
+
+///////////////////////////////////
+
         hostal* ControladorHostal::obtenerHostal(DTHostal*){return NULL;}
         void ControladorHostal::confirmarAltaHostal(){}
         void ControladorHostal::cancelarAltaHostal(){}
@@ -132,10 +141,6 @@ map<int,DTEstadia*> ControladorHostal::obtenerEstadiasDeHostal(){
         void ControladorHostal::IngresarDatosHab(DTHabitacion*){}
         void ControladorHostal::cancelarAltaHabitacion(){}
         void ControladorHostal::confirmarAltaHabitacion(){}
-        map<int,DTReserva*> ControladorHostal::ListarReservas(DTHostal*){
-            map<int,DTReserva*> a;
-            return a;
-        }
         string ControladorHostal::mostrarHostal(){return "a";}
         float ControladorHostal::obtenerPromCalificacionesDeHostal(){return 1;}
         map<int,DTCalificacion*> ControladorHostal::obtenerCalificacionesDeHostal(){

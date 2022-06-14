@@ -71,11 +71,14 @@ DTHabitacion* individual::darDatosHabitacion(){
     return hab;
 }
 
+void individual::darBajaReserva(){
+    huespedIndividual* HI = huesInd;
+    HI->darBaja();
+}
+
 /////////////////////////////////////////
 
         DTReservaIndividual* individual::darDatos(){return NULL;}
-        
-        void individual::darBajaReserva(){}
         DTEstadia* individual::obtenerEstadia(){return NULL;}
         DTReserva* individual::obtenerResrvaDeEst(){return NULL;}
         bool individual::tieneEstadiaFinalizadaDeHuesped(string){return 0;}

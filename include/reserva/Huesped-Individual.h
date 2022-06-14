@@ -33,7 +33,7 @@ class huespedIndividual{
         void finalizarEstadiaActiva(string);
         DTEstadia* darDatosEstadia();
         DTReserva* obtenerReserva();
-        void DarBaja();
+        void darBaja();
         DTEstadia* obtenerEstadia();
         bool tieneEstFinalizadaDeHus(string); 
         bool esDeHuesped(string);    

@@ -137,10 +137,15 @@ reserva* ControladorReserva::obtenerReservaDeEstadia(DTEstadia* dte){
     return r;
 }
 
+void ControladorReserva::confirmarBaja(DTHostal* Host, int Codigo){
+    reserva * r = (*reservas.find(Codigo)).second;
+    reservas.erase(Codigo);
+    r->darBajaReserva();
+}
+
 ////////////////////////////////
 
 
-        void ControladorReserva::confirmarBaja(DTHostal*, int){}
         int ControladorReserva::obtenerNumeroDeHabitacion(DTHabitacion*){return 4;}
         map<string,string> ControladorReserva::obtenerNombresDeReserva(DTReservaGrupal*){
             map<string,string> a;
