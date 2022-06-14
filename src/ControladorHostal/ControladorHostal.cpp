@@ -184,13 +184,24 @@ void ControladorHostal::liberarMemoria(){
     }
 }
 
-///////////////////////////////////
+void ControladorHostal::IngresarDatosHab(DTHabitacion* dthab){
+    datosHabitacion = dthab;
+}
 
-        hostal* ControladorHostal::obtenerHostal(DTHostal*){return NULL;}
-        void ControladorHostal::confirmarAltaHostal(){}
-        void ControladorHostal::cancelarAltaHostal(){}
-        void ControladorHostal::IngresarDatosHab(DTHabitacion*){}
-        void ControladorHostal::cancelarAltaHabitacion(){}
-        void ControladorHostal::confirmarAltaHabitacion(){}
-        DTEstadia* ControladorHostal::obtenerDatosEstadia(){return NULL;}
-        DTReserva* ControladorHostal::obtenerReservaDeEstadia(){return NULL;}
+void ControladorHostal::confirmarAltaHostal(){
+    hostal* ph = new hostal(datosHostal->getNombre(), datosHostal->getDireccion(), datosHostal->getTelefono());
+    agregarHostalAMap(ph);
+}
+
+void ControladorHostal::confirmarAltaHabitacion(){
+    habitacion * Phab = new habitacion(datosHabitacion->getNumero(), datosHabitacion->getPrecio(),datosHabitacion->getCapacidad()); ;
+    string hostalElegido = datosHostal->getNombre();
+    hostal* h = (*hostales.find(hostalElegido)).second;
+    h->agregarHabitacionAMap(Phab);
+    agregarHabitacionAMap(Phab);  
+}
+
+hostal* ControladorHostal::obtenerHostal(DTHostal* dth){
+    map<string,hostal*>::iterator it = (*this).hostales.find(dth->getNombre());
+    return it->second;
+}

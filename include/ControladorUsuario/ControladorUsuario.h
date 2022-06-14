@@ -23,12 +23,11 @@ class ControladorUsuario:public IControladorUsuario {
         ControladorUsuario();
     public:
         static ControladorUsuario* getInstance();
-        ~ControladorUsuario(); //AGREGADO
+        ~ControladorUsuario(); 
 
 
         void IngresarDatosUsuario(DTUsuario*);
-        void IngresarEmail(string);
-        void cancelarAltaUsuario();
+        bool IngresarEmail(string);
         void confirmarAltaUsuario();
         DTHuesped* obtenerHuespedConEmail(string);
         DTEmpleado* obtenerEmpleadoConEmail(string);

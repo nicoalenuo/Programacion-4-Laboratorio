@@ -19,12 +19,14 @@ ControladorCalificacion* ControladorCalificacion::getInstance(){
     return instancia;
 }
 
-void ControladorCalificacion::eliminarSuscripto(empleado* e){
+void ControladorCalificacion::eliminarSuscripto(IObserver* o){
+    empleado* e = static_cast<empleado*>(o);
     observers.erase((*e).getEmail());
 }
 
-void ControladorCalificacion::agregarSuscripto(empleado* e){
-            observers.insert(pair<string,empleado*>((*e).getEmail(),e));
+void ControladorCalificacion::agregarSuscripto(IObserver* o){
+    empleado* e = static_cast<empleado*>(o);
+    observers.insert(pair<string,IObserver*>((*e).getEmail(),o));
 }
 
 void ControladorCalificacion::notificarSuscriptos(string nombreAutor,int puntuacion,string comentario){
@@ -103,6 +105,10 @@ DTCalificacion* ControladorCalificacion::obtenerCalificacionDeEstadia(){
     if (c!=NULL)
         (*dtc) = DTCalificacion(c->getId(),c->getPuntuacion(),c->getComentario(),c->getFecha());
     return dtc;
+}
+
+void ControladorCalificacion::quitarEstadia(int codigo){
+    estadias.erase(codigo);
 }
 
 DTRespuesta* ControladorCalificacion::obtenerRespuesta(DTCalificacion* c){

@@ -1,4 +1,5 @@
 #include "../../include/ControladorUsuario/ControladorUsuario.h"
+#include "../../include/usuario/empleado.h"
 #include "../../include/fabrica.h"
 
 ControladorUsuario* ControladorUsuario::instancia = NULL;
@@ -135,9 +136,20 @@ void ControladorUsuario::liberarMemoria(){
     }
 }
 
+bool ControladorUsuario::IngresarEmail(string email){ //devuelve true si el mail se ingresó
+    return empleados.find(email)!=empleados.end() && huespedes.find(email)!=huespedes.end(); 
+}
 
-
-        void ControladorUsuario::IngresarEmail(string){}
-        void ControladorUsuario::cancelarAltaUsuario(){}
-        void ControladorUsuario::confirmarAltaUsuario(){}
-        DTUsuario* ControladorUsuario::devolverDatos(){return NULL;}
+void ControladorUsuario::confirmarAltaUsuario(){
+    DTEmpleado* de = dynamic_cast<DTEmpleado*>(datosUsuario);
+    if(de!=NULL){
+        empleado* Pe = new empleado(de->getNombre(),de->getEmail(),de->getPassword(),de->getTipoCargo());
+        agregarEmpleadoAMap(Pe);
+    }else{
+        DTHuesped * dh = dynamic_cast<DTHuesped*>(datosUsuario); 
+        huesped* Ph = new huesped(dh->getNombre(), dh->getEmail(), dh->getPassword(),dh->getEsFinger());;
+        agregarHuespedAMap(Ph);
+    }
+}
+        
+DTUsuario* ControladorUsuario::devolverDatos(){return NULL;}

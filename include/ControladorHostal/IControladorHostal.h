@@ -26,10 +26,8 @@ class IControladorHostal {
         virtual map<string,DTEmpleado*> quitarAsignados(map<string,DTEmpleado*>)=0;
         virtual void IngresarDatosHostal(DTHostal*)=0;
         virtual void confirmarAltaHostal()=0;
-        virtual void cancelarAltaHostal()=0;
         virtual map<string,DTHostal*> obtenerHostales()=0;
         virtual void IngresarDatosHab(DTHabitacion*)=0;
-        virtual void cancelarAltaHabitacion()=0;
         virtual void confirmarAltaHabitacion()=0;
         virtual map<int,DTReserva*> ListarReservas(DTHostal*)=0;
         virtual void FinalizarAsignacionDeEmpleados()=0;
@@ -40,8 +38,6 @@ class IControladorHostal {
         virtual map<int,DTReserva*> obtenerReservasDeHostal()=0;
         virtual void liberarMemoria()=0;
         virtual map<int,DTEstadia*> obtenerEstadiasDeHostal()=0;
-        virtual DTEstadia* obtenerDatosEstadia()=0;
-        virtual DTReserva* obtenerReservaDeEstadia()=0;
         virtual map<int,DTCalificacion*> obtenerCalificaciones(string)=0;
         virtual map<string,hostal*> getHostales()=0;
         virtual void agregarHostalAMap(hostal*)=0;

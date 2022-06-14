@@ -29,11 +29,9 @@ class ControladorHostal:public IControladorHostal {
         map<string,DTEmpleado*> quitarAsignados(map<string,DTEmpleado*>);
         void IngresarDatosHostal(DTHostal*);
         void confirmarAltaHostal();
-        void cancelarAltaHostal();
         void liberarMemoria();
         map<string,DTHostal*> obtenerHostales();
         void IngresarDatosHab(DTHabitacion*);
-        void cancelarAltaHabitacion();
         void confirmarAltaHabitacion();
         map<int,DTReserva*> ListarReservas(DTHostal*);
         void FinalizarAsignacionDeEmpleados();
@@ -43,8 +41,6 @@ class ControladorHostal:public IControladorHostal {
         map<int,DTCalificacion*> obtenerCalificacionesDeHostal();
         map<int,DTReserva*> obtenerReservasDeHostal();
         map<int,DTEstadia*> obtenerEstadiasDeHostal();
-        DTEstadia* obtenerDatosEstadia();
-        DTReserva* obtenerReservaDeEstadia();
         map<int,DTCalificacion*> obtenerCalificaciones(string);
         void quitarCalificacionDeHostal(int);
         map<string,hostal*> getHostales(){

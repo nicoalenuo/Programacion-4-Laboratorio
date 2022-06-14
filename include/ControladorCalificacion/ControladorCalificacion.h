@@ -39,7 +39,8 @@ class ControladorCalificacion:public IControladorCalificacion {
         void setDatosEstadia(DTEstadia* dte){
             datosEstadia=dte;
         }
-        void eliminarSuscripto(empleado*);
+        void eliminarSuscripto(IObserver*);
+        void agregarSuscripto(IObserver*);
         void eliminarCalificacion(int);
         map<int,DTEstadia*> obtenerEstadiasHuesped(string);
         void agregarCalificacion(string,string,int);
@@ -50,9 +51,9 @@ class ControladorCalificacion:public IControladorCalificacion {
         void ingresarRespuesta(string,DTCalificacion*);
         float obtenerPromocionDeEstadia();
         int obtenerCodigoDeEstadia();
+        void quitarEstadia(int);
         DTCalificacion* obtenerCalificacionDeEstadia();
         DTRespuesta* obtenerRespuesta(DTCalificacion*);
-        void agregarSuscripto(empleado*);
         void agregarCalificacionAMap(calificacion* c){
             calificaciones.insert(pair<int,calificacion*>((*c).getId(),c));
         }

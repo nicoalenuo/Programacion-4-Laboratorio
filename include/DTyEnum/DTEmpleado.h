@@ -37,7 +37,7 @@ class DTEmpleado:public DTUsuario {
         void setPassword(string password) {
             (*this).password = password;
         }
-        int getTipoCargo(){
+        Cargo getTipoCargo(){
             return (*this).TipoCargo;
         }
         void setTipoCargo(Cargo c){

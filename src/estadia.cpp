@@ -1,4 +1,5 @@
 #include "../include/estadia.h"
+#include "../include/fabrica.h"
 #include "../include/FechaSistema.h"
 
 estadia::estadia(DTEstadia* est){
@@ -30,12 +31,15 @@ DTEstadia* estadia::darDatos(){
 }
 
 void estadia::eliminarEstadia(){
+    fabrica* f = fabrica::getInstance();
+    IControladorCalificacion* icc = (*f).getIControladorCalificacion();
     calificacion* c = calificacionAsoc;
     if(c!= NULL){
         c->eliminarCalificacion();
         delete calificacionAsoc;
         c= NULL;
     }
+    (*icc).quitarEstadia(codigo);
 }
 
 estadia::~estadia(){

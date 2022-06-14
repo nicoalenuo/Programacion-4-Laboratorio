@@ -23,8 +23,7 @@ class IControladorUsuario {
     public:
         virtual ~IControladorUsuario()=0; //CAMBIADO
         virtual void IngresarDatosUsuario(DTUsuario*)=0;
-        virtual void IngresarEmail(string)=0;
-        virtual void cancelarAltaUsuario()=0;
+        virtual bool IngresarEmail(string)=0;
         virtual void confirmarAltaUsuario()=0;
         virtual DTHuesped* obtenerHuespedConEmail(string)=0;
         virtual DTEmpleado* obtenerEmpleadoConEmail(string)=0;
