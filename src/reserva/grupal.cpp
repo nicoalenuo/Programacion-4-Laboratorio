@@ -46,7 +46,7 @@ DTEstadia* grupal::darEstadiaDeHuesped(string email){
         set<huespedGrupal*>::iterator it = huesGrup.begin();
         while(aux != true && it != huesGrup.end()){
             if((*it)->esDeHuesped(email)){
-                send = darEstadiaDeHuesped(email);
+                send = (*it)->darDatosEstadia();
                 aux = true;
             }
             ++it;
