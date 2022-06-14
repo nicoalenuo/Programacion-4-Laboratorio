@@ -29,7 +29,7 @@ class ControladorHostal:public IControladorHostal {
         void IngresarDatosHostal(DTHostal*);
         void confirmarAltaHostal();
         void cancelarAltaHostal();
-        void liberarDatosHostal();
+        void liberarMemoria();
         map<string,DTHostal*> obtenerHostales();
         void IngresarDatosHab(DTHabitacion*);
         void cancelarAltaHabitacion();
@@ -44,11 +44,9 @@ class ControladorHostal:public IControladorHostal {
         map<int,DTCalificacion*> obtenerCalificacionesDeHostal();
         void mostrarHabitacion(DTHabitacion*);
         map<int,DTReserva*> obtenerReservasDeHostal();
-        void liberarHostal();
         map<int,DTEstadia*> obtenerEstadiasDeHostal();
         DTEstadia* obtenerDatosEstadia();
         DTReserva* obtenerReservaDeEstadia();
-        void liberarHostalEstadia();
         map<int,DTCalificacion*> obtenerCalificaciones(string);
         //Cosas que agregue
         map<string,hostal*> getHostales(){
@@ -64,6 +62,15 @@ class ControladorHostal:public IControladorHostal {
         hostal* DarHostalDeHabitacion(habitacion*);
         DTHostal* getDatosHostal(){
             return datosHostal;
+        }
+        DTHabitacion* getDatosHabitacion(){
+            return datosHabitacion;
+        }
+        void setDatosHostal(DTHostal* h){
+            datosHostal=h;
+        }
+        void setDatosHabitacion(DTHabitacion* h){
+            datosHabitacion=h;
         }
 };  
 

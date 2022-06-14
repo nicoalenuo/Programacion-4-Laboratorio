@@ -18,8 +18,6 @@ class ControladorCalificacion:public IControladorCalificacion {
 
         DTCalificacion* datosCalificacion;
         DTEstadia* datosEstadia;
-        DTHostal* huesMemory;
-        DTEstadia* estMemory;
 
         static ControladorCalificacion* instancia;
         ControladorCalificacion();
@@ -44,7 +42,7 @@ class ControladorCalificacion:public IControladorCalificacion {
         map<int,DTEstadia*> obtenerEstadiasHuesped(string);
         void agregarCalificacion(string,string,int);
         map<int,DTCalificacion*> obtenerCalificaciones(string);
-        void liberarEstadia();
+        void liberarMemoria();
         void eliminarCalificacion();
         void RegistrarEstadia(DTHostal*, string, DTReserva*, DTEstadia*);
         void ingresarRespuesta(string,DTCalificacion*);

@@ -40,7 +40,7 @@ class ControladorUsuario:public IControladorUsuario {
         map<string,DTHuesped*> obtenerHuespedes();
         void AsignarEmpleadoAHostal(string);
         map<string,DTUsuario*> obtenerUsuarios();
-        void liberarUsuario();
+        void liberarMemoria();
         void suscribirEmpleado(string);
         //Cosas que agregue
         void desuscribirEmpleado(string);

@@ -56,7 +56,6 @@ class individual:public reserva{
         DTReservaIndividual* darDatos();
         void finalizarSiEsReservaBuscada(string, string);
         bool perteneceHusped(string);
-        string getTipoReserva();
         void darBajaReserva();
         map<int, DTEstadia*> obtenerEstadias();
         DTEstadia* obtenerEstadia();

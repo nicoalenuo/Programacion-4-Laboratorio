@@ -27,9 +27,7 @@ class IControladorReserva{
         //AQUI DECIA OTRA VEZ FINALIZAR ESTADIA ACTIVA
         virtual void ingresarDatosReserva(DTHostal*, Date, Date)=0;
         virtual map<int,DTHabitacion*> obtenerHabitacionesDisponibles()=0;
-        virtual void EscogerHabitacion(DTHabitacion*)=0;
         virtual void IngresarHuespedEnReserva(DTHuesped*)=0;
-        virtual void CancelarReserva()=0;
         virtual void confirmarReserva()=0; 
         virtual void DesignarPropietarioDeReserva(DTHuesped*)=0;
         virtual map<int,DTReserva*> ListarReservasNoCanceladasDeHuesped(DTHostal*, string)=0;
@@ -43,6 +41,7 @@ class IControladorReserva{
         virtual reserva* getReserva(DTReserva*)=0;
         virtual reserva* obtenerReservaDeEstadia(DTEstadia*)=0;
         virtual DTDatosEstadia* obtenerDatosEstadia()=0;
+        virtual void liberarMemoria()=0;
 };
 
 #endif

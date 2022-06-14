@@ -64,7 +64,6 @@ class grupal:public reserva{
         DTReservaGrupal* darDatos();
         void finalizarSiEsReservaBuscada(string, string);
         bool perteneceHusped(string);
-        string getTipoReserva();
         void darBajaReserva();
         map<int, DTEstadia*> obtenerEstadias();
         DTEstadia* obtenerEstadia();

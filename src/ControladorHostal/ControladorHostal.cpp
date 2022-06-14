@@ -146,12 +146,22 @@ map<int,DTCalificacion*> ControladorHostal::obtenerCalificaciones(string emplead
     return send;
 }
 
+void ControladorHostal::liberarMemoria(){
+    if (datosHostal!=NULL){
+        delete datosHostal;
+        datosHostal=NULL;
+    }
+    if (datosHabitacion!=NULL){
+        delete datosHabitacion;
+        datosHabitacion=NULL;
+    }
+}
+
 ///////////////////////////////////
 
         hostal* ControladorHostal::obtenerHostal(DTHostal*){return NULL;}
         void ControladorHostal::confirmarAltaHostal(){}
         void ControladorHostal::cancelarAltaHostal(){}
-        void ControladorHostal::liberarDatosHostal(){}
         void ControladorHostal::IngresarDatosHab(DTHabitacion*){}
         void ControladorHostal::cancelarAltaHabitacion(){}
         void ControladorHostal::confirmarAltaHabitacion(){}
@@ -166,7 +176,5 @@ map<int,DTCalificacion*> ControladorHostal::obtenerCalificaciones(string emplead
             map<int,DTReserva*> a;
             return a;
         }
-        void ControladorHostal::liberarHostal(){}
         DTEstadia* ControladorHostal::obtenerDatosEstadia(){return NULL;}
         DTReserva* ControladorHostal::obtenerReservaDeEstadia(){return NULL;}
-        void ControladorHostal::liberarHostalEstadia(){}

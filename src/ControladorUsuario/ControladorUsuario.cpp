@@ -102,6 +102,22 @@ void ControladorUsuario::AsignarEmpleadoAHostal(string emailEmpleado){
     (*ch).asignarEmpleadoElegido(e);
 }
 
+void ControladorUsuario::liberarMemoria(){
+    if (datosUsuario!=NULL){
+        delete datosUsuario;
+        datosUsuario=NULL;
+    }
+    if (datosHuesped!=NULL){
+        delete datosHuesped;
+        datosHuesped=NULL;
+    }
+    if (datosEmpleado!=NULL){
+        delete datosEmpleado;
+        datosEmpleado=NULL;
+    }
+}
+
+
 
         void ControladorUsuario::IngresarEmail(string){}
         void ControladorUsuario::cancelarAltaUsuario(){}
@@ -109,7 +125,6 @@ void ControladorUsuario::AsignarEmpleadoAHostal(string emailEmpleado){
         string ControladorUsuario::obtenerNombreUsuario(DTUsuario*){return "a";}
         string ControladorUsuario::obtenerEmailUsuario(DTUsuario*){return "a";}
         DTUsuario* ControladorUsuario::devolverDatos(){return NULL;}
-        void ControladorUsuario::liberarUsuario(){}
 
 map<string,DTUsuario*> ControladorUsuario::obtenerUsuarios(){
     map<string,DTUsuario*> usuarios={};

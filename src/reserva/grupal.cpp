@@ -46,7 +46,6 @@ bool grupal::perteneceHusped(string email){
     return Resultado;
 }
 
-string grupal::getTipoReserva(){return "Grupal";}
 
 DTHostal* grupal::getDTHostal(){
     habitacion* hab = habitacionAsoc;

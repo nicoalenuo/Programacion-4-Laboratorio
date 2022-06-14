@@ -18,11 +18,8 @@ class ControladorReserva:public IControladorReserva {
         DTReserva* datosReserva;
         DTReservaIndividual* datosIndividual;
         DTReservaGrupal* datosGrupal;
-
-        DTHostal* Hos;
         Date CheckIn;
         Date CheckOut;
-        DTHabitacion* Hab;
         DTHuesped * Propietario;
         map<string,DTHuesped*> SDTH;
 
@@ -36,9 +33,7 @@ class ControladorReserva:public IControladorReserva {
         //AQUI DECIA OTRA VEZ FINALIZAR ESTADIA ACTIVA
         void ingresarDatosReserva(DTHostal*, Date, Date);
         map<int,DTHabitacion*> obtenerHabitacionesDisponibles();
-        void EscogerHabitacion(DTHabitacion*);
         void IngresarHuespedEnReserva(DTHuesped*);
-        void CancelarReserva();
         void confirmarReserva();  
         reserva* getReserva(DTReserva*);
         void DesignarPropietarioDeReserva(DTHuesped*);
@@ -54,6 +49,7 @@ class ControladorReserva:public IControladorReserva {
         void agregarReservaAMap(reserva * r){
             reservas.insert(pair<int,reserva*>((*r).getCodigo(),r));
         }
+        void liberarMemoria();
 };
 
 #endif

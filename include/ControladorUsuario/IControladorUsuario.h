@@ -37,7 +37,7 @@ class IControladorUsuario {
         virtual map<string,DTHuesped*> obtenerHuespedes()=0;
         virtual void AsignarEmpleadoAHostal(string)=0;
         virtual map<string,DTUsuario*> obtenerUsuarios()=0;
-        virtual void liberarUsuario()=0;
+        virtual void liberarMemoria()=0;
         virtual void suscribirEmpleado(string)=0;
         //Cosas que agregue
         virtual void desuscribirEmpleado(string)=0;

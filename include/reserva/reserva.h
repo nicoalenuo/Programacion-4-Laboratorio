@@ -40,7 +40,6 @@ class reserva{
         virtual void setCosto(float)=0;
         virtual void finalizarSiEsReservaBuscada(string, string)=0;
         virtual bool perteneceHusped(string)=0;
-        virtual string getTipoReserva()=0;
         virtual void darBajaReserva()=0;
         virtual map<int, DTEstadia*> obtenerEstadias()=0;
         virtual DTEstadia* obtenerEstadia()=0;

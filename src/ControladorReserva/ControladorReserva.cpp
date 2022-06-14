@@ -28,11 +28,13 @@ void ControladorReserva::finalizarEstadiaActiva(string emailHuesped, string nomb
     for (it=reservas.begin() ; it!=reservas.end() ; it++)
         (*(*it).second).finalizarSiEsReservaBuscada(emailHuesped,nombreHostal);
 
-     (*ch).liberarDatosHostal();
+     (*ch).liberarMemoria();
 }
 
-void ControladorReserva::ingresarDatosReserva(DTHostal* DTHostal, Date CkeckIn, Date CheckOut){
-    (*this).Hos = DTHostal;
+void ControladorReserva::ingresarDatosReserva(DTHostal* hos, Date CkeckIn, Date CheckOut){
+    fabrica* f = fabrica::getInstance();
+    IControladorHostal* ch = (*f).getIControladorHostal();
+    (*ch).setDatosHostal(hos);
     (*this).CheckIn = CkeckIn; 
     (*this).CheckOut = CheckOut; 
 }
@@ -41,30 +43,20 @@ map<int,DTHabitacion*> ControladorReserva::obtenerHabitacionesDisponibles(){
     fabrica* Fab =fabrica::getInstance();
     map<int,DTHabitacion*> Resultado;
     IControladorHostal* CH = (*Fab).getIControladorHostal();
+    DTHostal* Hos = (*CH).getDatosHostal();
     hostal *h = (*CH).obtenerHostal(Hos);
-    Resultado = (*h).obtenerHabitacionesDisponiblesEntre((*this).CheckIn, (*this).CheckOut);/////////////////
+    Resultado = (*h).obtenerHabitacionesDisponiblesEntre((*this).CheckIn, (*this).CheckOut);
     return Resultado;
 }
-
-void ControladorReserva::EscogerHabitacion(DTHabitacion* h){(*this).Hab = h;}
 
 void ControladorReserva::DesignarPropietarioDeReserva(DTHuesped* P){(*this).Propietario = P;}
 
 void ControladorReserva::IngresarHuespedEnReserva(DTHuesped* h){SDTH.insert(pair<string,DTHuesped*>(h->getMail(), h));}
-        
-void ControladorReserva::CancelarReserva(){
-        map<string,DTHuesped*>::iterator it;
-        delete Hos;
-        delete Hab;
-        delete Propietario;
-        for(it = SDTH.begin(); it != SDTH.end();it++){
-            delete (*it).second;
-    }
-}
 
 void ControladorReserva::confirmarReserva(){
     fabrica* Fab =fabrica::getInstance();
     IControladorHostal* CH = Fab->getIControladorHostal();
+    DTHabitacion* Hab = (*CH).getDatosHabitacion();
     habitacion* h = CH->getHab(Hab);
     reserva *Res;
     int CantidadDias = this->CheckIn - this->CheckOut;//Calculo los dias entre Checkin y CheckOut
@@ -79,7 +71,7 @@ void ControladorReserva::confirmarReserva(){
     }
     IDActualReserva++;
     agregarReservaAMap(Res);
-    CancelarReserva();//Libera la memoria correspondiente            
+    (*CH).liberarMemoria();            
 }  
 
         
@@ -152,6 +144,21 @@ map<int,DTEstadia*> ControladorReserva::obtenerEstadiaHuesped(string email){
         }
     }
     return send;
+}
+
+void ControladorReserva::liberarMemoria(){
+    if (datosReserva!=NULL){
+        delete datosReserva;
+        datosReserva=NULL;
+    }
+    if (datosIndividual!=NULL){
+        delete datosIndividual;
+        datosIndividual=NULL;
+    }
+    if (datosGrupal!=NULL){
+        delete datosGrupal;
+        datosGrupal=NULL;
+    }
 }
 
 ////////////////////////////////

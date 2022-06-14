@@ -38,8 +38,7 @@ void ControladorCalificacion::RegistrarEstadia(DTHostal* Hosta, string email, DT
     fabrica* Fab =fabrica::getInstance();
     IControladorReserva* CH = (*Fab).getIControladorReserva();
     reserva* r = CH->getReserva(Reserva);
-    string TipoReserva = r->getTipoReserva();
-    if(TipoReserva == "Individual"){
+    if(dynamic_cast<individual*>(r)!=NULL){
         individual* rI = static_cast<individual*>(r);
         huespedIndividual* HI = rI->getHuespedIndividual();
         MaxCodigoEstadia++;
@@ -63,15 +62,16 @@ void ControladorCalificacion::agregarCalificacion(string email,string coment,int
     FechaSistema* fSist = FechaSistema::getInstance(); 
     IControladorUsuario* usr = fab->getIControladorUsuario();
     IControladorHostal* hst = fab->getIControladorHostal();
+    DTHostal* dtsHostal=(*hst).getDatosHostal();
     DTHuesped* hues = usr->obtenerHuespedConEmail(email);
-    hostal* host = hst->obtenerHostal(huesMemory);
+    hostal* host = hst->obtenerHostal(dtsHostal);
     Date actual = fSist->getFechaActual();
     calificacion* cal = new calificacion(idActual, nota, coment, actual);
     idActual++;
     notificarSuscriptos(hues->getNombre(),nota,coment);
     agregarCalificacionAMap(cal);
     host->agregarCalificacionAMap(cal);
-    map<int,estadia*>::iterator it = estadias.find(estMemory->getCodigo());
+    map<int,estadia*>::iterator it = estadias.find(datosEstadia->getCodigo());
     it->second->setCalificacion(cal);
 }
 
@@ -81,6 +81,19 @@ void ControladorCalificacion::ingresarRespuesta(string resp, DTCalificacion* tcl
     aux2->ingresarRespuesta(resp);
 }
 
+void ControladorCalificacion::liberarMemoria(){
+    if (datosCalificacion!=NULL){
+        delete datosCalificacion;
+        datosCalificacion=NULL;
+    }
+    if (datosEstadia!=NULL){
+        delete datosEstadia;
+        datosEstadia=NULL;
+    }
+}
+
+////////////////////////////////////////////////
+
         map<int,DTEstadia*> ControladorCalificacion::obtenerEstadiasHuesped(string){
             map<int,DTEstadia*> a;
             return a;
@@ -89,7 +102,6 @@ void ControladorCalificacion::ingresarRespuesta(string resp, DTCalificacion* tcl
             map<int,DTCalificacion*> a;
             return a;
         }
-        void ControladorCalificacion::liberarEstadia(){};
         void ControladorCalificacion::eliminarCalificacion(){}
         float ControladorCalificacion::obtenerPromocionDeEstadia(){return 1;}
         int ControladorCalificacion::obtenerCodigoDeEstadia(){return 1;}
