@@ -13,7 +13,7 @@ class DTEstadia {
         Date* fechaSalida;
         int codigo;
     public:
-        DTEstadia(Date,Date,int);
+        DTEstadia(Date,Date*,int);
         ~DTEstadia();
         
         Date getFechaEntrada(){

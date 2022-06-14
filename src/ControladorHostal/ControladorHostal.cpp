@@ -116,6 +116,15 @@ habitacion * ControladorHostal::getHab(DTHabitacion* DTH){
    return (*it).second;
 }
 
+map<int,DTEstadia*> ControladorHostal::obtenerEstadiasDeHostal(){
+    map<string,hostal*>::iterator it;
+    it = hostales.find(datosHostal->getNombre());
+    hostal* h= (*it).second;
+    map<int,DTEstadia*> dte;
+    dte= h->obtenerEstadias();
+    return dte;
+}
+
         hostal* ControladorHostal::obtenerHostal(DTHostal*){return NULL;}
         void ControladorHostal::confirmarAltaHostal(){}
         void ControladorHostal::cancelarAltaHostal(){}
@@ -139,10 +148,6 @@ habitacion * ControladorHostal::getHab(DTHabitacion* DTH){
             return a;
         }
         void ControladorHostal::liberarHostal(){}
-        map<int,DTEstadia*> ControladorHostal::obtenerEstadiasDeHostal(){
-            map<int,DTEstadia*> a;
-            return a;
-        }
         DTEstadia* ControladorHostal::obtenerDatosEstadia(){return NULL;}
         DTReserva* ControladorHostal::obtenerReservaDeEstadia(){return NULL;}
         void ControladorHostal::liberarHostalEstadia(){}

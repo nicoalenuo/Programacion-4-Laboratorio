@@ -15,3 +15,11 @@ void huespedIndividual::finalizarEstadiaActiva(string emailHuesped){
         }
     }
 }
+
+DTEstadia* huespedIndividual::obtenerEstadia(){
+    DTEstadia* pDTe= NULL;
+    if(estadiaAsoc!=NULL){
+        pDTe= new DTEstadia(estadiaAsoc->getFechaEntrada(),estadiaAsoc->getFechaSalida(),estadiaAsoc->getCodigo());
+    }
+    return pDTe;
+}

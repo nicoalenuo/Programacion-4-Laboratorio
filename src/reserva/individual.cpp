@@ -44,14 +44,21 @@ string individual::getTipoReserva(){return "Individual";}
 bool individual::perteneceHusped(string email){
     return (this->huesInd->getHuesped())->getEmail() == email;
 }
-        
+
+map<int,DTEstadia*> individual::obtenerEstadias(){
+        map<int,DTEstadia*> e;
+        DTEstadia* estadia= (*huesInd).obtenerEstadia();
+        if(estadia!=NULL){
+            e.insert(pair<int,DTEstadia*>(estadia->getCodigo(),estadia));
+        }
+        return e;
+}
+
+/////////////////////////////////////////
 
         DTReservaIndividual* individual::darDatos(){return NULL;}
         
         void individual::darBajaReserva(){}
-        map<int, DTEstadia*> individual::obtenerEstadias(){ 
-            map<int,DTEstadia*> a;
-            return a;}
         DTEstadia* individual::obtenerEstadia(){return NULL;}
         DTReserva* individual::obtenerResrvaDeEst(){return NULL;}
         bool individual::tieneEstadiaFinalizadaDeHuesped(string){return 0;}

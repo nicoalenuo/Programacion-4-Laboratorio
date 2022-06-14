@@ -77,14 +77,23 @@ huespedGrupal* grupal::GetHuespedGrupalDeUsuario(string email){
 
 }
 
+map<int,DTEstadia*> grupal::obtenerEstadias(){
+        map<int,DTEstadia*> e;
+        DTEstadia* aux;
+        map<int,DTEstadia*>::iterator ite;
+        set<huespedGrupal*>::iterator ithg;
+        for(ithg= huesGrup.begin(); ithg!=huesGrup.end();ithg++){
+                aux = (*ithg)->obtenerEstadia();
+                if(aux!=NULL){
+                    e.insert(pair<int,DTEstadia*>((*aux).getCodigo(),aux));
+                }
+        }       
+        return e;
+}
+
 /////////////////////////////////////////////
 
 void grupal::darBajaReserva(){}
-
-map<int, DTEstadia*> grupal::obtenerEstadias(){
-    map<int,DTEstadia*> a;
-    return a;
-}
 
 DTEstadia* grupal::obtenerEstadia(){return NULL;}
 
