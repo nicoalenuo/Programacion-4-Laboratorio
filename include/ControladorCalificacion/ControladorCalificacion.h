@@ -13,7 +13,9 @@ class ControladorCalificacion:public IControladorCalificacion {
         map<int,calificacion*> calificaciones;
         map<string,IObserver*> observers;
         map<int,estadia*> estadias;
-
+        int idActual =0;
+        DTHostal* huesMemory;
+        DTEstadia* estMemory;
         static ControladorCalificacion* instancia;
         ControladorCalificacion();
 

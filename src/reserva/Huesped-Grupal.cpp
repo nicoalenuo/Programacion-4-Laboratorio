@@ -30,6 +30,6 @@ bool huespedGrupal::tieneEstFinalizadaDeHus(string email){
         return estadiaAsoc->estaActiva();
     }else{ return false; }
 }
-bool huespedGrupal::esDeHuesped(string){
-    return false;
+bool huespedGrupal::esDeHuesped(string email){
+    return huespedAsoc->getEmail() == email;
 }

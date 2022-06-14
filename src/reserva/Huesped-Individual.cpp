@@ -34,6 +34,6 @@ bool huespedIndividual::tieneEstFinalizadaDeHus(string email){
     else{ return false; }
 }
 
-bool huespedIndividual::esDeHuesped(string){
-    return false;
+bool huespedIndividual::esDeHuesped(string email){
+    return huespedAsoc->getEmail()==email;
 }

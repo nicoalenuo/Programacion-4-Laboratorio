@@ -44,14 +44,14 @@ void ControladorCalificacion::agregarCalificacion(string email,string coment,int
     IControladorUsuario* usr = fab->getIControladorUsuario();
     IControladorHostal* hst = fab->getIControladorHostal();
     DTHuesped* hues = usr->obtenerHuespedConEmail(email);
-    hostal* host = hst->obtenerHostal(dtc);
-    int a = 0;
+    hostal* host = hst->obtenerHostal(huesMemory);
     Date actual = fSist->getFechaActual();
-    calificacion* cal = new calificacion(a, nota, coment, actual);
+    calificacion* cal = new calificacion(idActual, nota, coment, actual);
+    idActual++;
     notificarSuscriptos(hues->getNombre(),nota,coment);
     agregarCalificacionAMap(cal);
     host->agregarCalificacionAMap(cal);
-    map<int,estadia*>::iterator it = estadias.find(dte.codigo);
+    map<int,estadia*>::iterator it = estadias.find(estMemory->getCodigo());
     it->second->setCalificacion(cal);
 
 }

@@ -132,11 +132,12 @@ map<int,DTCalificacion*> ControladorHostal::obtenerCalificaciones(string emplead
     map<int,DTCalificacion*> send;
     bool aux = false;
     map<string,hostal*>::iterator it = (*this).hostales.begin();
-    while(it != (*this).hostales.end() and aux != true){
+    while(it != (*this).hostales.end() && aux != true){
         if(it->second->trabajaEmpleado(empleado)){
             send = it->second->obtenerCalifSinCom();
             aux = true;
         }
+        ++it;
     }
     return send;
 }

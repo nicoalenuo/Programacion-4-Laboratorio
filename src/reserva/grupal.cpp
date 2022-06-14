@@ -28,9 +28,18 @@ void grupal::finalizarSiEsReservaBuscada(string emailHuesped,string nombreHostal
 }
 bool grupal::tieneEstadiaFinalizadaDeHuesped(string email){
     if(!huesGrup.empty()){
-        for(set<huespedGrupal*>::iterator it = huesGrup.begin(); it != huesGrup.end(); ++it){
-
+        set<huespedGrupal*>::iterator it = huesGrup.begin();
+        bool aux = false;
+        while(aux != true && it != huesGrup.end()){
+            if((*it)->tieneEstFinalizadaDeHus(email)){
+                aux = true;
+            }
+            ++it;
         }
+        return aux;
     } 
         
+}
+DTEstadia* darEstadiaDeHuesped(string){
+    
 }
