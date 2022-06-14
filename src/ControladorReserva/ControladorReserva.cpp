@@ -90,7 +90,11 @@ void ControladorReserva::finalizarEstadiaActiva(string emailHuesped, string nomb
             agregarReservaAMap(Res);
             CancelarReserva();//Libera la memoria correspondiente            
         }  
-        void ControladorReserva::confirmarBaja(DTHostal*, int){}
+        void ControladorReserva::confirmarBaja(DTHostal* Host, int Codigo){
+            reserva * r = (*reservas.find(Codigo)).second;
+            reservas.erase(Codigo);
+            r->darBajaReserva();
+        }
         int ControladorReserva::obtenerNumeroDeHabitacion(DTHabitacion*){return 4;}
        
         map<string,string> ControladorReserva::obtenerNombresDeReserva(DTReservaGrupal*){

@@ -10,6 +10,7 @@ using namespace std;
 
 class DTEmpleado:public DTUsuario {
     private:
+        hostal B;
         Cargo TipoCargo;
     public:
         DTEmpleado(string,string,string,Cargo);
