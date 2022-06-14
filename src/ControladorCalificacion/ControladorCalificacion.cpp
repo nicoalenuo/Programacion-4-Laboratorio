@@ -43,7 +43,24 @@ void ControladorCalificacion::notificarSuscriptos(string nombreAutor,int puntuac
         void ControladorCalificacion::eliminarCalificacion(){}
         void ControladorCalificacion::RegistrarEstadia(DTHostal*, string, DTReserva*, DTEstadia*){}
         void ControladorCalificacion::ingresarRespuesta(string){}
-        float ControladorCalificacion::obtenerPromocionDeEstadia(){return 1;}
-        int ControladorCalificacion::obtenerCodigoDeEstadia(){return 1;}
-        DTCalificacion* ControladorCalificacion::obtenerCalificacionDeEstadia(){return NULL;}
-        DTRespuesta* ControladorCalificacion::obtenerRespuesta(DTCalificacion*){return NULL;}
+
+int ControladorCalificacion::obtenerCodigoDeEstadia(){
+    return (*this).getDatosEstadia()->getCodigo();
+}
+
+DTCalificacion* ControladorCalificacion::obtenerCalificacionDeEstadia(){
+    map<int,estadia*>::iterator it= estadias.find((*this).datosEstadia->getCodigo());
+    calificacion* c= (*it).second->getCalificacion();
+    DTCalificacion* dtc;
+    (*dtc) = DTCalificacion(c->getId(),c->getPuntuacion(),c->getComentario(),c->getFecha());
+    return dtc;
+}
+
+DTRespuesta* ControladorCalificacion::obtenerRespuesta(DTCalificacion* c){
+    map<int,estadia*>::iterator it= estadias.find(c->getId());
+    calificacion* cal= (*it).second->getCalificacion();
+    respuesta* r= cal->getRespuesta();
+    DTRespuesta* dtr;
+    (*dtr) = DTRespuesta(r->getComentario());
+    return dtr;
+}

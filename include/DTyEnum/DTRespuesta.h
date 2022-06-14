@@ -7,35 +7,17 @@ using namespace std;
 
 class DTRespuesta {
     private:
-        string nombre;
-        string email;
-        string password;
+        string respuesta;
     public:
-        DTRespuesta(string,string,string);
+        DTRespuesta(string);
         ~DTRespuesta();
         
-        string getNombre() {
-            return (*this).nombre;
+        string getRespuesta() {
+            return (*this).respuesta;
         }
 
-        void setNombre(string nombre) {
-            (*this).nombre = nombre;
-        }
-
-        string getEmail() {
-            return (*this).email;
-        }
-
-        void setEmail(string email) {
-            (*this).email = email;
-        }
-
-        string getPassword() {
-            return (*this).password;
-        }
-
-        void setPassword(string password) {
-            (*this).password = password;
+        void setRespuesta(string respuesta) {
+            (*this).respuesta = respuesta;
         }
 
 };
