@@ -122,8 +122,6 @@ void ControladorUsuario::liberarMemoria(){
         void ControladorUsuario::IngresarEmail(string){}
         void ControladorUsuario::cancelarAltaUsuario(){}
         void ControladorUsuario::confirmarAltaUsuario(){}
-        string ControladorUsuario::obtenerNombreUsuario(DTUsuario*){return "a";}
-        string ControladorUsuario::obtenerEmailUsuario(DTUsuario*){return "a";}
         DTUsuario* ControladorUsuario::devolverDatos(){return NULL;}
 
 map<string,DTUsuario*> ControladorUsuario::obtenerUsuarios(){

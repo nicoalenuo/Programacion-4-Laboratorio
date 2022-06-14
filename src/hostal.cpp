@@ -88,18 +88,18 @@ map<int,DTEstadia*> hostal:: obtenerEstadias(){
     return habEst;
 }
 
-map<int,DTReserva*> hostal::obtenerReservas(){
+map<int,DTReserva*> hostal:: obtenerReservas(){
     map<int,habitacion*>::iterator it;
-    map<int,DTReserva*>::iterator it2;
-    map<int,DTReserva*> Resultado;
-    for (it=habitaciones.begin() ; it!=habitaciones.end() ; it++){
-        map<int,DTReserva*> ResultadoLocal;
-        ResultadoLocal =(*(*it).second).obtenerReservas();
-        for(it2 = ResultadoLocal.begin(); it2 != ResultadoLocal.end();it2++){
-            Resultado.insert(*it2);
+    map<int,DTReserva*> reservas, aux;
+    map<int,DTReserva*>::iterator itr;
+    for(it=habitaciones.begin(); it!=habitaciones.end();it++){
+        habitacion* h= (*it).second;
+        aux= h->obtenerReservas();
+        for(itr=aux.begin();itr!=aux.end();itr++){
+            reservas.insert(pair<int,DTReserva*>((*itr).first,(*itr).second));
         }
     }
-    return Resultado;
+    return reservas;
 }
 
 bool hostal::trabajaEmpleado(string emailEmpleado){

@@ -40,12 +40,11 @@ class ControladorReserva:public IControladorReserva {
         map<int,DTReserva*> ListarReservasNoCanceladasDeHuesped(DTHostal*, string);
         void confirmarBaja(DTHostal*, int);
         void finalizarEstadiaActiva(string, string);
-        map<string,string> mostrarReserva(DTReserva*); ////////////////////////////////////////
-        int obtenerNumeroDeHabitacion(DTHabitacion*);
-        map<string,string> obtenerNombresDeReserva(DTReservaGrupal*); //////////////////////////////////////////////
+        map<string,DTHuesped*> obtenerHuespedesDeReserva(DTReservaGrupal*); 
         map<int,DTEstadia*> obtenerEstadiaHuesped(string);
         DTDatosEstadia* obtenerDatosEstadia();
         reserva* obtenerReservaDeEstadia(DTEstadia*);
+        DTReserva* obtenerDTReservaDeEstadia(DTEstadia*);
         void agregarReservaAMap(reserva * r){
             reservas.insert(pair<int,reserva*>((*r).getCodigo(),r));
         }

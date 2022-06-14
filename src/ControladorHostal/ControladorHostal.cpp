@@ -170,6 +170,18 @@ map<int,DTCalificacion*> ControladorHostal::obtenerCalificaciones(string emplead
     return send;
 }
 
+map<int,DTCalificacion*> ControladorHostal::obtenerCalificacionesDeHostal(){//precondicion, existe DTHostal en memoria
+    string nombre= datosHostal->getNombre();
+    return obtenerCalificacionesYComentarios(nombre);
+}
+
+map<int,DTReserva*> ControladorHostal::obtenerReservasDeHostal(){
+    map<int,DTReserva*> reservas;
+    hostal* h= obtenerHostal(datosHostal);
+    reservas= h->obtenerReservas();
+    return reservas;
+}
+
 void ControladorHostal::liberarMemoria(){
     if (datosHostal!=NULL){
         delete datosHostal;
@@ -189,16 +201,5 @@ void ControladorHostal::liberarMemoria(){
         void ControladorHostal::IngresarDatosHab(DTHabitacion*){}
         void ControladorHostal::cancelarAltaHabitacion(){}
         void ControladorHostal::confirmarAltaHabitacion(){}
-        string ControladorHostal::mostrarHostal(){return "a";}
-        float ControladorHostal::obtenerPromCalificacionesDeHostal(){return 1;}
-        map<int,DTCalificacion*> ControladorHostal::obtenerCalificacionesDeHostal(){
-            map<int,DTCalificacion*> a;
-            return a;
-        }
-        void ControladorHostal::mostrarHabitacion(DTHabitacion*){}
-        map<int,DTReserva*> ControladorHostal::obtenerReservasDeHostal(){
-            map<int,DTReserva*> a;
-            return a;
-        }
         DTEstadia* ControladorHostal::obtenerDatosEstadia(){return NULL;}
         DTReserva* ControladorHostal::obtenerReservaDeEstadia(){return NULL;}

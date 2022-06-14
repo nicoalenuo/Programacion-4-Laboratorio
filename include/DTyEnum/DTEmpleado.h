@@ -22,11 +22,11 @@ class DTEmpleado:public DTUsuario {
             (*this).nombre = nombre;
         }
 
-        string getMail() {
+        string getEmail() {
             return (*this).email;
         }
 
-        void setMail(string email) {
+        void setEmail(string email) {
             (*this).email = email;
         }
 

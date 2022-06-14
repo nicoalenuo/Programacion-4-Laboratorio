@@ -92,6 +92,32 @@ void ControladorCalificacion::liberarMemoria(){
     }
 }
 
+int ControladorCalificacion::obtenerCodigoDeEstadia(){
+    return (*this).getDatosEstadia()->getCodigo();
+}
+
+DTCalificacion* ControladorCalificacion::obtenerCalificacionDeEstadia(){
+    map<int,estadia*>::iterator it= estadias.find((*this).datosEstadia->getCodigo());
+    calificacion* c= (*it).second->getCalificacion();
+    DTCalificacion* dtc=NULL;;
+    if (c!=NULL)
+        (*dtc) = DTCalificacion(c->getId(),c->getPuntuacion(),c->getComentario(),c->getFecha());
+    return dtc;
+}
+
+DTRespuesta* ControladorCalificacion::obtenerRespuesta(DTCalificacion* c){
+    map<int,estadia*>::iterator it= estadias.find(c->getId());
+    calificacion* cal= (*it).second->getCalificacion();
+    DTRespuesta* dtr=NULL;
+    if (cal!=NULL){
+        respuesta* r= cal->getRespuesta();
+        if (r!=NULL){
+            dtr = new DTRespuesta((*r).getComentario());
+        }
+    }
+    return dtr;
+}
+
 void ControladorCalificacion::eliminarCalificacion(calificacion* cal){//borra del map la calificacion, pero no de memoria, eso se hace en EliminarCalificacion de Calificacion
     calificaciones.erase(cal->getId());
 }
@@ -108,6 +134,3 @@ void ControladorCalificacion::eliminarCalificacion(calificacion* cal){//borra de
         }
         void ControladorCalificacion::eliminarCalificacion(){}
         float ControladorCalificacion::obtenerPromocionDeEstadia(){return 1;}
-        int ControladorCalificacion::obtenerCodigoDeEstadia(){return 1;}
-        DTCalificacion* ControladorCalificacion::obtenerCalificacionDeEstadia(){return NULL;}
-        DTRespuesta* ControladorCalificacion::obtenerRespuesta(DTCalificacion*){return NULL;}

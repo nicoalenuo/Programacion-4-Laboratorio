@@ -159,6 +159,16 @@ void grupal::darBajaReserva(){
     } 
 }
 
+map<string,DTHuesped*> grupal::obtenerHuespedesDeReserva(){
+    set<huespedGrupal*>::iterator it;
+    map<string,DTHuesped*> resultado;
+    for(it=huesGrup.begin();it!=huesGrup.end();it++){
+        DTHuesped* h= (*it)->darDatosHuesped();
+        resultado.insert(pair<string,DTHuesped*>((*h).getEmail(),h));
+    }
+    return resultado;
+}
+
 /////////////////////////////////////////////
 
 DTEstadia* grupal::obtenerEstadia(){return NULL;}

@@ -16,8 +16,8 @@ class DTUsuario{
         virtual ~DTUsuario()=0;
         virtual string getNombre()=0;
         virtual void setNombre(string nombre)=0;
-        virtual string getMail()=0;
-        virtual void setMail(string email)=0;
+        virtual string getEmail()=0;
+        virtual void setEmail(string email)=0;
         virtual string getPassword()=0;
         virtual void setPassword(string password)=0;
 };

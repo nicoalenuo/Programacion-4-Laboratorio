@@ -51,7 +51,7 @@ map<int,DTHabitacion*> ControladorReserva::obtenerHabitacionesDisponibles(){
 
 void ControladorReserva::DesignarPropietarioDeReserva(DTHuesped* P){(*this).Propietario = P;}
 
-void ControladorReserva::IngresarHuespedEnReserva(DTHuesped* h){SDTH.insert(pair<string,DTHuesped*>(h->getMail(), h));}
+void ControladorReserva::IngresarHuespedEnReserva(DTHuesped* h){SDTH.insert(pair<string,DTHuesped*>(h->getEmail(), h));}
 
 void ControladorReserva::confirmarReserva(){
     fabrica* Fab =fabrica::getInstance();
@@ -129,6 +129,14 @@ reserva* ControladorReserva::obtenerReservaDeEstadia(DTEstadia* dte){
     return r;
 }
 
+DTReserva* ControladorReserva::obtenerDTReservaDeEstadia(DTEstadia* dte){
+    DTReserva* resultado;
+    reserva* r;
+    r=obtenerReservaDeEstadia(dte);
+    resultado = (*r).getDTReserva();
+    return resultado;
+}
+
 void ControladorReserva::confirmarBaja(DTHostal* Host, int Codigo){
     reserva * r = (*reservas.find(Codigo)).second;
     reservas.erase(Codigo);
@@ -146,6 +154,13 @@ map<int,DTEstadia*> ControladorReserva::obtenerEstadiaHuesped(string email){
     return send;
 }
 
+map<string,DTHuesped*> ControladorReserva::obtenerHuespedesDeReserva(DTReservaGrupal* dtrg){
+    map<int,reserva*>::iterator it= reservas.find(dtrg->getCodigo());
+    //como siempre es grupal
+    grupal* gru= static_cast<grupal*>((*it).second);
+    return gru->obtenerHuespedesDeReserva();
+}
+
 void ControladorReserva::liberarMemoria(){
     if (datosReserva!=NULL){
         delete datosReserva;
@@ -160,17 +175,4 @@ void ControladorReserva::liberarMemoria(){
         datosGrupal=NULL;
     }
 }
-
-////////////////////////////////
-
-
-        int ControladorReserva::obtenerNumeroDeHabitacion(DTHabitacion*){return 4;}
-        map<string,string> ControladorReserva::obtenerNombresDeReserva(DTReservaGrupal*){
-            map<string,string> a;
-            return a;
-        }
-        map<string,string> ControladorReserva::mostrarReserva(DTReserva*){
-            map<string,string> a;
-            return a;
-        }
         
