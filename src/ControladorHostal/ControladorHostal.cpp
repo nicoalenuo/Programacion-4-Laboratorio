@@ -141,7 +141,3 @@ map<int,DTCalificacion*> ControladorHostal::obtenerCalificaciones(string emplead
     }
     return send;
 }
-hostal* ControladorHostal::obtenerHostal(DTHostal* dth){
-    map<string,hostal*>::iterator it = hostales.find(dth->getNombre());
-    return it->second;
-}
