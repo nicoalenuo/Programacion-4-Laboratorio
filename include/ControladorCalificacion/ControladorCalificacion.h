@@ -14,9 +14,12 @@ class ControladorCalificacion:public IControladorCalificacion {
         map<string,IObserver*> observers;
         map<int,estadia*> estadias;
         int MaxCodigoEstadia = 0;
+        int idActual=0;
 
         DTCalificacion* datosCalificacion;
         DTEstadia* datosEstadia;
+        DTHostal* huesMemory;
+        DTEstadia* estMemory;
 
         static ControladorCalificacion* instancia;
         ControladorCalificacion();
@@ -39,7 +42,7 @@ class ControladorCalificacion:public IControladorCalificacion {
         }
         void eliminarSuscripto(empleado*);
         map<int,DTEstadia*> obtenerEstadiasHuesped(string);
-        void agregarCalificacion(string,int);
+        void agregarCalificacion(string,string,int);
         map<int,DTCalificacion*> obtenerCalificaciones(string);
         void ingresarComentario(string);
         void liberarEstadia();

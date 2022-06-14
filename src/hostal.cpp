@@ -55,10 +55,6 @@ bool hostal::tieneHab(int nHab){
     return habitaciones.find(nHab) != habitaciones.end();
 }
 
-bool hostal::trabajaEmpleado(string emailEmpleado){
-    return empleados.find(emailEmpleado)!=empleados.end(); 
-}
-
 void hostal::agregarHabitacionAMap(habitacion* h){
     habitaciones.insert(pair<int,habitacion*>((*h).getNumero(),h));
 }
@@ -95,4 +91,19 @@ map<int,DTEstadia*> hostal:: obtenerEstadias(){
 map<int,DTReserva*> hostal::obtenerReservas(){
     map<int,DTReserva*> a;
     return a;
-};
+}
+
+bool hostal::trabajaEmpleado(string emailEmpleado){
+    return empleados.find(emailEmpleado)!=empleados.end(); 
+}
+
+map<int,DTCalificacion*> hostal::obtenerCalifSinCom(){
+    map<int,DTCalificacion*> send;
+    for(map<int,calificacion*>::iterator it=(*this).calificaciones.begin(); it !=(*this).calificaciones.end(); ++it){
+        if(it->second->sinRespuesta()){
+            DTCalificacion* in = (*(*it).second).darDatos();
+            send.insert(pair<int,DTCalificacion*>((*it).first,in));
+        }
+    }
+    return send;
+}

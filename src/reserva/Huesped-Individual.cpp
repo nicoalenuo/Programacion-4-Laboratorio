@@ -33,4 +33,15 @@ DTHuesped* huespedIndividual::darDatosHuesped(){
     return resultado;
 }
 
+bool huespedIndividual::tieneEstFinalizadaDeHus(string email){
+    if(estadiaAsoc !=NULL and huespedAsoc !=NULL and huespedAsoc->getEmail() == email){
+        return estadiaAsoc->estaActiva();
+    }
+    else{ return false; }
+}
+
+bool huespedIndividual::esDeHuesped(string email){
+    return huespedAsoc->getEmail()==email;
+}
+
 void huespedIndividual::darBaja(){}

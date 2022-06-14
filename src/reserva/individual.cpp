@@ -76,11 +76,20 @@ void individual::darBajaReserva(){
     HI->darBaja();
 }
 
+bool individual::tieneEstadiaFinalizadaDeHuesped(string email){
+    return huesInd->tieneEstFinalizadaDeHus(email);
+}
+
+DTEstadia* individual::darEstadiaDeHuesped(string email){
+    if(tieneEstadiaFinalizadaDeHuesped(email)==true){
+        DTEstadia* est = huesInd->obtenerEstadia();
+        return est;
+    }else{ return NULL; }
+}
+
 /////////////////////////////////////////
 
         DTReservaIndividual* individual::darDatos(){return NULL;}
         DTEstadia* individual::obtenerEstadia(){return NULL;}
         DTReserva* individual::obtenerResrvaDeEst(){return NULL;}
-        bool individual::tieneEstadiaFinalizadaDeHuesped(string){return 0;}
-        DTEstadia* individual::darEstadiaDeHuesped(string){return NULL;}
        

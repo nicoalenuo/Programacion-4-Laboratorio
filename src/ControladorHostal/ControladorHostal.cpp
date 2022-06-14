@@ -132,6 +132,20 @@ map<int,DTReserva*> ControladorHostal::ListarReservas(DTHostal* Hos){
     return Resultado;
 }
 
+map<int,DTCalificacion*> ControladorHostal::obtenerCalificaciones(string empleado){
+    map<int,DTCalificacion*> send;
+    bool aux = false;
+    map<string,hostal*>::iterator it = (*this).hostales.begin();
+    while(it != (*this).hostales.end() && aux != true){
+        if(it->second->trabajaEmpleado(empleado)){
+            send = it->second->obtenerCalifSinCom();
+            aux = true;
+        }
+        ++it;
+    }
+    return send;
+}
+
 ///////////////////////////////////
 
         hostal* ControladorHostal::obtenerHostal(DTHostal*){return NULL;}
@@ -156,7 +170,3 @@ map<int,DTReserva*> ControladorHostal::ListarReservas(DTHostal* Hos){
         DTEstadia* ControladorHostal::obtenerDatosEstadia(){return NULL;}
         DTReserva* ControladorHostal::obtenerReservaDeEstadia(){return NULL;}
         void ControladorHostal::liberarHostalEstadia(){}
-        map<int,DTCalificacion*> ControladorHostal::obtenerCalificaciones(string){
-            map<int,DTCalificacion*> a;
-            return a;
-        }

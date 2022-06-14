@@ -33,4 +33,14 @@ DTHuesped* huespedGrupal::darDatosHuesped(){
     return resultado;
 }
 
+bool huespedGrupal::tieneEstFinalizadaDeHus(string email){
+    if(huespedAsoc != NULL and estadiaAsoc != NULL and huespedAsoc->getEmail() == email){
+        return estadiaAsoc->estaActiva();
+    }else{ return false; }
+}
+
+bool huespedGrupal::esDeHuesped(string email){
+    return huespedAsoc->getEmail() == email;
+}
+
 void huespedGrupal::darBaja(){}

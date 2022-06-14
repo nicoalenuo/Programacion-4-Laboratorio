@@ -118,6 +118,36 @@ DTHabitacion* grupal::darDatosHabitacion(){
     return hab;
 }
 
+bool grupal::tieneEstadiaFinalizadaDeHuesped(string email){
+    bool aux = false;
+    if(!huesGrup.empty()){
+        set<huespedGrupal*>::iterator it = huesGrup.begin();
+        while(aux != true && it != huesGrup.end()){
+            if((*it)->tieneEstFinalizadaDeHus(email)){
+                aux = true;
+            }
+            ++it;
+        }
+    } 
+    return aux;
+}
+
+DTEstadia* grupal::darEstadiaDeHuesped(string email){
+    DTEstadia* send = NULL;
+    bool aux = false;
+    if(!huesGrup.empty()){
+        set<huespedGrupal*>::iterator it = huesGrup.begin();
+        while(aux != true && it != huesGrup.end()){
+            if((*it)->esDeHuesped(email)){
+                send = (*(*it)).obtenerEstadia();
+                aux = true;
+            }
+            ++it;
+        }
+    }
+    return send;
+}
+
 /////////////////////////////////////////////
 
 void grupal::darBajaReserva(){}
@@ -125,7 +155,3 @@ void grupal::darBajaReserva(){}
 DTEstadia* grupal::obtenerEstadia(){return NULL;}
 
 DTReserva* grupal::obtenerResrvaDeEst(){return NULL;}
-
-bool grupal::tieneEstadiaFinalizadaDeHuesped(string){return 0;}
-
-DTEstadia* grupal::darEstadiaDeHuesped(string){return NULL;}

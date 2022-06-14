@@ -34,7 +34,7 @@ class IControladorCalificacion {
         virtual void setDatosCalificacion(DTCalificacion*)=0;
         virtual void setDatosEstadia(DTEstadia*)=0;
         virtual map<int,DTEstadia*> obtenerEstadiasHuesped(string)=0;
-        virtual void agregarCalificacion(string,int)=0;
+        virtual void agregarCalificacion(string,string,int)=0;
         virtual map<int,DTCalificacion*> obtenerCalificaciones(string)=0;
         virtual void ingresarComentario(string)=0;
         virtual void liberarEstadia()=0;

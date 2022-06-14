@@ -8,7 +8,7 @@ estadia::estadia(DTEstadia* est){
 }
 
 bool estadia::estaActiva(){
-    return false;
+    return fechaSalida!=NULL;
 }
 
 void estadia::finalizarEstadiaActiva(){
@@ -18,4 +18,13 @@ void estadia::finalizarEstadiaActiva(){
     if (estaActiva()){
         setFechaSalida(fechaActual);
     }
+}
+
+DTEstadia* estadia::darDatos(){
+    Date* fs=NULL;
+    if (fechaSalida!=NULL)
+        fs = new Date((*fechaSalida).getDia(),(*fechaSalida).getMes(),(*fechaSalida).getAnio());
+
+    DTEstadia* resultado = new DTEstadia(fechaEntrada,fs,codigo);
+    return resultado;
 }

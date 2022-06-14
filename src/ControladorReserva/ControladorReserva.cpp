@@ -143,16 +143,23 @@ void ControladorReserva::confirmarBaja(DTHostal* Host, int Codigo){
     r->darBajaReserva();
 }
 
+map<int,DTEstadia*> ControladorReserva::obtenerEstadiaHuesped(string email){
+    map<int,DTEstadia*> send;
+    for(map<int,reserva*>::iterator it = reservas.begin(); it != reservas.end(); ++it){
+        if(it->second->tieneEstadiaFinalizadaDeHuesped(email)){
+            DTEstadia* aux = it->second->darEstadiaDeHuesped(email);
+            send.insert(pair<int,DTEstadia*>(aux->getCodigo(),aux));
+        }
+    }
+    return send;
+}
+
 ////////////////////////////////
 
 
         int ControladorReserva::obtenerNumeroDeHabitacion(DTHabitacion*){return 4;}
         map<string,string> ControladorReserva::obtenerNombresDeReserva(DTReservaGrupal*){
             map<string,string> a;
-            return a;
-        }
-        map<int,DTEstadia*> ControladorReserva::obtenerEstadiaHuesped(string){
-            map<int,DTEstadia*> a;
             return a;
         }
         map<string,string> ControladorReserva::mostrarReserva(DTReserva*){
