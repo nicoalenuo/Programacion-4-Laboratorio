@@ -26,25 +26,19 @@ void grupal::obtenerNombresDeReserva(){
 
 map<int,DTEstadia*> grupal::obtenerEstadias(){
         map<int,DTEstadia*> e;
-        DTEstadia* aux;
-        map<int,DTEstadia*>::iterator ite;
-        set<huespedGrupal*>::iterator ithg;
-        for(ithg= huesGrup.begin(); ithg!=huesGrup.end();ithg++){
-                aux = (*ithg)->obtenerEstadia();
-                if(aux!=NULL){
-                    e.insert(pair<int,DTEstadia*>((*aux).getCodigo(),aux));
-                }
-        }       
         return e;
 }
 
 bool grupal::tieneEstadia(DTEstadia* dte){
     bool encontrado=false;
+<<<<<<< Updated upstream
     set<huespedGrupal*>::iterator it;
     for (it=huesGrup.begin() ; it!=huesGrup.end() ; it++){
         encontrado = (*(*it)).tieneEstadia(dte);
     }
 
+=======
+>>>>>>> Stashed changes
     return encontrado;
 }
 

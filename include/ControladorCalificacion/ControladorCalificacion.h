@@ -33,7 +33,6 @@ class ControladorCalificacion:public IControladorCalificacion {
         void eliminarCalificacion();
         void RegistrarEstadia(DTHostal*, string, DTReserva*, DTEstadia*);
         void ingresarRespuesta(string);
-        float obtenerPromocionDeEstadia();
         int obtenerCodigoDeEstadia();
         DTCalificacion* obtenerCalificacionDeEstadia();
         DTRespuesta* obtenerRespuesta(DTCalificacion*);
