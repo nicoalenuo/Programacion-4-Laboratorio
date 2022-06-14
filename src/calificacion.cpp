@@ -18,5 +18,10 @@ bool calificacion::sinRespuesta(){
     return (getRespuesta()==NULL);
 }
 
+void calificacion::ingresarRespuesta(string res){
+    respuesta* set = new respuesta(res);
+    setRespuesta(set);
+}
+
 calificacion::~calificacion(){
 }

@@ -73,7 +73,12 @@ void ControladorCalificacion::agregarCalificacion(string email,string coment,int
     host->agregarCalificacionAMap(cal);
     map<int,estadia*>::iterator it = estadias.find(estMemory->getCodigo());
     it->second->setCalificacion(cal);
+}
 
+void ControladorCalificacion::ingresarRespuesta(string resp, DTCalificacion* tcl){
+    map<int,calificacion*>::iterator aux = (*this).calificaciones.find(tcl->getId());
+    calificacion* aux2 = (*aux).second;
+    aux2->ingresarRespuesta(resp);
 }
 
         map<int,DTEstadia*> ControladorCalificacion::obtenerEstadiasHuesped(string){
@@ -84,10 +89,8 @@ void ControladorCalificacion::agregarCalificacion(string email,string coment,int
             map<int,DTCalificacion*> a;
             return a;
         }
-        void ControladorCalificacion::ingresarComentario(string){}
         void ControladorCalificacion::liberarEstadia(){};
         void ControladorCalificacion::eliminarCalificacion(){}
-        void ControladorCalificacion::ingresarRespuesta(string){}
         float ControladorCalificacion::obtenerPromocionDeEstadia(){return 1;}
         int ControladorCalificacion::obtenerCodigoDeEstadia(){return 1;}
         DTCalificacion* ControladorCalificacion::obtenerCalificacionDeEstadia(){return NULL;}

@@ -44,11 +44,10 @@ class ControladorCalificacion:public IControladorCalificacion {
         map<int,DTEstadia*> obtenerEstadiasHuesped(string);
         void agregarCalificacion(string,string,int);
         map<int,DTCalificacion*> obtenerCalificaciones(string);
-        void ingresarComentario(string);
         void liberarEstadia();
         void eliminarCalificacion();
         void RegistrarEstadia(DTHostal*, string, DTReserva*, DTEstadia*);
-        void ingresarRespuesta(string);
+        void ingresarRespuesta(string,DTCalificacion*);
         float obtenerPromocionDeEstadia();
         int obtenerCodigoDeEstadia();
         DTCalificacion* obtenerCalificacionDeEstadia();
