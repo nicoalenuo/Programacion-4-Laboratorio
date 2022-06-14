@@ -16,7 +16,7 @@ class ControladorCalificacion:public IControladorCalificacion {
 
         DTCalificacion* datosCalificacion;
         DTEstadia* datosEstadia;
-
+        int MaxCodigoEstadia = 0;
         static ControladorCalificacion* instancia;
         ControladorCalificacion();
 
@@ -32,7 +32,7 @@ class ControladorCalificacion:public IControladorCalificacion {
         void liberarEstadia();
         void eliminarCalificacion();
         void RegistrarEstadia(DTHostal*, string, DTReserva*, DTEstadia*);
-        void ingresarRespuesta(string, DTCalificacion*);
+        void ingresarRespuesta(string);
         float obtenerPromocionDeEstadia();
         int obtenerCodigoDeEstadia();
         DTCalificacion* obtenerCalificacionDeEstadia();
@@ -45,10 +45,7 @@ class ControladorCalificacion:public IControladorCalificacion {
             estadias.insert(pair<int,estadia*>((*e).getCodigo(), e));
         }
         DTEstadia* getDatosEstadia(){
-            return datosEstadia;
-        }
-        void setDatosEstadia(DTEstadia* dte){
-            datosEstadia=dte;
+            return (*this).datosEstadia;
         }
         
 };

@@ -36,7 +36,7 @@ class IControladorCalificacion {
         virtual void liberarEstadia()=0;
         virtual void eliminarCalificacion()=0;
         virtual void RegistrarEstadia(DTHostal*, string, DTReserva*, DTEstadia*)=0;
-        virtual void ingresarRespuesta(string,DTCalificacion*)=0;
+        virtual void ingresarRespuesta(string)=0;
         virtual float obtenerPromocionDeEstadia()=0;
         virtual int obtenerCodigoDeEstadia()=0;
         virtual DTCalificacion* obtenerCalificacionDeEstadia()=0;
@@ -44,7 +44,6 @@ class IControladorCalificacion {
         virtual void agregarCalificacionAMap(calificacion*)=0;
         virtual void agregarEstadiaAMap(estadia*)=0;
         virtual DTEstadia* getDatosEstadia()=0;
-        virtual void setDatosEstadia()=0;
 };
 
 #endif

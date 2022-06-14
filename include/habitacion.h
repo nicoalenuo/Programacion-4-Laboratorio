@@ -4,6 +4,7 @@
 #include "reserva/reserva.h"
 #include "DTyEnum/DTReserva.h" //Agregado
 #include "DTyEnum/DTHostal.h"
+#include "DTyEnum/DTHabitacion.h"
 #include "DTyEnum/DTEstadia.h"
 #include "DTyEnum/DTHabitacion.h"
 #include "DTyEnum/DTDatosEstadia.h"

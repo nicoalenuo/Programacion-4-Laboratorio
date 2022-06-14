@@ -37,7 +37,7 @@ void ControladorReserva::finalizarEstadiaActiva(string emailHuesped, string nomb
             return a;
         }
         void ControladorReserva::EscogerHabitacion(DTHabitacion*){}
-        DTHuesped* ControladorReserva::DesignarPropietarioDeReserva(DTHuesped*){return NULL;}
+        void ControladorReserva::DesignarPropietarioDeReserva(DTHuesped*){}
         void ControladorReserva::IngresarHuespedEnReserva(DTHuesped*){}
         void ControladorReserva::CancelarReserva(){}
         void ControladorReserva::confirmarReserva(){}  
@@ -78,7 +78,7 @@ DTDatosEstadia* ControladorReserva::obtenerDatosEstadia(){//Existe DTHostal y DT
     Date* fechaSalidaDevolver;
     (*fechaSalidaDevolver) = (*dte).getFechaSalida();
 
-    DTDatosEstadia* datosDevolver = new DTDatosEstadia(datosHostalDevolver,datosHuespedDevolver,datosHabitacionDevolver,(*dte).getFechaEntrada(),fechaSalidaDevolver);
+    DTDatosEstadia* datosDevolver = new DTDatosEstadia(datosHostalDevolver,datosHabitacionDevolver,datosHuespedDevolver,(*dte).getFechaEntrada(),fechaSalidaDevolver);
 
     return datosDevolver;
 }

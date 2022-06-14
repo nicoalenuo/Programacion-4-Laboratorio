@@ -4,6 +4,11 @@
 #include "../include/DTyEnum/DTReservaGrupal.h"
 #include "../include/DTyEnum/DTReservaIndividual.h"
 
+DTHabitacion* habitacion::darDatos(){
+        DTHabitacion* dth= new DTHabitacion((*this).getNumero(),(*this).getPrecio(),(*this).getCapacidad());
+        return dth;
+}
+
 void habitacion::agregarReservaAMap(reserva * r){
         (*this).reservas.insert(pair<int,reserva*>((*r).getCodigo(),r));
 }

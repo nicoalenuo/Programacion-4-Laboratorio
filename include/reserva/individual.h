@@ -64,12 +64,8 @@ class individual:public reserva{
         DTEstadia* darEstadiaDeHuesped(string);
 
         //Cosas que agregue
-        huespedIndividual* getHuespedIndividual(){
-            return huesInd;
-        }
-        void setHuespedIndividual(huespedIndividual* hi){
-            huesInd = hi;
-        }
+        huespedIndividual* getHuespedIndividual();
+        void setHuespedIndividual(huespedIndividual* hi);
         DTHuesped* darHuespedConEstadia(DTEstadia*);
         DTHabitacion* darDatosHabitacion();
 };

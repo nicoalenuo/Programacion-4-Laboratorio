@@ -39,3 +39,11 @@ DTHabitacion* individual::darDatosHabitacion(){
     DTHabitacion* hab = (*habitacionAsoc).darDatos();
     return hab;
 }
+
+huespedIndividual* individual::getHuespedIndividual(){
+    return huesInd;
+}
+
+void individual::setHuespedIndividual(huespedIndividual* hi){
+    huesInd = hi;
+}

@@ -23,7 +23,7 @@ bool huespedGrupal::tieneEstadia(DTEstadia* dte){
     return (*estadiaAsoc).getCodigo() == (*dte).getCodigo();
 }
 
-DTHuesped* huespedIndividual::darDatosHuesped(){
+DTHuesped* huespedGrupal::darDatosHuesped(){
     DTHuesped* resultado = new DTHuesped((*huespedAsoc).getNombre() , (*huespedAsoc).getEmail() , (*huespedAsoc).getPassword() , (*huespedAsoc).getEsFinger());
     return resultado;
 }

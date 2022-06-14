@@ -5,7 +5,6 @@
 #include "DTHuesped.h"
 #include "DTHabitacion.h"
 #include "Date.h"
-#include "../../include/fabrica.h"
 
 #include <iostream>
 #include <stdio.h>
@@ -19,7 +18,7 @@ class DTDatosEstadia {
         Date checkIn;
         Date* checkOut;
     public:
-        DTDatosEstadia(DTHostal*,DTHuesped*,DTHabitacion*,Date,Date*);
+        DTDatosEstadia(DTHostal*,DTHabitacion*,DTHuesped*,Date,Date*);
         ~DTDatosEstadia();
         
         DTHostal* getHostalDeEstadia(){

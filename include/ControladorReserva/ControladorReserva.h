@@ -28,7 +28,7 @@ class ControladorReserva:public IControladorReserva {
         void ingresarDatosReserva(DTHostal*, Date, Date);
         map<int,DTHabitacion*> obtenerHabitacionesDisponibles();
         void EscogerHabitacion(DTHabitacion*);
-        DTHuesped* DesignarPropietarioDeReserva(DTHuesped*);
+        void DesignarPropietarioDeReserva(DTHuesped*);
         void IngresarHuespedEnReserva(DTHuesped*);
         void CancelarReserva();
         void confirmarReserva();  
