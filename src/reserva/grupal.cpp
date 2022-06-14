@@ -36,9 +36,8 @@ bool grupal::tieneEstadiaFinalizadaDeHuesped(string email){
             }
             ++it;
         }
-        return aux;
     } 
-        
+    return aux;
 }
 DTEstadia* grupal::darEstadiaDeHuesped(string email){
     DTEstadia* send = NULL;
@@ -53,5 +52,23 @@ DTEstadia* grupal::darEstadiaDeHuesped(string email){
             ++it;
         }
     }
+    return send;
+}
+bool grupal::perteneceHusped(string email){
+    return false;
+}
+string grupal::getTipoReserva(){
+    return "";
+}
+void grupal::darBajaReserva(){
+}
+DTReserva* grupal::obtenerResrvaDeEst(){
+    return NULL;
+}
+DTEstadia* grupal::obtenerEstadia(){
+    return NULL;
+}
+map<int, DTEstadia*> grupal::obtenerEstadias(){
+    map<int, DTEstadia*> send;
     return send;
 }
