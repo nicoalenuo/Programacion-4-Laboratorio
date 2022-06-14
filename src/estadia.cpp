@@ -28,3 +28,16 @@ DTEstadia* estadia::darDatos(){
     DTEstadia* resultado = new DTEstadia(fechaEntrada,fs,codigo);
     return resultado;
 }
+
+void estadia::eliminarEstadia(){
+    calificacion* c = calificacionAsoc;
+    if(c!= NULL){
+        c->eliminarCalificacion();
+        delete calificacionAsoc;
+        c= NULL;
+    }
+}
+
+estadia::~estadia(){
+    
+}

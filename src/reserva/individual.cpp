@@ -71,7 +71,11 @@ DTHabitacion* individual::darDatosHabitacion(){
 
 void individual::darBajaReserva(){
     huespedIndividual* HI = huesInd;
+    habitacion* h = getHabitacion();
+    (*h).darBajaReserva(codigo);
     HI->darBaja();
+    delete HI;
+    HI= NULL;
 }
 
 bool individual::tieneEstadiaFinalizadaDeHuesped(string email){

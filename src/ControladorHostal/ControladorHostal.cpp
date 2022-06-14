@@ -127,9 +127,33 @@ map<int,DTEstadia*> ControladorHostal::obtenerEstadiasDeHostal(){
 
 map<int,DTReserva*> ControladorHostal::ListarReservas(DTHostal* Hos){
     map<int,DTReserva*> Resultado;
-    hostal* ho = (*hostales.find(Hos->getNombre())).second;
-    Resultado = (*ho).obtenerReservas();// PREGUNTAR A JULIO SI LO PROGRAMO
+    map<string,hostal*>::iterator it;
+    map<int,DTReserva*>::iterator it2;
+    for(it = hostales.begin(); it != hostales.end();it++){
+        map<int,DTReserva*> ReservasLocales;  
+        hostal* ho = ((*it)).second;
+        ReservasLocales = (*ho).obtenerReservas();
+        for(it2 = ReservasLocales.begin(); it2 != ReservasLocales.end(); it2++){
+            Resultado.insert(*it2);
+        }
+
+    }
     return Resultado;
+}
+
+hostal * ControladorHostal::hostalQuePoseeCal(calificacion* cal){
+    map<string,hostal*>::iterator it;
+    bool pr = false;
+    hostal* Solucion = NULL;
+    it = hostales.begin();
+    while(it != hostales.end() && !pr){
+        if((*it).second->perteneceCalificacion(cal->getId())){
+            Solucion = (*it).second;
+            pr= true;
+        }
+        it++;
+    }
+    return Solucion;
 }
 
 map<int,DTCalificacion*> ControladorHostal::obtenerCalificaciones(string empleado){

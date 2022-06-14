@@ -43,4 +43,15 @@ bool huespedGrupal::esDeHuesped(string email){
     return huespedAsoc->getEmail() == email;
 }
 
-void huespedGrupal::darBaja(){}
+void huespedGrupal::darBaja(){
+    estadia* es = estadiaAsoc;
+    if(es!= NULL){
+        es->eliminarEstadia();
+        delete estadiaAsoc;
+    }
+    estadiaAsoc = NULL;
+}
+
+huespedGrupal::~huespedGrupal(){
+   
+}

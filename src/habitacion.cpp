@@ -45,3 +45,16 @@ map<int,DTEstadia*> habitacion::obtenerEstadias(){
         }       
         return e;
 }
+
+map<int,DTReserva*> habitacion::obtenerReservas(){
+        map<int,DTReserva*> Resultado;
+        map<int,reserva*>::iterator it;
+        for(it = reservas.begin(); it != reservas.end();it++){
+            Resultado.insert(pair<int,DTReserva*>((*(*it).second).getCodigo(), ((*it).second)->getDTReserva()));
+        }
+        return Resultado;
+}
+
+void habitacion::darBajaReserva(int c){
+        reservas.erase(c);
+}

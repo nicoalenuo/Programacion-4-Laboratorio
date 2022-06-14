@@ -47,8 +47,8 @@ class ControladorHostal:public IControladorHostal {
         map<int,DTEstadia*> obtenerEstadiasDeHostal();
         DTEstadia* obtenerDatosEstadia();
         DTReserva* obtenerReservaDeEstadia();
+        hostal* hostalQuePoseeCal(calificacion*);
         map<int,DTCalificacion*> obtenerCalificaciones(string);
-        //Cosas que agregue
         map<string,hostal*> getHostales(){
             return hostales;
         } 

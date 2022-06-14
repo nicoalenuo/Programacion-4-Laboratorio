@@ -92,6 +92,10 @@ void ControladorCalificacion::liberarMemoria(){
     }
 }
 
+void ControladorCalificacion::eliminarCalificacion(calificacion* cal){//borra del map la calificacion, pero no de memoria, eso se hace en EliminarCalificacion de Calificacion
+    calificaciones.erase(cal->getId());
+}
+
 ////////////////////////////////////////////////
 
         map<int,DTEstadia*> ControladorCalificacion::obtenerEstadiasHuesped(string){

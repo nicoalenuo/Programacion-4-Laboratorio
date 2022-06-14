@@ -39,6 +39,7 @@ class ControladorCalificacion:public IControladorCalificacion {
             datosEstadia=dte;
         }
         void eliminarSuscripto(empleado*);
+        void eliminarCalificacion(calificacion*);
         map<int,DTEstadia*> obtenerEstadiasHuesped(string);
         void agregarCalificacion(string,string,int);
         map<int,DTCalificacion*> obtenerCalificaciones(string);

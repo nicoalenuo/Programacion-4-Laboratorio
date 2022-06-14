@@ -89,12 +89,25 @@ map<int,DTEstadia*> hostal:: obtenerEstadias(){
 }
 
 map<int,DTReserva*> hostal::obtenerReservas(){
-    map<int,DTReserva*> a;
-    return a;
+    map<int,habitacion*>::iterator it;
+    map<int,DTReserva*>::iterator it2;
+    map<int,DTReserva*> Resultado;
+    for (it=habitaciones.begin() ; it!=habitaciones.end() ; it++){
+        map<int,DTReserva*> ResultadoLocal;
+        ResultadoLocal =(*(*it).second).obtenerReservas();
+        for(it2 = ResultadoLocal.begin(); it2 != ResultadoLocal.end();it2++){
+            Resultado.insert(*it2);
+        }
+    }
+    return Resultado;
 }
 
 bool hostal::trabajaEmpleado(string emailEmpleado){
     return empleados.find(emailEmpleado)!=empleados.end(); 
+}
+
+bool hostal::perteneceCalificacion(int Id){
+    return calificaciones.find(Id)!= calificaciones.end();
 }
 
 map<int,DTCalificacion*> hostal::obtenerCalifSinCom(){

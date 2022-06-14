@@ -147,9 +147,19 @@ DTEstadia* grupal::darEstadiaDeHuesped(string email){
     return send;
 }
 
-/////////////////////////////////////////////
+void grupal::darBajaReserva(){
+    set<huespedGrupal*>::iterator it;
+    habitacion* h = getHabitacion();
+    (*h).darBajaReserva(codigo);
+    for(it= huesGrup.begin(); it!= huesGrup.end();it++){
+        huespedGrupal* gh = *it;
+        (*it)->darBaja();
+        huesGrup.erase((*it));
+        delete gh;
+    } 
+}
 
-void grupal::darBajaReserva(){}
+/////////////////////////////////////////////
 
 DTEstadia* grupal::obtenerEstadia(){return NULL;}
 

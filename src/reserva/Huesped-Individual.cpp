@@ -44,4 +44,15 @@ bool huespedIndividual::esDeHuesped(string email){
     return huespedAsoc->getEmail()==email;
 }
 
-void huespedIndividual::darBaja(){}
+void huespedIndividual::darBaja(){
+    estadia* es = estadiaAsoc;
+    if(es!= NULL){
+        es->eliminarEstadia();
+        delete estadiaAsoc;
+    }
+    estadiaAsoc = NULL;
+}
+
+huespedIndividual::~huespedIndividual(){
+   
+}

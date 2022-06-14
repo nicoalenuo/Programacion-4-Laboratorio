@@ -58,6 +58,7 @@ class hostal{
         DTReserva* obtenerReservaDeEstadia();
         bool trabajaEmpleado(string);
         DTHostal* darDatos();   
+        bool perteneceCalificacion(int);
         float darCalifPromedio();
         map<string,DTEmpleado*> quitarAsignados(map<string,DTEmpleado*>);
         void agregarCalificacionAMap(calificacion * c){
