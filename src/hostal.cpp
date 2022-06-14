@@ -60,7 +60,19 @@ void hostal::asignarEmpleado(empleado* e){
     cout << "aea" << endl;
     empleados.insert(pair<string,empleado*>((*e).getEmail(),e));
 }
-
+map<int,DTReserva*> hostal::obtenerReservas(){
+    map<int,habitacion*>::iterator it;
+    map<int,DTReserva*> Resultado;
+    for (it=habitaciones.begin() ; it!=habitaciones.end() ; it++){
+        map<int,DTReserva*> ResultadoLocal;
+        map<int,DTReserva*>::iterator it2;
+        ResultadoLocal =(*(*it).second).obtenerReservas();
+        for(it2 = ResultadoLocal.begin(); it2 != ResultadoLocal.end();it2++){
+            Resultado.insert(*it2);
+        }
+    }
+    return Resultado;
+}
 map<int,DTCalificacion*> hostal::obtenerCalsYComs(){
     map<int,DTCalificacion*> resultado;
     map<int,calificacion*>::iterator it;
@@ -74,7 +86,12 @@ map<int,DTCalificacion*> hostal::obtenerCalsYComs(){
 bool hostal::tieneHab(int nHab){
     return habitaciones.find(nHab) != habitaciones.end();
 }
-
+bool hostal::perteneceCalificacion(int Id){
+    return calificaciones.find(Id)!= calificaciones.end();
+}
 bool hostal::trabajaEmpleado(string emailEmpleado){
     return empleados.find(emailEmpleado)!=empleados.end(); 
+}
+void hostal::removerCalificacion(calificacion* c){
+    calificaciones.erase(c->getId());
 }

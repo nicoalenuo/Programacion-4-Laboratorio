@@ -34,7 +34,7 @@ class IControladorCalificacion {
         virtual map<int,DTCalificacion*> obtenerCalificaciones(string)=0;
         virtual void ingresarComentario(string)=0;
         virtual void liberarEstadia()=0;
-        virtual void eliminarCalificacion()=0;
+        virtual void eliminarCalificacion(calificacion*)=0;
         virtual void RegistrarEstadia(DTHostal*, string, DTReserva*, DTEstadia*)=0;
         virtual void ingresarRespuesta(string)=0;
         virtual float obtenerPromocionDeEstadia()=0;

@@ -40,7 +40,9 @@ void ControladorCalificacion::notificarSuscriptos(string nombreAutor,int puntuac
         }
         void ControladorCalificacion::ingresarComentario(string){}
         void ControladorCalificacion::liberarEstadia(){};
-        void ControladorCalificacion::eliminarCalificacion(){}
+        void ControladorCalificacion::eliminarCalificacion(calificacion* cal){//borra del map la calificacion, pero no de memoria, eso se hace en EliminarCalificacion de Calificacion
+            calificaciones.erase(cal->getId());
+        }
         void ControladorCalificacion::RegistrarEstadia(DTHostal* Hosta, string email, DTReserva* Reserva, DTEstadia* Estadia){
             fabrica* Fab =fabrica::getInstance();
             IControladorReserva* CH = (*Fab).getIControladorReserva();

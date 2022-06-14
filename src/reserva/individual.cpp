@@ -36,9 +36,9 @@ void individual::finalizarSiEsReservaBuscada(string emailHuesped,string nombreHo
         string individual::getTipoReserva(){return "Individual";}
         void individual::darBajaReserva(){
             huespedIndividual* HI = huesInd;
-            HI->DarBaja();
-            
-
+            HI->darBaja();
+            delete HI;
+            HI= NULL;
         }
         map<int, DTEstadia*> individual::obtenerEstadias(){ 
             map<int,DTEstadia*> a;

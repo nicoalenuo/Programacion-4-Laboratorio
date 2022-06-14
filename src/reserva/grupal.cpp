@@ -50,7 +50,16 @@ DTHostal* grupal::getDTHostal(){
             return Resultado;
         }
         string grupal::getTipoReserva(){return "Grupal";}
-        void grupal::darBajaReserva(){}
+        void grupal::darBajaReserva(){
+            set<huespedGrupal*>::iterator it;
+            for(it= huesGrup.begin(); it!= huesGrup.end();it++){
+                huespedGrupal* gh = *it;
+                (*it)->DarBaja();
+                huesGrup.erase(it);
+                delete gh;
+            }
+           
+        }
         map<int, DTEstadia*> grupal::obtenerEstadias(){
             map<int,DTEstadia*> a;
             return a;

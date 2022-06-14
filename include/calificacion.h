@@ -55,6 +55,7 @@ class calificacion{
         DTCalificacion* darDatos();
         bool sinRespuesta();
         void removerCalificacion();
+        void eliminarCalificacion();
         DTRespuesta* obtenerRespuesta();
         void ingresarRespuesta(string);
         DTCalificacion* getDatosCalificacion(); 

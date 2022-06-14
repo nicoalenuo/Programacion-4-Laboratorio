@@ -20,6 +20,14 @@ hostal* habitacion::darHostal(){
         IControladorHostal* CH = (*Fab).getIControladorHostal();
         return CH->DarHostalDeHabitacion(this);
 }
+map<int,DTReserva*>habitacion::obtenerReservas(){
+        map<int,DTReserva*> Resultado;
+        map<int,reserva*>::iterator it;
+        for(it = reservas.begin(); it != reservas.end();it++){
+            Resultado.insert(pair<int,DTReserva*>((*(*it).second).getCodigo(), ((*it).second)->getDTReserva()));
+        }
+        return Resultado;
+}
 DTHabitacion* habitacion::darDatos(){
     DTHabitacion* resultado = new DTHabitacion((*this).numero , (*this).precio , (*this).capacidad);
     return resultado;

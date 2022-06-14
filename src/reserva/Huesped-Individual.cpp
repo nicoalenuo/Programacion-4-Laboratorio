@@ -5,6 +5,9 @@ huespedIndividual::huespedIndividual(huesped* hues){
     this->huespedAsoc = hues;
 }
 
+huespedIndividual::~huespedIndividual(){
+   
+}
 void huespedIndividual::finalizarEstadiaActiva(string emailHuesped){
     huesped* hus=getHuesped();
     string emailHus = (*hus).getEmail();
@@ -14,4 +17,13 @@ void huespedIndividual::finalizarEstadiaActiva(string emailHuesped){
             (*es).finalizarEstadiaActiva();
         }
     }
+}
+void huespedIndividual::darBaja(){
+    estadia* es = estadiaAsoc;
+    if(es!= NULL){
+        es->eliminarEstadia();
+        delete estadiaAsoc;
+    }
+    estadiaAsoc = NULL;
+
 }
