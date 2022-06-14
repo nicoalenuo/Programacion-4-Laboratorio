@@ -51,6 +51,11 @@ class ControladorUsuario:public IControladorUsuario {
         void agregarHuespedAMap(huesped* h){
             huespedes.insert(pair<string,huesped*>((*h).getEmail(),h));
         }
+        huesped* getHuesped(DTHuesped* DTU){
+            map<string,huesped*>::iterator it;
+            it =  huespedes.find(DTU->getMail());
+            return (*it).second;
+        }
 };
 
 #endif

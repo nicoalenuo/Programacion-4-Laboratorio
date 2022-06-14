@@ -11,7 +11,7 @@ class DTReservaIndividual:public DTReserva {
     private:
 
     public:
-        DTReservaIndividual(string,string,string);
+        DTReservaIndividual(int, Date, Date, EstadoReserva,float);
         ~DTReservaIndividual();
 
         int getCodigo() {
@@ -44,6 +44,13 @@ class DTReservaIndividual:public DTReserva {
 
         void setEstado(EstadoReserva estado) {
             (*this).estado = estado;
+        }
+        float getCosto() {
+            return (*this).costo;
+        }
+
+        void setCosto(float Costo) {
+            (*this).costo = Costo;
         }
 };
 

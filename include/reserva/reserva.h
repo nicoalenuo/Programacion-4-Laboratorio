@@ -3,6 +3,7 @@
 
 #include "../DTyEnum/EstadoReserva.h"
 #include "../habitacion.h"
+#include "../DTyEnum/DTHostal.h"
 #include "Huesped-Individual.h"
 #include "../DTyEnum/DTReservaIndividual.h"
 #include "../DTyEnum/DTReservaGrupal.h"
@@ -11,7 +12,7 @@
 #include <stdio.h>
 using namespace std;
 
-class habitacion;//agregue esto XD
+class habitacion;
 
 class reserva{
     protected:
@@ -30,7 +31,7 @@ class reserva{
         virtual Date getCheckOut()=0;
         virtual EstadoReserva getEstado()=0;
         virtual float getCosto()=0;
-        virtual void setHabitacion()=0;
+        virtual void setHabitacion(habitacion*)=0;
         virtual void setCodigo(int)=0;
         virtual void setCheckIn(Date)=0;
         virtual void setCheckOut(Date)=0;
@@ -45,6 +46,8 @@ class reserva{
         virtual DTReserva* obtenerResrvaDeEst()=0;
         virtual bool tieneEstadiaFinalizadaDeHuesped(string)=0;
         virtual DTEstadia* darEstadiaDeHuesped(string)=0;
+        virtual DTHostal* getDTHostal()=0;
+        virtual DTReserva* getDTReserva()=0;
 };
 
 #endif

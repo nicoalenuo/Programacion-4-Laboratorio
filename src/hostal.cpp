@@ -38,7 +38,6 @@ map<string,DTEmpleado*> hostal::quitarAsignados(map<string,DTEmpleado*> emps){
 }
 
 void hostal::asignarEmpleado(empleado* e){
-    cout << "aea" << endl;
     empleados.insert(pair<string,empleado*>((*e).getEmail(),e));
 }
 
@@ -58,4 +57,23 @@ bool hostal::tieneHab(int nHab){
 
 bool hostal::trabajaEmpleado(string emailEmpleado){
     return empleados.find(emailEmpleado)!=empleados.end(); 
+}
+
+void hostal::agregarHabitacionAMap(habitacion* h){
+    habitaciones.insert(pair<int,habitacion*>((*h).getNumero(),h));
+}
+
+map<int,DTHabitacion*> hostal::obtenerHabitacionesDisponiblesEntre(Date CheckIn, Date CheckOut){
+    map<int,DTHabitacion*> Resultado;
+    map<int,habitacion*>::iterator it;
+
+    for (it=habitaciones.begin() ; it !=habitaciones.end() ; it++){//Por cada habitacion
+        //Por cada reserva
+        map<int,habitacion*>::iterator ithab;
+        habitacion* Hab = (*it).second;
+        if(Hab->disponibleEn(CheckIn,CheckOut)){
+            Resultado.insert(pair<int,DTHabitacion*>(Hab->getNumero(),Hab->darDatos()));
+        }
+    }
+    return Resultado;
 }

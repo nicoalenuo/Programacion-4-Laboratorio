@@ -28,10 +28,10 @@ class IControladorReserva{
         virtual void ingresarDatosReserva(DTHostal*, Date, Date)=0;
         virtual map<int,DTHabitacion*> obtenerHabitacionesDisponibles()=0;
         virtual void EscogerHabitacion(DTHabitacion*)=0;
-        virtual DTHuesped* DesignarPropietarioDeReserva(DTHuesped*)=0;
         virtual void IngresarHuespedEnReserva(DTHuesped*)=0;
         virtual void CancelarReserva()=0;
         virtual void confirmarReserva()=0; 
+        virtual void DesignarPropietarioDeReserva(DTHuesped*)=0;
         virtual map<int,DTReserva*> ListarReservasNoCanceladasDeHuesped(DTHostal*, string)=0;
         virtual void confirmarBaja(DTHostal*, int)=0;
         virtual void finalizarEstadiaActiva(string, string)=0;
@@ -40,6 +40,7 @@ class IControladorReserva{
         virtual map<string,string> obtenerNombresDeReserva(DTReservaGrupal*)=0;
         virtual map<int,DTEstadia*> obtenerEstadiaHuesped(string)=0;
         virtual void agregarReservaAMap(reserva * r)=0;
+        virtual reserva* getReserva(DTReserva*)=0;
 };
 
 #endif

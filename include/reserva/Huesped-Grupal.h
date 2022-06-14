@@ -16,7 +16,7 @@ class huespedGrupal{
         estadia* estadiaAsoc;      
     public:
         ~huespedGrupal();
-        huespedGrupal();
+        huespedGrupal(huesped*);
         huesped* getHuesped(){
             return huespedAsoc;
         }

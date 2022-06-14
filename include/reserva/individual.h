@@ -14,7 +14,7 @@ class individual:public reserva{
         huespedIndividual* huesInd;
     public:
         ~individual();
-        individual(int,Date,Date,EstadoReserva,float);
+        individual(DTReservaIndividual*, habitacion*,DTHuesped*);
 
         habitacion* getHabitacion(){
             return habitacionAsoc;
@@ -63,14 +63,14 @@ class individual:public reserva{
         DTReserva* obtenerResrvaDeEst();
         bool tieneEstadiaFinalizadaDeHuesped(string);
         DTEstadia* darEstadiaDeHuesped(string);
-
-        //Cosas que agregue
         huespedIndividual* getHuespedIndividual(){
             return huesInd;
         }
         void setHuespedIndividual(huespedIndividual* hi){
             huesInd = hi;
         }
+        DTHostal* getDTHostal();
+        DTReserva* getDTReserva();
 };
 
 #endif

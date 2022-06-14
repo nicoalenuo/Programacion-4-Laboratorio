@@ -7,6 +7,7 @@
 #include "DTyEnum/DTEstadia.h"
 #include "DTyEnum/DTHabitacion.h"
 #include "DTyEnum/DTDatosEstadia.h"
+#include "hostal.h"
 
 #include <iostream>
 #include <stdio.h>
@@ -14,6 +15,7 @@ using namespace std;
 #include <map>
 
 class reserva; //Agregado
+class hostal;
 
 class habitacion{
     private:
@@ -26,9 +28,7 @@ class habitacion{
         ~habitacion();
         habitacion(int,float,int);
 
-        int getNumero(){
-            return numero;
-        }
+        int getNumero();
         float getPrecio(){
             return precio;
         }
@@ -51,8 +51,10 @@ class habitacion{
         map<int, DTReserva*> obtenerReservas();
         map<int, DTEstadia*> obtenerEstadias();
         DTDatosEstadia* obtenerDatos();
+        hostal* darHostal();
         DTReserva* obtenerReservaDeEstadia();
         void agregarReservaAMap(reserva * );
+        bool disponibleEn(Date,Date);
 };    
 
 #endif

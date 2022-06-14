@@ -1,4 +1,6 @@
 #include "../../include/ControladorCalificacion/ControladorCalificacion.h"
+#include "../../include/fabrica.h"
+
 
 ControladorCalificacion* ControladorCalificacion::instancia = NULL;
 
@@ -29,6 +31,30 @@ void ControladorCalificacion::notificarSuscriptos(string nombreAutor,int puntuac
     }
 }
 
+void ControladorCalificacion::RegistrarEstadia(DTHostal* Hosta, string email, DTReserva* Reserva, DTEstadia* Estadia){
+            fabrica* Fab =fabrica::getInstance();
+            IControladorReserva* CH = (*Fab).getIControladorReserva();
+            reserva* r = CH->getReserva(Reserva);
+            string TipoReserva = r->getTipoReserva();
+            if(TipoReserva == "Individual"){
+                individual* rI = static_cast<individual*>(r);
+                huespedIndividual* HI = rI->getHuespedIndividual();
+                MaxCodigoEstadia++;
+                Estadia->setCodigo(MaxCodigoEstadia);
+                estadia* e = new estadia(Estadia); 
+                HI->setEstadia(e);
+                estadias.insert(pair<int,estadia*>(Estadia->getCodigo(),e));
+            }else{
+                grupal* rG = static_cast<grupal*>(r);
+                huespedGrupal* HG = rG->GetHuespedGrupalDeUsuario(email);
+                MaxCodigoEstadia++;
+                Estadia->setCodigo(MaxCodigoEstadia);
+                estadia* e = new estadia(Estadia); 
+                HG->setEstadia(e);
+                estadias.insert(pair<int,estadia*>(Estadia->getCodigo(),e));
+            }
+        }
+
         map<int,DTEstadia*> ControladorCalificacion::obtenerEstadiasHuesped(string){
             map<int,DTEstadia*> a;
             return a;
@@ -41,7 +67,6 @@ void ControladorCalificacion::notificarSuscriptos(string nombreAutor,int puntuac
         void ControladorCalificacion::ingresarComentario(string){}
         void ControladorCalificacion::liberarEstadia(){};
         void ControladorCalificacion::eliminarCalificacion(){}
-        void ControladorCalificacion::RegistrarEstadia(DTHostal*, string, DTReserva*, DTEstadia*){}
         void ControladorCalificacion::ingresarRespuesta(string){}
         float ControladorCalificacion::obtenerPromocionDeEstadia(){return 1;}
         int ControladorCalificacion::obtenerCodigoDeEstadia(){return 1;}

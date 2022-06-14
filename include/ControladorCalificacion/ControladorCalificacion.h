@@ -13,6 +13,7 @@ class ControladorCalificacion:public IControladorCalificacion {
         map<int,calificacion*> calificaciones;
         map<string,IObserver*> observers;
         map<int,estadia*> estadias;
+        int MaxCodigoEstadia = 0;
 
         static ControladorCalificacion* instancia;
         ControladorCalificacion();

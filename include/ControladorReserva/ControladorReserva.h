@@ -12,10 +12,19 @@ using namespace std;
 class ControladorReserva:public IControladorReserva {
     private:
         map<int,reserva*> reservas;
+        int IDActualReserva =0;
+
 
         DTReserva* datosReserva;
         DTReservaIndividual* datosIndividual;
         DTReservaGrupal* datosGrupal;
+
+        DTHostal* Hos;
+        Date CheckIn;
+        Date CheckOut;
+        DTHabitacion* Hab;
+        DTHuesped * Propietario;
+        map<string,DTHuesped*> SDTH;
 
         static ControladorReserva* instancia;
         ControladorReserva();
@@ -28,10 +37,11 @@ class ControladorReserva:public IControladorReserva {
         void ingresarDatosReserva(DTHostal*, Date, Date);
         map<int,DTHabitacion*> obtenerHabitacionesDisponibles();
         void EscogerHabitacion(DTHabitacion*);
-        DTHuesped* DesignarPropietarioDeReserva(DTHuesped*);
         void IngresarHuespedEnReserva(DTHuesped*);
         void CancelarReserva();
         void confirmarReserva();  
+        reserva* getReserva(DTReserva*);
+        void DesignarPropietarioDeReserva(DTHuesped*);
         map<int,DTReserva*> ListarReservasNoCanceladasDeHuesped(DTHostal*, string);
         void confirmarBaja(DTHostal*, int);
         void finalizarEstadiaActiva(string, string);

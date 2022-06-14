@@ -95,6 +95,27 @@ void ControladorHostal::IngresarDatosHostal(DTHostal* dth){
     datosHostal=dth;
 }
 
+hostal* ControladorHostal::DarHostalDeHabitacion(habitacion* hab){
+    map<string,hostal*>::iterator it;
+    bool pr = false;
+    hostal* Solucion = NULL;
+    it = hostales.begin();
+    while(it != hostales.end() && !pr){
+        pr = (*it).second->tieneHab(hab->getNumero());
+        if(pr) {
+            Solucion= (*it).second;
+        }
+        it++;
+    }
+    return Solucion;
+}
+
+habitacion * ControladorHostal::getHab(DTHabitacion* DTH){
+    map<int,habitacion*>::iterator it;
+    it =  habitaciones.find(DTH->getNumero());
+   return (*it).second;
+}
+
         hostal* ControladorHostal::obtenerHostal(DTHostal*){return NULL;}
         void ControladorHostal::confirmarAltaHostal(){}
         void ControladorHostal::cancelarAltaHostal(){}

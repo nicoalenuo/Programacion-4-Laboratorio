@@ -60,7 +60,8 @@ class ControladorHostal:public IControladorHostal {
         void agregarHabitacionAMap(habitacion * h){
             habitaciones.insert(pair<int,habitacion*>((*h).getNumero(),h));
         }
-
-};
+        habitacion* getHab(DTHabitacion*);  
+        hostal* DarHostalDeHabitacion(habitacion*);  
+};  
 
 #endif
