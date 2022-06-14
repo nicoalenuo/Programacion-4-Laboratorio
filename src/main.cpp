@@ -14,10 +14,11 @@ DTHostal* ElegirHostal(){
     IControladorHostal *ICH = (*f).getIControladorHostal();
     map<string,DTHostal*> listaHostales = (*ICH).obtenerHostales();
 	map<string,DTHostal*>::iterator it;
-    int cont = 1;
+    int cont = 0;
 	for(it=listaHostales.begin(); it!=listaHostales.end(); it++){
-		std::cout << cont <<". Nombre: " << ((*it).second)->getNombre() << std::endl;
-        cont++;
+		cont++;
+        std::cout << cont <<". Nombre: " << ((*it).second)->getNombre() << std::endl;
+        
 	}
 	bool existeH = false;
 	int numHostal;	
@@ -40,7 +41,6 @@ DTHostal* ElegirHostal(){
     return (*it).second;	
 };
 
-#include <iostream>
 int main(){
     //----Declaracion de variables----//
     char OpcionAux, esFingerAux, confirmarAlta;
@@ -84,6 +84,7 @@ int main(){
                     Opcion2 = (int)OpcionAux - '0'; //Control en caso de que se ingrese char en vez de int
                     switch(Opcion2){
                         case 1:{ //Alta Hostal
+                           cout<<"Caso alta hostal \n"; 
                             fabrica* f = fabrica::getInstance();
                             IControladorHostal *ICH = (*f).getIControladorHostal();
                             
@@ -101,35 +102,9 @@ int main(){
                             DTHostal* pdth = &dth;
                             (*ICH).IngresarDatosHostal(pdth);
                             (*ICH).confirmarAltaHostal();
-                            cout<<"Se ingreso el nuevo hostal \n";
-                            map<string,DTHostal*> listaHostales = (*ICH).obtenerHostales();
-                            map<string,DTHostal*>::iterator it;
-                            it=listaHostales.begin();
-                            std::cout  <<". Nombre: " << ((*it).second)->getNombre() << std::endl;                                
-	                        
-                            /*try{
-                                map<string, hostal*> hostales = (*ICH).getHostales();
-                                map<string,hostal*>::iterator it;
-                                existe = true;
-                                while (it!=hostales.begin() && !existe){
-                                    if (((*it).second)->getNombre() == NombreHos)
-                                        existe = true;
-                                        throw std::invalid_argument("");
-                                    it++;
-                                    }
-                                    if (it == hostales.end())
-                                        (*ICH).IngresarDatosHostal(pdth);
-                                        (*ICH).confirmarAltaHostal();
-                                        cout<<"Se ingreso el nuevo hostal";
-                            }
-                            catch(invalid_argument &e){
-                                (*ICH).liberarDatosHostal();
-                                cout << "Ya existe un hostal de nombre " << NombreHos << endl;
-                            };*/
                             
-                        
-                        break;
                         };
+                        break;
                         //case 1 | Alta Hostal
                         case 2:{ //Alta Habitacion
                             
@@ -173,7 +148,8 @@ int main(){
                             fabrica* f = fabrica::getInstance();
                             IControladorHostal *ICH = (*f).getIControladorHostal();
                             (*ICH).mostrarHostal();
-                         */   
+                         */
+                        cout<<"Caso consultar hostal";
                         };
                         break;
                         // case 3 | Consultar Hostal
@@ -201,7 +177,6 @@ int main(){
                         //case 4 | Consultar Top 3 Hostales
                         
                         case 5:{
-                            
                             finSubMenu = true;
                         };
                         break;
@@ -251,19 +226,23 @@ int main(){
                                     case 1:{ 
                                         cargo = Administracion;
                                         cargoCorrecto = true;
-                                    }
+                                    };
+                                    break;
                                     case 2:{ 
                                         cargo = Limpieza;
                                         cargoCorrecto = true;
-                                    }
+                                    };
+                                    break;
                                     case 3:{ 
                                         cargo = Recepcion;
                                         cargoCorrecto = true;
-                                    }
+                                    };
+                                    break;
                                     case 4:{ 
                                         cargo = Infraestructura;
                                         cargoCorrecto = true;
-                                    }
+                                    };
+                                    break;
                                     default:{ 
                                         cout<<"Por favor, ingrese una opcion valida: \n";
                                         cin>>CargoAux;
@@ -293,6 +272,9 @@ int main(){
                             (*ICU).IngresarDatosUsuario(dtu);
                             (*ICU).confirmarAltaUsuario();
                             cout<<"Se confirmo el alta de Empleado.\n";
+                            map<string,DTEmpleado*> empleados = (*ICU).obtenerEmpleados();
+                            map<string,DTEmpleado*>::iterator j = empleados.begin();
+                            std::cout<<((*j).second)->getNombre() <<std::endl;
                         };
                         break;
                         //case 1 | Alta Empleado
@@ -644,41 +626,42 @@ int main(){
 
                     //Alta Huespedes
                     DTHuesped hue1("Sofia","sofia@mail.com","123",true); 
-                    DTHuesped* Pdth1 = &hue1;
-                    DTUsuario* dtuh1 = dynamic_cast<DTUsuario*>(Pdth1);
-                    (*ICU).IngresarDatosUsuario(dtuh1);
+                    DTHuesped* pdthue1 = &hue1;
+                    DTUsuario* dthu1 = dynamic_cast<DTUsuario*>(pdthue1);
+                    (*ICU).IngresarDatosUsuario(dthu1);
                     (*ICU).confirmarAltaUsuario();
 
                     DTHuesped hue2("Frodo","frodo@mail.com","123",true); 
-                    DTHuesped* Pdth2 = &hue2;
-                    DTUsuario* dtuh2 = dynamic_cast<DTUsuario*>(Pdth2);
-                    (*ICU).IngresarDatosUsuario(dtuh2);
+                    DTHuesped* pdthue2 = &hue2;
+                    DTUsuario* dthu2 = dynamic_cast<DTUsuario*>(pdthue2);
+                    (*ICU).IngresarDatosUsuario(dthu2);
                     (*ICU).confirmarAltaUsuario();
 
                     DTHuesped hue3("Sam","sam@mail.com","123",false); 
-                    DTHuesped* Pdth3 = &hue3;
-                    DTUsuario* dtuh3 = dynamic_cast<DTUsuario*>(Pdth3);
-                    (*ICU).IngresarDatosUsuario(dtuh3);
+                    DTHuesped* pdthue3 = &hue3;
+                    DTUsuario* dthu3 = dynamic_cast<DTUsuario*>(pdthue3);
+                    (*ICU).IngresarDatosUsuario(dthu3);
                     (*ICU).confirmarAltaUsuario();
 
                     DTHuesped hue4("Merry","merry@mail.com","123",false); 
-                    DTHuesped* Pdth4 = &hue4;
-                    DTUsuario* dtuh4 = dynamic_cast<DTUsuario*>(Pdth4);
-                    (*ICU).IngresarDatosUsuario(dtuh4);
+                    DTHuesped* pdthue4 = &hue4;
+                    DTUsuario* dthu4 = dynamic_cast<DTUsuario*>(pdthue4);
+                    (*ICU).IngresarDatosUsuario(dthu4);
                     (*ICU).confirmarAltaUsuario();
 
                     DTHuesped hue5("Pippin","pippin@mail.com","123",false); 
-                    DTHuesped* Pdth5 = &hue5;
-                    DTUsuario* dtuh5 = dynamic_cast<DTUsuario*>(Pdth5);
-                    (*ICU).IngresarDatosUsuario(dtuh5);
+                    DTHuesped* pdthue5 = &hue5;
+                    DTUsuario* dthu5 = dynamic_cast<DTUsuario*>(pdthue5);
+                    (*ICU).IngresarDatosUsuario(dthu5);
                     (*ICU).confirmarAltaUsuario();
 
                     DTHuesped hue6("Seba","seba@mail.com","123",true); 
-                    DTHuesped* Pdth6 = &hue6;
-                    DTUsuario* dtuh6 = dynamic_cast<DTUsuario*>(Pdth6);
-                    (*ICU).IngresarDatosUsuario(dtuh6);
+                    DTHuesped* pdthue6 = &hue6;
+                    DTUsuario* dthu6 = dynamic_cast<DTUsuario*>(pdthue6);
+                    (*ICU).IngresarDatosUsuario(dthu6);
                     (*ICU).confirmarAltaUsuario();
 
+                    //Alta Hostales
                     //HO1
                     
                     DTHostal dth1("La posada del finger","Av de la playa 123, Maldonado","099111111",0);
@@ -686,23 +669,42 @@ int main(){
                     (*ICH).IngresarDatosHostal(pdth1);
                     (*ICH).confirmarAltaHostal();
 
+                    //HO2
+                    DTHostal dth2("Mochileros","Rambla Costanera 333, Rocha","42579512",0);
+                    DTHostal* pdth2 = &dth2;
+                    (*ICH).IngresarDatosHostal(pdth2);
+                    (*ICH).confirmarAltaHostal();
+
+                    //HO3                    
+                    DTHostal dth3("El Pony Pisador","Bree (preguntar por Gandalf)","000",0);
+                    DTHostal* pdth3 = &dth3;
+                    (*ICH).IngresarDatosHostal(pdth3);
+                    (*ICH).confirmarAltaHostal();
+
+                    //HO4
+                    DTHostal dth4("Altos de Fing","Av del Toro 1424","099892992",0);
+                    DTHostal* pdth4 = &dth4;
+                    (*ICH).IngresarDatosHostal(pdth4);
+                    (*ICH).confirmarAltaHostal();
+
+                    //HO5
+                    DTHostal dth5("Caverna Lujosa","Amaya 2515","233233235",0);
+                    DTHostal* pdth5 = &dth5;
+                    (*ICH).IngresarDatosHostal(pdth5);
+                    (*ICH).confirmarAltaHostal();
+
+
+
                     //HO1 - Habitaciones
                     //HA1
-                    //buscar hostal
+                    
+                    pdth1 = &dth1;
+                    (*ICH).IngresarDatosHostal(pdth1);
+
                     DTHabitacion dthab1(1,40,2);
                     DTHabitacion* pdthab1 = &dthab1;
                     (*ICH).IngresarDatosHab(pdthab1);
                     (*ICH).confirmarAltaHabitacion();
-
-                    //H01 - HA1 - Reserva R1
-                    
-                    Date ChIn1(01,05,22);
-                    Date ChOut1(10,05,22);
-                    (*ICR).ingresarDatosReserva(pdth1,ChIn1,ChOut1);
-                    (*ICR).DesignarPropietarioDeReserva(Pdth1);                    
-                    (*ICR).confirmarReserva();
-
-                    //(*ICC).RegistrarEstadia(dth,"sofia@mail.com",res,est);
 
                     //HA2
                     DTHabitacion dthab2(2,10,7);
@@ -716,37 +718,116 @@ int main(){
                     (*ICH).IngresarDatosHab(pdthab3);
                     (*ICH).confirmarAltaHabitacion();
 
-                    
-
-                    //HO1 - HA3 / Reserva R3
-
-                    Date ChIn2(07,06,22);
-                    Date ChOut2(30,06,22);
-                    (*ICR).ingresarDatosReserva(pdth1,ChIn2,ChOut2);
-                    (*ICR).DesignarPropietarioDeReserva(Pdth1);                    
-                    (*ICR).confirmarReserva();
-
                     //HA4
-
                     DTHabitacion dthab4(4,5,12);
                     DTHabitacion* pdthab4 = &dthab4;
                     (*ICH).IngresarDatosHab(pdthab4);
                     (*ICH).confirmarAltaHabitacion();
 
+                    (*ICH).liberarDatosHostal();
+
+                    //HO3 - Habitaciones
+                    //HA6
+                    pdth3 = &dth3;
+                    (*ICH).IngresarDatosHostal(pdth3);
+
+                    DTHabitacion dthab6(1,9,5);
+                    DTHabitacion* pdthab6 = &dthab6;                    
+                    (*ICH).IngresarDatosHab(pdthab6);
+                    (*ICH).confirmarAltaHabitacion();
+
+                    (*ICH).liberarDatosHostal();
+
+                    //HO5 - Habitaciones
+                    //HA5
+                    pdth5 = &dth5;
+                    (*ICH).IngresarDatosHostal(pdth5);
+
+                    DTHabitacion dthab5(1,3,2);
+                    DTHabitacion* pdthab5 = &dthab5;
+                    (*ICH).IngresarDatosHab(pdthab5);
+                    (*ICH).confirmarAltaHabitacion();
+
+                    (*ICH).liberarDatosHostal();
+                    
+                    //H01 - Reservas
+                    //R1 - HA1
+                    pdth1 = &dth1;
+                    pdthab1 = &dthab1;
+                    Date ChIn1(01,05,22);
+                    Date ChOut1(10,05,22);
+                    (*ICR).ingresarDatosReserva(pdth1,ChIn1,ChOut1);
+                    (*ICR).EscogerHabitacion(pdthab1);
+                    pdthue1 = &hue1;
+                    (*ICR).DesignarPropietarioDeReserva(pdthue1);   
+                    (*ICR).IngresarHuespedEnReserva(pdthue1);                 
+                    (*ICR).confirmarReserva();
+
+                    //HO1 - Reservas
+                    //R3 - HA3
+                    
+                    pdthab3 = &dthab3;
+                    Date ChIn3(07,06,22);
+                    Date ChOut3(30,06,22);
+                    (*ICR).ingresarDatosReserva(pdth1,ChIn3,ChOut3);
+                    (*ICR).EscogerHabitacion(pdthab3);
+                    pdthue1 = &hue1;
+                    (*ICR).DesignarPropietarioDeReserva(pdthue1);   
+                    (*ICR).IngresarHuespedEnReserva(pdthue1);                 
+                    (*ICR).confirmarReserva();
+
+                    //HO3 - Reservas
+                    //R2 - HA6
+                    pdth3 = &dth3;
+                    pdthab6 = &dthab6;
+                    Date ChIn2(04,01,01);
+                    Date ChOut2(05,01,01);
+                    (*ICR).ingresarDatosReserva(pdth3,ChIn2,ChOut2);
+                    (*ICR).EscogerHabitacion(pdthab6);
+                    pdthue2 = &hue2;
+                    pdthue3 = &hue3;
+                    pdthue4 = &hue4;
+                    pdthue5 = &hue5;
+                    (*ICR).DesignarPropietarioDeReserva(pdthue2);   
+                    (*ICR).IngresarHuespedEnReserva(pdthue2);
+                    (*ICR).IngresarHuespedEnReserva(pdthue3);
+                    (*ICR).IngresarHuespedEnReserva(pdthue4);
+                    (*ICR).IngresarHuespedEnReserva(pdthue5);                                     
+                    (*ICR).confirmarReserva(); 
+
+                    //HO5 - Reserva
+                    //R4
+                    pdth5 = &dth5;
+                    pdthab5 = &dthab5;
+                    Date ChIn4(10,06,22);
+                    Date ChOut4(30,06,22);
+                    (*ICR).ingresarDatosReserva(pdth5,ChIn4,ChOut4);
+                    (*ICR).EscogerHabitacion(pdthab5);
+                    pdthue6 = &hue6;
+                    (*ICR).DesignarPropietarioDeReserva(pdthue6);   
+                    (*ICR).IngresarHuespedEnReserva(pdthue6);                 
+                    (*ICR).confirmarReserva();
+
+                    //(*ICC).RegistrarEstadia(dth,"sofia@mail.com",res,est);
+
+                    
+
+                    
+
                     //HO1 - Empleados
+                    pdth1 = &dth1;
+                    (*ICH).IngresarDatosHostal(pdth1);
 
                     (*ICU).AsignarEmpleadoAHostal("emilia@mail.com");
                     (*ICH).FinalizarAsignacionDeEmpleados();
 
                     (*ICH).liberarDatosHostal();
 
-                    //HO2
-                    DTHostal dth2("Mochileros","Rambla Costanera 333, Rocha","42579512",0);
-                    DTHostal* pdth2 = &dth2;
-                    (*ICH).IngresarDatosHostal(pdth2);
-                    (*ICH).liberarDatosHostal();
+                    
 
                     //HO2 - Empleados
+                    pdth2 = &dth2;
+                    (*ICH).IngresarDatosHostal(pdth2);
 
                     (*ICU).AsignarEmpleadoAHostal("leo@mail.com");
                     (*ICH).FinalizarAsignacionDeEmpleados();
@@ -754,130 +835,89 @@ int main(){
                     (*ICU).AsignarEmpleadoAHostal("alina@mail.com");
                     (*ICH).FinalizarAsignacionDeEmpleados();
 
-                    //HO3
-                    DTHostal dth3("El Pony Pisador","Bree (preguntar por Gandalf)","000",0);
-                    DTHostal* pdth3 = &dth3;
-                    (*ICH).IngresarDatosHostal(pdth3);
-
-                    //HO3 - Habitaciones
-                    //HA6
-                    //DTHabitacion dthab3(1,9,5);
-                    //DTHabitacion* 
-                    pdthab3 = &dthab3;
-                    (*ICH).IngresarDatosHab(pdthab3);
-                    (*ICH).confirmarAltaHabitacion();
-                    
-                    //HO3 - HA6 - Reserva R2
-                    Date ChIn3(04,01,01);
-                    Date ChOut3(05,01,01);
-                    (*ICR).ingresarDatosReserva(pdth3,ChIn3,ChOut3);
-                    (*ICR).DesignarPropietarioDeReserva(Pdth2); 
-                    (*ICR).IngresarHuespedEnReserva(Pdth3);
-                    (*ICR).IngresarHuespedEnReserva(Pdth4);
-                    (*ICR).IngresarHuespedEnReserva(Pdth5);                   
-                    (*ICR).confirmarReserva();
+                    (*ICH).liberarDatosHostal(); 
 
                     //HO3 - Empleados
+                    pdth3 = &dth3;
+                    (*ICH).IngresarDatosHostal(pdth3);
 
                     (*ICU).AsignarEmpleadoAHostal("barli@mail.com");
                     (*ICH).FinalizarAsignacionDeEmpleados();
 
-                    (*ICH).liberarDatosHostal();
-
-                    //HO4
-                    DTHostal dth4("Altos de Fing","Av del Toro 1424","099892992",0);
-                    DTHostal* pdth4 = &dth4;
-                    (*ICH).IngresarDatosHostal(pdth4);
-                    (*ICH).liberarDatosHostal();
-
-                    //HO5
-                    DTHostal dth5("Caverna Lujosa","Amaya 2515","233233235",0);
-                    DTHostal* pdth5 = &dth5;
-                    (*ICH).IngresarDatosHostal(pdth5);
-                    
-                    //HO5 - HA5
-
-                    DTHabitacion dthab(1,3,2);
-                    DTHabitacion* pdthab = &dthab;
-                    (*ICH).IngresarDatosHab(pdthab);
-                    (*ICH).confirmarAltaHabitacion();
-
-                    //HO5 - HA5 - Reserva R4
-
-                    Date ChIn4(10,06,22);
-                    Date ChOut4(30,06,22);
-                    (*ICR).ingresarDatosReserva(pdth5,ChIn4,ChOut4);
-                    (*ICR).DesignarPropietarioDeReserva(Pdth6);                    
-                    (*ICR).confirmarReserva();                    
-
-                    (*ICH).liberarDatosHostal();
-                    
+                    (*ICH).liberarDatosHostal();                  
+                  
                     //Estadías
                     //ES1
-                    DTHostal * Pdth = &dth1;                    
-                    map<int,DTReserva*> res = (*ICR).ListarReservasNoCanceladasDeHuesped(Pdth, "sofia@mail.com");
+                    pdth1 = &dth1;                    
+                    map<int,DTReserva*> res = (*ICR).ListarReservasNoCanceladasDeHuesped(pdth1, "sofia@mail.com");
                     
                     itDTR = res.begin();
                     Date d1(01,05,22);
-                    DTEstadia dtes1(d1, ((*itDTR).second)->getCheckOut(), codReserva++);
-                    DTEstadia * Pdte1 = &dtes1;                  
-                    (*ICC).RegistrarEstadia(Pdth,"sofia@mail.com", (*itDTR).second,Pdte1);
+                    DTEstadia dtes1(d1, ((*itDTR).second)->getCheckOut(), ((*itDTR).second)->getCodigo());
+                    DTEstadia * Pdtes1 = &dtes1;                  
+                    (*ICC).RegistrarEstadia(pdth1,"sofia@mail.com", (*itDTR).second,Pdtes1);
 
-                    (*ICR).finalizarEstadiaActiva("sofia@mail.com", (*Pdth).getNombre());
+                    (*ICR).finalizarEstadiaActiva("sofia@mail.com", (*pdth1).getNombre());
 
-                    //ES2
-                    Pdth = &dth3;                    
-                    res = (*ICR).ListarReservasNoCanceladasDeHuesped(Pdth, "frodo@mail.com");
+                    //ES2 
+                    //R2 - HU2
+                    pdth3 = &dth3;                    
+                    res = (*ICR).ListarReservasNoCanceladasDeHuesped(pdth3, "frodo@mail.com");
                     
                     itDTR = res.begin();
                     Date d2(04,01,01);
-                    DTEstadia dtes2(d2, (*itDTR).second->getCheckOut(), codReserva++);
-                    DTEstadia* Pdte2 = &dtes2;
-                    (*ICC).RegistrarEstadia(Pdth,"frodo@mail.com",(*itDTR).second,Pdte2);
+                    DTEstadia dtes2(d2, (*itDTR).second->getCheckOut(), ((*itDTR).second)->getCodigo());
+                    DTEstadia* Pdtes2 = &dtes2;
+                    (*ICC).RegistrarEstadia(pdth3,"frodo@mail.com",(*itDTR).second,Pdtes2);
 
-                    (*ICR).finalizarEstadiaActiva("frodo@mail.com", (*Pdth).getNombre());
+                    (*ICR).finalizarEstadiaActiva("frodo@mail.com", (*pdth1).getNombre());
 
                     //ES3
-                    Pdth = &dth3;                    
-                    res = (*ICR).ListarReservasNoCanceladasDeHuesped(Pdth, "sam@mail.com");
+                    //R2 - HU3
+                    pdth3 = &dth3;                    
+                    res = (*ICR).ListarReservasNoCanceladasDeHuesped(pdth3, "sam@mail.com");
+                    
                     itDTR = res.begin();
                     Date d3(04,01,01);
-                    DTEstadia dtes3(d3, (*itDTR).second->getCheckOut(), codReserva++);
-                    DTEstadia* Pdte3 = &dtes3;
-                    (*ICC).RegistrarEstadia(Pdth,"sam@mail.com",(*itDTR).second,Pdte3);
+                    DTEstadia dtes3(d3, (*itDTR).second->getCheckOut(), ((*itDTR).second)->getCodigo());
+                    DTEstadia* Pdtes3 = &dtes3;
+                    (*ICC).RegistrarEstadia(pdth3,"sam@mail.com",(*itDTR).second,Pdtes3);
 
                     //ES4
-                    Pdth = &dth3;                    
-                    res = (*ICR).ListarReservasNoCanceladasDeHuesped(Pdth, "merry@mail.com");
+                    //R2 - HU4
+                    pdth3 = &dth3;                    
+                    res = (*ICR).ListarReservasNoCanceladasDeHuesped(pdth3, "merry@mail.com");
                     itDTR = res.begin();
                     Date d4(04,01,01);
-                    DTEstadia dtes4(d4, (*itDTR).second->getCheckOut(), codReserva++);
+                    DTEstadia dtes4(d4, (*itDTR).second->getCheckOut(), ((*itDTR).second)->getCodigo());
                     DTEstadia* Pdte4= &dtes4;
-                    (*ICC).RegistrarEstadia(Pdth,"merry@mail.com",(*itDTR).second,Pdte4);
+                    (*ICC).RegistrarEstadia(pdth3,"merry@mail.com",(*itDTR).second,Pdte4);
 
                     //ES5
-                    Pdth = &dth3;                    
-                    res = (*ICR).ListarReservasNoCanceladasDeHuesped(Pdth, "pippin@mail.com");
+                    //R2 - HUE5
+                    pdth3 = &dth3;                   
+                    res = (*ICR).ListarReservasNoCanceladasDeHuesped(pdth3, "pippin@mail.com");
                     itDTR = res.begin();
                     Date d5(04,01,01);
-                    DTEstadia dtes5(d5, (*itDTR).second->getCheckOut(), codReserva++);
+                    DTEstadia dtes5(d5, (*itDTR).second->getCheckOut(), ((*itDTR).second)->getCodigo());
                     DTEstadia* Pdte5 = &dtes5;
-                    (*ICC).RegistrarEstadia(Pdth,"pippin@mail.com",(*itDTR).second,Pdte5);
+                    (*ICC).RegistrarEstadia(pdth5,"pippin@mail.com",(*itDTR).second,Pdte5);
 
                     //ES6
-                    Pdth = &dth5;                    
-                    res = (*ICR).ListarReservasNoCanceladasDeHuesped(Pdth, "seba@mail.com");
+                    //R4 -HU6
+                    pdth5 = &dth5;                    
+                    res = (*ICR).ListarReservasNoCanceladasDeHuesped(pdth5, "seba@mail.com");
                     itDTR = res.begin();
                     Date d6(07,06,22);
-                    DTEstadia dtes6(d6, (*itDTR).second->getCheckOut(), codReserva++);
+                    DTEstadia dtes6(d6, (*itDTR).second->getCheckOut(), ((*itDTR).second)->getCodigo());
                     DTEstadia* Pdte6 = &dtes6;
-                    (*ICC).RegistrarEstadia(Pdth,"seba@mail.com",(*itDTR).second,Pdte6);
+                    (*ICC).RegistrarEstadia(pdth5,"seba@mail.com",(*itDTR).second,Pdte6);
 
-                    (*ICR).finalizarEstadiaActiva("seba@mail.com", (*Pdth).getNombre());
+                    (*ICR).finalizarEstadiaActiva("seba@mail.com", (*pdth5).getNombre());
 
                     //Calificar Estadia
 
-                    //ES1
+                    /*//ES1
                     map<int,DTEstadia*> esHues = (*ICR).obtenerEstadiaHuesped("sofia@mail.com");
                     itDTEs = esHues.begin();
                     Comentario = "Un poco caro para lo que ofrecen. El famoso gimnasio era una caminadora (que hacía tremendo ruido) y 2 pesas, la piscina parecía el lago del Parque Rodó y el desayuno eran 2 tostadas con mermelada. Internet se pasaba,cayendo. No vuelvo";
@@ -901,14 +941,16 @@ int main(){
                     //Comentar Calificacion
                     map<int,DTCalificacion*> cals = (*ICC).obtenerCalificaciones("barli@mail.com");
                     Comentario = "Desapareció y se fue sin pagar.";
-                    (*ICC).ingresarComentario(Comentario);
+                    (*ICC).ingresarComentario(Comentario);*/
 
                 };
-                break;//case 6 | Cargar datos de prueba
+                break;
+                //case 6 | Cargar datos de prueba
             case 7:{ //Salir
                 finalizar = true;
                 break;
-            }//case 7 | Salir
+            }
+            //case 7 | Salir
             default:{
                 cout << "Por favor, ingrese una opcion entre 1 y 6.\n";
                 break;

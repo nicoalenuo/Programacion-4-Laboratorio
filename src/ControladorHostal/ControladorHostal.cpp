@@ -104,7 +104,10 @@ void ControladorHostal::confirmarAltaHostal(){
     hostal h(datosHostal->getNombre(), datosHostal->getDireccion(), datosHostal->getTelefono());
     hostal* ph = &h;
     agregarHostalAMap(ph);
-
+    map<string,DTHostal*> listaHostales = obtenerHostales();
+                            map<string,DTHostal*>::iterator it;
+                            it=listaHostales.begin();
+                            std::cout  <<". Nombre: " << ((*it).second)->getNombre() << std::endl;   
     //datosHostal = NULL;
 }
 
@@ -135,8 +138,8 @@ void ControladorHostal::confirmarAltaHabitacion(){
     hostal* h = (*hostales.find(hostalElegido)).second;
     h->agregarHab(Phab);
     agregarHabitacionAMap(Phab);
-    delete datosHabitacion;
-    datosHabitacion = NULL;
+    /*delete datosHabitacion;
+    datosHabitacion = NULL;*/
      
 }
 

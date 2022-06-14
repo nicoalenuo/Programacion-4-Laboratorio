@@ -133,14 +133,22 @@ void ControladorUsuario::confirmarAltaUsuario(){
         empleado e(de->getNombre(),de->getMail(),de->getPassword(),de->getTipoCargo());
         empleado * Pe = &e;
         agregarEmpleadoAMap(Pe);
+        /*map<string,DTEmpleado*> empleados = obtenerEmpleados();
+        map<string,DTEmpleado*>::iterator j = empleados.begin();
+        std::cout<<((*j).second)->getNombre() <<std::endl;*/
     }else{
         DTHuesped * dh = dynamic_cast<DTHuesped*>(datosUsuario);
         huesped h(dh->getNombre(), dh->getMail(), dh->getPassword(),dh->getEsFinger());
         huesped * Ph = &h;
         agregarHuespedAMap(Ph);
+        /*map<string,DTHuesped*> hues = obtenerHuespedes();
+        map<string,DTHuesped*>::iterator j = hues.begin();
+        std::cout<<((*j).second)->getNombre() <<std::endl;*/
     };
-    delete datosUsuario;
-    datosUsuario = NULL;
+   
+    ///delete datosUsuario;
+    //datosUsuario = NULL;
+
 }
 
 string ControladorUsuario::obtenerNombreUsuario(DTUsuario*){return "a";}
