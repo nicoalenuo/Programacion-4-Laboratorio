@@ -31,8 +31,8 @@ void calificacion::eliminarCalificacion(){
     fabrica* f = fabrica::getInstance();
     IControladorHostal* ch = (*f).getIControladorHostal();
     IControladorCalificacion* cc = (*f).getIControladorCalificacion();
-    hostal* hos = ch->hostalQuePoseeCal(this);
-    cc->eliminarCalificacion(this);
+    (*ch).quitarCalificacionDeHostal(id);
+    cc->eliminarCalificacion(id);
     if(respuestaAsoc!=NULL){
         delete respuestaAsoc;
     }

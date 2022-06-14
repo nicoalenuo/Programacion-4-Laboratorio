@@ -13,14 +13,15 @@ class ControladorHostal:public IControladorHostal {
         map<string,hostal*> hostales;
         map<int,habitacion*> habitaciones;
 
-        DTHostal* datosHostal; //Aca se guarda la informacion "recordada por el sistema"
+        //Cosas "Recordadas por el sistema"
+        DTHostal* datosHostal;
         DTHabitacion* datosHabitacion;
 
         static ControladorHostal* instancia;
         ControladorHostal();
     public:
         static ControladorHostal* getInstance();
-        ~ControladorHostal(); //AGREGADO
+        ~ControladorHostal();
 
         void asignarEmpleadoElegido(empleado*); 
         hostal* obtenerHostal(DTHostal*);
@@ -44,8 +45,8 @@ class ControladorHostal:public IControladorHostal {
         map<int,DTEstadia*> obtenerEstadiasDeHostal();
         DTEstadia* obtenerDatosEstadia();
         DTReserva* obtenerReservaDeEstadia();
-        hostal* hostalQuePoseeCal(calificacion*);
         map<int,DTCalificacion*> obtenerCalificaciones(string);
+        void quitarCalificacionDeHostal(int);
         map<string,hostal*> getHostales(){
             return hostales;
         } 

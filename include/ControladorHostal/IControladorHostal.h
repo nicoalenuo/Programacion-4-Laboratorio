@@ -44,12 +44,12 @@ class IControladorHostal {
         virtual DTReserva* obtenerReservaDeEstadia()=0;
         virtual map<int,DTCalificacion*> obtenerCalificaciones(string)=0;
         virtual map<string,hostal*> getHostales()=0;
-        virtual hostal* hostalQuePoseeCal(calificacion*)=0;
         virtual void agregarHostalAMap(hostal*)=0;
         virtual void agregarHabitacionAMap(habitacion*)=0;
         virtual habitacion* getHab(DTHabitacion*)=0;
         virtual hostal* DarHostalDeHabitacion(habitacion*)=0;
         virtual DTHostal* getDatosHostal()=0;
+        virtual void quitarCalificacionDeHostal(int)=0;
         virtual DTHabitacion* getDatosHabitacion()=0;
         virtual void setDatosHostal(DTHostal* h)=0;
         virtual void setDatosHabitacion(DTHabitacion* h)=0;

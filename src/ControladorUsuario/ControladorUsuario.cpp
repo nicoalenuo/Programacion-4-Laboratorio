@@ -25,6 +25,24 @@ void ControladorUsuario::IngresarDatosUsuario(DTUsuario* datos){
     datosUsuario=datos;
 }
 
+map<string,DTUsuario*> ControladorUsuario::obtenerUsuarios(){
+    map<string,DTUsuario*> usuarios={};
+    map<string,DTEmpleado*> datosEmpleados=obtenerEmpleados();
+    map<string,DTHuesped*> datosHuespedes=obtenerHuespedes();
+    map<string,DTEmpleado*>::iterator it1;
+    map<string,DTHuesped*>::iterator it2;
+    
+    for (it1=datosEmpleados.begin() ; it1!=datosEmpleados.end() ; it1++){
+        DTEmpleado* dte= (*it1).second;
+        usuarios.insert(pair<string,DTUsuario*>((*it1).first,dte));
+    }
+    for (it2=datosHuespedes.begin() ; it2!=datosHuespedes.end() ; it2++){
+        DTHuesped* dth = (*it2).second;
+        usuarios.insert(pair<string,DTUsuario*>((*it2).first,dth));
+    }
+    return usuarios;
+}
+
 map<string,DTEmpleado*> ControladorUsuario::obtenerEmpleados(){
     map<string,DTEmpleado*> resultado={};
     map<string,empleado*>::iterator it;
@@ -123,21 +141,3 @@ void ControladorUsuario::liberarMemoria(){
         void ControladorUsuario::cancelarAltaUsuario(){}
         void ControladorUsuario::confirmarAltaUsuario(){}
         DTUsuario* ControladorUsuario::devolverDatos(){return NULL;}
-
-map<string,DTUsuario*> ControladorUsuario::obtenerUsuarios(){
-    map<string,DTUsuario*> usuarios={};
-    map<string,DTEmpleado*> datosEmpleados=obtenerEmpleados();
-    map<string,DTHuesped*> datosHuespedes=obtenerHuespedes();
-    map<string,DTEmpleado*>::iterator it1;
-    map<string,DTHuesped*>::iterator it2;
-    
-    for (it1=datosEmpleados.begin() ; it1!=datosEmpleados.end() ; it1++){
-        DTEmpleado* dte= (*it1).second;
-        usuarios.insert(pair<string,DTUsuario*>((*it1).first,dte));
-    }
-    for (it2=datosHuespedes.begin() ; it2!=datosHuespedes.end() ; it2++){
-        DTHuesped* dth = (*it2).second;
-        usuarios.insert(pair<string,DTUsuario*>((*it2).first,dth));
-    }
-    return usuarios;
-}

@@ -106,8 +106,10 @@ bool hostal::trabajaEmpleado(string emailEmpleado){
     return empleados.find(emailEmpleado)!=empleados.end(); 
 }
 
-bool hostal::perteneceCalificacion(int Id){
-    return calificaciones.find(Id)!= calificaciones.end();
+void hostal::quitarSiTieneCalificacion(int id){
+    if (calificaciones.find(id) != calificaciones.end()){
+        calificaciones.erase(id);
+    }
 }
 
 map<int,DTCalificacion*> hostal::obtenerCalifSinCom(){

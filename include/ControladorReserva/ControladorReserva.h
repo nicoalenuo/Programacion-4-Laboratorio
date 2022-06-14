@@ -14,7 +14,7 @@ class ControladorReserva:public IControladorReserva {
         map<int,reserva*> reservas;
         int IDActualReserva =0;
 
-
+        //Cosas "Recordadas por el sistema"
         DTReserva* datosReserva;
         DTReservaIndividual* datosIndividual;
         DTReservaGrupal* datosGrupal;
@@ -27,10 +27,8 @@ class ControladorReserva:public IControladorReserva {
         ControladorReserva();
     public:
         static ControladorReserva* getInstance();
-        ~ControladorReserva(); //AGREGADO
-
-
-        //AQUI DECIA OTRA VEZ FINALIZAR ESTADIA ACTIVA
+        ~ControladorReserva();
+        
         void ingresarDatosReserva(DTHostal*, Date, Date);
         map<int,DTHabitacion*> obtenerHabitacionesDisponibles();
         void IngresarHuespedEnReserva(DTHuesped*);

@@ -141,19 +141,10 @@ map<int,DTReserva*> ControladorHostal::ListarReservas(DTHostal* Hos){
     return Resultado;
 }
 
-hostal * ControladorHostal::hostalQuePoseeCal(calificacion* cal){
+void ControladorHostal::quitarCalificacionDeHostal(int id){
     map<string,hostal*>::iterator it;
-    bool pr = false;
-    hostal* Solucion = NULL;
-    it = hostales.begin();
-    while(it != hostales.end() && !pr){
-        if((*it).second->perteneceCalificacion(cal->getId())){
-            Solucion = (*it).second;
-            pr= true;
-        }
-        it++;
-    }
-    return Solucion;
+    for (it=hostales.begin() ; it!=hostales.end() ; it++)
+        (*(*it).second).quitarSiTieneCalificacion(id);
 }
 
 map<int,DTCalificacion*> ControladorHostal::obtenerCalificaciones(string empleado){

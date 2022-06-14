@@ -16,6 +16,7 @@ class ControladorCalificacion:public IControladorCalificacion {
         int MaxCodigoEstadia = 0;
         int idActual=0;
 
+        //Cosas "Recordadas por el sistema"
         DTCalificacion* datosCalificacion;
         DTEstadia* datosEstadia;
 
@@ -39,7 +40,7 @@ class ControladorCalificacion:public IControladorCalificacion {
             datosEstadia=dte;
         }
         void eliminarSuscripto(empleado*);
-        void eliminarCalificacion(calificacion*);
+        void eliminarCalificacion(int);
         map<int,DTEstadia*> obtenerEstadiasHuesped(string);
         void agregarCalificacion(string,string,int);
         map<int,DTCalificacion*> obtenerCalificaciones(string);
@@ -57,8 +58,7 @@ class ControladorCalificacion:public IControladorCalificacion {
         }
         void agregarEstadiaAMap(estadia * e){
             estadias.insert(pair<int,estadia*>((*e).getCodigo(), e));
-        }
-        
+        }     
 };
 
 #endif

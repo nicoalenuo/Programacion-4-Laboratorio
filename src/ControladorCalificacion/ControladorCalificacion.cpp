@@ -118,8 +118,8 @@ DTRespuesta* ControladorCalificacion::obtenerRespuesta(DTCalificacion* c){
     return dtr;
 }
 
-void ControladorCalificacion::eliminarCalificacion(calificacion* cal){//borra del map la calificacion, pero no de memoria, eso se hace en EliminarCalificacion de Calificacion
-    calificaciones.erase(cal->getId());
+void ControladorCalificacion::eliminarCalificacion(int id){//borra del map la calificacion, pero no de memoria, eso se hace en EliminarCalificacion de Calificacion
+    calificaciones.erase(id);
 }
 
 ////////////////////////////////////////////////

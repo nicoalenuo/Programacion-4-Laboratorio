@@ -14,6 +14,7 @@ class ControladorUsuario:public IControladorUsuario {
         map<string,empleado*> empleados;
         map<string,huesped*> huespedes;
 
+        //Cosas "Recordadas por el sistema"
         DTUsuario* datosUsuario;
         DTHuesped* datosHuesped;
         DTEmpleado* datosEmpleado;
@@ -40,7 +41,6 @@ class ControladorUsuario:public IControladorUsuario {
         map<string,DTUsuario*> obtenerUsuarios();
         void liberarMemoria();
         void suscribirEmpleado(string);
-        //Cosas que agregue
         void desuscribirEmpleado(string);
         void agregarEmpleadoAMap(empleado* e){
             empleados.insert(pair<string,empleado*>((*e).getEmail(),e));

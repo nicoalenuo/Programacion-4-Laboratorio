@@ -26,9 +26,8 @@ void grupal::finalizarSiEsReservaBuscada(string emailHuesped,string nombreHostal
     set<huespedGrupal*>::iterator it;
     
     int nHab = (*getHabitacion()).getNumero();
-    bool t=(*ch).existeHabEnHostal(nHab,nombreHostal);
 
-    if (t){
+    if ((*ch).existeHabEnHostal(nHab,nombreHostal)){
         for (it=huesGrup.begin() ; it!=huesGrup.end() ; it++){
             (*(*it)).finalizarEstadiaActiva(emailHuesped);
         }

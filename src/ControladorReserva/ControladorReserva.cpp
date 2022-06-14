@@ -49,7 +49,9 @@ map<int,DTHabitacion*> ControladorReserva::obtenerHabitacionesDisponibles(){
     return Resultado;
 }
 
-void ControladorReserva::DesignarPropietarioDeReserva(DTHuesped* P){(*this).Propietario = P;}
+void ControladorReserva::DesignarPropietarioDeReserva(DTHuesped* P){
+    (*this).Propietario = P;
+}
 
 void ControladorReserva::IngresarHuespedEnReserva(DTHuesped* h){SDTH.insert(pair<string,DTHuesped*>(h->getEmail(), h));}
 
@@ -141,6 +143,7 @@ void ControladorReserva::confirmarBaja(DTHostal* Host, int Codigo){
     reserva * r = (*reservas.find(Codigo)).second;
     reservas.erase(Codigo);
     r->darBajaReserva();
+    delete r;
 }
 
 map<int,DTEstadia*> ControladorReserva::obtenerEstadiaHuesped(string email){
@@ -173,6 +176,10 @@ void ControladorReserva::liberarMemoria(){
     if (datosGrupal!=NULL){
         delete datosGrupal;
         datosGrupal=NULL;
+    }
+    if (Propietario!=NULL){
+        delete Propietario;
+        Propietario=NULL;
     }
 }
         

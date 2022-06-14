@@ -26,9 +26,8 @@ void individual::finalizarSiEsReservaBuscada(string emailHuesped,string nombreHo
     IControladorHostal* ch = (*f).getIControladorHostal();
     
     int nHab = (*getHabitacion()).getNumero();
-    bool t=(*ch).existeHabEnHostal(nHab,nombreHostal);
 
-    if (t){
+    if ((*ch).existeHabEnHostal(nHab,nombreHostal)){
         huespedIndividual* hi = getHuespedIndividual();
         (*hi).finalizarEstadiaActiva(emailHuesped);
     }
