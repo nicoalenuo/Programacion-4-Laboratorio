@@ -54,6 +54,7 @@ class IControladorHostal {
         virtual void agregarHabitacionAMap(habitacion*)=0;
         virtual habitacion* getHab(DTHabitacion*)=0;
         virtual hostal* DarHostalDeHabitacion(habitacion*)=0;
+        virtual DTHostal* getDatosHostal()=0;
 };
 
 #endif

@@ -61,7 +61,10 @@ class ControladorHostal:public IControladorHostal {
             habitaciones.insert(pair<int,habitacion*>((*h).getNumero(),h));
         }
         habitacion* getHab(DTHabitacion*);  
-        hostal* DarHostalDeHabitacion(habitacion*);  
+        hostal* DarHostalDeHabitacion(habitacion*);
+        DTHostal* getDatosHostal(){
+            return datosHostal;
+        }
 };  
 
 #endif

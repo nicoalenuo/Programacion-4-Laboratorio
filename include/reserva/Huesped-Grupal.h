@@ -36,7 +36,9 @@ class huespedGrupal{
         void DarBaja();
         DTEstadia* obtenerEstadia();
         bool tieneEstFinalizadaDeHus(string);
-        bool esDeHuesped(string);                                                                                                                                                                          
+        bool esDeHuesped(string);
+        bool tieneEstadia(DTEstadia*);
+        DTHuesped* darDatosHuesped();                                                                                                                                                                 
 };
 
 #endif

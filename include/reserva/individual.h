@@ -71,6 +71,9 @@ class individual:public reserva{
         }
         DTHostal* getDTHostal();
         DTReserva* getDTReserva();
+        bool tieneEstadia(DTEstadia*);
+        DTHuesped* darHuespedConEstadia(DTEstadia*);
+        DTHabitacion* darDatosHabitacion();
 };
 
 #endif

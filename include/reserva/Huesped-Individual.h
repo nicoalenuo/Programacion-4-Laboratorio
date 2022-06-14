@@ -37,6 +37,8 @@ class huespedIndividual{
         DTEstadia* obtenerEstadia();
         bool tieneEstFinalizadaDeHus(string); 
         bool esDeHuesped(string);    
+        bool tieneEstadia(DTEstadia*);
+        DTHuesped* darDatosHuesped();  
 };
 
 #endif

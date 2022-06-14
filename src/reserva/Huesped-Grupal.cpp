@@ -23,3 +23,12 @@ DTEstadia* huespedGrupal::obtenerEstadia(){
     }
     return pDTe;
 }
+
+bool huespedGrupal::tieneEstadia(DTEstadia* dte){
+    return (*estadiaAsoc).getCodigo() == (*dte).getCodigo();
+}
+
+DTHuesped* huespedGrupal::darDatosHuesped(){
+    DTHuesped* resultado = new DTHuesped((*huespedAsoc).getNombre() , (*huespedAsoc).getEmail() , (*huespedAsoc).getPassword() , (*huespedAsoc).getEsFinger());
+    return resultado;
+}

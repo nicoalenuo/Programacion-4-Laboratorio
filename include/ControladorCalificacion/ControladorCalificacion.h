@@ -15,13 +15,28 @@ class ControladorCalificacion:public IControladorCalificacion {
         map<int,estadia*> estadias;
         int MaxCodigoEstadia = 0;
 
+        DTCalificacion* datosCalificacion;
+        DTEstadia* datosEstadia;
+
         static ControladorCalificacion* instancia;
         ControladorCalificacion();
 
         void notificarSuscriptos(string,int,string);
     public:
         static ControladorCalificacion* getInstance();
-        ~ControladorCalificacion(); //AGREGADO
+        ~ControladorCalificacion();
+        DTCalificacion* getDatosCalificacion(){
+            return datosCalificacion;
+        }
+        DTEstadia* getDatosEstadia(){
+            return datosEstadia;
+        }
+        void setDatosCalificacion(DTCalificacion* dtc){
+            datosCalificacion=dtc;
+        }
+        void setDatosEstadia(DTEstadia* dte){
+            datosEstadia=dte;
+        }
         void eliminarSuscripto(empleado*);
         map<int,DTEstadia*> obtenerEstadiasHuesped(string);
         void agregarCalificacion(string,int);

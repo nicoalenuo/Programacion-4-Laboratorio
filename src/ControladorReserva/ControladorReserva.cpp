@@ -103,6 +103,42 @@ reserva* ControladorReserva::getReserva(DTReserva* res){
     return (*reservas.find(res->getCodigo())).second;
 }
 
+DTDatosEstadia* ControladorReserva::obtenerDatosEstadia(){//Existe DTHostal y DTEstadia en memoria
+    fabrica* f= fabrica::getInstance();
+    IControladorCalificacion* icc= (*f).getIControladorCalificacion();
+    IControladorHostal* ich= (*f).getIControladorHostal();
+    DTEstadia* dte= (*icc).getDatosEstadia();
+    
+    map<int,reserva*>::iterator itr;
+    reserva* r= obtenerReservaDeEstadia(dte);
+
+    DTHostal* datosHostalDevolver= (*ich).getDatosHostal();
+    DTHuesped* datosHuespedDevolver = (*r).darHuespedConEstadia(dte);
+    DTHabitacion* datosHabitacionDevolver = (*r).darDatosHabitacion();
+    Date* fechaSalidaDevolver;
+    Date fs=Date((*(*dte).getFechaSalida()));
+    (*fechaSalidaDevolver)=fs;
+
+    DTDatosEstadia* datosDevolver = new DTDatosEstadia(datosHostalDevolver,datosHabitacionDevolver,datosHuespedDevolver,(*dte).getFechaEntrada(),fechaSalidaDevolver);
+
+    return datosDevolver;
+}
+
+reserva* ControladorReserva::obtenerReservaDeEstadia(DTEstadia* dte){
+    reserva* r;
+    bool encontrado= false; 
+    map<int,reserva*>::iterator it= reservas.begin();
+    while(encontrado != false){
+        encontrado= (*it).second->tieneEstadia(dte);
+        if (!encontrado)
+            it++;
+    }
+    r=(*it).second;
+    return r;
+}
+
+////////////////////////////////
+
 
         void ControladorReserva::confirmarBaja(DTHostal*, int){}
         int ControladorReserva::obtenerNumeroDeHabitacion(DTHabitacion*){return 4;}

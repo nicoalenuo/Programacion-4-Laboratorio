@@ -4,6 +4,7 @@
 #include "../DTyEnum/EstadoReserva.h"
 #include "../habitacion.h"
 #include "../DTyEnum/DTHostal.h"
+#include "../DTyEnum/DTHabitacion.h"
 #include "Huesped-Individual.h"
 #include "../DTyEnum/DTReservaIndividual.h"
 #include "../DTyEnum/DTReservaGrupal.h"
@@ -48,6 +49,9 @@ class reserva{
         virtual DTEstadia* darEstadiaDeHuesped(string)=0;
         virtual DTHostal* getDTHostal()=0;
         virtual DTReserva* getDTReserva()=0;
+        virtual bool tieneEstadia(DTEstadia*)=0;
+        virtual DTHuesped* darHuespedConEstadia(DTEstadia*)=0;
+        virtual DTHabitacion* darDatosHabitacion()=0;
 };
 
 #endif
