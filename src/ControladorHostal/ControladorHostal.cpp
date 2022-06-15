@@ -3,6 +3,8 @@
 ControladorHostal* ControladorHostal::instancia = NULL;
 
 ControladorHostal::~ControladorHostal(){
+    datosHostal = NULL;
+    datosHabitacion = NULL;
 }
 
 ControladorHostal::ControladorHostal(){

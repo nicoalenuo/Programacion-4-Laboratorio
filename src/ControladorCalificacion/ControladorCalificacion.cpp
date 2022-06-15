@@ -6,6 +6,8 @@
 ControladorCalificacion* ControladorCalificacion::instancia = NULL;
 
 ControladorCalificacion::~ControladorCalificacion(){
+    datosCalificacion = NULL;
+    datosEstadia = NULL;
 }
 
 ControladorCalificacion::ControladorCalificacion(){

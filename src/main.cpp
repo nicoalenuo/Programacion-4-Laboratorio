@@ -1011,6 +1011,6 @@ int main(){
                 break;
             }
         }//switch(Opcion1)
-        cout<<"Gracias por operar con nosotros, vuelva pronto!";
     }//while (!finalizar)
+    cout<<"Gracias por operar con nosotros, vuelva pronto!";
 }//int main()

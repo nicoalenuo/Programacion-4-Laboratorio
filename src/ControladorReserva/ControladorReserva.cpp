@@ -7,11 +7,10 @@ ControladorReserva::~ControladorReserva(){
 }
 
 ControladorReserva::ControladorReserva(){
-    reservas={};
-
-    datosReserva=NULL;
-    datosIndividual=NULL;
-    datosGrupal=NULL;
+        datosReserva = NULL;
+        datosIndividual = NULL;
+        datosGrupal = NULL;
+        Propietario = NULL;
 }
 
 ControladorReserva* ControladorReserva::getInstance(){
@@ -181,5 +180,10 @@ void ControladorReserva::liberarMemoria(){
         delete Propietario;
         Propietario=NULL;
     }
+    map<string,DTHuesped*>::iterator it;
+    for (it=SDTH.begin() ; it!=SDTH.end() ; it++){
+        delete (*it).second;
+    }
+    SDTH.clear();
 }
         
