@@ -175,7 +175,6 @@ int main(){
                             }
                         };
                         break;
-                        //case 4 | Consultar Top 3 Hostales
                         
                         case 5:{
                             finSubMenu = true;
@@ -413,13 +412,99 @@ int main(){
                         //case 4 | Consultar Usuario
 
                         case 5:{ //Suscribir a Notificaciones
+                            int i=1;
+                            int eleccion;
+                            fabrica* f = fabrica::getInstance();
+                            IControladorUsuario* ICU = (*f).getIControladorUsuario();
+                            map<string,DTEmpleado*> empleados = (*ICU).obtenerEmpleados();
+                            map<string,DTEmpleado*>::iterator it;
 
-                        }
+                            cout << "Seleccione un empleado:" << endl;
+                            for (it=empleados.begin() ; it!=empleados.end() ; it++){
+                                cout << i << "- " << (*(*it).second).getNombre() << endl;
+                                cout << "   " << (*(*it).second).getEmail() << endl;
+                                cout << endl;
+                                i++;
+                            }
+                            cout << "Eleccion: " << endl;
+                            cin >> eleccion;
+                            it = empleados.begin();
+                            for (i=1 ; i<eleccion ; i++){
+                                it++;
+                            }
+
+                            (*ICU).suscribirEmpleado((*(*it).second).getEmail());
+
+                            for (it=empleados.begin() ; it!=empleados.end() ; it++){
+                                delete (*it).second;
+                            }
+                        };
+                        break;
                         case 6:{ //Consultar Notificaciones
+                            int i=1;
+                            int eleccion;
+                            fabrica* f = fabrica::getInstance();
+                            IControladorUsuario* ICU = (*f).getIControladorUsuario();
+                            map<string,DTEmpleado*> empleados = (*ICU).obtenerEmpleados();
+                            map<string,DTEmpleado*>::iterator it;
+                            set<DTNotificacion*>::iterator it2;
 
-                        }
+                            cout << "Seleccione un empleado:" << endl;
+                            for (it=empleados.begin() ; it!=empleados.end() ; it++){
+                                cout << i << "- " << (*(*it).second).getNombre() << endl;
+                                cout << "   " << (*(*it).second).getEmail() << endl;
+                                cout << endl;
+                                i++;
+                            }
+                            cout << "Eleccion: " << endl;
+                            cin >> eleccion;
+                            it = empleados.begin();
+                            for (i=1 ; i<eleccion ; i++){
+                                it++;
+                            }
+
+                            set<DTNotificacion*> notificaciones = (*ICU).consultarNotificaciones((*(*it).second).getEmail());
+
+                            for (it2=notificaciones.begin() ; it2!=notificaciones.end() ; it2++){
+                                cout << (*(*it2)).getNombreAutor() << endl;
+                                cout << (*(*it2)).getPuntuacion() << endl;
+                                cout << (*(*it2)).getComentario() << endl;
+                                delete (*it2);
+                            }
+                            
+                            for (it=empleados.begin() ; it!=empleados.end() ; it++){
+                                delete (*it).second;
+                            }
+                        };
+                        break;
+
                         case 7:{ //Eliminar Suscripcion
+                            int i=1;
+                            int eleccion;
+                            fabrica* f = fabrica::getInstance();
+                            IControladorUsuario* ICU = (*f).getIControladorUsuario();
+                            map<string,DTEmpleado*> empleados = (*ICU).obtenerEmpleados();
+                            map<string,DTEmpleado*>::iterator it;
 
+                            cout << "Seleccione un empleado:" << endl;
+                            for (it=empleados.begin() ; it!=empleados.end() ; it++){
+                                cout << i << "- " << (*(*it).second).getNombre() << endl;
+                                cout << "   " << (*(*it).second).getEmail() << endl;
+                                cout << endl;
+                                i++;
+                            }
+                            cout << "Eleccion: " << endl;
+                            cin >> eleccion;
+                            it = empleados.begin();
+                            for (i=1 ; i<eleccion ; i++){
+                                it++;
+                            }
+
+                            (*ICU).desuscribirEmpleado((*(*it).second).getEmail());
+
+                            for (it=empleados.begin() ; it!=empleados.end() ; it++){
+                                delete (*it).second;
+                            }
                         }
                         case 8:{ //Volver
                             finSubMenu = true;
