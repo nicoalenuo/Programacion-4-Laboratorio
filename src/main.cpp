@@ -98,8 +98,8 @@ int main(){
                             cout << "Telefono del hostal: ";
                             cin.ignore();
                             getline(cin, TelHos);
-                            DTHostal dth(NombreHos,DirHos,TelHos,0);
-                            DTHostal* pdth = &dth;
+                            
+                            DTHostal* pdth = new DTHostal(NombreHos,DirHos,TelHos,0);
                             (*ICH).IngresarDatosHostal(pdth);
                             (*ICH).confirmarAltaHostal();
 
@@ -121,8 +121,8 @@ int main(){
                             cin >> precio;
                             cout << "Capacidad de la habitacion: ";
                             cin >> capacidad;
-                            DTHabitacion dthab(num,precio,capacidad);
-                            DTHabitacion* pdthab = &dthab;
+                            
+                            DTHabitacion* pdthab = new DTHabitacion(num,precio,capacidad);
                             (*ICH).IngresarDatosHab(pdthab);
                             confirmarAlta = 'A';
                             while((char) toupper(confirmarAlta) != 'S' && (char) toupper(confirmarAlta) != 'N'){
@@ -267,9 +267,9 @@ int main(){
                                     
                                 }
                             };
-                            DTEmpleado e(Nombre,email,pass,cargo); 
-                            DTEmpleado* dte = &e;
-                            DTUsuario* dtu = dynamic_cast<DTUsuario*>(dte);
+                            
+                            DTEmpleado* dte = new DTEmpleado(Nombre,email,pass,cargo); 
+                            DTUsuario* dtu = static_cast<DTUsuario*>(dte);
                             (*ICU).IngresarDatosUsuario(dtu);
                             (*ICU).confirmarAltaUsuario();
                             cout<<"Se confirmo el alta de Empleado.\n";
@@ -315,9 +315,9 @@ int main(){
                                     getline(cin, email);
                                 }
                             };
-                            DTHuesped hu(Nombre,email,pass,cargo);
-                            DTHuesped* dth = &hu;
-                            DTUsuario* dtu = dynamic_cast<DTUsuario*>(dth);
+                            
+                            DTHuesped* dth = new DTHuesped(Nombre,email,pass,cargo);
+                            DTUsuario* dtu = static_cast<DTUsuario*>(dth);
                             (*ICU).IngresarDatosUsuario(dtu);
                             (*ICU).confirmarAltaUsuario();
                             cout<<"Se confirmo el alta de Huesped.\n";
