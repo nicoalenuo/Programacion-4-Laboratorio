@@ -20,14 +20,10 @@ ControladorReserva* ControladorReserva::getInstance(){
 }
 
 void ControladorReserva::finalizarEstadiaActiva(string emailHuesped, string nombreHostal){
-    fabrica* f = fabrica::getInstance();
-    IControladorHostal* ch = (*f).getIControladorHostal();
     map<int,reserva*>::iterator it;
 
     for (it=reservas.begin() ; it!=reservas.end() ; it++)
         (*(*it).second).finalizarSiEsReservaBuscada(emailHuesped,nombreHostal);
-
-     (*ch).liberarMemoria();
 }
 
 void ControladorReserva::ingresarDatosReserva(DTHostal* hos, Date CkeckIn, Date CheckOut){

@@ -617,8 +617,43 @@ int main(){
 
                         }
                         case 6:{ //Finalizar Estadia
+                            fabrica* f = fabrica::getInstance();
+                            IControladorHostal* ICH = (*f).getIControladorHostal();
+                            IControladorReserva* ICR = (*f).getIControladorReserva();
+                            map<string,DTHostal*> hostales = (*ICH).obtenerHostales();
 
-                        }
+                            int i=1;
+                            int eleccion;
+                            string email;
+                            map<string,DTHostal*>::iterator it;
+
+                            cout << "Seleccione un hostal:" << endl;
+                            for (it=hostales.begin() ; it!=hostales.end() ; it++){
+                                cout << i << "- " << (*(*it).second).getNombre() << endl;
+                                cout << "   " << (*(*it).second).getDireccion() << endl;
+                                cout << "   " << (*(*it).second).getTelefono() << endl;
+                                cout << endl;
+                                i++;
+                            }
+                            cout << "Eleccion: " << endl;
+                            cin >> eleccion;
+                            it = hostales.begin();
+                            for (i=1 ; i<eleccion ; i++){
+                                it++;
+                            }
+
+                            cout << "Ingrese el email del huesped a finalizar la estadia:" << endl;
+                            cin >> email;
+
+                            (*ICR).finalizarEstadiaActiva(email, (*(*it).second).getNombre());
+
+                            for (it=hostales.begin() ; it!=hostales.end() ; it++){
+                                delete (*it).second;
+                            }
+                            hostales.clear();
+                            
+                        };
+                        break;
                         case 7:{ //Volver
                             finSubMenu = true;
                         }
@@ -833,7 +868,7 @@ int main(){
                     (*ICR).confirmarReserva();
                     cout << "b" << endl;
                     //HO1 - Reservas
-                    //R3 - HA3
+                    //R3 - HA3F
                     
                     Date ChIn3(07,06,22);
                     Date ChOut3(30,06,22);
