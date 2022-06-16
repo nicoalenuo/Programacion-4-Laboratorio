@@ -557,11 +557,54 @@ int main(){
 
                     switch (Opcion2){
                         case 1:{ //Calificar Estadía
-
+                            string emaliHues;
+                            string calif;
+                            int nota;
+                            int codigoEst;
+                            cout << "selecciones unhostal \n";
+                            DTHostal* selectedHost = ElegirHostal();
+                            cout << "ingrese el email del huesped cuya estadia desea calificar \n";
+                            cin >>emaliHues;
+                            fabrica* f = fabrica::getInstance();
+                            IControladorReserva *ICR = (*f).getIControladorReserva();
+                            IControladorCalificacion *ICC = (*f).getIControladorCalificacion();
+                            map<int,DTEstadia*> listaReservas = (*ICR).obtenerEstadiaHuesped(emaliHues);
+	                        map<int,DTEstadia*>::iterator it;
+                            int cont = 0;
+                            cout << "elija la reserva que desee  \n";
+	                        for(it=listaReservas.begin(); it!=listaReservas.end(); ++it){
+	                        	cont++;
+                                cout << cont <<". Codigo de estadia: " << ((*it).second)->getCodigo() << endl;
+	                        }
+                            cin>>codigoEst;//no validado
+                            cout <<"ingrese su calificacion \n";
+                            cin>>calif;
+                            cout << " ingrese su nota \n";
+                            cin>>nota;
+                            (*ICC).agregarCalificacion(emaliHues,calif,nota);
                         };
                         break;
                         case 2:{ //Comentar Calificacion
-
+                            fabrica* f = fabrica::getInstance();
+                            IControladorCalificacion *ICC = (*f).getIControladorCalificacion();
+                            map<int,DTCalificacion*> lisataCalifs;
+                            map<int,DTCalificacion*>::iterator it;
+                            int calif;
+                            string resp;
+                            string emailEmpleado;
+                            cout <<"ingrese un email empleado que trabaje en el hostal deseado \n";
+                            cin>>emailEmpleado;//sin validar
+                            lisataCalifs = (*ICC).obtenerCalificaciones(emailEmpleado);
+                            cout << "elija la calificacion que desee  \n";
+                            for(it=lisataCalifs.begin(); it!=lisataCalifs.end(); ++it){
+                                cout << ". Codio de calif" << ((*it).second)->getId() << endl;
+                            }
+                            cin >>calif;// sin validar
+                            it = lisataCalifs.find(calif);
+                            DTCalificacion* dtc = (*it).second;
+                            cout << "ahora ingrese la respuesta que desee ingresar \n";
+                            cin >>resp;// sin validar
+                            (*ICC).ingresarRespuesta(resp,dtc);
                         };
                         break;
                         case 3:{ //Registrar Estadía
