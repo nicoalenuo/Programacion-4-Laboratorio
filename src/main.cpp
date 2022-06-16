@@ -685,7 +685,7 @@ int main(){
                     IControladorCalificacion *ICC = (*f).getIControladorCalificacion();
                     
                     //Alta Empleados
-
+                    
                     //E1
                     DTUsuario* dtu1 = new DTEmpleado("Emilia","emilia@mail.com","123",Recepcion); 
                     (*ICU).IngresarDatosUsuario(dtu1);
@@ -815,16 +815,23 @@ int main(){
                     
                     //H01 - Reservas
                     //R1 - HA1
-                    
+                    cout << "a" << endl;
                     Date ChIn1(01,05,22);
+                    cout << "b" << endl;
                     Date ChOut1(10,05,22);
+                    cout << "c" << endl;
                     (*ICR).ingresarDatosReserva(pdth1,ChIn1,ChOut1);
+                    cout << "d" << endl;
                     (*ICH).setDatosHabitacion(pdthab1);
+                    cout << "e" << endl;
                     DTHuesped* dthue1 = static_cast<DTHuesped*>(dthu1);
+                    cout << "f" << endl;
                     (*ICR).DesignarPropietarioDeReserva(dthue1);   
-                    (*ICR).IngresarHuespedEnReserva(dthue1);                 
+                    cout << "g" << endl;
+                    (*ICR).IngresarHuespedEnReserva(dthue1);    
+                    cout << "h" << endl;             
                     (*ICR).confirmarReserva();
-
+                    cout << "b" << endl;
                     //HO1 - Reservas
                     //R3 - HA3
                     
@@ -836,7 +843,6 @@ int main(){
                     (*ICR).DesignarPropietarioDeReserva(pdthue1);   
                     (*ICR).IngresarHuespedEnReserva(pdthue1);                 
                     (*ICR).confirmarReserva();
-
                     //HO3 - Reservas
                     //R2 - HA6
                     

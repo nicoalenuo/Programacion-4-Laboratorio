@@ -72,7 +72,8 @@ void ControladorReserva::confirmarReserva(){
     }
     IDActualReserva++;
     agregarReservaAMap(Res);
-    (*CH).liberarMemoria();            
+    (*CH).liberarMemoria();
+    liberarMemoria();
 }  
 
         
