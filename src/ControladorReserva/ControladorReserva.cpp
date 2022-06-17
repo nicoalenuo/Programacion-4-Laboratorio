@@ -57,7 +57,7 @@ void ControladorReserva::confirmarReserva(){
     IControladorHostal* CH = Fab->getIControladorHostal();
     DTHabitacion* Hab = (*CH).getDatosHabitacion();
     habitacion* h = CH->getHabDeHostal(Hab);
-    
+
     reserva *Res;
     int CantidadDias = this->CheckIn - this->CheckOut;//Calculo los dias entre Checkin y CheckOut
     if(SDTH.empty()){//Es individual

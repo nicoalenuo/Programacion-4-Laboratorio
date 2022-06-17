@@ -178,12 +178,12 @@ void grupal::imprimirHuespedes(){
     set<huespedGrupal*>::iterator it;
     map<string,DTHuesped*> resultado;
     for(it=huesGrup.begin();it!=huesGrup.end();it++){
-        huesped* h= (*it)->getHuesped();
-        cout << (*h).getNombre() << endl; 
-        cout << (*h).getEmail() << endl; 
-        cout << (*h).getPassword() << endl; 
-        cout << (*h).getEsFinger() << endl; 
-        cout << endl;
+            huesped* h= (*it)->getHuesped();
+            cout << (*h).getNombre() << endl; 
+            cout << (*h).getEmail() << endl; 
+            cout << (*h).getPassword() << endl;
+            cout << (*h).getEsFinger() << endl;
+            cout << endl;
     }  
 }
 
