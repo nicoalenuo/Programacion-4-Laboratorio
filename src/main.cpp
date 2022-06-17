@@ -324,40 +324,51 @@ int main(){
                         //case 2 | Alta Huesped
 
                         case 3: {//Asignar Empleado a Hostal
-                            DTHostal * dth = ElegirHostal();
                             fabrica* f = fabrica::getInstance();
-                            IControladorHostal * ICH = (*f).getIControladorHostal();
-                            (*ICH).IngresarDatosHostal(dth);
-                            IControladorUsuario * ICU = (*f).getIControladorUsuario();
+                            IControladorHostal* ICH = (*f).getIControladorHostal();
+                            IControladorUsuario* ICU = (*f).getIControladorUsuario();
                             map<string,DTEmpleado*> empsLibres = (*ICU).obtenerEmpleadosNoAsignados();
-                            map<string,DTEmpleado*>::iterator it;
-                            
-                            existe = false;
-                            aux = false;
-                            while(!existe){
-                                if(aux){
-                                    cout<<"El número ingresado no es correcto. \n";
-                                }
-                                ind = 1;
-                                cout<<"Seleccione el número correspondiente al empleado que desea asignar de la siguiente lista: \n";
-                                for(it=empsLibres.begin(); it!=empsLibres.end(); it++){
-                                    cout<<ind<<". Nombre: "<<((*it).second)->getNombre() <<", Mail: "<<((*it).second)->getEmail()<< std::endl;
-                                    ind++;
-                                }
-                                cin>>num;
-                                if(num>ind || num==0){
-                                    existe = false;
-                                    aux = true;
+                            map<string,DTEmpleado*>::iterator it2;
+                            if (empsLibres.size() !=0){
+                                DTHostal * dth = ElegirHostal(); 
+                                (*ICH).IngresarDatosHostal(dth);
+                                
+                                map<string,DTEmpleado*>::iterator it;
+                                
+                                existe = false;
+                                aux = false;
+                                while(!existe){
+                                    if(aux){
+                                        cout<<"El número ingresado no es correcto. \n";
+                                    }
+                                    ind = 1;
+                                    cout<<"Seleccione el número correspondiente al empleado que desea asignar de la siguiente lista: \n";
+                                    for(it=empsLibres.begin(); it!=empsLibres.end(); it++){
+                                        cout<<ind<<". Nombre: "<<((*it).second)->getNombre() <<", Mail: "<<((*it).second)->getEmail()<< std::endl;
+                                        ind++;
+                                    }
+                                    cin>>num;
+                                    if(num>ind || num==0){
+                                        existe = false;
+                                        aux = true;
+                                    };
                                 };
-                            };
-                            ind = 1;
-                            it = empsLibres.begin();
-                            while(ind<num){
-                                it++;
-                                ind++;
-                            };
-                            (*ICU).AsignarEmpleadoAHostal((*it).second->getEmail());
-                            (*ICH).FinalizarAsignacionDeEmpleados();	
+                                ind = 1;
+                                it = empsLibres.begin();
+                                while(ind<num){
+                                    it++;
+                                    ind++;
+                                };
+                                (*ICU).AsignarEmpleadoAHostal((*it).second->getEmail());
+                                (*ICH).FinalizarAsignacionDeEmpleados();	
+                        }
+                        else
+                            cout << "No hay empleados libres" << endl;
+
+                        for (it2=empsLibres.begin() ; it2!=empsLibres.end() ; it2++)
+                            delete (*it2).second;
+                        empsLibres.clear();
+
                         };
                         break;
                         //case 3 | Asignar Empleado a Hostal
