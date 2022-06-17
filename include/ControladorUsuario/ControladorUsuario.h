@@ -34,7 +34,6 @@ class ControladorUsuario:public IControladorUsuario {
         map<string,DTEmpleado*> obtenerEmpleadosNoAsignados();
         map<string,DTEmpleado*> obtenerEmpleados();
         set<DTNotificacion*> consultarNotificaciones(string);
-        DTUsuario* devolverDatos();
         map<string,DTHuesped*> obtenerHuespedes();
         void AsignarEmpleadoAHostal(string);
         map<string,DTUsuario*> obtenerUsuarios();
@@ -48,10 +47,13 @@ class ControladorUsuario:public IControladorUsuario {
         void agregarHuespedAMap(huesped* h){
             huespedes.insert(pair<string,huesped*>((*h).getEmail(),h));
         }
-        huesped* getHuesped(DTHuesped* DTU){
+        huesped* getHuesped(DTHuesped* DTH){
             map<string,huesped*>::iterator it;
-            it =  huespedes.find(DTU->getEmail());
+            it =  huespedes.find(DTH->getEmail());
             return (*it).second;
+        }
+        DTUsuario* obtenerDatosUsuario(){
+            return (*this).datosUsuario;
         }
 };
 

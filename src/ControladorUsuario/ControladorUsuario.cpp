@@ -151,5 +151,3 @@ void ControladorUsuario::confirmarAltaUsuario(){
         agregarHuespedAMap(Ph);
     }
 }
-        
-DTUsuario* ControladorUsuario::devolverDatos(){return NULL;}

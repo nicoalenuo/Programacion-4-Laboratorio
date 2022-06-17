@@ -68,6 +68,8 @@ class hostal{
             empleados.insert(pair<string,empleado*>((*e).getEmail(),e));
         }
         void agregarHabitacionAMap(habitacion* h);
+        map<int,DTHabitacion*> obtenerHabitaciones();
+        map<string,DTEmpleado*> obtenerEmpleados();
 };
 
 #endif

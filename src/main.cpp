@@ -144,13 +144,90 @@ int main(){
                         break;
                         // case 2 | Alta Habitacion
 
-                        case 3:{ /*// Consultar Hostal
+                        case 3:{ // Consultar Hostal
                             DTHostal* dth = ElegirHostal();
                             fabrica* f = fabrica::getInstance();
                             IControladorHostal *ICH = (*f).getIControladorHostal();
-                            (*ICH).mostrarHostal();
-                         */
-                        cout<<"Caso consultar hostal";
+                            map<string,hostal*> hostales= ICH->getHostales();
+                            //elegir un hostal
+                            map<string,hostal*>::iterator it;
+                            if(hostales.size()==0){
+                                cout<<"No hay usuarios ingresados.";
+                            }else{
+                                int cont=0;
+                                for(it=hostales.begin();it!=hostales.end();it++){
+                                    cont++;
+                                    cout << cont << " | Nombre: " << (*it).second->getNombre();
+                                    cout << " | Direccion: " << (*it).second->getDireccion();
+                                    cout << " | Telefono: " << (*it).second->getTelefono() << endl;
+                                }
+                                int elegir;
+                                do{
+                                    cont = 1;
+                                    it=hostales.begin();
+                                    cin >> elegir;
+                                    if(elegir > hostales.size() || elegir<=0){
+                                        cout << "El numero elegido no pertenece a la lista" << endl;
+                                    }else{
+                                        while(cont<elegir){
+                                            cont++;
+                                            it++;
+                                        }
+                                    }
+                                }while(elegir > hostales.size() || elegir <=0);
+                                //guarda DTHostal en memoria
+                                DTHostal* dtHostal;
+                                (*dtHostal)= DTHostal((*it).second->getNombre(),(*it).second->getDireccion(),(*it).second->getTelefono(),(*it).second->darCalifPromedio());
+                                (*ICH).setDatosHostal(dtHostal);
+                                //mostar el hostal
+                                cout << "Hostal " << endl;
+                                cout << "Nombre: " << (*ICH).getDatosHostal()->getNombre() << endl;
+                                cout << "Direccion: " << (*ICH).getDatosHostal()->getDireccion() << endl;
+                                cout << "Telefono: " << (*ICH).getDatosHostal()->getTelefono() << endl;
+                                //mostrar el promedio de calificaciones del hostal
+                                if(dtHostal->getCalificacionPromedio()!=0){
+                                    cout << "Promedio: " << (*ICH).getDatosHostal()->getCalificacionPromedio() << endl;
+                                }else{
+                                    cout << "Promedio: No existe." << endl;
+                                }
+                                //mostrar las calificaciones del hostal
+                                map<int,DTCalificacion*> dtcalificaciones= (*ICH).obtenerCalificacionesDeHostal();
+                                map<int,DTCalificacion*>::iterator itcal;
+                                DTCalificacion* dtcal;
+                                cout << "Calificaciones" << endl;
+                                cont=0;
+                                if(dtcalificaciones.size()==0){
+                                    cout << "No existen." << endl;
+                                }
+                                for(itcal=dtcalificaciones.begin();itcal!=dtcalificaciones.end();itcal++){
+                                    dtcal= (*itcal).second;
+                                    cout << "Calificacion: " << endl;
+                                    cout << "Comentario: " << dtcal->getComentario() << endl;
+                                    cout << "Puntuacion: " << dtcal->getPuntuacion() << endl;
+                                }
+                                //mostar habitaciones del hostal
+                                map<int,DTHabitacion*> habitaciones= (*it).second->obtenerHabitaciones();
+                                map<int,DTHabitacion*>::iterator it1;
+                                for(it1=habitaciones.begin();it1!=habitaciones.end();it++){
+                                    cout << "Habitacion " << ": " << (*it1).second->getNumero() << endl;
+                                    cout << "Numero: " << (*it1).second->getNumero() << endl;
+                                    cout << "Precio: " << (*it1).second->getPrecio() << endl;
+                                    cout << "Capacidad:" << (*it1).second->getCapacidad() << endl;
+                                }
+                                //mostrar reservas del hostal
+                                map<int,DTReserva*> dtreservas = (*it).second->obtenerReservas();
+                                map<int,DTReserva*>::iterator it2;
+                                for(it2=dtreservas.begin();it2!=dtreservas.end();it2++){
+                                    cout << "Reserva: " << endl;
+                                    cout << "Fecha de Ingreso: " << (*it2).second->getCheckIn().getDia() << "/" << (*it2).second->getCheckIn().getMes() << "/" << (*it2).second->getCheckIn().getAnio() << endl;
+                                    cout << "Fecha de Salida: " << (*it2).second->getCheckOut().getDia() << "/" << (*it2).second->getCheckOut().getMes() << "/" << (*it2).second->getCheckOut().getAnio() << endl;
+                                    cout << "Estado:" << (*it2).second->getEstado() << endl;
+                                    cout << "Costo:" << (*it2).second->getCosto() << endl;
+                                }
+                            }
+                            //liberarMemoria del Hostal
+                            (*ICH).liberarMemoria();
+
                         };
                         break;
                         // case 3 | Consultar Hostal
@@ -371,42 +448,76 @@ int main(){
                             (*ICH).IngresarDatosHostal(dth);
 
                             IControladorUsuario *ICU = (*f).getIControladorUsuario();
-                            map<string,DTUsuario*> us = (*ICU).obtenerUsuarios();
-                            if(us.size()==0){
+                            map<string,DTUsuario*> usuarios = (*ICU).obtenerUsuarios();
+                            //elegir un usuario
+                            if(usuarios.size()==0){
                                 cout<<"No hay usuarios ingresados.";
                             }else{
                                 map<string,DTUsuario*>::iterator it;
-                                existe = false;
-                                aux = false;
-                                while(!existe){
-                                    if(aux){
-                                        cout<<"El número ingresado no es correcto. \n";
-                                    }
-                                    ind = 1;
-                                    cout<<"Seleccione el número correspondiente al usuario que desea seleccionar de la siguiente lista: \n";
-                                    for(it=us.begin(); it!=us.end(); it++){
-                                        std::cout<<ind<<". Nombre: "<<((*it).second)->getNombre() <<", Mail: "<<((*it).second)->getEmail()<< std::endl;
-                                        ind++;
-                                    }
-                                    cin>>num;
-                                    if(num>ind || num==0){
-                                        existe = false;
-                                        aux= true;
-                                    };
-                                };
-                                ind = 1;
-                                it = us.begin();
-                                while(ind<num){
-                                    it++;
-                                    ind++;
-                                };
+                                int cont=0;
+                                for(it=usuarios.begin();it!=usuarios.end();it++){
+                                    cont++;
+                                    cout << cont << " | Nombre: " << (*it).second->getNombre();
+                                    cout << " | Email: " << (*it).second->getEmail() << endl;
 
-                                
-                                //obtenerNombreUsuario
-                                //obtenerEmailUsuario
-                                //obtenerHuespedConEmail (mostrar esFinger) / obtenerEmpleadoConEmail (mostrar cargo y hostal)
-                                
-                            };// if(us.size()==0)
+                                }
+                                int elegir;
+                                do{
+                                    cont = 1;
+                                    it=usuarios.begin();
+                                    cin >> elegir;
+                                    if(elegir > usuarios.size() || elegir<=0){
+                                        cout << "El numero elegido no pertenece a la lista" << endl;
+                                    }else{
+                                        while(cont<elegir){
+                                            cont++;
+                                            it++;
+                                        }
+                                    }
+                                }while(elegir > usuarios.size() || elegir <=0);
+                                //guardar DTUsuario en memoria
+                                (*ICU).IngresarDatosUsuario((*it).second);
+                                //mostrar el usuario
+                                cout << cont << " | Nombre: " << (*ICU).obtenerDatosUsuario()->getNombre();
+                                cout << " | Email: " << (*ICU).obtenerDatosUsuario()->getEmail() << endl;
+                                if(dynamic_cast<DTHuesped*>((*ICU).obtenerDatosUsuario())!=NULL){
+                                    DTHuesped* dth= (*ICU).obtenerHuespedConEmail((*ICU).obtenerDatosUsuario()->getEmail());
+                                    if((*dth).getEsFinger()){
+                                        cout << "Es finger." << endl;
+                                    }else{
+                                        cout << "No es finger." << endl;
+                                    }
+                                }else{
+                                    DTEmpleado* dte= (*ICU).obtenerEmpleadoConEmail((*ICU).obtenerDatosUsuario()->getEmail());
+                                    //buscar hostal asociado al DTEmpleado
+                                    map<string,hostal*> hostales= (*ICH).getHostales();
+                                    map<string,hostal*>::iterator it1=hostales.begin();
+                                    map<string,DTEmpleado*> dtempleados= (*it1).second->obtenerEmpleados();
+                                    map<string,DTEmpleado*>::iterator it2;
+                                    bool encontrado=false;
+                                    hostal* hos;
+                                    while(encontrado || it1!=hostales.end()){
+                                        while(encontrado || it2!=(*it1).second->obtenerEmpleados().end()){
+                                            if((*it2).second->getEmail()== dte->getEmail()){
+                                                hos= (*it1).second;
+                                                encontrado= true;
+                                            }
+                                            it2++;
+                                        }
+                                        it1++;
+                                    }
+                                    DTHostal* dthostal;
+                                    (*dthostal) = DTHostal(hos->getNombre(),hos->getDireccion(),hos->getTelefono(),hos->darCalifPromedio());
+                                    //mostar el hostal
+                                    cout << "Hostal " << endl;
+                                    cout << "Nombre: " << dthostal->getNombre() << endl;
+                                    cout << "Direccion: " << dthostal->getDireccion() << endl;
+                                    cout << "Telefono: " << dthostal->getTelefono() << endl;
+                                    cout << "Cargo: "<<(*dte).getTipoCargo() << endl;
+                                }
+                                //liberarMemoria del DTUsuario
+                                (*ICU).liberarMemoria();
+                            };
                                 
                         };
                         break;
@@ -520,7 +631,17 @@ int main(){
                         }//case 1 | Realizar Reserva
 
                         case 2:{//Consultar Reserva
-
+                            //obtenerHostales
+                            //Guardar DTHostal en memoria
+                            //Para toda reserva del DTHostal
+                                //mostrarReserva
+                                //obtener habitacion de la reserva
+                                //obtenerNumeroDeHabitacion(habitacion)
+                                //Si la reserva es Grupal
+                                    //obtenerNombresDeReserva
+                                //Fin Si
+                            //Fin Para todo
+                            //liberarHostal
                         }
                         case 3:{ //Baja de Reserva
 
@@ -529,7 +650,27 @@ int main(){
 
                         }
                         case 5:{ //Consultar Estadia
-
+                            //obtenerHostales
+                            //Guardar en memoria un DTHostal
+                            //obtenerEstadiasDeHostal
+                            //Guardar en memoria una DTEstadia
+                            //obtenerDatosEstadia
+                            //Si existe promo
+                                //obtenerPromocionDeEstadia
+                            //Fin Si
+                            //obtenerTotalConsumidoDeEstadia
+                            //obtenerCodigoDeEstadia
+                            //Si existe calificacion y el usuario quiere verla
+                                //obtenerCalificacionDeEstadia
+                                //Si existe respuesta a la calificacion y el usuario quiere verla
+                                    //obtenerRespuesta
+                                //Fin Si
+                            //Fin Si
+                            //Si el usuario quiere ver la informacion de la reserva
+                                //obtenerReservaDeEstadia
+                            //Fin Si
+                            //liberarEstadia
+                            //liberarHostal
                         }
                         case 6:{ //Finalizar Estadia
 

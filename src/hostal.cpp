@@ -125,3 +125,37 @@ map<int,DTCalificacion*> hostal::obtenerCalifSinCom(){
     }
     return send;
 }
+
+float hostal::darCalifPromedio(){
+    map<int,calificacion*>::iterator it;
+    float resultado=0;
+    if(calificaciones.size() != 0){
+        for (it=calificaciones.begin() ; it!=calificaciones.end() ; it++){
+            calificacion* c= (*it).second;
+            resultado=resultado+ c->getPuntuacion();
+        }
+        return (resultado/calificaciones.size());
+    }else{
+        return 0;
+    }
+}
+
+map<int,DTHabitacion*> hostal::obtenerHabitaciones(){
+    map<int,DTHabitacion*> resultado= {};
+    map<int,habitacion*>::iterator it;
+    for(it=habitaciones.begin();it!=habitaciones.end();it++){
+        DTHabitacion* dth = (*it).second->darDatos();
+        resultado.insert(pair<int,DTHabitacion*>((*it).first,dth));
+    }
+    return resultado;
+}
+
+map<string,DTEmpleado*> hostal::obtenerEmpleados(){
+    map<string,DTEmpleado*> resultado= {};
+    map<string,empleado*>::iterator it;
+    for(it=empleados.begin();it!=empleados.end();it++){
+        DTEmpleado* dte = (*it).second->darDatos();
+        resultado.insert(pair<string,DTEmpleado*>((*it).first,dte));
+    }
+    return resultado;
+}

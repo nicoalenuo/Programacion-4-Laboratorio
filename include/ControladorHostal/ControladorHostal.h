@@ -45,7 +45,7 @@ class ControladorHostal:public IControladorHostal {
         void quitarCalificacionDeHostal(int);
         map<string,hostal*> getHostales(){
             return hostales;
-        } 
+        }
         void agregarHostalAMap(hostal* h){
             hostales.insert(pair<string,hostal*>((*h).getNombre(),h));
         }
