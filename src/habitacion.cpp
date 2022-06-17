@@ -64,6 +64,10 @@ map<int,DTReserva*> habitacion::obtenerReservas(){
         return Resultado;
 }
 
+habitacion* hostal::getHab(DTHabitacion* hab){
+        return (*habitaciones.find((*hab).getNumero())).second;
+}
+
 void habitacion::darBajaReserva(int c){
         reservas.erase(c);
 }

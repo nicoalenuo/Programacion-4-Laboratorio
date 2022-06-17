@@ -54,8 +54,15 @@ map<int,DTCalificacion*> hostal::obtenerCalsYComs(){
     return resultado;
 }
 
-bool hostal::tieneHab(int nHab){
-    return habitaciones.find(nHab) != habitaciones.end();
+bool hostal::tieneHab(habitacion* hab){
+    map<int,habitacion*>::iterator it;
+    bool resultado=false;
+    for (it=habitaciones.begin() ; it!=habitaciones.end() ; it++){
+        if ((*it).second == hab){
+            resultado=true;
+        }
+    }
+    return resultado;
 }
 
 void hostal::agregarHabitacionAMap(habitacion* h){
@@ -75,6 +82,17 @@ map<int,DTHabitacion*> hostal::obtenerHabitacionesDisponiblesEntre(Date CheckIn,
         }
     }
     return Resultado;
+}
+
+set<DTHabitacion*> hostal::obtenerHabitaciones(){
+    map<int,habitacion*>::iterator it;
+    set<DTHabitacion*> resultado;
+    DTHabitacion* agregar;
+    for (it=habitaciones.begin() ; it!=habitaciones.end() ; it++){
+        agregar = (*(*it).second).darDatos();
+        resultado.insert(agregar);
+    }
+    return resultado;
 }
 
 map<int,DTEstadia*> hostal:: obtenerEstadias(){

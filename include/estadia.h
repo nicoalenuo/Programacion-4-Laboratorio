@@ -17,7 +17,7 @@ class estadia{
         Date* fechaSalida;
         int codigo;
     public:
-        estadia(DTEstadia*);
+        estadia(int);
         ~estadia();
 
         calificacion* getCalificacion(){

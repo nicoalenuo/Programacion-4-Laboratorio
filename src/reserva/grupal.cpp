@@ -18,16 +18,22 @@ grupal::grupal(DTReservaGrupal* DTR, habitacion* Hab,map<string,DTHuesped*> SDTH
         this->huesGrup.insert(HG);
     }
     this->habitacionAsoc = Hab;
+    codigo=(*DTR).getCodigo();
+    costo=(*DTR).getCosto();
+    checkIn=(*DTR).getCheckIn();
+    checkOut=(*DTR).getCheckOut();
+    estado=(*DTR).getEstado();
+    cantHuespedes=(*DTR).getCantHuespedes();
 }
 
 void grupal::finalizarSiEsReservaBuscada(string emailHuesped,string nombreHostal){
     fabrica* f = fabrica::getInstance();
     IControladorHostal* ch = (*f).getIControladorHostal();
     set<huespedGrupal*>::iterator it;
-    
-    int nHab = (*getHabitacion()).getNumero();
 
-    if ((*ch).existeHabEnHostal(nHab,nombreHostal)){
+    habitacion* hab = getHabitacion();
+    
+    if ((*ch).existeHabEnHostal(hab,nombreHostal)){
         for (it=huesGrup.begin() ; it!=huesGrup.end() ; it++){
             (*(*it)).finalizarEstadiaActiva(emailHuesped);
         }
@@ -166,6 +172,19 @@ map<string,DTHuesped*> grupal::obtenerHuespedesDeReserva(){
         resultado.insert(pair<string,DTHuesped*>((*h).getEmail(),h));
     }
     return resultado;
+}
+
+void grupal::imprimirHuespedes(){
+    set<huespedGrupal*>::iterator it;
+    map<string,DTHuesped*> resultado;
+    for(it=huesGrup.begin();it!=huesGrup.end();it++){
+        huesped* h= (*it)->getHuesped();
+        cout << (*h).getNombre() << endl; 
+        cout << (*h).getEmail() << endl; 
+        cout << (*h).getPassword() << endl; 
+        cout << (*h).getEsFinger() << endl; 
+        cout << endl;
+    }  
 }
 
 /////////////////////////////////////////////

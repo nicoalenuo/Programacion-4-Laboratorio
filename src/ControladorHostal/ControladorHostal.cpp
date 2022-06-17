@@ -3,16 +3,13 @@
 ControladorHostal* ControladorHostal::instancia = NULL;
 
 ControladorHostal::~ControladorHostal(){
-    datosHostal = NULL;
-    datosHabitacion = NULL;
 }
 
 ControladorHostal::ControladorHostal(){
     hostales={};
-    habitaciones={};
 
-    datosHostal==NULL;
-    datosHabitacion==NULL;
+    datosHostal=NULL;
+    datosHabitacion=NULL;
 }
 
 ControladorHostal* ControladorHostal::getInstance(){
@@ -42,7 +39,6 @@ map<string,DTEmpleado*> ControladorHostal::quitarAsignados(map<string,DTEmpleado
 
 void ControladorHostal::asignarEmpleadoElegido(empleado* e){
     hostal* h = (*hostales.find((*datosHostal).getNombre())).second;
-    cout << (*h).getNombre() << endl;
     (*h).asignarEmpleado(e);
 }
 
@@ -74,9 +70,9 @@ map<int,DTCalificacion*> ControladorHostal::obtenerCalificacionesYComentarios(st
     return resultado;
 }
 
-bool ControladorHostal::existeHabEnHostal(int nHab,string nombreHostal){
+bool ControladorHostal::existeHabEnHostal(habitacion* hab,string nombreHostal){
     hostal* h = (*hostales.find(nombreHostal)).second;
-    return (*h).tieneHab(nHab);
+    return (*h).tieneHab(hab);
 }
 
 void ControladorHostal::FinalizarAsignacionDeEmpleados(){
@@ -103,19 +99,13 @@ hostal* ControladorHostal::DarHostalDeHabitacion(habitacion* hab){
     hostal* Solucion = NULL;
     it = hostales.begin();
     while(it != hostales.end() && !pr){
-        pr = (*it).second->tieneHab(hab->getNumero());
+        pr = (*it).second->tieneHab(hab);
         if(pr) {
             Solucion= (*it).second;
         }
         it++;
     }
     return Solucion;
-}
-
-habitacion * ControladorHostal::getHab(DTHabitacion* DTH){
-    map<int,habitacion*>::iterator it;
-    it =  habitaciones.find(DTH->getNumero());
-   return (*it).second;
 }
 
 map<int,DTEstadia*> ControladorHostal::obtenerEstadiasDeHostal(){
@@ -190,6 +180,27 @@ void ControladorHostal::IngresarDatosHab(DTHabitacion* dthab){
     datosHabitacion = dthab;
 }
 
+habitacion* ControladorHostal::getHabDeHostal(DTHabitacion* h){
+    hostal* hos = (*hostales.find((*datosHostal).getNombre())).second;
+    habitacion* hab = (*hos).getHab(h);
+    return hab;
+}
+
+set<DTHabitacion*> ControladorHostal::obtenerHabitaciones(){
+    map<string,hostal*>::iterator it;
+    set<DTHabitacion*>::iterator it2;
+    set<DTHabitacion*> resultado;
+    set<DTHabitacion*> aux;
+    for (it=hostales.begin() ; it!=hostales.end() ; it++){
+        aux=(*(*it).second).obtenerHabitaciones();
+        for (it2=aux.begin() ; it2!=aux.end() ; it2++){
+            resultado.insert((*it2));
+        }
+        aux.clear();
+    }
+    return resultado;
+}
+
 void ControladorHostal::confirmarAltaHostal(){
     hostal* ph = new hostal(datosHostal->getNombre(), datosHostal->getDireccion(), datosHostal->getTelefono());
     agregarHostalAMap(ph);
@@ -200,7 +211,6 @@ void ControladorHostal::confirmarAltaHabitacion(){
     string hostalElegido = datosHostal->getNombre();
     hostal* h = (*hostales.find(hostalElegido)).second;
     h->agregarHabitacionAMap(Phab);
-    agregarHabitacionAMap(Phab);  
 }
 
 hostal* ControladorHostal::obtenerHostal(DTHostal* dth){

@@ -38,26 +38,29 @@ void ControladorCalificacion::notificarSuscriptos(string nombreAutor,int puntuac
     }
 }
 
-void ControladorCalificacion::RegistrarEstadia(DTHostal* Hosta, string email, DTReserva* Reserva, DTEstadia* Estadia){
+void ControladorCalificacion::RegistrarEstadia(string nomH, string email, int codR){
     fabrica* Fab =fabrica::getInstance();
     IControladorReserva* CH = (*Fab).getIControladorReserva();
-    reserva* r = CH->getReserva(Reserva);
+
+    reserva* r = CH->getReserva(codR);
     if(dynamic_cast<individual*>(r)!=NULL){
         individual* rI = static_cast<individual*>(r);
         huespedIndividual* HI = rI->getHuespedIndividual();
         MaxCodigoEstadia++;
-        Estadia->setCodigo(MaxCodigoEstadia);
-        estadia* e = new estadia(Estadia); 
+        estadia* e = new estadia(MaxCodigoEstadia); 
         HI->setEstadia(e);
-        estadias.insert(pair<int,estadia*>(Estadia->getCodigo(),e));
+        estadias.insert(pair<int,estadia*>(MaxCodigoEstadia,e));
+
+        cout << "Registrada Individual" << endl;
     }else{
         grupal* rG = static_cast<grupal*>(r);
         huespedGrupal* HG = rG->GetHuespedGrupalDeUsuario(email);
         MaxCodigoEstadia++;
-        Estadia->setCodigo(MaxCodigoEstadia);
-        estadia* e = new estadia(Estadia); 
+        estadia* e = new estadia(MaxCodigoEstadia); 
         HG->setEstadia(e);
-        estadias.insert(pair<int,estadia*>(Estadia->getCodigo(),e));
+        estadias.insert(pair<int,estadia*>(MaxCodigoEstadia,e));
+
+        cout << "Registrada Grupal" << endl;
     }
 }
 

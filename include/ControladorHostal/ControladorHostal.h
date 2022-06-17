@@ -11,7 +11,6 @@ using namespace std;
 class ControladorHostal:public IControladorHostal {
     private:
         map<string,hostal*> hostales;
-        map<int,habitacion*> habitaciones;
 
         //Cosas "Recordadas por el sistema"
         DTHostal* datosHostal;
@@ -25,7 +24,7 @@ class ControladorHostal:public IControladorHostal {
 
         void asignarEmpleadoElegido(empleado*); 
         hostal* obtenerHostal(DTHostal*);
-        bool existeHabEnHostal(int,string);
+        bool existeHabEnHostal(habitacion*,string);
         map<string,DTEmpleado*> quitarAsignados(map<string,DTEmpleado*>);
         void IngresarDatosHostal(DTHostal*);
         void confirmarAltaHostal();
@@ -41,6 +40,7 @@ class ControladorHostal:public IControladorHostal {
         map<int,DTCalificacion*> obtenerCalificacionesDeHostal();
         map<int,DTReserva*> obtenerReservasDeHostal();
         map<int,DTEstadia*> obtenerEstadiasDeHostal();
+        set<DTHabitacion*> obtenerHabitaciones();
         map<int,DTCalificacion*> obtenerCalificaciones(string);
         void quitarCalificacionDeHostal(int);
         map<string,hostal*> getHostales(){
@@ -49,10 +49,7 @@ class ControladorHostal:public IControladorHostal {
         void agregarHostalAMap(hostal* h){
             hostales.insert(pair<string,hostal*>((*h).getNombre(),h));
         }
-        void agregarHabitacionAMap(habitacion * h){
-            habitaciones.insert(pair<int,habitacion*>((*h).getNumero(),h));
-        }
-        habitacion* getHab(DTHabitacion*);  
+        habitacion* getHabDeHostal(DTHabitacion*);  
         hostal* DarHostalDeHabitacion(habitacion*);
         DTHostal* getDatosHostal(){
             return datosHostal;

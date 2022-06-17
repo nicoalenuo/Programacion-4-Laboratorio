@@ -33,7 +33,7 @@ class ControladorReserva:public IControladorReserva {
         map<int,DTHabitacion*> obtenerHabitacionesDisponibles();
         void IngresarHuespedEnReserva(DTHuesped*);
         void confirmarReserva();  
-        reserva* getReserva(DTReserva*);
+        reserva* getReserva(int);
         void DesignarPropietarioDeReserva(DTHuesped*);
         map<int,DTReserva*> ListarReservasNoCanceladasDeHuesped(DTHostal*, string);
         void confirmarBaja(DTHostal*, int);
@@ -47,6 +47,8 @@ class ControladorReserva:public IControladorReserva {
             reservas.insert(pair<int,reserva*>((*r).getCodigo(),r));
         }
         void liberarMemoria();
+
+        void ww();
 };
 
 #endif

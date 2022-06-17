@@ -48,13 +48,16 @@ void ControladorReserva::DesignarPropietarioDeReserva(DTHuesped* P){
     (*this).Propietario = P;
 }
 
-void ControladorReserva::IngresarHuespedEnReserva(DTHuesped* h){SDTH.insert(pair<string,DTHuesped*>(h->getEmail(), h));}
+void ControladorReserva::IngresarHuespedEnReserva(DTHuesped* h){
+    SDTH.insert(pair<string,DTHuesped*>(h->getEmail(), h));
+}
 
 void ControladorReserva::confirmarReserva(){
     fabrica* Fab =fabrica::getInstance();
     IControladorHostal* CH = Fab->getIControladorHostal();
     DTHabitacion* Hab = (*CH).getDatosHabitacion();
-    habitacion* h = CH->getHab(Hab);
+    habitacion* h = CH->getHabDeHostal(Hab);
+    
     reserva *Res;
     int CantidadDias = this->CheckIn - this->CheckOut;//Calculo los dias entre Checkin y CheckOut
     if(SDTH.empty()){//Es individual
@@ -64,10 +67,11 @@ void ControladorReserva::confirmarReserva(){
     }else{//Es grupal
         float Precio = (Hab->getPrecio())*CantidadDias*(1-0.3);
         DTReservaGrupal* ResGr= new DTReservaGrupal(IDActualReserva+1,CheckIn,CheckOut,Abierto,Precio,SDTH.size() +1);
-        Res = new grupal(ResGr,h,SDTH,Propietario);///////
+        Res = new grupal(ResGr,h,SDTH,Propietario);
     }
     IDActualReserva++;
     agregarReservaAMap(Res);
+    (*h).agregarReservaAMap(Res);
     (*CH).liberarMemoria();
     liberarMemoria();
 }  
@@ -89,8 +93,8 @@ map<int,DTReserva*> ControladorReserva::ListarReservasNoCanceladasDeHuesped(DTHo
     return Resultado;
 }
 
-reserva* ControladorReserva::getReserva(DTReserva* res){
-    return (*reservas.find(res->getCodigo())).second;
+reserva* ControladorReserva::getReserva(int cod){
+    return (*reservas.find(cod)).second;
 }
 
 DTDatosEstadia* ControladorReserva::obtenerDatosEstadia(){//Existe DTHostal y DTEstadia en memoria
@@ -183,4 +187,23 @@ void ControladorReserva::liberarMemoria(){
     }
     SDTH.clear();
 }
-        
+
+
+void ControladorReserva::ww(){
+    map<int,reserva*>::iterator it;
+    set<huespedGrupal*>::iterator it2;
+
+    for (it=reservas.begin() ; it!=reservas.end() ; it++){
+        if (dynamic_cast<grupal*>((*it).second)!=NULL){
+            grupal* grp = static_cast<grupal*>((*it).second);
+            (*grp).imprimirHuespedes();
+
+        }
+
+        cout << (*(*it).second).getCodigo() << endl;
+        cout << (*(*(*it).second).getHabitacion()).getNumero() << endl;
+        cout << (*(*(*it).second).getDTHostal()).getNombre() << endl;
+
+        cout << endl;
+    }
+} 

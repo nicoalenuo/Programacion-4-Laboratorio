@@ -141,12 +141,12 @@ bool ControladorUsuario::IngresarEmail(string email){ //devuelve true si el mail
 }
 
 void ControladorUsuario::confirmarAltaUsuario(){
-    DTEmpleado* de = dynamic_cast<DTEmpleado*>(datosUsuario);
-    if(de!=NULL){
+    if(dynamic_cast<DTEmpleado*>(datosUsuario)!=NULL){
+        DTEmpleado* de = static_cast<DTEmpleado*>(datosUsuario);
         empleado* Pe = new empleado(de->getNombre(),de->getEmail(),de->getPassword(),de->getTipoCargo());
         agregarEmpleadoAMap(Pe);
     }else{
-        DTHuesped * dh = dynamic_cast<DTHuesped*>(datosUsuario); 
+        DTHuesped* dh = static_cast<DTHuesped*>(datosUsuario);
         huesped* Ph = new huesped(dh->getNombre(), dh->getEmail(), dh->getPassword(),dh->getEsFinger());;
         agregarHuespedAMap(Ph);
     }

@@ -2,14 +2,17 @@
 #include "../include/fabrica.h"
 #include "../include/FechaSistema.h"
 
-estadia::estadia(DTEstadia* est){
-    this->fechaEntrada = est->getFechaEntrada();
-    this->fechaSalida = est->getFechaSalida();
-    this->codigo = est->getCodigo();
+estadia::estadia(int codigoAct){
+    FechaSistema* fs = FechaSistema::getInstance();
+    calificacionAsoc=NULL;
+
+    this->fechaEntrada =(*fs).getFechaActual();
+    fechaSalida = NULL;
+    this->codigo = codigoAct;
 }
 
 bool estadia::estaActiva(){
-    return fechaSalida!=NULL;
+    return fechaSalida==NULL;
 }
 
 void estadia::finalizarEstadiaActiva(){
@@ -18,6 +21,7 @@ void estadia::finalizarEstadiaActiva(){
     (*fechaActual)=(*fs).getFechaActual();
     if (estaActiva()){
         setFechaSalida(fechaActual);
+        cout << "finalizada" << endl;
     }
 }
 

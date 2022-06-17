@@ -5,13 +5,13 @@
 #include "DTyEnum/DTHostal.h"
 #include "DTyEnum/DTEmpleado.h"
 #include "usuario/empleado.h"
-//Cosas que agregue
 #include "habitacion.h"
 
 #include <iostream>
 #include <stdio.h>
 using namespace std;
 #include <map>
+#include <set>
 
 class habitacion;
 
@@ -47,7 +47,7 @@ class hostal{
         };
 
         void asignarEmpleado(empleado*);
-        bool tieneHab(int);
+        bool tieneHab(habitacion*);
         map<int,DTCalificacion*> obtenerCalsYComs();
         map<int,DTCalificacion*> obtenerCalifSinCom();
         map<int,DTHabitacion*> obtenerHabitacionesDisponiblesEntre(Date, Date);
@@ -60,6 +60,8 @@ class hostal{
         DTHostal* darDatos();
         void quitarSiTieneCalificacion(int);
         float darCalifPromedio();
+        set<DTHabitacion*> obtenerHabitaciones();
+        habitacion* getHab(DTHabitacion*);
         map<string,DTEmpleado*> quitarAsignados(map<string,DTEmpleado*>);
         void agregarCalificacionAMap(calificacion * c){
             calificaciones.insert(pair<int,calificacion*>((*c).getId(),c));

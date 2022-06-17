@@ -12,6 +12,11 @@ individual::individual(DTReservaIndividual* DTR, habitacion* Hab,DTHuesped* Prop
     huespedIndividual* HI = new huespedIndividual(U);
     this->huesInd = HI;
     this->habitacionAsoc = Hab;
+    codigo=(*DTR).getCodigo();
+    costo=(*DTR).getCosto();
+    checkIn=(*DTR).getCheckIn();
+    checkOut=(*DTR).getCheckOut();
+    estado=(*DTR).getEstado();
 }
 
 DTHostal* individual::getDTHostal(){
@@ -25,9 +30,8 @@ void individual::finalizarSiEsReservaBuscada(string emailHuesped,string nombreHo
     fabrica* f = fabrica::getInstance();
     IControladorHostal* ch = (*f).getIControladorHostal();
     
-    int nHab = (*getHabitacion()).getNumero();
-
-    if ((*ch).existeHabEnHostal(nHab,nombreHostal)){
+    habitacion* hab = getHabitacion();
+    if ((*ch).existeHabEnHostal(hab,nombreHostal)){
         huespedIndividual* hi = getHuespedIndividual();
         (*hi).finalizarEstadiaActiva(emailHuesped);
     }

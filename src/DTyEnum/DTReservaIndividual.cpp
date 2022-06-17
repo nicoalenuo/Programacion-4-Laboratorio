@@ -4,6 +4,7 @@ DTReservaIndividual::DTReservaIndividual(int Codigo, Date CheckIn, Date CheckOut
     (*this).codigo = Codigo;
     (*this).checkIn = CheckIn;
     (*this).checkOut =checkOut;
+    (*this).estado=e;
     (*this).costo= Costo;
 }
 
