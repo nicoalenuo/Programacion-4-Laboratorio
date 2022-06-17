@@ -9,7 +9,7 @@
 
 //funcion auxiliar
 DTHostal* ElegirHostal(){
-	cout<< "Por favor, seleccione de la siguiente lista el numero del hostal al que desea asignarle un nuevo empleado: \n";
+	cout<< "Por favor, seleccione el numero de un hostal de la siguiente lista: \n";
 	fabrica* f = fabrica::getInstance();
     IControladorHostal *ICH = (*f).getIControladorHostal();
     map<string,DTHostal*> listaHostales = (*ICH).obtenerHostales();
@@ -102,6 +102,7 @@ int main(){
                             DTHostal* pdth = new DTHostal(NombreHos,DirHos,TelHos,0);
                             (*ICH).IngresarDatosHostal(pdth);
                             (*ICH).confirmarAltaHostal();
+                            cout<<"Se confirmo el alta de Hostal "<<(*pdth).getNombre() <<" \n";
 
                             (*ICH).liberarMemoria();              
                         };
@@ -130,6 +131,7 @@ int main(){
                                 cin >> confirmarAlta; 
                                 if ((char) toupper(confirmarAlta) == 'S'){
                                     (*ICH).confirmarAltaHabitacion();
+                                    cout<<"Se confirmo el alta de la habitacion "<<(*pdthab).getNumero() <<" en el hostal "<<(*dth).getNombre()<<" \n";
                                     
                                 }else{
                                     if ((char) toupper(confirmarAlta) == 'N')
@@ -272,10 +274,12 @@ int main(){
                             DTUsuario* dtu = static_cast<DTUsuario*>(dte);
                             (*ICU).IngresarDatosUsuario(dtu);
                             (*ICU).confirmarAltaUsuario();
-                            cout<<"Se confirmo el alta de Empleado.\n";
+                            cout<<"Se confirmo el alta de Empleado "<<(*dte).getNombre() <<" \n";
                             map<string,DTEmpleado*> empleados = (*ICU).obtenerEmpleados();
                             map<string,DTEmpleado*>::iterator j = empleados.begin();
                             std::cout<<((*j).second)->getNombre() <<std::endl;
+
+                            (*ICU).liberarMemoria();
                         };
                         break;
                         //case 1 | Alta Empleado
@@ -320,7 +324,9 @@ int main(){
                             DTUsuario* dtu = static_cast<DTUsuario*>(dth);
                             (*ICU).IngresarDatosUsuario(dtu);
                             (*ICU).confirmarAltaUsuario();
-                            cout<<"Se confirmo el alta de Huesped.\n";
+                            cout<<"Se confirmo el alta de Huesped "<<(*dth).getNombre() <<" \n";
+
+                            (*ICU).liberarMemoria();
                         };
                         break;
                         //case 2 | Alta Huesped
@@ -605,21 +611,32 @@ int main(){
                     DTUsuario* dtu1 = new DTEmpleado("Emilia","emilia@mail.com","123",Recepcion); 
                     (*ICU).IngresarDatosUsuario(dtu1);
                     (*ICU).confirmarAltaUsuario();
+                    (*ICU).liberarMemoria();
 
                     //E2
                     DTUsuario* dtu2 = new DTEmpleado("Leonardo","leo@mail.com","123",Recepcion);
                     (*ICU).IngresarDatosUsuario(dtu2);
                     (*ICU).confirmarAltaUsuario();
+                    (*ICU).liberarMemoria();
 
                     //E3
                     DTUsuario* dtu3 = new DTEmpleado("Alina","alina@mail.com","123",Administracion);
                     (*ICU).IngresarDatosUsuario(dtu3);
                     (*ICU).confirmarAltaUsuario();
+                    (*ICU).liberarMemoria();
 
                     //E4
                     DTUsuario* dtu4 = new DTEmpleado("Barliman","barli@mail.com","123",Recepcion); 
                     (*ICU).IngresarDatosUsuario(dtu4);
                     (*ICU).confirmarAltaUsuario();
+                    (*ICU).liberarMemoria();
+                    
+                    cout<<"Se ingresaron los empleados: \n";
+                    map<string,DTEmpleado*> emps = (*ICU).obtenerEmpleados();
+                    map<string, DTEmpleado*>::iterator it;
+                    for(it=emps.begin(); it!=emps.end(); it++){
+                        cout<<(*it).second->getNombre() <<"\n";
+                    }
 
                     //Alta Huespedes
                     
@@ -627,31 +644,44 @@ int main(){
                     DTUsuario* dthu1 = new DTHuesped("Sofia","sofia@mail.com","123",true); 
                     (*ICU).IngresarDatosUsuario(dthu1);
                     (*ICU).confirmarAltaUsuario();
+                    (*ICU).liberarMemoria();
 
                     //H2
                     DTUsuario* dthu2 = new DTHuesped("Frodo","frodo@mail.com","123",true);
                     (*ICU).IngresarDatosUsuario(dthu2);
                     (*ICU).confirmarAltaUsuario();
+                    (*ICU).liberarMemoria();
 
                     //H3
                     DTUsuario* dthu3 = new DTHuesped("Sam","sam@mail.com","123",false); 
                     (*ICU).IngresarDatosUsuario(dthu3);
                     (*ICU).confirmarAltaUsuario();
+                    (*ICU).liberarMemoria();
 
                     //H4
                     DTUsuario* dthu4 = new DTHuesped("Merry","merry@mail.com","123",false); 
                     (*ICU).IngresarDatosUsuario(dthu4);
                     (*ICU).confirmarAltaUsuario();
+                    (*ICU).liberarMemoria();
 
                     //H5
                     DTUsuario* dthu5 = new DTHuesped("Pippin","pippin@mail.com","123",false);
                     (*ICU).IngresarDatosUsuario(dthu5);
                     (*ICU).confirmarAltaUsuario();
+                    (*ICU).liberarMemoria();
 
                     //H6
                     DTUsuario* dthu6 = new DTHuesped("Seba","seba@mail.com","123",true); 
                     (*ICU).IngresarDatosUsuario(dthu6);
                     (*ICU).confirmarAltaUsuario();
+                    (*ICU).liberarMemoria();
+
+                    cout<<"Se ingresaron los huespedes: \n";
+                    map<string,DTHuesped*> hues = (*ICU).obtenerHuespedes();
+                    map<string, DTHuesped*>::iterator it2;
+                    for(it2=hues.begin(); it2!=hues.end(); it2++){
+                        cout<<(*it2).second->getNombre() <<"\n";
+                    };
 
                     //Alta Hostales
                     //HO1                    
@@ -659,79 +689,97 @@ int main(){
                     DTHostal* pdth1 = new DTHostal("La posada del finger","Av de la playa 123, Maldonado","099111111",0);
                     (*ICH).IngresarDatosHostal(pdth1);
                     (*ICH).confirmarAltaHostal();
-
+                    //(*ICH).liberarMemoria();
+                    cout<<"1";
                     //HO2
                     DTHostal* pdth2 = new DTHostal("Mochileros","Rambla Costanera 333, Rocha","42579512",0);
                     (*ICH).IngresarDatosHostal(pdth2);
                     (*ICH).confirmarAltaHostal();
-
+                    (*ICH).liberarMemoria();
+                    cout<<"2";
                     //HO3                    
                     DTHostal* pdth3 = new DTHostal("El Pony Pisador","Bree (preguntar por Gandalf)","000",0);
                     (*ICH).IngresarDatosHostal(pdth3);
                     (*ICH).confirmarAltaHostal();
+                    (*ICH).liberarMemoria();
+                    cout<<"3";
 
                     //HO4
                     DTHostal* pdth4 = new DTHostal("Altos de Fing","Av del Toro 1424","099892992",0);
                     (*ICH).IngresarDatosHostal(pdth4);
                     (*ICH).confirmarAltaHostal();
+                    (*ICH).liberarMemoria();
+                    cout<<"4";
 
                     //HO5
                     DTHostal* pdth5 = new DTHostal("Caverna Lujosa","Amaya 2515","233233235",0);
                     (*ICH).IngresarDatosHostal(pdth5);
                     (*ICH).confirmarAltaHostal();
+                    (*ICH).liberarMemoria();
+                    cout<<"5";
+
+                    cout<<"Se ingresaron los hostales: \n";
+                    map<string,DTHostal*> host = (*ICH).obtenerHostales();
+                    map<string, DTHostal*>::iterator it3;
+                    for(it3=host.begin(); it3!=host.end(); it3++){
+                        cout<<(*it3).second->getNombre() <<"\n";
+                    };
 
                     //HO1 - Habitaciones
                     //HA1
                     
                     (*ICH).IngresarDatosHostal(pdth1);
-
                     DTHabitacion* pdthab1 = new DTHabitacion(1,40,2);
                     (*ICH).IngresarDatosHab(pdthab1);
                     (*ICH).confirmarAltaHabitacion();
-
+                    //(*ICH).liberarMemoria();
+                    
                     //HA2
+                    (*ICH).IngresarDatosHostal(pdth1);
                     DTHabitacion* pdthab2 = new DTHabitacion(2,10,7);
                     (*ICH).IngresarDatosHab(pdthab2);
                     (*ICH).confirmarAltaHabitacion();
+                    (*ICH).liberarMemoria();
+                    cout<<"b";
 
                     //HA3
+                    (*ICH).IngresarDatosHostal(pdth1);
                     DTHabitacion* pdthab3 = new DTHabitacion(3,30,3);
                     (*ICH).IngresarDatosHab(pdthab3);
                     (*ICH).confirmarAltaHabitacion();
+                    (*ICH).liberarMemoria();
 
                     //HA4
+                    (*ICH).IngresarDatosHostal(pdth1);
                     DTHabitacion* pdthab4 = new DTHabitacion(4,5,12);
                     (*ICH).IngresarDatosHab(pdthab4);
                     (*ICH).confirmarAltaHabitacion();
-
                     (*ICH).liberarMemoria();
 
                     //HO3 - Habitaciones
                     //HA6
                     
                     (*ICH).IngresarDatosHostal(pdth3);
-
                     DTHabitacion* pdthab6 = new DTHabitacion(1,9,5);                   
                     (*ICH).IngresarDatosHab(pdthab6);
                     (*ICH).confirmarAltaHabitacion();
-
                     (*ICH).liberarMemoria();
 
                     //HO5 - Habitaciones
                     //HA5
                     
                     (*ICH).IngresarDatosHostal(pdth5);
-
                     DTHabitacion* pdthab5 = new DTHabitacion(1,3,2);
                     (*ICH).IngresarDatosHab(pdthab5);
                     (*ICH).confirmarAltaHabitacion();
-
                     (*ICH).liberarMemoria();
+
+                    cout<<"Luego de alta habitaciones \n"; 
                     
                     //H01 - Reservas
                     //R1 - HA1
                     
-                    Date ChIn1(01,05,22);
+                    /*Date ChIn1(01,05,22);
                     Date ChOut1(10,05,22);
                     (*ICR).ingresarDatosReserva(pdth1,ChIn1,ChOut1);
                     (*ICH).setDatosHabitacion(pdthab1);
@@ -911,7 +959,7 @@ int main(){
                     Comentario = "Desapareció y se fue sin pagar.";
                     (*ICC).ingresarRespuesta(Comentario,dtcal);
 
-                    (*ICC).liberarMemoria();
+                    (*ICC).liberarMemoria();*/
 
                 };
                 break;
@@ -926,6 +974,7 @@ int main(){
                 break;
             }
         }//switch(Opcion1)
-        cout<<"Gracias por operar con nosotros, vuelva pronto!";
+
     }//while (!finalizar)
+    cout<<"Gracias por operar con nosotros, vuelva pronto! \n";
 }//int main()

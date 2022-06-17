@@ -9,8 +9,8 @@ ControladorHostal::ControladorHostal(){
     hostales={};
     habitaciones={};
 
-    datosHostal==NULL;
-    datosHabitacion==NULL;
+    datosHostal=NULL;
+    datosHabitacion=NULL;
 }
 
 ControladorHostal* ControladorHostal::getInstance(){

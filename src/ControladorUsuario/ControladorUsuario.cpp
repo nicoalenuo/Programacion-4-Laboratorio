@@ -137,7 +137,7 @@ void ControladorUsuario::liberarMemoria(){
 }
 
 bool ControladorUsuario::IngresarEmail(string email){ //devuelve true si el mail se ingresó
-    return empleados.find(email)!=empleados.end() && huespedes.find(email)!=huespedes.end(); 
+    return empleados.find(email)==empleados.end() && huespedes.find(email)==huespedes.end(); 
 }
 
 void ControladorUsuario::confirmarAltaUsuario(){
