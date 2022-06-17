@@ -43,12 +43,13 @@ class ControladorCalificacion:public IControladorCalificacion {
         void agregarSuscripto(IObserver*);
         void eliminarCalificacion(int);
         map<int,DTEstadia*> obtenerEstadiasHuesped(string);
-        void agregarCalificacion(string,string,int);
+        void agregarCalificacion(string,string,int,int);
         map<int,DTCalificacion*> obtenerCalificaciones(string);
+         map<int,DTCalificacion*> obtenerCalificaciones();
         void liberarMemoria();
         void eliminarCalificacion();
         void RegistrarEstadia(string, string, int);
-        void ingresarRespuesta(string,DTCalificacion*);
+        void ingresarRespuesta(string,int);
         float obtenerPromocionDeEstadia();
         int obtenerCodigoDeEstadia();
         void quitarEstadia(int);

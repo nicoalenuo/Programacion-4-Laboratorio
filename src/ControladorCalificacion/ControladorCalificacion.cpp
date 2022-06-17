@@ -50,8 +50,6 @@ void ControladorCalificacion::RegistrarEstadia(string nomH, string email, int co
         estadia* e = new estadia(MaxCodigoEstadia); 
         HI->setEstadia(e);
         estadias.insert(pair<int,estadia*>(MaxCodigoEstadia,e));
-
-        cout << "Registrada Individual" << endl;
     }else{
         grupal* rG = static_cast<grupal*>(r);
         huespedGrupal* HG = rG->GetHuespedGrupalDeUsuario(email);
@@ -59,12 +57,10 @@ void ControladorCalificacion::RegistrarEstadia(string nomH, string email, int co
         estadia* e = new estadia(MaxCodigoEstadia); 
         HG->setEstadia(e);
         estadias.insert(pair<int,estadia*>(MaxCodigoEstadia,e));
-
-        cout << "Registrada Grupal" << endl;
     }
 }
 
-void ControladorCalificacion::agregarCalificacion(string email,string coment,int nota){
+void ControladorCalificacion::agregarCalificacion(string email,string coment,int nota, int codEst){
     fabrica* fab = fabrica::getInstance();
     FechaSistema* fSist = FechaSistema::getInstance(); 
     IControladorUsuario* usr = fab->getIControladorUsuario();
@@ -73,19 +69,18 @@ void ControladorCalificacion::agregarCalificacion(string email,string coment,int
     DTHuesped* hues = usr->obtenerHuespedConEmail(email);
     hostal* host = hst->obtenerHostal(dtsHostal);
     Date actual = fSist->getFechaActual();
-    calificacion* cal = new calificacion(idActual, nota, coment, actual);
     idActual++;
+    calificacion* cal = new calificacion(idActual, nota, coment, actual);
     notificarSuscriptos(hues->getNombre(),nota,coment);
     agregarCalificacionAMap(cal);
     host->agregarCalificacionAMap(cal);
-    map<int,estadia*>::iterator it = estadias.find(datosEstadia->getCodigo());
+    map<int,estadia*>::iterator it = estadias.find(codEst);
     it->second->setCalificacion(cal);
 }
 
-void ControladorCalificacion::ingresarRespuesta(string resp, DTCalificacion* tcl){
-    map<int,calificacion*>::iterator aux = (*this).calificaciones.find(tcl->getId());
-    calificacion* aux2 = (*aux).second;
-    aux2->ingresarRespuesta(resp);
+void ControladorCalificacion::ingresarRespuesta(string resp, int codCal){
+    calificacion* cal = (*calificaciones.find(codCal)).second;
+    cal->ingresarRespuesta(resp);
 }
 
 void ControladorCalificacion::liberarMemoria(){
@@ -131,6 +126,15 @@ DTRespuesta* ControladorCalificacion::obtenerRespuesta(DTCalificacion* c){
 
 void ControladorCalificacion::eliminarCalificacion(int id){//borra del map la calificacion, pero no de memoria, eso se hace en EliminarCalificacion de Calificacion
     calificaciones.erase(id);
+}
+
+map<int,DTCalificacion*> ControladorCalificacion::obtenerCalificaciones(){
+    map<int,DTCalificacion*> resultado;
+    map<int,calificacion*>::iterator it;
+    for (it=calificaciones.begin() ; it!=calificaciones.end() ; it++){
+        resultado.insert(pair<int,DTCalificacion*>((*(*it).second).getPuntuacion() , (*(*it).second).darDatos()));
+    }
+    return resultado;
 }
 
 ////////////////////////////////////////////////

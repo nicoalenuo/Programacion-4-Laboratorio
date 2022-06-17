@@ -17,11 +17,9 @@ bool estadia::estaActiva(){
 
 void estadia::finalizarEstadiaActiva(){
     FechaSistema* fs=FechaSistema::getInstance();
-    Date* fechaActual;
-    (*fechaActual)=(*fs).getFechaActual();
+    Date* fechaActual = new Date(((*fs).getFechaActual()).getDia(),((*fs).getFechaActual()).getMes(),((*fs).getFechaActual()).getAnio());
     if (estaActiva()){
         setFechaSalida(fechaActual);
-        cout << "finalizada" << endl;
     }
 }
 

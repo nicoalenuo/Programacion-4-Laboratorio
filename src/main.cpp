@@ -1008,14 +1008,12 @@ int main(){
                     (*fec).setFechaActual(d1O);
                     (*ICR).finalizarEstadiaActiva("sofia@mail.com", nmbrHstl1);
                     
-                   (*ICR).ww();
-                    
                     //ES2 
                    //R2 - HU2
 
-     /*
-                    Date d2I(04,01,01);
-                    Date d2O(05,01,01);
+     
+                    Date d2I = Date(04,01,01);
+                    Date d2O = Date(05,01,01);
 
                     string nmbrHstl2 = "El Pony Pisador";
                     int codRsv2=2;
@@ -1027,85 +1025,80 @@ int main(){
                     (*ICC).RegistrarEstadia(nmbrHstl2,"pippin@mail.com",codRsv2);
 
                     (*fec).setFechaActual(d2O);
-
                     (*ICR).finalizarEstadiaActiva("frodo@mail.com", nmbrHstl2);  
+
 
                     //ES3
                     //R2 - HU3
                                        
-                    itDTR = res.begin();
-                    Date d3I(04,01,01);
-                    Date * d3O = new Date((*itDTR).second->getCheckOut());
-                    DTEstadia* Pdtes3 = new DTEstadia(d3I, d3O, ((*itDTR).second)->getCodigo());
-                    (*ICC).RegistrarEstadia(pdth3,"sam@mail.com",(*itDTR).second,Pdtes3);
+                    Date d3I = Date(07,06,22);
+                    Date d3O = Date(15,06,22);
 
-                    //ES4
-                    //R2 - HU4
-                                        
-                    res = (*ICR).ListarReservasNoCanceladasDeHuesped(pdth3, "merry@mail.com");
-                    itDTR = res.begin();
-                    Date d4I(04,01,01);
-                    Date * d4O = new Date((*itDTR).second->getCheckOut());
-                    DTEstadia* Pdtes4 = new DTEstadia(d4I, d4O, ((*itDTR).second)->getCodigo());
-                    (*ICC).RegistrarEstadia(pdth3,"merry@mail.com",(*itDTR).second,Pdtes4);
+                    string nmbrHstl3 = "Caverna Lujosa";
+                    int codRsv3=4;
+                    
+                    (*fec).setFechaActual(d3I);
+                    (*ICC).RegistrarEstadia(nmbrHstl3,"seba@mail.com",codRsv3);
 
-                    //ES5
-                    //R2 - HUE5
-                                      
-                    res = (*ICR).ListarReservasNoCanceladasDeHuesped(pdth3, "pippin@mail.com");
-                    itDTR = res.begin();
-                    Date d5I(04,01,01);
-                    Date * d5O = new Date((*itDTR).second->getCheckOut());
-                    DTEstadia* Pdtes5 = new DTEstadia(d5I, d5O, ((*itDTR).second)->getCodigo());
-                    (*ICC).RegistrarEstadia(pdth5,"pippin@mail.com",(*itDTR).second,Pdtes5);
+                    (*fec).setFechaActual(d3O);
+                    (*ICR).finalizarEstadiaActiva("seba@mail.com", nmbrHstl3);  
 
-                    //ES6
-                    //R4 -HU6
-                                       
-                    res = (*ICR).ListarReservasNoCanceladasDeHuesped(pdth5, "seba@mail.com");
-                    itDTR = res.begin();
-                    Date d6I(07,06,22);
-                    Date * d6O = new Date((*itDTR).second->getCheckOut());
-                    DTEstadia* Pdtes6 = new DTEstadia(d6I ,d6O, ((*itDTR).second)->getCodigo());
-                    (*ICC).RegistrarEstadia(pdth5,"seba@mail.com",(*itDTR).second,Pdtes6);
-
-                    (*ICR).finalizarEstadiaActiva("seba@mail.com", (*pdth5).getNombre());
 
                     //Calificar Estadia
 
                     //C1
                     //ES1
-                    map<int,DTEstadia*> esHues = (*ICR).obtenerEstadiaHuesped("sofia@mail.com");
-                    itDTEs = esHues.begin();
+
+                    Date fechaCal1 = Date(11,05,22);
+                    (*fec).setFechaActual(fechaCal1);
+
+                    pdth1 = new DTHostal("La posada del finger","Av de la playa 123, Maldonado","099111111",0);
+                    (*ICH).IngresarDatosHostal(pdth1);
+
                     Comentario = "Un poco caro para lo que ofrecen. El famoso gimnasio era una caminadora (que hacía tremendo ruido) y 2 pesas, la piscina parecía el lago del Parque Rodó y el desayuno eran 2 tostadas con mermelada. Internet se pasaba,cayendo. No vuelvo";
                     nota = 3;
-                    (*ICC).agregarCalificacion("sofia@mail.com",Comentario, nota);
+
+                    (*ICC).agregarCalificacion("sofia@mail.com",Comentario, nota,1);
                     
+                    (*ICH).liberarMemoria();
+
                     //C2
                     //ES2
-                    esHues = (*ICR).obtenerEstadiaHuesped("frodo@mail.com");
-                    itDTEs = esHues.begin();
-                    Comentario = "Se pone peligroso de noche, no recomiendo. Además no hay caja fuerte para guardar anillos.";
+
+                    Date fechaCal2 = Date(5,01,01);
+                    (*fec).setFechaActual(fechaCal2);
+
+                    pdth3 = new DTHostal("El Pony Pisador","Bree (preguntar por Gandalf)","000",0);
+                    (*ICH).IngresarDatosHostal(pdth3);
+
+                    Comentario = "Se pone peligroso de noche, no recomiendo. Además no hay cajafuerte para guardar anillos.";
                     nota = 2;
-                    (*ICC).agregarCalificacion("frodo@mail.com",Comentario, nota);
+
+                    (*ICC).agregarCalificacion("frodo@mail.com",Comentario, nota,1);
+
+                    (*ICH).liberarMemoria();
 
                     //C3
                     //ES6
-                    esHues = (*ICR).obtenerEstadiaHuesped("seba@mail.com");
-                    itDTEs = esHues.begin();
-                    Comentario = "Había pulgas en la habitación. Que lugar más mamarracho!!";
+
+                    Date fechaCal3 = Date(15,06,22);
+                    (*fec).setFechaActual(fechaCal3);
+
+                    pdth5 = new DTHostal("Caverna Lujosa","Amaya 2515","233233235",0);
+                    (*ICH).IngresarDatosHostal(pdth5);
+
+                    Comentario = "Había pulgas en la habitación.Que lugar más mamarracho!!";
                     nota = 1;
-                    
-                    (*ICC).agregarCalificacion("seba@mail.com",Comentario, nota);
+
+                    (*ICC).agregarCalificacion("seba@mail.com",Comentario, nota,1);
+
+                    (*ICH).liberarMemoria();
 
                     //Comentar Calificacion
-                    (*ICC).setDatosEstadia(Pdtes2);
-                    DTCalificacion * dtcal = (*ICC).obtenerCalificacionDeEstadia();
+                   
                     Comentario = "Desapareció y se fue sin pagar.";
-                    (*ICC).ingresarRespuesta(Comentario,dtcal);
-
-                    (*ICC).liberarMemoria();
-                    */
+                    (*ICC).ingresarRespuesta(Comentario,2);
+                    
                 };
                 break;
                 //case 6 | Cargar datos de prueba
