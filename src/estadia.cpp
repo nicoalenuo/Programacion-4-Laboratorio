@@ -41,6 +41,9 @@ void estadia::eliminarEstadia(){
         delete calificacionAsoc;
         c= NULL;
     }
+    if (fechaSalida!=NULL)
+        delete fechaSalida;
+        
     (*icc).quitarEstadia(codigo);
 }
 

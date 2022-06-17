@@ -186,27 +186,4 @@ void ControladorReserva::liberarMemoria(){
         delete (*it).second;
     }
     SDTH.clear();
-}
-
-
-void ControladorReserva::ww(){
-    map<int,reserva*>::iterator it;
-    set<huespedGrupal*>::iterator it2;
-
-    for (it=reservas.begin() ; it!=reservas.end() ; it++){
-        if (dynamic_cast<grupal*>((*it).second)!=NULL){
-            grupal* grp = static_cast<grupal*>((*it).second);
-            (*grp).imprimirHuespedes();
-        }
-        else{
-            individual* ind = static_cast<individual*>((*it).second);
-            (*ind).imprimirHuespedes();
-        }
-
-        cout << (*(*it).second).getCodigo() << endl;
-        cout << (*(*(*it).second).getHabitacion()).getNumero() << endl;
-        cout << (*(*(*it).second).getDTHostal()).getNombre() << endl;
-
-        cout << endl;
-    }
 } 

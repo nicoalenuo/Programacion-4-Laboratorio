@@ -47,8 +47,6 @@ class ControladorReserva:public IControladorReserva {
             reservas.insert(pair<int,reserva*>((*r).getCodigo(),r));
         }
         void liberarMemoria();
-
-        void ww();
 };
 
 #endif

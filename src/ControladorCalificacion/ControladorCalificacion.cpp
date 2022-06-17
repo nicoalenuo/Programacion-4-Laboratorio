@@ -128,15 +128,6 @@ void ControladorCalificacion::eliminarCalificacion(int id){//borra del map la ca
     calificaciones.erase(id);
 }
 
-map<int,DTCalificacion*> ControladorCalificacion::obtenerCalificaciones(){
-    map<int,DTCalificacion*> resultado;
-    map<int,calificacion*>::iterator it;
-    for (it=calificaciones.begin() ; it!=calificaciones.end() ; it++){
-        resultado.insert(pair<int,DTCalificacion*>((*(*it).second).getPuntuacion() , (*(*it).second).darDatos()));
-    }
-    return resultado;
-}
-
 ////////////////////////////////////////////////
 
         map<int,DTEstadia*> ControladorCalificacion::obtenerEstadiasHuesped(string){

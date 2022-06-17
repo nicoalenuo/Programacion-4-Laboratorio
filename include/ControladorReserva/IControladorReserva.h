@@ -41,8 +41,6 @@ class IControladorReserva{
         virtual reserva* obtenerReservaDeEstadia(DTEstadia*)=0;
         virtual DTDatosEstadia* obtenerDatosEstadia()=0;
         virtual void liberarMemoria()=0;
-
-        virtual void ww()=0;
 };
 
 #endif

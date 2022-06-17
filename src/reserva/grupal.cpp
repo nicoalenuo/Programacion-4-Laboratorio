@@ -174,18 +174,6 @@ map<string,DTHuesped*> grupal::obtenerHuespedesDeReserva(){
     return resultado;
 }
 
-void grupal::imprimirHuespedes(){
-    set<huespedGrupal*>::iterator it;
-    for(it=huesGrup.begin();it!=huesGrup.end();it++){
-            huesped* h= (*it)->getHuesped();
-            cout << (*h).getNombre() << endl; 
-            cout << (*h).getEmail() << endl; 
-            cout << (*h).getPassword() << endl;
-            cout << (*h).getEsFinger() << endl;
-            cout << endl;
-    }  
-}
-
 /////////////////////////////////////////////
 
 DTEstadia* grupal::obtenerEstadia(){return NULL;}

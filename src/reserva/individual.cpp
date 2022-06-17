@@ -92,15 +92,6 @@ DTEstadia* individual::darEstadiaDeHuesped(string email){
     }else{ return NULL; }
 }
 
-void individual::imprimirHuespedes(){
-        huesped* h= (*huesInd).getHuesped();
-        cout << (*h).getNombre() << endl; 
-        cout << (*h).getEmail() << endl; 
-        cout << (*h).getPassword() << endl;
-        cout << (*h).getEsFinger() << endl;
-        cout << endl;
-}
-
 
 /////////////////////////////////////////
 

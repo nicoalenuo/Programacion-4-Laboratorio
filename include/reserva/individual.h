@@ -73,8 +73,6 @@ class individual:public reserva{
         bool tieneEstadia(DTEstadia*);
         DTHuesped* darHuespedConEstadia(DTEstadia*);
         DTHabitacion* darDatosHabitacion();
-
-        void imprimirHuespedes();
 };
 
 #endif
