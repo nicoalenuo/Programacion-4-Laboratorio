@@ -145,7 +145,6 @@ int main(){
                         // case 2 | Alta Habitacion
 
                         case 3:{ // Consultar Hostal
-                            DTHostal* dth = ElegirHostal();
                             fabrica* f = fabrica::getInstance();
                             IControladorHostal *ICH = (*f).getIControladorHostal();
                             map<string,hostal*> hostales= ICH->getHostales();
@@ -442,11 +441,8 @@ int main(){
                         //case 3 | Asignar Empleado a Hostal
 
                         case 4:{ //Consultar Usuario
-                            DTHostal * dth = ElegirHostal();
                             fabrica* f = fabrica::getInstance();
                             IControladorHostal * ICH = (*f).getIControladorHostal();
-                            (*ICH).IngresarDatosHostal(dth);
-
                             IControladorUsuario *ICU = (*f).getIControladorUsuario();
                             map<string,DTUsuario*> usuarios = (*ICU).obtenerUsuarios();
                             //elegir un usuario
@@ -517,6 +513,7 @@ int main(){
                                 }
                                 //liberarMemoria del DTUsuario
                                 (*ICU).liberarMemoria();
+                                //(*ICH).liberarMemoria()
                             };
                                 
                         };
@@ -632,16 +629,62 @@ int main(){
 
                         case 2:{//Consultar Reserva
                             //obtenerHostales
-                            //Guardar DTHostal en memoria
-                            //Para toda reserva del DTHostal
+                            DTHostal* dth = ElegirHostal();
+                            fabrica* f = fabrica::getInstance();
+                            IControladorHostal *ICH = (*f).getIControladorHostal();
+                            map<string,hostal*> hostales= ICH->getHostales();
+                            //elegir un hostal
+                            map<string,hostal*>::iterator it;
+                            if(hostales.size()==0){
+                                cout<<"No hay usuarios ingresados.";
+                            }else{
+                                int cont=0;
+                                for(it=hostales.begin();it!=hostales.end();it++){
+                                    cont++;
+                                    cout << cont << " | Nombre: " << (*it).second->getNombre();
+                                    cout << " | Direccion: " << (*it).second->getDireccion();
+                                    cout << " | Telefono: " << (*it).second->getTelefono() << endl;
+                                }
+                                int elegir;
+                                do{
+                                    cont = 1;
+                                    it=hostales.begin();
+                                    cin >> elegir;
+                                    if(elegir > hostales.size() || elegir<=0){
+                                        cout << "El numero elegido no pertenece a la lista" << endl;
+                                    }else{
+                                        while(cont<elegir){
+                                            cont++;
+                                            it++;
+                                        }
+                                    }
+                                }while(elegir > hostales.size() || elegir <=0);
+                                //guarda DTHostal en memoria
+                                DTHostal* dtHostal;
+                                (*dtHostal)= DTHostal((*it).second->getNombre(),(*it).second->getDireccion(),(*it).second->getTelefono(),(*it).second->darCalifPromedio());
+                                (*ICH).setDatosHostal(dtHostal);
+                                //mostrar reservas del hostal
+                                map<int,DTReserva*> dtreservas = (*it).second->obtenerReservas();
+                                map<int,DTReserva*>::iterator it2;
+                                //Para toda reserva del DTHostal
                                 //mostrarReserva
-                                //obtener habitacion de la reserva
-                                //obtenerNumeroDeHabitacion(habitacion)
-                                //Si la reserva es Grupal
-                                    //obtenerNombresDeReserva
-                                //Fin Si
-                            //Fin Para todo
-                            //liberarHostal
+                                hostal* hostal;
+                                for(it2=dtreservas.begin();it2!=dtreservas.end();it2++){
+                                    cout << "Reserva: " << endl;
+                                    cout << "Fecha de Ingreso: " << (*it2).second->getCheckIn().getDia() << "/" << (*it2).second->getCheckIn().getMes() << "/" << (*it2).second->getCheckIn().getAnio() << endl;
+                                    cout << "Fecha de Salida: " << (*it2).second->getCheckOut().getDia() << "/" << (*it2).second->getCheckOut().getMes() << "/" << (*it2).second->getCheckOut().getAnio() << endl;
+                                    cout << "Estado:" << (*it2).second->getEstado() << endl;
+                                    cout << "Costo:" << (*it2).second->getCosto() << endl;
+                                    //obtener habitacion de la reserva
+                                    hostal= (*ICH).obtenerHostal(dtHostal);
+                                    //obtenerNumeroDeHabitacion(habitacion)
+                                    //Si la reserva es Grupal
+                                        //obtenerNombresDeReserva
+                                    //Fin Si
+                                }
+                            }
+                            //liberarMemoria del Hostal
+                            (*ICH).liberarMemoria();
                         }
                         case 3:{ //Baja de Reserva
 
