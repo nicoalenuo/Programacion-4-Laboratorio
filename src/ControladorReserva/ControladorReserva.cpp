@@ -197,7 +197,10 @@ void ControladorReserva::ww(){
         if (dynamic_cast<grupal*>((*it).second)!=NULL){
             grupal* grp = static_cast<grupal*>((*it).second);
             (*grp).imprimirHuespedes();
-
+        }
+        else{
+            individual* ind = static_cast<individual*>((*it).second);
+            (*ind).imprimirHuespedes();
         }
 
         cout << (*(*it).second).getCodigo() << endl;

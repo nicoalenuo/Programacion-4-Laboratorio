@@ -51,6 +51,8 @@ class reserva{
         virtual bool tieneEstadia(DTEstadia*)=0;
         virtual DTHuesped* darHuespedConEstadia(DTEstadia*)=0;
         virtual DTHabitacion* darDatosHabitacion()=0;
+
+        virtual void imprimirHuespedes()=0;
 };
 
 #endif

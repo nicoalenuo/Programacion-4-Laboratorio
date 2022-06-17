@@ -176,7 +176,6 @@ map<string,DTHuesped*> grupal::obtenerHuespedesDeReserva(){
 
 void grupal::imprimirHuespedes(){
     set<huespedGrupal*>::iterator it;
-    map<string,DTHuesped*> resultado;
     for(it=huesGrup.begin();it!=huesGrup.end();it++){
             huesped* h= (*it)->getHuesped();
             cout << (*h).getNombre() << endl; 

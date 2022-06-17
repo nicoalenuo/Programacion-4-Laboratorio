@@ -996,7 +996,6 @@ int main(){
                     //Estadías
                     //ES1
 
-
                     Date d1I = Date(01,05,22);
                     Date d1O = Date(10,05,22);
 
@@ -1005,16 +1004,16 @@ int main(){
 
                     (*fec).setFechaActual(d1I);
                     (*ICC).RegistrarEstadia(nmbrHstl1,"sofia@mail.com", codRsv1);
-                    
-
 
                     (*fec).setFechaActual(d1O);
                     (*ICR).finalizarEstadiaActiva("sofia@mail.com", nmbrHstl1);
                     
+                   (*ICR).ww();
+                    
                     //ES2 
                    //R2 - HU2
 
-     
+     /*
                     Date d2I(04,01,01);
                     Date d2O(05,01,01);
 
@@ -1030,9 +1029,7 @@ int main(){
                     (*fec).setFechaActual(d2O);
 
                     (*ICR).finalizarEstadiaActiva("frodo@mail.com", nmbrHstl2);  
-                    
-                    (*ICR).ww();
-/*
+
                     //ES3
                     //R2 - HU3
                                        
