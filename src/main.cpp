@@ -212,7 +212,7 @@ int main(){
                                     cout << "Capacidad:" << (*it1).second->getCapacidad() << endl;
                                 }
                                 //mostrar reservas del hostal
-                                map<int,DTReserva*> dtreservas = (*it).second->obtenerReservas();
+                                map<int,DTReserva*> dtreservas = (*ICH).obtenerReservasDeHostal();
                                 map<int,DTReserva*>::iterator it2;
                                 for(it2=dtreservas.begin();it2!=dtreservas.end();it2++){
                                     cout << "Reserva " << endl;
