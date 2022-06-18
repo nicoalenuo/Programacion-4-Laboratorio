@@ -200,7 +200,7 @@ int main(){
                                 }
                                 for(itcal=dtcalificaciones.begin();itcal!=dtcalificaciones.end();itcal++){
                                     dtcal= (*itcal).second;
-                                    cout << "Calificacion " << endl;
+                                    cout << "Calificacion: " << endl;
                                     cout << "Comentario: " << dtcal->getComentario() << endl;
                                     cout << "Puntuacion: " << dtcal->getPuntuacion() << endl;
                                 }
@@ -208,7 +208,7 @@ int main(){
                                 map<int,DTHabitacion*> habitaciones= (*it).second->obtenerHabitaciones();
                                 map<int,DTHabitacion*>::iterator it1;
                                 for(it1=habitaciones.begin();it1!=habitaciones.end();it++){
-                                    cout << "Habitacion " << endl;
+                                    cout << "Habitacion " << ": " << (*it1).second->getNumero() << endl;
                                     cout << "Numero: " << (*it1).second->getNumero() << endl;
                                     cout << "Precio: " << (*it1).second->getPrecio() << endl;
                                     cout << "Capacidad:" << (*it1).second->getCapacidad() << endl;
@@ -217,7 +217,7 @@ int main(){
                                 map<int,DTReserva*> dtreservas = (*it).second->obtenerReservas();
                                 map<int,DTReserva*>::iterator it2;
                                 for(it2=dtreservas.begin();it2!=dtreservas.end();it2++){
-                                    cout << "Reserva " << endl;
+                                    cout << "Reserva: " << endl;
                                     cout << "Fecha de Ingreso: " << (*it2).second->getCheckIn().getDia() << "/" << (*it2).second->getCheckIn().getMes() << "/" << (*it2).second->getCheckIn().getAnio() << endl;
                                     cout << "Fecha de Salida: " << (*it2).second->getCheckOut().getDia() << "/" << (*it2).second->getCheckOut().getMes() << "/" << (*it2).second->getCheckOut().getAnio() << endl;
                                     cout << "Estado:" << (*it2).second->getEstado() << endl;
@@ -451,7 +451,6 @@ int main(){
                             }else{
                                 map<string,DTUsuario*>::iterator it;
                                 int cont=0;
-                                //mostrarUsuarios
                                 for(it=usuarios.begin();it!=usuarios.end();it++){
                                     cont++;
                                     cout << cont << " | Nombre: " << (*it).second->getNombre();
@@ -633,7 +632,6 @@ int main(){
                             DTHostal* dth = ElegirHostal();
                             fabrica* f = fabrica::getInstance();
                             IControladorHostal *ICH = (*f).getIControladorHostal();
-                            IControladorReserva *ICR = (*f).getIControladorReserva();
                             map<string,hostal*> hostales= ICH->getHostales();
                             //elegir un hostal
                             map<string,hostal*>::iterator it;
@@ -679,22 +677,10 @@ int main(){
                                     cout << "Costo:" << (*it2).second->getCosto() << endl;
                                     //obtener habitacion de la reserva
                                     hostal= (*ICH).obtenerHostal(dtHostal);
-                                    reserva* res= (*ICR).getReserva((*it2).second);
-                                    habitacion* hab= res->getHabitacion();
                                     //obtenerNumeroDeHabitacion(habitacion)
-                                    cout << "Numero de habitacion: " << hab->getNumero() << endl;
                                     //Si la reserva es Grupal
-                                    if(dynamic_cast<DTReservaGrupal*>((*it2).second)){
-                                        DTReservaGrupal* dtrg= static_cast<DTReservaGrupal*>((*it2).second);
-                                        map<string,DTHuesped*> dthuesped = (*ICR).obtenerHuespedesDeReserva(dtrg);
-                                        map<string,DTHuesped*>::iterator it3;
-                                        cont=0;
-                                        for(it3=dthuesped.begin();it3!=dthuesped.end();it3++){
-                                            cont++;
-                                            cout << "Huesped " << cont << ": " << (*it3).second->getNombre() << endl;
-                                            it3++;
-                                        }
-                                    }
+                                        //obtenerNombresDeReserva
+                                    //Fin Si
                                 }
                             }
                             //liberarMemoria del Hostal
@@ -707,170 +693,27 @@ int main(){
 
                         }
                         case 5:{ //Consultar Estadia
-                            fabrica* f = fabrica::getInstance();
-                            IControladorHostal *ICH = (*f).getIControladorHostal();
-                            IControladorCalificacion *ICC = (*f).getIControladorCalificacion();
-                            IControladorReserva *ICR = (*f).getIControladorReserva();
-                            map<string,hostal*> hostales= ICH->getHostales();
-                            //elegir un hostal
-                            map<string,hostal*>::iterator it;
-                            if(hostales.size()==0){
-                                cout<<"No hay usuarios ingresados.";
-                            }else{
-                                int cont=0;
-                                for(it=hostales.begin();it!=hostales.end();it++){
-                                    cont++;
-                                    cout << cont << " | Nombre: " << (*it).second->getNombre();
-                                    cout << " | Direccion: " << (*it).second->getDireccion();
-                                    cout << " | Telefono: " << (*it).second->getTelefono() << endl;
-                                }
-                                int elegir;
-                                do{
-                                    cont = 1;
-                                    it=hostales.begin();
-                                    cin >> elegir;
-                                    if(elegir > hostales.size() || elegir<=0){
-                                        cout << "El numero elegido no pertenece a la lista" << endl;
-                                    }else{
-                                        while(cont<elegir){
-                                            cont++;
-                                            it++;
-                                        }
-                                    }
-                                }while(elegir > hostales.size() || elegir <=0);
-                                //guarda DTHostal en memoria
-                                DTHostal* dtHostal;
-                                (*dtHostal)= DTHostal((*it).second->getNombre(),(*it).second->getDireccion(),(*it).second->getTelefono(),(*it).second->darCalifPromedio());
-                                (*ICH).setDatosHostal(dtHostal);
-
-                                //obtenerEstadiasDeHostal
-                                map<int,estadia*> estadias;
-                                map<int,estadia*>::iterator it1;
-                                if(estadias.size()==0){
-                                    cout<<"No hay estadias ingresadas.";
-                                }else{
-                                    int cont=0;
-                                    for(it1=estadias.begin();it1!=estadias.end();it++){
-                                        cont++;
-                                        cout << "Estadia: " << endl;
-                                        cout << "Fecha de Ingreso: " << (*it1).second->getFechaEntrada().getDia() << "/" << (*it1).second->getFechaEntrada().getMes() << "/" << (*it1).second->getFechaEntrada().getAnio() << endl;
-                                        if((*it1).second->getFechaSalida()!=NULL){
-                                            cout << "Fecha de Salida: " << (*it1).second->getFechaSalida()->getDia() << "/" << (*it1).second->getFechaSalida()->getMes() << "/" << (*it1).second->getFechaSalida()->getAnio() << endl;
-                                        }else{
-                                            cout << "Aun esta sin finalizar." << endl;
-                                        }
-                                        cout << "Codigo: " << (*it1).second->getCodigo() << endl;
-                                        cout << "Calificacion" << endl;
-                                        cout << "Comentario : " << (*it1).second->getCalificacion()->getComentario() << endl;
-                                        cout << "Puntaje : " << (*it1).second->getCalificacion()->getPuntuacion() << endl;
-                                    //elegir la estadia
-                                    do{
-                                        cont = 1;
-                                        it1=estadias.begin();
-                                        cin >> elegir;
-                                        if(elegir > estadias.size() || elegir<=0){
-                                            cout << "El numero elegido no pertenece a la lista" << endl;
-                                        }else{
-                                            while(cont<elegir){
-                                                cont++;
-                                                it1++;
-                                            }
-                                        }
-                                    }while(elegir > estadias.size() || elegir <=0);
-                                    //Guardar en memoria una DTEstadia
-                                    DTEstadia* dtEstadia;
-                                    (*dtEstadia)= DTEstadia((*it1).second->getFechaEntrada(),(*it1).second->getFechaSalida(),(*it1).second->getCodigo());
-                                    (*ICC).setDatosEstadia(dtEstadia);
-                                    //obtenerDatosEstadia
-                                    DTDatosEstadia* dtde= (*ICR).obtenerDatosEstadia();
-                                    //mostar el hostal
-                                    cout << "Hostal " << endl;
-                                    cout << "Nombre: " << (*ICH).getDatosHostal()->getNombre() << endl;
-                                    cout << "Direccion: " << (*ICH).getDatosHostal()->getDireccion() << endl;
-                                    cout << "Telefono: " << (*ICH).getDatosHostal()->getTelefono() << endl;
-                                    //mostrar Huesped
-                                    cout << "Huesped" << endl;
-                                    cout << "Nombre : " << dtde->getHuespedDeEstadia()->getNombre() << endl;
-                                    cout << "Email : " << dtde->getHuespedDeEstadia()->getEmail() << endl;
-                                    if(dtde->getHuespedDeEstadia()->getEsFinger()==true){
-                                        cout << "Es Finger." << endl;
-                                    }else{
-                                        cout << "No es Finger." << endl;
-                                    }
-                                    //mostrar Habitacion
-                                    cout << "Habitacion " << endl;
-                                    cout << "Numero: " << dtde->getHabitacionDeEstadia()->getNumero() << endl;
-                                    cout << "Precio: " << dtde->getHabitacionDeEstadia()->getPrecio() << endl;
-                                    cout << "Capacidad:" << dtde->getHabitacionDeEstadia()->getCapacidad() << endl;
-                                    //mostrar chechIn
-                                    cout << "Fecha de Ingreso: " << dtde->getFechaEntradaDeEstadia().getDia() << "/" << dtde->getFechaEntradaDeEstadia().getMes() << "/" << dtde->getFechaEntradaDeEstadia().getAnio() << endl;
-                                    //mostrar chechOut
-                                    cout << "Fecha de Salida: " << dtde->getFechaSalidaDeEstadia()->getDia() << "/" << dtde->getFechaSalidaDeEstadia()->getMes() << "/" << dtde->getFechaSalidaDeEstadia()->getAnio() << endl;
-                                    //Obtener Reserva de la estadia
-                                    reserva* res= (*ICR).obtenerReservaDeEstadia((*ICC).getDatosEstadia());
-                                    if(dynamic_cast<grupal*>(res)){
-                                        grupal* g= static_cast<grupal*>(res);
-                                        map<string,DTHuesped*> hues= g->obtenerHuespedesDeReserva();
-                                        map<string,DTHuesped*>::iterator it2= hues.begin();
-                                        cont=0;
-                                        do{
-                                            if((*it2).second->getEsFinger()==true){
-                                                cont++;
-                                            }
-                                            it2++;
-                                        }while(cont<2 || it2!=hues.end());
-                                        if(cont>=2){
-                                            cout << "Tiene promocion." << endl;
-                                        }else{
-                                            cout << "No tiene promocion." << endl;
-                                        }
-                                    }else{
-                                        cout << "No tiene promocion." << endl;
-                                    }
-                                    //obtenerCodigoDeEstadia
-                                    cout << "Codigo: " << (*ICC).obtenerCodigoDeEstadia() << endl;
-                                    //obtenerCalificacionDeEstadia
-                                    DTCalificacion* dtc= (*ICC).obtenerCalificacionDeEstadia();
-                                    //Si existe calificacion y el usuario quiere verla
-                                    char confirmar;
-                                    if(dtc!=NULL){
-                                        cout << "Desea ver las calificaciones? s/n";
-                                        cin >> confirmar;
-                                        //mostrar Calificacion
-                                        if(confirmar == 's'){
-                                            cout << "Calificacion " << endl;
-                                            cout << "Comentario: " << dtc->getComentario() << endl;
-                                            cout << "Puntuacion: " << dtc->getPuntuacion() << endl;
-                                        }
-                                        DTRespuesta* dtr;
-                                        (*dtr) = DTRespuesta((*it1).second->getCalificacion()->getRespuesta()->getComentario());
-                                        if(dtr!=NULL){
-                                            cout << "Desea ver las calificaciones? s/n";
-                                            cin >> confirmar;
-                                            //mostrar Respuesta
-                                            if(confirmar == 's'){
-                                                cout << "Respuesta " << endl;
-                                                cout << "Comentario: " << dtr->getComentario() << endl;
-                                            }
-                                        }
-                                    }
-                                    cout << "Desea ver la reserva? s/n";
-                                    cin >> confirmar;
-                                    //mostar Reserva
-                                    if(confirmar == 'y'){
-                                        DTReserva* dtres= (*ICR).obtenerDTReservaDeEstadia((*ICC).getDatosEstadia());
-                                        cout << "Reserva: " << endl;
-                                        cout << "Fecha de Ingreso: " << dtres->getCheckIn().getDia() << "/" << dtres->getCheckIn().getMes() << "/" << dtres->getCheckIn().getAnio() << endl;
-                                        cout << "Fecha de Salida: " << dtres->getCheckOut().getDia() << "/" << dtres->getCheckOut().getMes() << "/" << dtres->getCheckOut().getAnio() << endl;
-                                        cout << "Estado:" << dtres->getEstado() << endl;
-                                        cout << "Costo:" << dtres->getCosto() << endl;
-                                    }
-                                }
-                            }
+                            //obtenerHostales
+                            //Guardar en memoria un DTHostal
+                            //obtenerEstadiasDeHostal
+                            //Guardar en memoria una DTEstadia
+                            //obtenerDatosEstadia
+                            //Si existe promo
+                                //obtenerPromocionDeEstadia
+                            //Fin Si
+                            //obtenerTotalConsumidoDeEstadia
+                            //obtenerCodigoDeEstadia
+                            //Si existe calificacion y el usuario quiere verla
+                                //obtenerCalificacionDeEstadia
+                                //Si existe respuesta a la calificacion y el usuario quiere verla
+                                    //obtenerRespuesta
+                                //Fin Si
+                            //Fin Si
+                            //Si el usuario quiere ver la informacion de la reserva
+                                //obtenerReservaDeEstadia
+                            //Fin Si
                             //liberarEstadia
-                            (*ICC).liberarMemoria();
                             //liberarHostal
-                            (*ICH).liberarMemoria();
                         }
                         case 6:{ //Finalizar Estadia
 
