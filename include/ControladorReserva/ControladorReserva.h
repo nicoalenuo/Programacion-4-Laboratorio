@@ -43,6 +43,7 @@ class ControladorReserva:public IControladorReserva {
         DTDatosEstadia* obtenerDatosEstadia();
         reserva* obtenerReservaDeEstadia(DTEstadia*);
         DTReserva* obtenerDTReservaDeEstadia(DTEstadia*);
+        DTHabitacion* obtenerHabitacionDeReserva(DTReserva*);
         void agregarReservaAMap(reserva * r){
             reservas.insert(pair<int,reserva*>((*r).getCodigo(),r));
         }

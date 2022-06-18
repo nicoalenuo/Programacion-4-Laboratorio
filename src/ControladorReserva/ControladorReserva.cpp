@@ -49,6 +49,14 @@ map<int,DTHabitacion*> ControladorReserva::obtenerHabitacionesDisponibles(){
     return Resultado;
 }
 
+DTHabitacion* ControladorReserva::obtenerHabitacionDeReserva(DTReserva* dtr){
+    DTHabitacion* dth;
+    reserva* r= getReserva(dtr);
+    habitacion* hab= r->getHabitacion();
+    dth= hab->darDatos();
+    return dth;
+}
+
 void ControladorReserva::DesignarPropietarioDeReserva(DTHuesped* P){
     (*this).Propietario = P;
 }
