@@ -30,6 +30,14 @@ map<string,DTHostal*> ControladorHostal::obtenerHostales(){
     return resultado;
 }
 
+map<int,DTHabitacion*> ControladorHostal::obtenerHabitaciones(){
+    map<int,DTHabitacion*> resultado={};
+    map<string,hostal*>::iterator it;
+    it= hostales.find(getDatosHostal()->getNombre());
+    resultado= (*it).second->obtenerHabitaciones();
+    return resultado;
+}
+
 map<string,DTEmpleado*> ControladorHostal::quitarAsignados(map<string,DTEmpleado*> emps){
     map<string,hostal*>::iterator it;
     for (it=hostales.begin() ; it!=hostales.end() ; it++){
