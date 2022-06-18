@@ -114,16 +114,16 @@ void ControladorHostal::IngresarDatosHostal(DTHostal* dth){
 hostal* ControladorHostal::DarHostalDeHabitacion(habitacion* hab){
     map<string,hostal*>::iterator it;
     bool pr = false;
-    hostal* Solucion = NULL;
+    hostal* resultado = NULL;
     it = hostales.begin();
     while(it != hostales.end() && !pr){
         pr = (*it).second->tieneHab(hab->getNumero());
         if(pr) {
-            Solucion= (*it).second;
+            resultado= (*it).second;
         }
         it++;
     }
-    return Solucion;
+    return resultado;
 }
 
 habitacion * ControladorHostal::getHab(DTHabitacion* DTH){
