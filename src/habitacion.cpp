@@ -36,7 +36,7 @@ bool habitacion::disponibleEn(Date CheckIn,Date CheckOut){
         while(Resultado && it !=reservas.end()){
                 Date ChI = ((*it).second)->getCheckIn();
                 Date ChO = ((*it).second)->getCheckOut();
-                Resultado = (CheckIn > CheckOut || CheckOut < ChI);
+                Resultado = (CheckIn > ChO || CheckOut < ChI);
                 it++;
         }
         return Resultado;

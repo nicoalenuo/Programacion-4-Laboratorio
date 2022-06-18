@@ -6,13 +6,14 @@
 ControladorCalificacion* ControladorCalificacion::instancia = NULL;
 
 ControladorCalificacion::~ControladorCalificacion(){
-    datosCalificacion = NULL;
-    datosEstadia = NULL;
+
 }
 
 ControladorCalificacion::ControladorCalificacion(){
     calificaciones={};
     estadias={};
+    datosCalificacion = NULL;
+    datosEstadia = NULL;
 }
 
 ControladorCalificacion* ControladorCalificacion::getInstance(){
@@ -38,7 +39,7 @@ void ControladorCalificacion::notificarSuscriptos(string nombreAutor,int puntuac
     }
 }
 
-void ControladorCalificacion::RegistrarEstadia(string nomH, string email, int codR){
+void ControladorCalificacion::RegistrarEstadia(string email, int codR){
     fabrica* Fab =fabrica::getInstance();
     IControladorReserva* CH = (*Fab).getIControladorReserva();
 
@@ -101,9 +102,9 @@ int ControladorCalificacion::obtenerCodigoDeEstadia(){
 DTCalificacion* ControladorCalificacion::obtenerCalificacionDeEstadia(){
     map<int,estadia*>::iterator it= estadias.find((*this).datosEstadia->getCodigo());
     calificacion* c= (*it).second->getCalificacion();
-    DTCalificacion* dtc=NULL;;
+    DTCalificacion* dtc=NULL;
     if (c!=NULL)
-        (*dtc) = DTCalificacion(c->getId(),c->getPuntuacion(),c->getComentario(),c->getFecha());
+        dtc = new DTCalificacion(c->getId(),c->getPuntuacion(),c->getComentario(),c->getFecha());
     return dtc;
 }
 
@@ -126,6 +127,15 @@ DTRespuesta* ControladorCalificacion::obtenerRespuesta(DTCalificacion* c){
 
 void ControladorCalificacion::eliminarCalificacion(int id){//borra del map la calificacion, pero no de memoria, eso se hace en EliminarCalificacion de Calificacion
     calificaciones.erase(id);
+}
+
+DTCalificacion* ControladorCalificacion::obtenerCalificacion(DTEstadia* dte){
+    map<int,estadia*>::iterator it= estadias.find(dte->getCodigo());
+    calificacion* c= (*it).second->getCalificacion();
+    DTCalificacion* dtc=NULL;
+    if (c!=NULL)
+        dtc = new DTCalificacion(c->getId(),c->getPuntuacion(),c->getComentario(),c->getFecha());
+    return dtc;
 }
 
 ////////////////////////////////////////////////

@@ -40,10 +40,11 @@ class IControladorCalificacion {
         virtual void liberarMemoria()=0;
         virtual void eliminarCalificacion()=0;
         virtual void quitarEstadia(int)=0;
-        virtual void RegistrarEstadia(string, string, int)=0;
+        virtual void RegistrarEstadia(string, int)=0;
         virtual void ingresarRespuesta(string,int)=0;
         virtual float obtenerPromocionDeEstadia()=0;
         virtual int obtenerCodigoDeEstadia()=0;
+        virtual DTCalificacion* obtenerCalificacion(DTEstadia*)=0;
         virtual DTCalificacion* obtenerCalificacionDeEstadia()=0;
         virtual DTRespuesta* obtenerRespuesta(DTCalificacion*)=0;
         virtual void agregarCalificacionAMap(calificacion*)=0;

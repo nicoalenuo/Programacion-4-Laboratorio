@@ -31,6 +31,7 @@ class ControladorReserva:public IControladorReserva {
         
         void ingresarDatosReserva(DTHostal*, Date, Date);
         map<int,DTHabitacion*> obtenerHabitacionesDisponibles();
+        DTHabitacion* obtenerHabitacionDeReserva(DTReserva*);
         void IngresarHuespedEnReserva(DTHuesped*);
         void confirmarReserva();  
         reserva* getReserva(int);

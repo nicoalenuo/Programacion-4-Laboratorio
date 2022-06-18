@@ -6,6 +6,7 @@ class Date{
         int anio;
         int mes;
         int dia;
+        int hora;
     public:
         Date();
         ~Date();
@@ -14,7 +15,7 @@ class Date{
         bool operator==(Date);
         int operator-(Date);//retorna la cantidad de dias entre this y el parametro
 
-        Date(int,int,int);
+        Date(int,int,int,int);
         int getAnio(){
             return anio;
         }
@@ -23,6 +24,12 @@ class Date{
         }
         int getDia(){
             return dia;
+        }
+        int getHora(){
+            return hora;
+        }
+        void setHora(int h){
+            hora = h;
         }
         void setAnio(int a){
             anio= a;

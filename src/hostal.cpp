@@ -84,6 +84,16 @@ map<int,DTHabitacion*> hostal::obtenerHabitacionesDisponiblesEntre(Date CheckIn,
     return Resultado;
 }
 
+map<int,DTHabitacion*> hostal::obtenerHabitacionesMap(){
+    map<int,DTHabitacion*> resultado= {};
+    map<int,habitacion*>::iterator it;
+    for(it=habitaciones.begin();it!=habitaciones.end();it++){
+        DTHabitacion* dth = (*it).second->darDatos();
+        resultado.insert(pair<int,DTHabitacion*>((*it).first,dth));
+    }
+    return resultado;
+}
+
 set<DTHabitacion*> hostal::obtenerHabitaciones(){
     map<int,habitacion*>::iterator it;
     set<DTHabitacion*> resultado;

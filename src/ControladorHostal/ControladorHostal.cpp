@@ -37,6 +37,15 @@ map<string,DTEmpleado*> ControladorHostal::quitarAsignados(map<string,DTEmpleado
     return emps;
 }
 
+map<int,DTHabitacion*> ControladorHostal::obtenerHabitacionesDeHostal(){
+    map<int,DTHabitacion*> resultado;
+    map<string,hostal*>::iterator it;
+    it = hostales.find(datosHostal->getNombre());
+    hostal* h= (*it).second;
+    resultado= h->obtenerHabitacionesMap();
+    return resultado;
+}
+
 void ControladorHostal::asignarEmpleadoElegido(empleado* e){
     hostal* h = (*hostales.find((*datosHostal).getNombre())).second;
     (*h).asignarEmpleado(e);

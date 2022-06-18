@@ -17,7 +17,7 @@ bool estadia::estaActiva(){
 
 void estadia::finalizarEstadiaActiva(){
     FechaSistema* fs=FechaSistema::getInstance();
-    Date* fechaActual = new Date(((*fs).getFechaActual()).getDia(),((*fs).getFechaActual()).getMes(),((*fs).getFechaActual()).getAnio());
+    Date* fechaActual = new Date(((*fs).getFechaActual()).getDia(),((*fs).getFechaActual()).getMes(),((*fs).getFechaActual()).getAnio(),((*fs).getFechaActual()).getHora());
     if (estaActiva()){
         setFechaSalida(fechaActual);
     }
@@ -26,7 +26,7 @@ void estadia::finalizarEstadiaActiva(){
 DTEstadia* estadia::darDatos(){
     Date* fs=NULL;
     if (fechaSalida!=NULL)
-        fs = new Date((*fechaSalida).getDia(),(*fechaSalida).getMes(),(*fechaSalida).getAnio());
+        fs = new Date((*fechaSalida).getDia(),(*fechaSalida).getMes(),(*fechaSalida).getAnio(),(*fechaSalida).getHora());
 
     DTEstadia* resultado = new DTEstadia(fechaEntrada,fs,codigo);
     return resultado;

@@ -47,7 +47,8 @@ class ControladorCalificacion:public IControladorCalificacion {
         map<int,DTCalificacion*> obtenerCalificaciones(string);
         void liberarMemoria();
         void eliminarCalificacion();
-        void RegistrarEstadia(string, string, int);
+        DTCalificacion* obtenerCalificacion(DTEstadia*);
+        void RegistrarEstadia(string, int);
         void ingresarRespuesta(string,int);
         float obtenerPromocionDeEstadia();
         int obtenerCodigoDeEstadia();

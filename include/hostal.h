@@ -62,6 +62,7 @@ class hostal{
         float darCalifPromedio();
         bool tieneHabConNumero(int);
         set<DTHabitacion*> obtenerHabitaciones();
+        map<int,DTHabitacion*> obtenerHabitacionesMap();
         habitacion* getHab(DTHabitacion*);
         map<string,DTEmpleado*> obtenerEmpleados();
         map<string,DTEmpleado*> quitarAsignados(map<string,DTEmpleado*>);

@@ -37,8 +37,9 @@ int Date::operator-(Date D2){
         return -Diferencia;
     }
 }
-Date::Date(int dia,int mes,int anio){
+Date::Date(int dia,int mes,int anio,int hora){
     (*this).dia=dia;
     (*this).mes=mes;
     (*this).anio=anio;
+    (*this).hora=hora;
 }

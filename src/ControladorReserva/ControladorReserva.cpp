@@ -57,6 +57,8 @@ void ControladorReserva::confirmarReserva(){
     IControladorHostal* CH = Fab->getIControladorHostal();
     DTHabitacion* Hab = (*CH).getDatosHabitacion();
     habitacion* h = CH->getHabDeHostal(Hab);
+    map<string,DTHuesped*>::iterator it=SDTH.begin();
+    int cantF=0;
 
     reserva *Res;
     int CantidadDias = this->CheckIn - this->CheckOut;//Calculo los dias entre Checkin y CheckOut
@@ -65,7 +67,16 @@ void ControladorReserva::confirmarReserva(){
         DTReservaIndividual* ResIn = new DTReservaIndividual(IDActualReserva+1,CheckIn,CheckOut,Abierto,Precio);
         Res = new individual(ResIn,h,Propietario);
     }else{//Es grupal
-        float Precio = (Hab->getPrecio())*CantidadDias*(1-0.3);
+        if ((*Propietario).getEsFinger())
+            cantF++;
+        while (cantF!=2 && it!=SDTH.end()){
+            if ((*(*it).second).getEsFinger())
+                cantF++;
+            it++;
+        }
+        float Precio = (Hab->getPrecio())*CantidadDias;
+        if (cantF==2)
+            Precio = Precio*0.7;
         DTReservaGrupal* ResGr= new DTReservaGrupal(IDActualReserva+1,CheckIn,CheckOut,Abierto,Precio,SDTH.size() +1);
         Res = new grupal(ResGr,h,SDTH,Propietario);
     }
@@ -75,6 +86,14 @@ void ControladorReserva::confirmarReserva(){
     (*CH).liberarMemoria();
     liberarMemoria();
 }  
+
+DTHabitacion* ControladorReserva::obtenerHabitacionDeReserva(DTReserva* dtr){
+    DTHabitacion* dth;
+    reserva* r= getReserva((*dtr).getCodigo());
+    habitacion* hab= r->getHabitacion();
+    dth= hab->darDatos();
+    return dth;
+}
 
         
 map<int,DTReserva*> ControladorReserva::ListarReservasNoCanceladasDeHuesped(DTHostal* Hostal, string Mail){
@@ -105,13 +124,15 @@ DTDatosEstadia* ControladorReserva::obtenerDatosEstadia(){//Existe DTHostal y DT
     
     map<int,reserva*>::iterator itr;
     reserva* r= obtenerReservaDeEstadia(dte);
-
     DTHostal* datosHostalDevolver= (*ich).getDatosHostal();
     DTHuesped* datosHuespedDevolver = (*r).darHuespedConEstadia(dte);
     DTHabitacion* datosHabitacionDevolver = (*r).darDatosHabitacion();
-    Date* fechaSalidaDevolver;
-    Date fs=Date((*(*dte).getFechaSalida()));
-    (*fechaSalidaDevolver)=fs;
+    Date* fechaSalidaDevolver=NULL;
+    if ((*dte).getFechaSalida() != NULL){
+        Date* fs=(*dte).getFechaSalida();
+        fechaSalidaDevolver = new Date((*fs).getDia() , (*fs).getMes() , (*fs).getAnio() , (*fs).getHora());
+    }
+    
 
     DTDatosEstadia* datosDevolver = new DTDatosEstadia(datosHostalDevolver,datosHabitacionDevolver,datosHuespedDevolver,(*dte).getFechaEntrada(),fechaSalidaDevolver);
 

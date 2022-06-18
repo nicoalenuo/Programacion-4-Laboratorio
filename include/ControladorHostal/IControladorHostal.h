@@ -32,6 +32,7 @@ class IControladorHostal {
         virtual void IngresarDatosHab(DTHabitacion*)=0;
         virtual void confirmarAltaHabitacion()=0;
         virtual set<DTHabitacion*> obtenerHabitaciones()=0;
+        virtual map<int,DTHabitacion*> obtenerHabitacionesDeHostal()=0;
         virtual map<int,DTReserva*> ListarReservas(DTHostal*)=0;
         virtual bool existeHabConNumero(int,string)=0;
         virtual void FinalizarAsignacionDeEmpleados()=0;
