@@ -156,7 +156,7 @@ int main(){
                                 int cont=0;
                                 for(it=dthostales.begin();it!=dthostales.end();it++){
                                     cont++;
-                                    cout << "Hostal" << endl;
+                                    cout << "Hostal " << cont << endl;
                                     cout << "Nombre: " << (*it).second->getNombre() << endl;
                                     cout << "Direccion: " << (*it).second->getDireccion() << endl;
                                     cout << "Telefono: " << (*it).second->getTelefono() << endl;
@@ -165,6 +165,7 @@ int main(){
                                 do{
                                     cont = 1;
                                     it=dthostales.begin();
+                                    cout << "Elija un hostal de acuerdo a su numero" << endl;
                                     cin >> elegir;
                                     if(elegir > dthostales.size() || elegir<=0){
                                         cout << "El numero elegido no pertenece a la lista" << endl;
@@ -178,7 +179,7 @@ int main(){
                                 //guarda DTHostal en memoria
                                 (*ICH).setDatosHostal((*it).second);
                                 //mostar el hostal
-                                cout << "Hostal " << endl;
+                                cout << "Hostal" << endl;
                                 cout << "Nombre: " << (*ICH).getDatosHostal()->getNombre() << endl;
                                 cout << "Direccion: " << (*ICH).getDatosHostal()->getDireccion() << endl;
                                 cout << "Telefono: " << (*ICH).getDatosHostal()->getTelefono() << endl;
@@ -453,10 +454,11 @@ int main(){
                                 //mostrarUsuarios
                                 for(it=dtusuarios.begin();it!=dtusuarios.end();it++){
                                     cont++;
-                                    cout << cont << " | Nombre: " << (*it).second->getNombre();
-                                    cout << " | Email: " << (*it).second->getEmail() << endl;
-
+                                    cout << "Usuario " << cont << endl;
+                                    cout << "Nombre: " << (*it).second->getNombre() << endl;
+                                    cout << "Email: " << (*it).second->getEmail() << endl;
                                 }
+                                cout << "Elija un usuario de acuerdo a su numero" << endl;
                                 int elegir;
                                 do{
                                     cont = 1;
@@ -489,26 +491,29 @@ int main(){
                                     //buscar hostal asociado al DTEmpleado
                                     map<string,DTHostal*> hostales= (*ICH).obtenerHostales();
                                     map<string,DTHostal*>::iterator it1=hostales.begin();
-                                    map<string,DTEmpleado*> dtempleados= obtenerEmpleados((*it1).second);
                                     map<string,DTEmpleado*>::iterator it2;
                                     bool encontrado=false;
-                                    DTHostal* dthostal;
-                                    while(encontrado || it1!=hostales.end()){
-                                        while(encontrado || it2!=(*it1).second->obtenerEmpleados().end()){
+                                    DTHostal* dth;
+                                    while(!encontrado && it1!=hostales.end()){
+                                        it2= (*ICH).obtenerEmpleados((*it1).second).begin();
+                                        while(!encontrado && it2!=(*ICH).obtenerEmpleados((*it1).second).end()){
                                             if((*it2).second->getEmail()== dte->getEmail()){
-                                                dthostal= (*it1).second;
+                                                dth= (*it1).second;
                                                 encontrado= true;
+                                            }else{
+                                                it2++;
                                             }
-                                            it2++;
                                         }
                                         it1++;
                                     }
-                                    //mostar el hostal
-                                    cout << "Hostal " << endl;
-                                    cout << "Nombre: " << dthostal->getNombre() << endl;
-                                    cout << "Direccion: " << dthostal->getDireccion() << endl;
-                                    cout << "Telefono: " << dthostal->getTelefono() << endl;
-                                    cout << "Cargo: "<<(*dte).getTipoCargo() << endl;
+                                    if(it1!=hostales.end()){
+                                        //mostar el hostal
+                                        cout << "Hostal " << endl;
+                                        cout << "Nombre: " << dth->getNombre() << endl;
+                                        cout << "Direccion: " << dth->getDireccion() << endl;
+                                        cout << "Telefono: " << dth->getTelefono() << endl;
+                                        cout << "Cargo: "<<(*it2).second->getTipoCargo() << endl;
+                                    }
                                 }
                                 //liberarMemoria del DTUsuario
                                 (*ICU).liberarMemoria();

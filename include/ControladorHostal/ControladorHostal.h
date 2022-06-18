@@ -32,6 +32,7 @@ class ControladorHostal:public IControladorHostal {
         void liberarMemoria();
         map<string,DTHostal*> obtenerHostales();
         map<int,DTHabitacion*> obtenerHabitaciones();
+        map<string,DTEmpleado*> obtenerEmpleados(DTHostal*);
         void IngresarDatosHab(DTHabitacion*);
         void confirmarAltaHabitacion();
         map<int,DTReserva*> ListarReservas(DTHostal*);
