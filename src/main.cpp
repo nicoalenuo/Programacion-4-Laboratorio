@@ -711,14 +711,15 @@ int main(){
                             IControladorHostal *ICH = (*f).getIControladorHostal();
                             IControladorCalificacion *ICC = (*f).getIControladorCalificacion();
                             IControladorReserva *ICR = (*f).getIControladorReserva();
-                            map<string,hostal*> hostales= ICH->getHostales();
+                            map<string,DTHostal*> dthostales= (*ICH).obtenerHostales();
                             //elegir un hostal
-                            map<string,hostal*>::iterator it;
-                            if(hostales.size()==0){
+                            map<string,DTHostal*>::iterator it;
+                            
+                            if(dthostales.size()==0){
                                 cout<<"No hay usuarios ingresados.";
                             }else{
-                                int cont=0;
-                                for(it=hostales.begin();it!=hostales.end();it++){
+                                int cont=0;                                
+                                for(it=dthostales.begin();it!=dthostales.end();it++){
                                     cont++;
                                     cout << cont << " | Nombre: " << (*it).second->getNombre();
                                     cout << " | Direccion: " << (*it).second->getDireccion();
@@ -727,9 +728,9 @@ int main(){
                                 int elegir;
                                 do{
                                     cont = 1;
-                                    it=hostales.begin();
+                                    it=dthostales.begin();
                                     cin >> elegir;
-                                    if(elegir > hostales.size() || elegir<=0){
+                                    if(elegir > dthostales.size() || elegir<=0){
                                         cout << "El numero elegido no pertenece a la lista" << endl;
                                     }else{
                                         while(cont<elegir){
@@ -737,10 +738,11 @@ int main(){
                                             it++;
                                         }
                                     }
-                                }while(elegir > hostales.size() || elegir <=0);
+                                }while(elegir > dthostales.size() || elegir <=0);
+                                
                                 //guarda DTHostal en memoria
                                 DTHostal* dtHostal;
-                                (*dtHostal)= DTHostal((*it).second->getNombre(),(*it).second->getDireccion(),(*it).second->getTelefono(),(*it).second->darCalifPromedio());
+                                (*dtHostal)= DTHostal((*it).second->getNombre(),(*it).second->getDireccion(),(*it).second->getTelefono(),(*it).second->getCalificacionPromedio());
                                 (*ICH).setDatosHostal(dtHostal);
 
                                 //obtenerEstadiasDeHostal
@@ -763,6 +765,7 @@ int main(){
                                         cout << "Calificacion" << endl;
                                         cout << "Comentario : " << (*it1).second->getCalificacion()->getComentario() << endl;
                                         cout << "Puntaje : " << (*it1).second->getCalificacion()->getPuntuacion() << endl;
+                                    }
                                     //elegir la estadia
                                     do{
                                         cont = 1;
@@ -809,6 +812,7 @@ int main(){
                                     //Obtener Reserva de la estadia
                                     reserva* res= (*ICR).obtenerReservaDeEstadia((*ICC).getDatosEstadia());
                                     if(dynamic_cast<grupal*>(res)){
+                                        
                                         grupal* g= static_cast<grupal*>(res);
                                         map<string,DTHuesped*> hues= g->obtenerHuespedesDeReserva();
                                         map<string,DTHuesped*>::iterator it2= hues.begin();
