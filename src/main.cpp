@@ -151,14 +151,15 @@ int main(){
                             //elegir un hostal
                             map<string,DTHostal*>::iterator it;
                             if(dthostales.size()==0){
-                                cout<<"No hay usuarios ingresados.";
+                                cout<<"No hay hostales ingresados.";
                             }else{
                                 int cont=0;
                                 for(it=dthostales.begin();it!=dthostales.end();it++){
                                     cont++;
-                                    cout << cont << " | Nombre: " << (*it).second->getNombre();
-                                    cout << " | Direccion: " << (*it).second->getDireccion();
-                                    cout << " | Telefono: " << (*it).second->getTelefono() << endl;
+                                    cout << "Hostal" << endl;
+                                    cout << "Nombre: " << (*it).second->getNombre() << endl;
+                                    cout << "Direccion: " << (*it).second->getDireccion() << endl;
+                                    cout << "Telefono: " << (*it).second->getTelefono() << endl;
                                 }
                                 int elegir;
                                 do{
@@ -203,7 +204,7 @@ int main(){
                                     cout << "Puntuacion: " << dtcal->getPuntuacion() << endl;
                                 }
                                 //mostar habitaciones del hostal
-                                map<int,DTHabitacion*> dthabitaciones= (*ICH).obtenerHabitaciones();
+                                map<int,DTHabitacion*> dthabitaciones= (*ICH).obtenerHabitacionesDeHostal();
                                 map<int,DTHabitacion*>::iterator it1;
                                 for(it1=dthabitaciones.begin();it1!=dthabitaciones.end();it++){
                                     cout << "Habitacion " << endl;
@@ -442,15 +443,15 @@ int main(){
                             fabrica* f = fabrica::getInstance();
                             IControladorHostal * ICH = (*f).getIControladorHostal();
                             IControladorUsuario *ICU = (*f).getIControladorUsuario();
-                            map<string,DTUsuario*> usuarios = (*ICU).obtenerUsuarios();
+                            map<string,DTUsuario*> dtusuarios = (*ICU).obtenerUsuarios();
                             //elegir un usuario
-                            if(usuarios.size()==0){
+                            if(dtusuarios.size()==0){
                                 cout<<"No hay usuarios ingresados.";
                             }else{
                                 map<string,DTUsuario*>::iterator it;
                                 int cont=0;
                                 //mostrarUsuarios
-                                for(it=usuarios.begin();it!=usuarios.end();it++){
+                                for(it=dtusuarios.begin();it!=dtusuarios.end();it++){
                                     cont++;
                                     cout << cont << " | Nombre: " << (*it).second->getNombre();
                                     cout << " | Email: " << (*it).second->getEmail() << endl;
@@ -459,9 +460,9 @@ int main(){
                                 int elegir;
                                 do{
                                     cont = 1;
-                                    it=usuarios.begin();
+                                    it=dtusuarios.begin();
                                     cin >> elegir;
-                                    if(elegir > usuarios.size() || elegir<=0){
+                                    if(elegir > dtusuarios.size() || elegir<=0){
                                         cout << "El numero elegido no pertenece a la lista" << endl;
                                     }else{
                                         while(cont<elegir){
@@ -469,12 +470,13 @@ int main(){
                                             it++;
                                         }
                                     }
-                                }while(elegir > usuarios.size() || elegir <=0);
+                                }while(elegir > dtusuarios.size() || elegir <=0);
                                 //guardar DTUsuario en memoria
                                 (*ICU).IngresarDatosUsuario((*it).second);
                                 //mostrar el usuario
-                                cout << cont << " | Nombre: " << (*ICU).obtenerDatosUsuario()->getNombre();
-                                cout << " | Email: " << (*ICU).obtenerDatosUsuario()->getEmail() << endl;
+                                cout << "Usuario" << endl;
+                                cout << "Nombre: " << (*ICU).obtenerDatosUsuario()->getNombre() << endl;
+                                cout << "Email: " << (*ICU).obtenerDatosUsuario()->getEmail() << endl;
                                 if(dynamic_cast<DTHuesped*>((*ICU).obtenerDatosUsuario())!=NULL){
                                     DTHuesped* dth= (*ICU).obtenerHuespedConEmail((*ICU).obtenerDatosUsuario()->getEmail());
                                     if((*dth).getEsFinger()){
@@ -485,24 +487,22 @@ int main(){
                                 }else{
                                     DTEmpleado* dte= (*ICU).obtenerEmpleadoConEmail((*ICU).obtenerDatosUsuario()->getEmail());
                                     //buscar hostal asociado al DTEmpleado
-                                    map<string,hostal*> hostales= (*ICH).getHostales();
-                                    map<string,hostal*>::iterator it1=hostales.begin();
-                                    map<string,DTEmpleado*> dtempleados= (*it1).second->obtenerEmpleados();
+                                    map<string,DTHostal*> hostales= (*ICH).obtenerHostales();
+                                    map<string,DTHostal*>::iterator it1=hostales.begin();
+                                    map<string,DTEmpleado*> dtempleados= obtenerEmpleados((*it1).second);
                                     map<string,DTEmpleado*>::iterator it2;
                                     bool encontrado=false;
-                                    hostal* hos;
+                                    DTHostal* dthostal;
                                     while(encontrado || it1!=hostales.end()){
                                         while(encontrado || it2!=(*it1).second->obtenerEmpleados().end()){
                                             if((*it2).second->getEmail()== dte->getEmail()){
-                                                hos= (*it1).second;
+                                                dthostal= (*it1).second;
                                                 encontrado= true;
                                             }
                                             it2++;
                                         }
                                         it1++;
                                     }
-                                    DTHostal* dthostal;
-                                    (*dthostal) = DTHostal(hos->getNombre(),hos->getDireccion(),hos->getTelefono(),hos->darCalifPromedio());
                                     //mostar el hostal
                                     cout << "Hostal " << endl;
                                     cout << "Nombre: " << dthostal->getNombre() << endl;

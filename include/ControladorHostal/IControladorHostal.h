@@ -39,6 +39,7 @@ class IControladorHostal {
         virtual map<int,DTReserva*> obtenerReservasDeHostal()=0;
         virtual void liberarMemoria()=0;
         virtual map<int,DTEstadia*> obtenerEstadiasDeHostal()=0;
+        virtual map<int,DTHabitacion*> obtenerHabitacionesDeHostal()=0;
         virtual map<int,DTCalificacion*> obtenerCalificaciones(string)=0;
         virtual map<string,hostal*> getHostales()=0;
         virtual void agregarHostalAMap(hostal*)=0;

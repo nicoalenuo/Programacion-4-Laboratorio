@@ -133,6 +133,15 @@ map<int,DTEstadia*> ControladorHostal::obtenerEstadiasDeHostal(){
     return dte;
 }
 
+map<int,DTHabitacion*> ControladorHostal::obtenerHabitacionesDeHostal(){
+    map<int,DTHabitacion*> resultado;
+    map<string,hostal*>::iterator it;
+    it = hostales.find(datosHostal->getNombre());
+    hostal* h= (*it).second;
+    resultado= h->obtenerHabitaciones();
+    return resultado;
+}
+
 map<int,DTReserva*> ControladorHostal::ListarReservas(DTHostal* Hos){
     map<int,DTReserva*> Resultado;
     map<string,hostal*>::iterator it;
