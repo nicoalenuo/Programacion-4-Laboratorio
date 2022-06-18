@@ -1,5 +1,5 @@
 #include "../../include/ControladorHostal/ControladorHostal.h"
-
+//cami
 ControladorHostal* ControladorHostal::instancia = NULL;
 
 ControladorHostal::~ControladorHostal(){
@@ -7,7 +7,7 @@ ControladorHostal::~ControladorHostal(){
 
 ControladorHostal::ControladorHostal(){
     hostales={};
-    habitaciones={};
+
 
     datosHostal=NULL;
     datosHabitacion=NULL;
@@ -198,7 +198,7 @@ void ControladorHostal::confirmarAltaHabitacion(){
     string hostalElegido = datosHostal->getNombre();
     hostal* h = (*hostales.find(hostalElegido)).second;
     h->agregarHabitacionAMap(Phab);
-    agregarHabitacionAMap(Phab);  
+
 }
 
 hostal* ControladorHostal::obtenerHostal(DTHostal* dth){

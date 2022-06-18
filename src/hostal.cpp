@@ -1,11 +1,12 @@
 #include "../include/hostal.h"
-
+//cami
 hostal::~hostal(){
 }
 
 hostal::hostal(string nombre, string direccion,string telefono){
     empleados = {};
 
+    habitaciones = {};
     (*this).nombre=nombre;
     (*this).direccion=direccion;
     (*this).telefono=telefono;

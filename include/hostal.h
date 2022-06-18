@@ -12,7 +12,7 @@
 #include <stdio.h>
 using namespace std;
 #include <map>
-
+//cami
 class habitacion;
 
 class hostal{

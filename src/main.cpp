@@ -6,7 +6,11 @@
 #include <typeinfo>
 
 #include "../include/fabrica.h"
+<<<<<<< Updated upstream
 using namespace std;
+=======
+//Rama Cami
+>>>>>>> Stashed changes
 
 //funcion auxiliar
 DTHostal* ElegirHostal(){
@@ -851,7 +855,7 @@ int main(){
                     //H01 - Reservas
                     //R1 - HA1
                     
-                    /*Date ChIn1(01,05,22);
+                    Date ChIn1(01,05,22);
                     Date ChOut1(10,05,22);
                     (*ICR).ingresarDatosReserva(pdth1,ChIn1,ChOut1);
                     (*ICH).setDatosHabitacion(pdthab1);
@@ -1031,7 +1035,7 @@ int main(){
                     Comentario = "Desapareció y se fue sin pagar.";
                     (*ICC).ingresarRespuesta(Comentario,dtcal);
 
-                    (*ICC).liberarMemoria();*/
+                    (*ICC).liberarMemoria();
 
                 };
                 break;
