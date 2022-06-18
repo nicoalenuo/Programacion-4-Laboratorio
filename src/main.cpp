@@ -16,31 +16,40 @@ DTHostal* ElegirHostal(){
     IControladorHostal *ICH = (*f).getIControladorHostal();
     map<string,DTHostal*> listaHostales = (*ICH).obtenerHostales();
 	map<string,DTHostal*>::iterator it;
-    int cont = 0;
-	for(it=listaHostales.begin(); it!=listaHostales.end(); it++){
-		cont++;
-        cout << cont <<". Nombre: " << ((*it).second)->getNombre() << std::endl;
-        
-	}
-	bool existeH = false;
-	int numHostal;	
-	cin>>numHostal;
-	while(numHostal>cont or numHostal==0){ //verificar que el nombre coincida con un hostal, si coincide existeH = true
-		cout<<"El número ingresado no es correcto, por favor ingreselo nuevamente: \n";
-        cont = 1;
-	    for(it=listaHostales.begin(); it!=listaHostales.end(); it++){
-		    cout << cont <<". Nombre: " << ((*it).second)->getNombre() << std::endl;
-            cont++;
-	    }
+    DTHostal * aux;
+    bool correcto;
+	int cont;
+    int numHostal;
+    do{
+        cont = 0;
+        for(it=listaHostales.begin(); it!=listaHostales.end(); it++){
+		    cont++;
+            cout << cont <<". Nombre: " << ((*it).second)->getNombre() << endl;
+        };
+        cout<<"Eleccion: \n";
         cin>>numHostal;
-    };
+        if(numHostal>cont || numHostal==0){
+            cout<<"El valor ingresado no es correcto, por favor ingrese otro: \n";
+            correcto = false;
+        }else{
+            correcto = true;
+        }
+    }while(!correcto);
+    
     cont = 1;
     it = listaHostales.begin();
     while(cont<numHostal){
         it++;
         cont++;
     };
-    return (*it).second;	
+    aux = (*it).second;
+    for (it=listaHostales.begin() ; it!=listaHostales.end() ; it++){
+        if((*it).second != aux){
+            delete (*it).second;
+        }
+    }
+    listaHostales.clear();
+    return aux;	
 };
 
 int main(){
@@ -117,97 +126,63 @@ int main(){
                             
                             DTHostal* pdth = new DTHostal(NombreHos,DirHos,TelHos,0);
                             (*ICH).IngresarDatosHostal(pdth);
-                            (*ICH).confirmarAltaHostal();
-                            cout<<"Se confirmo el alta de Hostal "<<(*pdth).getNombre() <<" \n";
-                            
+                            do{  
+                                cout<<"Desea confirmar el alta? S / N \n";
+                                cin >> confirmarAlta; 
+                                if ((char) toupper(confirmarAlta) == 'S'){
+                                    (*ICH).confirmarAltaHostal();
+                                    cout<<"Se confirmo el alta del hostal "<<(*pdth).getNombre()<<" \n";                          
+                                }else{
+                                    if ((char) toupper(confirmarAlta) == 'N')
+                                        cout<<"Se cancelo el alta \n";
+                                    else
+                                        cout << "La opcion ingresada no es valida.\n";
+                                };
+                            }while((char) toupper(confirmarAlta) != 'S' && (char) toupper(confirmarAlta) != 'N');
                             for (k=listaHost.begin() ; k!=listaHost.end() ; k++){
                                 delete (*k).second;
                             }
                             listaHost.clear();
-                            (*ICH).liberarMemoria();              
+                            (*ICH).liberarMemoria();                             
                         };
                         break;
                         //case 1 | Alta Hostal
                         case 2:{ //Alta Habitacion
                             
                             DTHostal* dth = ElegirHostal();
-                            fabrica* f = fabrica::getInstance();
                             (*ICH).IngresarDatosHostal(dth);
                             cout << "Por favor, ingrese los siguientes datos: \n";
                             cout << "Numero de habitacion: ";
                             do{                                
                                 cin >> num;
-                                try{
-                                    bool esInt = static_cast<bool>(num);
-                                    if(esInt){
-                                        existe = (*ICH).existeHabConNumero(num, dth->getNombre());
-                                        if(existe){
-                                            cout<<"Ya existe una habitación con el numero "<<num<< " en el hostal "<<dth->getNombre()<<endl;
-                                            cout<<"Por favor ingrese otro: \n";
-                                        }
-                                    }else{
-                                        throw(num);
-                                    }
-                                }
-                                catch(char){
-                                    cout<<"Por favor, ingrese un valor valido: \n";
-                                    existe = true;
-                                    cin.clear();
-                                    cin.sync();
-                                }
+                                existe = (*ICH).existeHabConNumero(num, dth->getNombre());
+                                if(existe){
+                                    cout<<"Ya existe una habitación con el numero "<<num<< " en el hostal "<<dth->getNombre()<<endl;
+                                    cout<<"Por favor ingrese otro numero: \n";
+                                }                       
+                                                         
                             }while(existe);
-
                             cout << "Precio de la habitacion: ";
-                            do{ 
-                                cin>>precio;                              
-                                bool esInt = static_cast<bool>(precio);
-                                try{
-                                    if(esInt){
-                                        existe = false;                                    
-                                    }else{
-                                        throw(precio);
-                                    }
-                                }
-                                catch(float){
-                                    cout<<"Por favor, ingrese un valor valido: \n";
-                                    existe = true;
-                                }
-                            }while(existe);
-                            
+                            cin>>precio;
                             cout << "Capacidad de la habitacion: ";
-                            do{ 
-                                cin>>capacidad;                              
-                                bool esInt = static_cast<bool>(capacidad);
-                                try{
-                                    if(esInt){
-                                        existe = false;                                    
-                                    }else{
-                                        throw(capacidad);
-                                    }
-                                }
-                                catch(int){
-                                    cout<<"Por favor, ingrese un valor valido: \n";
-                                    existe = true;
-                                }
-                            }while(existe);
-                            
+                            cin>>capacidad;
+                                                       
                             DTHabitacion* pdthab = new DTHabitacion(num,precio,capacidad);
                             (*ICH).IngresarDatosHab(pdthab);
-                            confirmarAlta = 'A';
-                            while((char) toupper(confirmarAlta) != 'S' && (char) toupper(confirmarAlta) != 'N'){
-                                cout<<"¿Desea confirmar el alta? S / N \n";
+                            do{
+                                cout<<"Desea confirmar el alta? S / N \n";
                                 cin >> confirmarAlta; 
                                 if ((char) toupper(confirmarAlta) == 'S'){
                                     (*ICH).confirmarAltaHabitacion();
                                     cout<<"Se confirmo el alta de la habitacion "<<num <<" en el hostal "<<(*dth).getNombre()<<" \n";
-                                    
                                 }else{
                                     if ((char) toupper(confirmarAlta) == 'N')
-                                        (*ICH).liberarMemoria();
+                                        cout<<"Se cancelo el alta \n";
                                     else
                                         cout << "La opcion ingresada no es valida.\n";
                                 };
-                            };
+                            }while((char) toupper(confirmarAlta) != 'S' && (char) toupper(confirmarAlta) != 'N');
+
                             (*ICH).liberarMemoria();
                             
                         };
@@ -283,19 +258,19 @@ int main(){
                             cargoCorrecto = false;
                             cout<<"Seleccione el cargo: \n";
                             do{
-                                cout<<"1. Administracion \n";                 
-                                cout<<"2. Limpieza \n";
+                                cout<<"1. Limpieza \n";                 
+                                cout<<"2. Administracion \n";
                                 cout<<"3. Recepcion \n";
                                 cout<<"4. Infraestructura \n";      
                                 cin>>CargoAux;                                
                                 switch (CargoAux){
                                     case '1':{ 
-                                        cargo = Administracion;
+                                        cargo = Limpieza;
                                         cargoCorrecto = true;
                                     };
                                     break;
                                     case '2':{ 
-                                        cargo = Limpieza;
+                                        cargo = Administracion;
                                         cargoCorrecto = true;
                                     };
                                     break;
@@ -317,8 +292,7 @@ int main(){
                             }while(!cargoCorrecto);
                             cout<<"Email: \n";
                             cin.ignore();
-                            do{
-                                
+                            do{                                
                                 getline(cin, email);
                                 existe = (*ICU).IngresarEmail(email);
                                 if (!existe){
@@ -327,12 +301,23 @@ int main(){
                                 cin.clear();
                                 cin.sync();
                             }while(!existe);
-                                                      
-                            DTUsuario* dte = new DTEmpleado(Nombre,email,pass,cargo);
-                            (*ICU).IngresarDatosUsuario(dte);
-                            (*ICU).confirmarAltaUsuario();
-                            cout<<"Se confirmo el alta de Empleado "<<(*dte).getNombre() <<" | "<<(*dte).getEmail()<<endl;
+                            do{  
+                                cout<<"Desea confirmar el alta? S / N \n";
+                                cin >> confirmarAlta; 
+                                if ((char) toupper(confirmarAlta) == 'S'){
+                                    DTUsuario* dte = new DTEmpleado(Nombre,email,pass,cargo);
+                                    (*ICU).IngresarDatosUsuario(dte);
+                                    (*ICU).confirmarAltaUsuario();
+                                    cout<<"Se confirmo el alta del empleado "<<(*dte).getNombre() <<", email: "<<(*dte).getEmail()<<endl;
                     
+                                }else{
+                                    if ((char) toupper(confirmarAlta) == 'N')
+                                        cout<<"Se cancelo el alta \n";
+                                    else
+                                        cout << "La opcion ingresada no es valida.\n";
+                                };
+                            }while((char) toupper(confirmarAlta) != 'S' && (char) toupper(confirmarAlta) != 'N');
+                                                      
                             (*ICU).liberarMemoria();
                         };
                         break;
@@ -346,8 +331,8 @@ int main(){
                             cout<<"Contraseña: \n";
                             cin.ignore();
                             getline(cin, pass);
-                            esFingerAux = 'A';
-                            while((char) toupper(esFingerAux) != 'S' && (char) toupper(esFingerAux) != 'N'){
+                            esFingerAux;
+                            do{
                                 cout << "Si el huesped es Finger digite 'S', de lo contrario, digite 'N' \n";
                                 cin >> esFingerAux; 
                                 if ((char) toupper(esFingerAux) == 'S'){
@@ -358,7 +343,7 @@ int main(){
                                     else
                                         cout << "La opcion ingresada no es válida.\n";
                                 };
-                            };
+                            }while((char) toupper(esFingerAux) != 'S' && (char) toupper(esFingerAux) != 'N');
                             cout<<"Email: \n";
                             cin.ignore();
                             do{
@@ -371,14 +356,23 @@ int main(){
                                 cin.sync();
                                 
                             }while(!existe);
-
-                            cout<<email<<endl;                   
-                         
-                            DTUsuario* dth = new DTHuesped(Nombre,email,pass,cargo);
-                            (*ICU).IngresarDatosUsuario(dth);
-                            (*ICU).confirmarAltaUsuario();
-                            cout<<"Se confirmo el alta de Huesped "<<(*dth).getNombre() <<" | "<< (*dth).getEmail()<<endl;
-
+                            do{  
+                                cout<<"Desea confirmar el alta? S / N \n";
+                                cin >> confirmarAlta; 
+                                if ((char) toupper(confirmarAlta) == 'S'){
+                                    DTUsuario* dth = new DTHuesped(Nombre,email,pass,cargo);
+                                    (*ICU).IngresarDatosUsuario(dth);
+                                    (*ICU).confirmarAltaUsuario();
+                                    cout<<"Se confirmo el alta de Huesped "<<(*dth).getNombre() <<", email: "<< (*dth).getEmail()<<endl;
+                    
+                                }else{
+                                    if ((char) toupper(confirmarAlta) == 'N')
+                                        cout<<"Se cancelo el alta \n";
+                                    else
+                                        cout << "La opcion ingresada no es valida.\n";
+                                };
+                            }while((char) toupper(confirmarAlta) != 'S' && (char) toupper(confirmarAlta) != 'N');   
+                                          
                             (*ICU).liberarMemoria();
                         };
                         break;
@@ -399,7 +393,7 @@ int main(){
                                 ind = 1;
                                 cout<<"Seleccione el número correspondiente al empleado que desea asignar de la siguiente lista: \n";
                                 for(it=empsLibres.begin(); it!=empsLibres.end(); it++){
-                                    cout<<ind<<". Nombre: "<<((*it).second)->getNombre() <<", Mail: "<<((*it).second)->getEmail()<< std::endl;
+                                    cout<<ind<<". Nombre: "<<((*it).second)->getNombre() <<", Email: "<<((*it).second)->getEmail()<< std::endl;
                                     ind++;
                                 }
                                 cin>>num;
@@ -464,10 +458,29 @@ int main(){
                                         cout << "No es finger." << endl;
                                     }
                                 }else{
-                                    Cargo aux;
                                     DTEmpleado* dte= (*ICU).obtenerEmpleadoConEmail((*ICU).obtenerDatosUsuario()->getEmail());
+                                    Cargo aux =(*dte).getTipoCargo();
                                     //buscar hostal asociado al DTEmpleado
-                                    cout << "aSDKJNSÑDF "<<(*dte).getTipoCargo() << endl;
+                                    //cout << "Cargooo "<<(*dte).getTipoCargo() << endl;
+                                    int aux2 = (int)aux;
+                                        switch(aux2){
+                                            case 0 :{
+                                                cout << "Cargo: Limpieza"<< endl;
+                                            };
+                                            break;
+                                            case 1 :{
+                                                cout << "Cargo: Administracion"<< endl;
+                                            };
+                                            break;
+                                            case 2 : {
+                                                cout << "Cargo: Recepcion"<< endl;
+                                            };
+                                            break;
+                                            case 3 :{
+                                                cout << "Cargo: Infraestructura"<< endl;
+                                            };
+                                            break;
+                                        }
                                     map<string,DTHostal*> hostales= (*ICH).obtenerHostales();
                                     map<string,DTHostal*>::iterator it1=hostales.begin();
                                     map<string,DTEmpleado*>::iterator it2;
@@ -497,10 +510,11 @@ int main(){
                                         cout << "Nombre: " << dth->getNombre() << endl;
                                         cout << "Direccion: " << dth->getDireccion() << endl;
                                         cout << "Telefono: " << dth->getTelefono() << endl;
-                                        cout << "Cargo: "<< aux << endl;
+                                        
                                     }
                                 }
                                 //liberarMemoria del DTUsuario
+                             
                                 (*ICU).liberarMemoria();
                             };
                                 
@@ -596,7 +610,8 @@ int main(){
                             for (it=empleados.begin() ; it!=empleados.end() ; it++){
                                 delete (*it).second;
                             }
-                        }
+                        };
+                        break;
                         case 8:{ //Volver
                             finSubMenu = true;
                         }; 
@@ -691,20 +706,20 @@ int main(){
                             };//while(!existe)
                             DTHabitacion *dthab; // Puntero al DTHabitacion con el numero elegido en el hostal elegido
                             
-                        }//case 1 | Realizar Reserva
-
+                        };//case 1 | Realizar Reserva
+                        break;
                         case 2:{//Consultar Reserva
 
-                        }
+                        }break;
                         case 3:{ //Baja de Reserva
 
-                        }
+                        }break;
                         case 4:{ //Registrar Estadía
 
-                        }
+                        }break;
                         case 5:{ //Consultar Estadia
 
-                        }
+                        }break;
                         case 6:{ //Finalizar Estadia
                             map<string,DTHostal*> hostales = (*ICH).obtenerHostales();
 
@@ -742,7 +757,7 @@ int main(){
                         break;
                         case 7:{ //Volver
                             finSubMenu = true;
-                        }
+                        }break;
                         default:{}
                     }//switch(Opcion2){
                 }//while(!finSubMenu)
@@ -1193,5 +1208,5 @@ int main(){
             }
         }//switch(Opcion1)
     }//while (!finalizar)
-    cout<<"Gracias por operar con nosotros, vuelva pronto!";
+    cout<<"Gracias por operar con nosotros, vuelva pronto! \n";
 }//int main()
