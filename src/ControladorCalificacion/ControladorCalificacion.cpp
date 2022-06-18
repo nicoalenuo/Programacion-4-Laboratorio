@@ -107,6 +107,15 @@ DTCalificacion* ControladorCalificacion::obtenerCalificacionDeEstadia(){
     return dtc;
 }
 
+DTCalificacion* ControladorCalificacion::obtenerCalificacion(DTEstadia* dte){
+    map<int,estadia*>::iterator it= estadias.find(dte->getCodigo());
+    calificacion* c= (*it).second->getCalificacion();
+    DTCalificacion* dtc=NULL;
+    if (c!=NULL)
+        (*dtc) = DTCalificacion(c->getId(),c->getPuntuacion(),c->getComentario(),c->getFecha());
+    return dtc;
+}
+
 void ControladorCalificacion::quitarEstadia(int codigo){
     estadias.erase(codigo);
 }

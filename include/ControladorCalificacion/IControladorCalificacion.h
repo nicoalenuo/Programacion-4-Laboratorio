@@ -45,6 +45,7 @@ class IControladorCalificacion {
         virtual float obtenerPromocionDeEstadia()=0;
         virtual int obtenerCodigoDeEstadia()=0;
         virtual DTCalificacion* obtenerCalificacionDeEstadia()=0;
+        virtual DTCalificacion* obtenerCalificacion(DTEstadia*)=0;
         virtual DTRespuesta* obtenerRespuesta(DTCalificacion*)=0;
         virtual void agregarCalificacionAMap(calificacion*)=0;
         virtual void agregarEstadiaAMap(estadia*)=0;

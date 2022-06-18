@@ -53,6 +53,7 @@ class ControladorCalificacion:public IControladorCalificacion {
         int obtenerCodigoDeEstadia();
         void quitarEstadia(int);
         DTCalificacion* obtenerCalificacionDeEstadia();
+        DTCalificacion* obtenerCalificacion(DTEstadia*);
         DTRespuesta* obtenerRespuesta(DTCalificacion*);
         void agregarCalificacionAMap(calificacion* c){
             calificaciones.insert(pair<int,calificacion*>((*c).getId(),c));
