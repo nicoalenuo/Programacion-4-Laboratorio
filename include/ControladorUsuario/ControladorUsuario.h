@@ -34,13 +34,14 @@ class ControladorUsuario:public IControladorUsuario {
         map<string,DTEmpleado*> obtenerEmpleadosNoAsignados();
         map<string,DTEmpleado*> obtenerEmpleados();
         set<DTNotificacion*> consultarNotificaciones(string);
-        DTUsuario* devolverDatos();
         map<string,DTHuesped*> obtenerHuespedes();
         void AsignarEmpleadoAHostal(string);
         map<string,DTUsuario*> obtenerUsuarios();
         void liberarMemoria();
         void suscribirEmpleado(string);
         void desuscribirEmpleado(string);
+        
+        DTUsuario* obtenerDatosUsuario();
         void agregarEmpleadoAMap(empleado* e){
             empleados.insert(pair<string,empleado*>((*e).getEmail(),e));
         }

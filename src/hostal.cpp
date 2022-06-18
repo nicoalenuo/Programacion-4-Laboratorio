@@ -143,3 +143,17 @@ map<int,DTCalificacion*> hostal::obtenerCalifSinCom(){
     }
     return send;
 }
+
+bool hostal::tieneHabConNumero(int numero){
+    return (habitaciones.find(numero) != habitaciones.end());
+}
+
+map<string,DTEmpleado*> hostal::obtenerEmpleados(){
+    map<string,DTEmpleado*> resultado= {};
+    map<string,empleado*>::iterator it;
+    for(it=empleados.begin();it!=empleados.end();it++){
+        DTEmpleado* dte = (*it).second->darDatos();
+        resultado.insert(pair<string,DTEmpleado*>((*it).first,dte));
+    }
+    return resultado;
+}

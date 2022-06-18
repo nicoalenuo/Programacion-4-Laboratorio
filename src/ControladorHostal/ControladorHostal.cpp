@@ -201,6 +201,16 @@ set<DTHabitacion*> ControladorHostal::obtenerHabitaciones(){
     return resultado;
 }
 
+bool ControladorHostal::existeHabConNumero(int numero,string nombre){
+    hostal* h = (*hostales.find(nombre)).second;
+    return (*h).tieneHabConNumero(numero);
+}
+
+map<string,DTEmpleado*> ControladorHostal::obtenerEmpleados(string nombreHostal){
+    hostal* h = (*hostales.find(nombreHostal)).second;
+    return (*h).obtenerEmpleados();
+}
+
 void ControladorHostal::confirmarAltaHostal(){
     hostal* ph = new hostal(datosHostal->getNombre(), datosHostal->getDireccion(), datosHostal->getTelefono());
     agregarHostalAMap(ph);

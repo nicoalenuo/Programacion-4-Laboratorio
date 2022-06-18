@@ -60,8 +60,10 @@ class hostal{
         DTHostal* darDatos();
         void quitarSiTieneCalificacion(int);
         float darCalifPromedio();
+        bool tieneHabConNumero(int);
         set<DTHabitacion*> obtenerHabitaciones();
         habitacion* getHab(DTHabitacion*);
+        map<string,DTEmpleado*> obtenerEmpleados();
         map<string,DTEmpleado*> quitarAsignados(map<string,DTEmpleado*>);
         void agregarCalificacionAMap(calificacion * c){
             calificaciones.insert(pair<int,calificacion*>((*c).getId(),c));

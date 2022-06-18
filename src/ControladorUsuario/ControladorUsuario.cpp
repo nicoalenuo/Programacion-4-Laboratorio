@@ -66,6 +66,10 @@ map<string,DTHuesped*> ControladorUsuario::obtenerHuespedes(){
     return resultado;   
 }
 
+DTUsuario* ControladorUsuario::obtenerDatosUsuario(){
+    return datosUsuario;
+}
+
 DTHuesped* ControladorUsuario::obtenerHuespedConEmail(string email){ //Pre: Existe un huesped con atributo email
     huesped* huespedBuscado = (*huespedes.find(email)).second;
     DTHuesped* resultado;
@@ -151,5 +155,3 @@ void ControladorUsuario::confirmarAltaUsuario(){
         agregarHuespedAMap(Ph);
     }
 }
-        
-DTUsuario* ControladorUsuario::devolverDatos(){return NULL;}

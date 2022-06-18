@@ -29,12 +29,14 @@ class ControladorHostal:public IControladorHostal {
         void IngresarDatosHostal(DTHostal*);
         void confirmarAltaHostal();
         void liberarMemoria();
+        bool existeHabConNumero(int,string);
         map<string,DTHostal*> obtenerHostales();
         void IngresarDatosHab(DTHabitacion*);
         void confirmarAltaHabitacion();
         map<int,DTReserva*> ListarReservas(DTHostal*);
         void FinalizarAsignacionDeEmpleados();
         map<string,DTHostal*> obtenerTop3Hostales();
+        map<string,DTEmpleado*> obtenerEmpleados(string);
         map<int,DTCalificacion*> obtenerCalificacionesYComentarios(string);
         void cancelarFinalizarEstadiaActiva();
         map<int,DTCalificacion*> obtenerCalificacionesDeHostal();

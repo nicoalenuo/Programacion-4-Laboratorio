@@ -4,6 +4,7 @@
 #include <string>
 #include <exception>
 #include <typeinfo>
+using namespace std;
 
 #include "../include/fabrica.h"
 #include "../include/FechaSistema.h"
@@ -43,9 +44,16 @@ DTHostal* ElegirHostal(){
 };
 
 int main(){
+    //----Declaracion de controladores----//
+    fabrica* f = fabrica::getInstance();
+    IControladorHostal *ICH = (*f).getIControladorHostal(); 
+    IControladorUsuario *ICU = (*f).getIControladorUsuario();
+    IControladorReserva *ICR = (*f).getIControladorReserva();
+    IControladorCalificacion *ICC = (*f).getIControladorCalificacion();
+    FechaSistema* fec = FechaSistema::getInstance();
     //----Declaracion de variables----//
-    char OpcionAux, esFingerAux, confirmarAlta;
-    int nota, Opcion1, Opcion2, num, capacidad, dia1, mes1, anio1, dia2, mes2, anio2, CargoAux, ind, codReserva;
+    char OpcionAux, esFingerAux, confirmarAlta,CargoAux;
+    int nota, Opcion1, Opcion2, num, capacidad, dia1, mes1, anio1, dia2, mes2, anio2, ind, codReserva;
     float precio;
     string hostalSel, NombreHos, DirHos, TelHos, Nombre, pass, email, Comentario;
     Cargo cargo;
@@ -85,24 +93,37 @@ int main(){
                     Opcion2 = (int)OpcionAux - '0'; //Control en caso de que se ingrese char en vez de int
                     switch(Opcion2){
                         case 1:{ //Alta Hostal
-                           cout<<"Caso alta hostal \n"; 
-                            fabrica* f = fabrica::getInstance();
-                            IControladorHostal *ICH = (*f).getIControladorHostal();
-                            
                             cout << "Por favor, ingrese los siguientes datos: \n";
-                            cout << "Nombre del hostal: ";
+                            map<string,DTHostal*> listaHost = (*ICH).obtenerHostales();
+                            map<string,DTHostal*>::iterator k;
                             cin.ignore();
-                            getline(cin, NombreHos);
+                            do{                                
+                                cout << "Nombre del hostal: ";
+                                
+                                getline(cin, NombreHos);
+                                k = listaHost.find(NombreHos);
+                                if(k!=listaHost.end()){
+                                    cout<< "Ya existe un hostal con el nombre ingresado. Por favor ingrese otro \n";
+                                }
+                                                            
+                            }while(k!=listaHost.end());     
+
                             cout << "Direccion del hostal: ";
                             cin.ignore();
                             getline(cin, DirHos);
                             cout << "Telefono del hostal: ";
                             cin.ignore();
                             getline(cin, TelHos);
-                            DTHostal* pdth = new  DTHostal(NombreHos,DirHos,TelHos,0);
+                            
+                            DTHostal* pdth = new DTHostal(NombreHos,DirHos,TelHos,0);
                             (*ICH).IngresarDatosHostal(pdth);
                             (*ICH).confirmarAltaHostal();
-
+                            cout<<"Se confirmo el alta de Hostal "<<(*pdth).getNombre() <<" \n";
+                            
+                            for (k=listaHost.begin() ; k!=listaHost.end() ; k++){
+                                delete (*k).second;
+                            }
+                            listaHost.clear();
                             (*ICH).liberarMemoria();              
                         };
                         break;
@@ -111,16 +132,65 @@ int main(){
                             
                             DTHostal* dth = ElegirHostal();
                             fabrica* f = fabrica::getInstance();
-                            IControladorHostal *ICH = (*f).getIControladorHostal();
                             (*ICH).IngresarDatosHostal(dth);
                             cout << "Por favor, ingrese los siguientes datos: \n";
                             cout << "Numero de habitacion: ";
-                            cin >> num;
-                            //controlo que no exista ese numero de habitacion en el hostal seleccionado
+                            do{                                
+                                cin >> num;
+                                try{
+                                    bool esInt = static_cast<bool>(num);
+                                    if(esInt){
+                                        existe = (*ICH).existeHabConNumero(num, dth->getNombre());
+                                        if(existe){
+                                            cout<<"Ya existe una habitación con el numero "<<num<< " en el hostal "<<dth->getNombre()<<endl;
+                                            cout<<"Por favor ingrese otro: \n";
+                                        }
+                                    }else{
+                                        throw(num);
+                                    }
+                                }
+                                catch(char){
+                                    cout<<"Por favor, ingrese un valor valido: \n";
+                                    existe = true;
+                                    cin.clear();
+                                    cin.sync();
+                                }
+                            }while(existe);
+
                             cout << "Precio de la habitacion: ";
-                            cin >> precio;
+                            do{ 
+                                cin>>precio;                              
+                                bool esInt = static_cast<bool>(precio);
+                                try{
+                                    if(esInt){
+                                        existe = false;                                    
+                                    }else{
+                                        throw(precio);
+                                    }
+                                }
+                                catch(float){
+                                    cout<<"Por favor, ingrese un valor valido: \n";
+                                    existe = true;
+                                }
+                            }while(existe);
+                            
                             cout << "Capacidad de la habitacion: ";
-                            cin >> capacidad;
+                            do{ 
+                                cin>>capacidad;                              
+                                bool esInt = static_cast<bool>(capacidad);
+                                try{
+                                    if(esInt){
+                                        existe = false;                                    
+                                    }else{
+                                        throw(capacidad);
+                                    }
+                                }
+                                catch(int){
+                                    cout<<"Por favor, ingrese un valor valido: \n";
+                                    existe = true;
+                                }
+                            }while(existe);
+                            
                             DTHabitacion* pdthab = new DTHabitacion(num,precio,capacidad);
                             (*ICH).IngresarDatosHab(pdthab);
                             confirmarAlta = 'A';
@@ -129,6 +199,7 @@ int main(){
                                 cin >> confirmarAlta; 
                                 if ((char) toupper(confirmarAlta) == 'S'){
                                     (*ICH).confirmarAltaHabitacion();
+                                    cout<<"Se confirmo el alta de la habitacion "<<num <<" en el hostal "<<(*dth).getNombre()<<" \n";
                                     
                                 }else{
                                     if ((char) toupper(confirmarAlta) == 'N')
@@ -145,8 +216,6 @@ int main(){
 
                         case 3:{ /*// Consultar Hostal
                             DTHostal* dth = ElegirHostal();
-                            fabrica* f = fabrica::getInstance();
-                            IControladorHostal *ICH = (*f).getIControladorHostal();
                             (*ICH).mostrarHostal();
                          */
                         cout<<"Caso consultar hostal";
@@ -156,9 +225,7 @@ int main(){
 
                         case 4: {//Consultar Top 3 Hostales
                             
-                            fabrica * f = fabrica::getInstance();
-                            IControladorHostal *CHostal = (*f).getIControladorHostal();
-                            map<string,DTHostal*> top3 = (*CHostal).obtenerTop3Hostales();
+                            map<string,DTHostal*> top3 = (*ICH).obtenerTop3Hostales();
                             if(top3.size()==0){
                                 cout<<"No hay hostales registrados. \n";
                             }else{
@@ -215,65 +282,58 @@ int main(){
                             getline(cin, pass);
                             cargoCorrecto = false;
                             cout<<"Seleccione el cargo: \n";
-                            while(!cargoCorrecto){
+                            do{
                                 cout<<"1. Administracion \n";                 
                                 cout<<"2. Limpieza \n";
                                 cout<<"3. Recepcion \n";
                                 cout<<"4. Infraestructura \n";      
                                 cin>>CargoAux;                                
                                 switch (CargoAux){
-                                    case 1:{ 
+                                    case '1':{ 
                                         cargo = Administracion;
                                         cargoCorrecto = true;
                                     };
                                     break;
-                                    case 2:{ 
+                                    case '2':{ 
                                         cargo = Limpieza;
                                         cargoCorrecto = true;
                                     };
                                     break;
-                                    case 3:{ 
+                                    case '3':{ 
                                         cargo = Recepcion;
                                         cargoCorrecto = true;
                                     };
                                     break;
-                                    case 4:{ 
+                                    case '4':{ 
                                         cargo = Infraestructura;
                                         cargoCorrecto = true;
                                     };
                                     break;
                                     default:{ 
-                                        cout<<"Por favor, ingrese una opcion valida: \n";
+                                        cout<<"Por favor, ingrese una opcion entre 1 y 4: \n";
                                         cin>>CargoAux;
                                     }
                                 }//switch (CargoAux)
-                            }//while(!cargoCorrecto)
-                          
-                            cout<<"Mail: \n";
+                            }while(!cargoCorrecto);
+                            cout<<"Email: \n";
                             cin.ignore();
-                            getline(cin, email);
-                            fabrica* f = fabrica::getInstance();
-                            IControladorUsuario *ICU = (*f).getIControladorUsuario();
-                            existe=false;
-                            
-                            while(!existe){
+                            do{
+                                
+                                getline(cin, email);
                                 existe = (*ICU).IngresarEmail(email);
                                 if (!existe){
                                     cout<<"El email ingresado ya existe, por favor ingrese otro. \n" ;
-                                    cin.ignore();
-                                    getline(cin, email);
-                                    
                                 }
-                            };
-                            
-                            DTEmpleado* dte = new DTEmpleado(Nombre,email,pass,cargo); 
-                            DTUsuario* dtu = dynamic_cast<DTUsuario*>(dte);
-                            (*ICU).IngresarDatosUsuario(dtu);
+                                cin.clear();
+                                cin.sync();
+                            }while(!existe);
+                                                      
+                            DTUsuario* dte = new DTEmpleado(Nombre,email,pass,cargo);
+                            (*ICU).IngresarDatosUsuario(dte);
                             (*ICU).confirmarAltaUsuario();
-                            cout<<"Se confirmo el alta de Empleado.\n";
-                            map<string,DTEmpleado*> empleados = (*ICU).obtenerEmpleados();
-                            map<string,DTEmpleado*>::iterator j = empleados.begin();
-                            cout<<((*j).second)->getNombre() <<std::endl;
+                            cout<<"Se confirmo el alta de Empleado "<<(*dte).getNombre() <<" | "<<(*dte).getEmail()<<endl;
+                    
+                            (*ICU).liberarMemoria();
                         };
                         break;
                         //case 1 | Alta Empleado
@@ -299,36 +359,34 @@ int main(){
                                         cout << "La opcion ingresada no es válida.\n";
                                 };
                             };
-                            cout<<"Email:\n";
+                            cout<<"Email: \n";
                             cin.ignore();
-                            getline(cin, email);
-                            fabrica* f = fabrica::getInstance();
-                            IControladorUsuario *ICU = (*f).getIControladorUsuario();
-                            existe=false;                            
-                            while(!existe){
+                            do{
+                                getline(cin, email);
                                 existe = (*ICU).IngresarEmail(email);
                                 if (!existe){
-                                    cout<<"El email ingresado ya existe, por favor ingrese otro. \n";
-                                    cin.ignore();
-                                    getline(cin, email);
+                                    cout<<"El email ingresado ya existe, por favor ingrese otro: \n" ;
                                 }
-                            };
-                            
-                            DTHuesped* dth = new DTHuesped (Nombre,email,pass,cargo);
-                            DTUsuario* dtu = dynamic_cast<DTUsuario*>(dth);
-                            (*ICU).IngresarDatosUsuario(dtu);
+                                cin.clear();
+                                cin.sync();
+                                
+                            }while(!existe);
+
+                            cout<<email<<endl;                   
+                         
+                            DTUsuario* dth = new DTHuesped(Nombre,email,pass,cargo);
+                            (*ICU).IngresarDatosUsuario(dth);
                             (*ICU).confirmarAltaUsuario();
-                            cout<<"Se confirmo el alta de Huesped.\n";
+                            cout<<"Se confirmo el alta de Huesped "<<(*dth).getNombre() <<" | "<< (*dth).getEmail()<<endl;
+
+                            (*ICU).liberarMemoria();
                         };
                         break;
                         //case 2 | Alta Huesped
 
                         case 3: {//Asignar Empleado a Hostal
                             DTHostal * dth = ElegirHostal();
-                            fabrica* f = fabrica::getInstance();
-                            IControladorHostal * ICH = (*f).getIControladorHostal();
                             (*ICH).IngresarDatosHostal(dth);
-                            IControladorUsuario * ICU = (*f).getIControladorUsuario();
                             map<string,DTEmpleado*> empsLibres = (*ICU).obtenerEmpleadosNoAsignados();
                             map<string,DTEmpleado*>::iterator it;
                             
@@ -363,48 +421,88 @@ int main(){
                         //case 3 | Asignar Empleado a Hostal
 
                         case 4:{ //Consultar Usuario
-                            DTHostal * dth = ElegirHostal();
-                            fabrica* f = fabrica::getInstance();
-                            IControladorHostal * ICH = (*f).getIControladorHostal();
-                            (*ICH).IngresarDatosHostal(dth);
-
-                            IControladorUsuario *ICU = (*f).getIControladorUsuario();
-                            map<string,DTUsuario*> us = (*ICU).obtenerUsuarios();
-                            if(us.size()==0){
+                            map<string,DTUsuario*> dtusuarios = (*ICU).obtenerUsuarios();
+                            //elegir un usuario
+                            if(dtusuarios.size()==0){
                                 cout<<"No hay usuarios ingresados.";
                             }else{
                                 map<string,DTUsuario*>::iterator it;
-                                existe = false;
-                                aux = false;
-                                while(!existe){
-                                    if(aux){
-                                        cout<<"El número ingresado no es correcto. \n";
+                                int cont=0;
+                                //mostrarUsuarios
+                                for(it=dtusuarios.begin();it!=dtusuarios.end();it++){
+                                    cont++;
+                                    cout << cont <<  "- Nombre: " << (*it).second->getNombre() << endl;
+                                    cout << "   Email: " << (*it).second->getEmail() << endl;
+                                    cout << endl;
+                                }
+                                cout << "Elija un usuario de acuerdo a su numero" << endl;
+                                int elegir;
+                                do{
+                                    cont = 1;
+                                    it=dtusuarios.begin();
+                                    cin >> elegir;
+                                    if(elegir > dtusuarios.size() || elegir<=0){
+                                        cout << "El numero elegido no pertenece a la lista" << endl;
+                                    }else{
+                                        while(cont<elegir){
+                                            cont++;
+                                            it++;
+                                        }
                                     }
-                                    ind = 1;
-                                    cout<<"Seleccione el número correspondiente al usuario que desea seleccionar de la siguiente lista: \n";
-                                    for(it=us.begin(); it!=us.end(); it++){
-                                        cout<<ind<<". Nombre: "<<((*it).second)->getNombre() <<", Mail: "<<((*it).second)->getEmail()<< std::endl;
-                                        ind++;
+                                }while(elegir > dtusuarios.size() || elegir <=0);
+                                //guardar DTUsuario en memoria
+                                (*ICU).IngresarDatosUsuario((*it).second);
+                                //mostrar el usuario
+                                cout << "Usuario elegido" << endl;
+                                cout << "Nombre: " << (*ICU).obtenerDatosUsuario()->getNombre() << endl;
+                                cout << "Email: " << (*ICU).obtenerDatosUsuario()->getEmail() << endl;
+                                if(dynamic_cast<DTHuesped*>((*ICU).obtenerDatosUsuario())!=NULL){
+                                    DTHuesped* dth= (*ICU).obtenerHuespedConEmail((*ICU).obtenerDatosUsuario()->getEmail());
+                                    if((*dth).getEsFinger()){
+                                        cout << "Es finger." << endl;
+                                    }else{
+                                        cout << "No es finger." << endl;
                                     }
-                                    cin>>num;
-                                    if(num>ind || num==0){
-                                        existe = false;
-                                        aux= true;
-                                    };
-                                };
-                                ind = 1;
-                                it = us.begin();
-                                while(ind<num){
-                                    it++;
-                                    ind++;
-                                };
-
-                                
-                                //obtenerNombreUsuario
-                                //obtenerEmailUsuario
-                                //obtenerHuespedConEmail (mostrar esFinger) / obtenerEmpleadoConEmail (mostrar cargo y hostal)
-                                
-                            };// if(us.size()==0)
+                                }else{
+                                    Cargo aux;
+                                    DTEmpleado* dte= (*ICU).obtenerEmpleadoConEmail((*ICU).obtenerDatosUsuario()->getEmail());
+                                    //buscar hostal asociado al DTEmpleado
+                                    cout << "aSDKJNSÑDF "<<(*dte).getTipoCargo() << endl;
+                                    map<string,DTHostal*> hostales= (*ICH).obtenerHostales();
+                                    map<string,DTHostal*>::iterator it1=hostales.begin();
+                                    map<string,DTEmpleado*>::iterator it2;
+                                    map<string,DTEmpleado*> emps;
+                                    bool encontrado=false;
+                                    DTHostal* dth;
+                                    while(!encontrado && it1!=hostales.end()){
+                                        emps = (*ICH).obtenerEmpleados((*(*it1).second).getNombre());
+                                        it2= emps.begin();
+                                        while(!encontrado && it2!=emps.end()){
+                                            if((*it2).second->getEmail()== dte->getEmail()){
+                                                dth= (*it1).second;
+                                                encontrado= true;
+                                                aux = (*it2).second->getTipoCargo();
+                                            }else{
+                                                it2++;
+                                            }
+                                        }
+                                        for (it2=emps.begin () ; it2!=emps.end() ; it2++)
+                                                delete (*it2).second;
+                                        
+                                        it1++;
+                                    }
+                                    if(it1!=hostales.end()){
+                                        //mostar el hostal
+                                        cout << "Hostal " << endl;
+                                        cout << "Nombre: " << dth->getNombre() << endl;
+                                        cout << "Direccion: " << dth->getDireccion() << endl;
+                                        cout << "Telefono: " << dth->getTelefono() << endl;
+                                        cout << "Cargo: "<< aux << endl;
+                                    }
+                                }
+                                //liberarMemoria del DTUsuario
+                                (*ICU).liberarMemoria();
+                            };
                                 
                         };
                         break;
@@ -413,8 +511,6 @@ int main(){
                         case 5:{ //Suscribir a Notificaciones
                             int i=1;
                             int eleccion;
-                            fabrica* f = fabrica::getInstance();
-                            IControladorUsuario* ICU = (*f).getIControladorUsuario();
                             map<string,DTEmpleado*> empleados = (*ICU).obtenerEmpleados();
                             map<string,DTEmpleado*>::iterator it;
 
@@ -442,8 +538,6 @@ int main(){
                         case 6:{ //Consultar Notificaciones
                             int i=1;
                             int eleccion;
-                            fabrica* f = fabrica::getInstance();
-                            IControladorUsuario* ICU = (*f).getIControladorUsuario();
                             map<string,DTEmpleado*> empleados = (*ICU).obtenerEmpleados();
                             map<string,DTEmpleado*>::iterator it;
                             set<DTNotificacion*>::iterator it2;
@@ -480,8 +574,6 @@ int main(){
                         case 7:{ //Eliminar Suscripcion
                             int i=1;
                             int eleccion;
-                            fabrica* f = fabrica::getInstance();
-                            IControladorUsuario* ICU = (*f).getIControladorUsuario();
                             map<string,DTEmpleado*> empleados = (*ICU).obtenerEmpleados();
                             map<string,DTEmpleado*>::iterator it;
 
@@ -536,9 +628,6 @@ int main(){
                     switch(Opcion2){
                         case 1:{ //Realizar Reserva
                             DTHostal * dth = ElegirHostal();
-                            fabrica* f = fabrica::getInstance();
-                            IControladorHostal * ICH = (*f).getIControladorHostal();
-                            IControladorReserva *ICR = (*f).getIControladorReserva();
                             
                             cout<<"Por favor, ingrese la fecha de CheckIn: \n";
                             cout << "Día:";
@@ -617,9 +706,6 @@ int main(){
 
                         }
                         case 6:{ //Finalizar Estadia
-                            fabrica* f = fabrica::getInstance();
-                            IControladorHostal* ICH = (*f).getIControladorHostal();
-                            IControladorReserva* ICR = (*f).getIControladorReserva();
                             map<string,DTHostal*> hostales = (*ICH).obtenerHostales();
 
                             int i=1;
@@ -713,12 +799,6 @@ int main(){
             break;
             //case 5 | Modificar Fecha de Sistema
             case 6:{ //Cargar datos de prueba
-                    fabrica* f = fabrica::getInstance();
-                    IControladorHostal *ICH = (*f).getIControladorHostal(); 
-                    IControladorUsuario *ICU = (*f).getIControladorUsuario();
-                    IControladorReserva *ICR = (*f).getIControladorReserva();
-                    IControladorCalificacion *ICC = (*f).getIControladorCalificacion();
-                    FechaSistema* fec = FechaSistema::getInstance();
                     
                     //Alta Empleados
                     
