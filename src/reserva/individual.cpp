@@ -144,8 +144,9 @@ bool individual::tieneEstadiaFinalizadaDeHuespedEnHostal(string email){
     habitacion* hab = getHabitacion();
 
     bool aux = (*ICH).existeHabEnHostal(hab,(*dth).getNombre());
-    if (aux)
+    if (aux){
         return huesInd->tieneEstFinalizadaDeHus(email);
+    }
     else
         return false;
 }

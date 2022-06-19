@@ -25,45 +25,49 @@ bool fechaValida(Date d){
 }
 
 DTHostal* ElegirHostal(){
-	cout<< "Por favor, seleccione un hostal de la siguiente lista: \n";
 	fabrica* f = fabrica::getInstance();
     IControladorHostal *ICH = (*f).getIControladorHostal();
     map<string,DTHostal*> listaHostales = (*ICH).obtenerHostales();
-	map<string,DTHostal*>::iterator it;
-    DTHostal * aux;
-    bool correcto;
-	int cont;
-    int numHostal;
-    do{
-        cont = 0;
-        for(it=listaHostales.begin(); it!=listaHostales.end(); it++){
-		    cont++;
-            cout << cont <<". Nombre: " << ((*it).second)->getNombre() << endl;
+    if (!listaHostales.empty()){
+        map<string,DTHostal*>::iterator it;
+        cout<< "Por favor, seleccione un hostal de la siguiente lista: \n";
+        DTHostal * aux;
+        bool correcto;
+        int cont;
+        int numHostal;
+        do{
+            cont = 0;
+            for(it=listaHostales.begin(); it!=listaHostales.end(); it++){
+                cont++;
+                cout << cont <<". Nombre: " << ((*it).second)->getNombre() << endl;
+            };
+            cout<<"Eleccion: \n";
+            cin>>numHostal;
+            if(numHostal>cont || numHostal==0){
+                cout<<"El valor ingresado no es correcto, por favor ingrese otro: \n";
+                correcto = false;
+            }else{
+                correcto = true;
+            }
+        }while(!correcto);
+        
+        cont = 1;
+        it = listaHostales.begin();
+        while(cont<numHostal){
+            it++;
+            cont++;
         };
-        cout<<"Eleccion: \n";
-        cin>>numHostal;
-        if(numHostal>cont || numHostal==0){
-            cout<<"El valor ingresado no es correcto, por favor ingrese otro: \n";
-            correcto = false;
-        }else{
-            correcto = true;
+        aux = (*it).second;
+        for (it=listaHostales.begin() ; it!=listaHostales.end() ; it++){
+            if((*(*it).second).getNombre() != (*aux).getNombre()){
+                delete (*it).second;
+            }
         }
-    }while(!correcto);
-    
-    cont = 1;
-    it = listaHostales.begin();
-    while(cont<numHostal){
-        it++;
-        cont++;
-    };
-    aux = (*it).second;
-    for (it=listaHostales.begin() ; it!=listaHostales.end() ; it++){
-        if((*(*it).second).getNombre() != (*aux).getNombre()){
-            delete (*it).second;
-        }
+        listaHostales.clear();
+        return aux;	
+    }else{
+        return NULL;
     }
-    listaHostales.clear();
-    return aux;	
 };
 
 int main(){
@@ -86,19 +90,28 @@ int main(){
     finalizar = false;
     codReserva = 0;
     //-----------------------//
-    cout << "Antes de ingresar, por favor, ingrese la fecha del sistema"<< endl;
-    cout << "Día:";
-    cin >> dia1;
-    cout << "Mes:";
-    cin >> mes1;
-    cout << "Anio:";
-    cin >> anio1;
-    cout << "Hora:";
-    cin >> hora1;
-    Date fechaInicio = Date(dia1,mes1,anio1,hora1);
-    (*fec).setFechaActual(fechaInicio); 
+    Date fechaIni;
+    bool fechaV;
+    cout<<"Antes de ingresar, por favor, ingrese la fecha actual del sistema: \n";
+    do{
+        cout << "Dia:";
+        cin >> dia1;
+        cout << "Mes:";
+        cin >> mes1;
+        cout << "Anio:";
+        cin >> anio1;
+        cout << "Hora:";
+        cin >> hora1;
+        fechaIni = Date(dia1,mes1,anio1,hora1); 
+        fechaV = fechaValida(fechaIni);
+        if (!fechaV)
+            cout << "La fecha no es valida, por favor ingrese otra" << endl;
+    }while(!fechaV);  
+
+    (*fec).setFechaActual(fechaIni);
 
     while (!finalizar){
+        Date fechaActual=(*fec).getFechaActual();
         finSubMenu = false;
         cout << "-------------------------------\n";
         cout << "Seleccione la operacion que desea realizar: \n";
@@ -109,7 +122,7 @@ int main(){
         cout << "5. Modificar Fecha de Sistema \n";
         cout << "6. Cargar datos de prueba \n";
         cout << "7. Salir \n";
-        cout << "-------------------------------\n";
+        cout << "---------------- "<< fechaActual.getDia() << "/" << fechaActual.getMes() << "/" << fechaActual.getAnio() << " - "<< fechaActual.getHora() << ":00" << "\n";
             
         cin >> OpcionAux;
         Opcion1 = (int)OpcionAux - '0'; //Control en caso de que se ingrese char en vez de int
@@ -177,41 +190,45 @@ int main(){
                         case 2:{ //Alta Habitacion
                             
                             DTHostal* dth = ElegirHostal();
-                            (*ICH).IngresarDatosHostal(dth);
-                            cout << "Por favor, ingrese los siguientes datos: \n";
-                            cout << "Numero de habitacion: ";
-                            do{                                
-                                cin >> num;
-                                existe = (*ICH).existeHabConNumero(num, dth->getNombre());
-                                if(existe){
-                                    cout<<"Ya existe una habitación con el numero "<<num<< " en el hostal "<<dth->getNombre()<<endl;
-                                    cout<<"Por favor ingrese otro numero: \n";
-                                }                       
-                                                         
-                            }while(existe);
-                            cout << "Precio de la habitacion: ";
-                            cin>>precio;
-                            cout << "Capacidad de la habitacion: ";
-                            cin>>capacidad;
-                                                       
-                            DTHabitacion* pdthab = new DTHabitacion(num,precio,capacidad);
-                            (*ICH).IngresarDatosHab(pdthab);
-                            do{
-                                cout<<"Desea confirmar el alta? S / N \n";
-                                cin >> confirmarAlta; 
-                                if ((char) toupper(confirmarAlta) == 'S'){
-                                    (*ICH).confirmarAltaHabitacion();
-                                    cout<<"Se confirmo el alta de la habitacion "<<num <<" en el hostal "<<(*dth).getNombre()<<" \n";
-                                }else{
-                                    if ((char) toupper(confirmarAlta) == 'N')
-                                        cout<<"Se cancelo el alta \n";
-                                    else
-                                        cout << "La opcion ingresada no es valida.\n";
-                                };
-                            }while((char) toupper(confirmarAlta) != 'S' && (char) toupper(confirmarAlta) != 'N');
+                            if (dth!=NULL){
+                                (*ICH).IngresarDatosHostal(dth);
+                                cout << "Por favor, ingrese los siguientes datos: \n";
+                                cout << "Numero de habitacion: ";
+                                do{                                
+                                    cin >> num;
+                                    existe = (*ICH).existeHabConNumero(num, dth->getNombre());
+                                    if(existe){
+                                        cout<<"Ya existe una habitación con el numero "<<num<< " en el hostal "<<dth->getNombre()<<endl;
+                                        cout<<"Por favor ingrese otro numero: \n";
+                                    }                       
+                                                            
+                                }while(existe);
+                                cout << "Precio de la habitacion: ";
+                                cin>>precio;
+                                cout << "Capacidad de la habitacion: ";
+                                cin>>capacidad;
+                                                        
+                                DTHabitacion* pdthab = new DTHabitacion(num,precio,capacidad);
+                                (*ICH).IngresarDatosHab(pdthab);
+                                do{
+                                    cout<<"Desea confirmar el alta? S / N \n";
+                                    cin >> confirmarAlta; 
+                                    if ((char) toupper(confirmarAlta) == 'S'){
+                                        (*ICH).confirmarAltaHabitacion();
+                                        cout<<"Se confirmo el alta de la habitacion "<<num <<" en el hostal "<<(*dth).getNombre()<<" \n";
+                                    }else{
+                                        if ((char) toupper(confirmarAlta) == 'N')
+                                            cout<<"Se cancelo el alta \n";
+                                        else
+                                            cout << "La opcion ingresada no es valida.\n";
+                                    };
+                                }while((char) toupper(confirmarAlta) != 'S' && (char) toupper(confirmarAlta) != 'N');
 
-                            (*ICH).liberarMemoria();
-                            
+                                (*ICH).liberarMemoria();
+                            }
+                            else{
+                                cout << "No hay hostales en el sistema" << endl;
+                            } 
                         };
                         break;
                         // case 2 | Alta Habitacion
@@ -669,7 +686,7 @@ int main(){
                             map<string,DTUsuario*> dtusuarios = (*ICU).obtenerUsuarios();
                             //elegir un usuario
                             if(dtusuarios.size()==0){
-                                cout<<"No hay usuarios ingresados.";
+                                cout<<"No hay usuarios ingresados." << endl;
                             }else{
                                 map<string,DTUsuario*>::iterator it;
                                 int cont=0;
@@ -770,26 +787,38 @@ int main(){
                             int i=1;
                             int eleccion;
                             map<string,DTEmpleado*> empleados = (*ICU).obtenerEmpleados();
-                            map<string,DTEmpleado*>::iterator it;
+                            if (!empleados.empty()){
+                                map<string,DTEmpleado*>::iterator it;
+                                DTHostal* dth;
 
-                            cout << "Seleccione un empleado:" << endl;
-                            for (it=empleados.begin() ; it!=empleados.end() ; it++){
-                                cout << i << "- " << (*(*it).second).getNombre() << endl;
-                                cout << "   " << (*(*it).second).getEmail() << endl;
-                                cout << endl;
-                                i++;
-                            }
-                            cout << "Eleccion: " << endl;
-                            cin >> eleccion;
-                            it = empleados.begin();
-                            for (i=1 ; i<eleccion ; i++){
-                                it++;
-                            }
+                                cout << "Seleccione un empleado:" << endl;
+                                for (it=empleados.begin() ; it!=empleados.end() ; it++){
+                                    cout << i << "- Nombre:" << (*(*it).second).getNombre() << endl;
+                                    cout << "   Email:" << (*(*it).second).getEmail() << endl;
+                                    i++;
+                                    dth = (*ICH).hostalEnElQueTrabaja((*(*it).second).getNombre());
+                                    if (dth!=NULL){
+                                        cout << "   Trabaja en " << (*dth).getNombre() << endl;
+                                        delete dth;
+                                    }
+                                    else
+                                        cout << "   No trabaja en ningun hostal" << endl;
+                                    cout << endl;
+                                }
+                                cout << "Eleccion: " << endl;
+                                cin >> eleccion;
+                                it = empleados.begin();
+                                for (i=1 ; i<eleccion ; i++){
+                                    it++;
+                                }
 
-                            (*ICU).suscribirEmpleado((*(*it).second).getEmail());
+                                (*ICU).suscribirEmpleado((*(*it).second).getEmail());
 
-                            for (it=empleados.begin() ; it!=empleados.end() ; it++){
-                                delete (*it).second;
+                                for (it=empleados.begin() ; it!=empleados.end() ; it++){
+                                    delete (*it).second;
+                                }
+                            }else{
+                                cout << "No hay empleados en el sistema" << endl;
                             }
                         };
                         break;
@@ -887,107 +916,107 @@ int main(){
 
                     switch(Opcion2){
                         case 1:{ //Realizar Reserva
-                            
                             DTHostal * dth = ElegirHostal();
-                            DTHabitacion *dthab; // Puntero al DTHabitacion con el numero elegido en el hostal elegido
-                            cout<<"Por favor, ingrese la fecha de CheckIn: \n";
-                            cout << "Día:";
-                            cin >> dia1;
-                            cout << "Mes:";
-                            cin >> mes1;
-                            cout << "Anio:";
-                            cin >> anio1;
-                            cout << "Hora:";
-                            cin >> hora1;
-                            Date ChIn(dia1,mes1,anio1,hora1); //DTFecha CheckIn
-                            cout<<"Por favor, ingrese la fecha de CheckOut: \n";
-                            cout << "Día:";
-                            cin >> dia2;
-                            cout << "Mes:";
-                            cin >> mes2;
-                            cout << "Anio:";
-                            cin >> anio2;
-                            cout << "Hora:";
-                            cin >> hora2;
-                            Date ChOut(dia2,mes2,anio2,hora2); //DTFecha CheckIn
-                            cout<<"Por favor, ingrese el tipo de reserva: \n";
-                            cout<<"1- Individual \n";
-                            cout<<"2- Grupal \n";
-                            cin>>tipoR;
-                            (*ICR).ingresarDatosReserva(dth,ChIn,ChOut);
-                            map<int,DTHabitacion*>::iterator j;
-                            map<int,DTHabitacion*> habs = (*ICR).obtenerHabitacionesDisponibles();
-                            if(!habs.empty()){
-                                
-                                cout<<"Por favor, seleccione el número de la habitacion que desea reservar: \n";
-                                for(j=habs.begin(); j!=habs.end(); j++){
-                                    cout<<"Numero: " << ((*(*j).second)).getNumero() << endl;
-                                    cout<<"Precio: " << ((*(*j).second)).getPrecio() << endl;
-                                    cout<<"Capacidad: " << ((*(*j).second)).getCapacidad() << endl;
-                                    cout<<"..............................................." << endl;
-                                };
-                
-                                cin>>num;
-                                //controlar que sea un int
-                                bool existe=false;
-                                j = habs.begin();
-                                while(j!=habs.end() && !existe){ //controlo que el numero ingresado corresponda a una habitacion disponible
-                                    if(((*j).second)->getNumero() == num){
-                                        existe = true;
-                                        dthab = (*j).second;
-                                    };
-                                    j++;
-                                };
-                                while(!existe){ //si se ingreso un numero incorrecto, muestro las hab y pido reingresar
-                                    cout<<"El número de habitacion ingresado no corresponde a una habitacion disponible.\n";
+                            map<string,DTHuesped*> HuespedesAListar = ICU->obtenerHuespedes();
+                            bool fechaV;
+                            if (dth!=NULL && !HuespedesAListar.empty()){
+                                DTHabitacion *dthab; // Puntero al DTHabitacion con el numero elegido en el hostal elegido
+                                Date ChIn;
+                                Date ChOut;
+                                cout<<"Por favor, ingrese la fecha de CheckIn: \n";
+                                do{
+                                    cout << "Día:";
+                                    cin >> dia1;
+                                    cout << "Mes:";
+                                    cin >> mes1;
+                                    cout << "Anio:";
+                                    cin >> anio1;
+                                    cout << "Hora:";
+                                    cin >> hora1;
+                                    ChIn = Date(dia1,mes1,anio1,hora1); //DTFecha CheckIn
+                                    fechaV = fechaValida(ChIn);
+                                    if (!fechaV)
+                                        cout << "La fecha no es valida, por favor ingrese otra" << endl;
+                                }while(!fechaV);  
+                                cout<<"Por favor, ingrese la fecha de CheckOut: \n";
+                                do{
+                                    cout << "Día:";
+                                    cin >> dia2;
+                                    cout << "Mes:";
+                                    cin >> mes2;
+                                    cout << "Anio:";
+                                    cin >> anio2;
+                                    cout << "Hora:";
+                                    cin >> hora2;
+                                    ChOut = Date(dia2,mes2,anio2,hora2); //DTFecha CheckIn
+                                    fechaV = fechaValida(ChOut);
+                                    if (!fechaV)
+                                        cout << "La fecha no es valida, por favor ingrese otra" << endl;
+                                }while(!fechaV);
+                                cout<<"Por favor, ingrese el tipo de reserva: \n";
+                                cout<<"1- Individual \n";
+                                cout<<"2- Grupal \n";
+                                cin>>tipoR;
+                                (*ICR).ingresarDatosReserva(dth,ChIn,ChOut);
+                                map<int,DTHabitacion*>::iterator j;
+                                map<int,DTHabitacion*> habs = (*ICR).obtenerHabitacionesDisponibles();
+                                if(!habs.empty()){
+                                    
+                                    cout<<"Por favor, seleccione el número de la habitacion que desea reservar: \n";
                                     for(j=habs.begin(); j!=habs.end(); j++){
-                                        cout<<"Numero: " << (*(*j).second).getNumero() <<endl;
-                                        cout<<"Precio: " << (*(*j).second).getPrecio() <<endl;
-                                        cout<<"Capacidad: " << (*(*j).second).getCapacidad() <<endl;
-                                        cout<<"..............................................."<< endl;
+                                        cout<<"Numero: " << ((*(*j).second)).getNumero() << endl;
+                                        cout<<"Precio: " << ((*(*j).second)).getPrecio() << endl;
+                                        cout<<"Capacidad: " << ((*(*j).second)).getCapacidad() << endl;
+                                        cout<<"..............................................." << endl;
                                     };
-                                    cout<< "Por favor, ingrese un número de habitacion de la lista: \n";
-                                
+                    
                                     cin>>num;
                                     //controlar que sea un int
-
+                                    bool existe=false;
                                     j = habs.begin();
                                     while(j!=habs.end() && !existe){ //controlo que el numero ingresado corresponda a una habitacion disponible
-                                        if((*(*j).second).getNumero() == num){
+                                        if(((*j).second)->getNumero() == num){
                                             existe = true;
                                             dthab = (*j).second;
                                         };
                                         j++;
                                     };
+                                    while(!existe){ //si se ingreso un numero incorrecto, muestro las hab y pido reingresar
+                                        cout<<"El número de habitacion ingresado no corresponde a una habitacion disponible.\n";
+                                        for(j=habs.begin(); j!=habs.end(); j++){
+                                            cout<<"Numero: " << (*(*j).second).getNumero() <<endl;
+                                            cout<<"Precio: " << (*(*j).second).getPrecio() <<endl;
+                                            cout<<"Capacidad: " << (*(*j).second).getCapacidad() <<endl;
+                                            cout<<"..............................................."<< endl;
+                                        };
+                                        cout<< "Por favor, ingrese un número de habitacion de la lista: \n";
+                                    
+                                        cin>>num;
+                                        //controlar que sea un int
 
-                                };//while(!existe)
-                                
-                                ICH->IngresarDatosHab(dthab);
-                                //LISTO HUESPEDES
-                                map<string,DTHuesped*> HuespedesAListar = ICU->obtenerHuespedes();
-                                map<string,DTHuesped*>::iterator itCU;
-                                DTHuesped* Hues;
-                                cout<< "Seleccione un huesped: "<< endl;
-                                for(itCU = HuespedesAListar.begin();itCU != HuespedesAListar.end(); itCU++ ){
-                                    cout << " Nombre: " << (*itCU).second->getNombre() << "|| Email: " <<(*itCU).second->getEmail() << endl;
-                                    cout<<"..............................................."<< endl;
-                                }
-                                cout<< "Ingrese el mail de un huesped: " << endl;
-                                cin >> MailHuesped;
-                               
-                                //CONTROLO QUE EL MAIL SEA CORRECTO
-                                existe= false;
-                                itCU = HuespedesAListar.begin();
-                                while(itCU!=HuespedesAListar.end() && !existe){ //controlo que el numero ingresado corresponda a una habitacion disponible
-                                    if((*(*itCU).second).getEmail() == MailHuesped){
-                                        existe = true;
-                                        Hues = (*itCU).second;
-                                    };
-                                    itCU++;
-                                };
-                                while(existe == false){
-                                    cout<< "###ERROR### Ingrese un email correcto: "<< endl;
+                                        j = habs.begin();
+                                        while(j!=habs.end() && !existe){ //controlo que el numero ingresado corresponda a una habitacion disponible
+                                            if((*(*j).second).getNumero() == num){
+                                                existe = true;
+                                                dthab = (*j).second;
+                                            };
+                                            j++;
+                                        };
+
+                                    };//while(!existe)
+                                    
+                                    ICH->IngresarDatosHab(dthab);
+                                    //LISTO HUESPEDES
+                                    map<string,DTHuesped*>::iterator itCU;
+                                    DTHuesped* Hues;
+                                    cout<< "Seleccione un huesped: "<< endl;
+                                    for(itCU = HuespedesAListar.begin();itCU != HuespedesAListar.end(); itCU++ ){
+                                        cout << " Nombre: " << (*itCU).second->getNombre() << "|| Email: " <<(*itCU).second->getEmail() << endl;
+                                        cout<<"..............................................."<< endl;
+                                    }
+                                    cout<< "Ingrese el mail de un huesped: " << endl;
                                     cin >> MailHuesped;
+                                
                                     //CONTROLO QUE EL MAIL SEA CORRECTO
                                     existe= false;
                                     itCU = HuespedesAListar.begin();
@@ -998,15 +1027,8 @@ int main(){
                                         };
                                         itCU++;
                                     };
-                                }
-                               
-                                ICR->DesignarPropietarioDeReserva(Hues);
-                                if(tipoR == 2){//GRUPAL
-                                    existe= false;
-                                        cout<< "---Usted está ingresando una reserva Grupal---- "<< endl;
-                                        cout<< "Si desea dejar de ingresar huespedes inserte S "<< endl;
-                                    while(MailHuesped != "S"){
-                                        cout<< "Ingrese el mail del próximo huesped: "<< endl;
+                                    while(existe == false){
+                                        cout<< "###ERROR### Ingrese un email correcto: "<< endl;
                                         cin >> MailHuesped;
                                         //CONTROLO QUE EL MAIL SEA CORRECTO
                                         existe= false;
@@ -1018,8 +1040,15 @@ int main(){
                                             };
                                             itCU++;
                                         };
-                                        while(existe == false && MailHuesped != "S"){
-                                            cout<< "###ERROR### Ingrese un email correcto: "<< endl;
+                                    }
+                                
+                                    ICR->DesignarPropietarioDeReserva(Hues);
+                                    if(tipoR == 2){//GRUPAL
+                                        existe= false;
+                                            cout<< "---Usted está ingresando una reserva Grupal---- "<< endl;
+                                            cout<< "Si desea dejar de ingresar huespedes inserte S "<< endl;
+                                        while(MailHuesped != "S"){
+                                            cout<< "Ingrese el mail del próximo huesped: "<< endl;
                                             cin >> MailHuesped;
                                             //CONTROLO QUE EL MAIL SEA CORRECTO
                                             existe= false;
@@ -1030,38 +1059,60 @@ int main(){
                                                     Hues = (*itCU).second;
                                                 };
                                                 itCU++;
+                                            };
+                                            while(existe == false && MailHuesped != "S"){
+                                                cout<< "###ERROR### Ingrese un email correcto: "<< endl;
+                                                cin >> MailHuesped;
+                                                //CONTROLO QUE EL MAIL SEA CORRECTO
+                                                existe= false;
+                                                itCU = HuespedesAListar.begin();
+                                                while(itCU!=HuespedesAListar.end() && !existe){ //controlo que el numero ingresado corresponda a una habitacion disponible
+                                                    if((*(*itCU).second).getEmail() == MailHuesped){
+                                                        existe = true;
+                                                        Hues = (*itCU).second;
+                                                    };
+                                                    itCU++;
+                                                }
+                                            }
+                                            if(MailHuesped !="S"){//insertar el huesped
+                                                ICR->IngresarHuespedEnReserva(Hues);
                                             }
                                         }
-                                        if(MailHuesped !="S"){//insertar el huesped
-                                            ICR->IngresarHuespedEnReserva(Hues);
-                                        }
                                     }
-                                }
-                                cout<< "¿Desea confirmar la reserva? : "<< endl;
-                                cout<< "S/N: "<< endl;
-                                cin >> MailHuesped;
-                                if(MailHuesped == "S"){
-                                    ICR->confirmarReserva();
-                                }else if(MailHuesped == "N"){
-                                    ICR->liberarMemoria();
-                                }else{
-                                    bool Finalizado = false;
-                                    while(Finalizado == false){
-                                        cout<< "###ERROR###"<< endl;
-                                        cout<< "¿Desea confirmar la reserva? : "<< endl;
-                                        cout<< "S/N: "<< endl;
-                                        cin >> MailHuesped;
-                                        Finalizado = (MailHuesped == "S" || MailHuesped == "S");
-                                    }
+                                    cout<< "¿Desea confirmar la reserva? : "<< endl;
+                                    cout<< "S/N: "<< endl;
+                                    cin >> MailHuesped;
                                     if(MailHuesped == "S"){
                                         ICR->confirmarReserva();
-                                    }if(MailHuesped == "N"){
+                                    }else if(MailHuesped == "N"){
                                         ICR->liberarMemoria();
+                                    }else{
+                                        char elec;
+                                        bool Finalizado = false;
+                                        while(Finalizado == false){
+                                            cout<< "###ERROR###"<< endl;
+                                            cout<< "¿Desea confirmar la reserva? : "<< endl;
+                                            cout<< "S/N: "<< endl;
+                                            cin >> elec;
+                                            Finalizado = ((char)toupper(elec) == 'S' || (char)toupper(elec) == 'N');
+                                        }
+                                        if((char)toupper(elec) == 'S'){
+                                            ICR->confirmarReserva();
+                                        }if((char)toupper(elec) == 'N'){
+                                            ICR->liberarMemoria();
+                                        }
                                     }
-                                }
-                            
-                            }else
-                                cout<< "El hostal no posee habitaciones" << endl;
+                                
+                                }else
+                                    cout<< "El hostal no posee habitaciones disponibles para las fechas dadas" << endl;
+                            }
+                            else{
+                                if (dth==NULL)
+                                    cout << "No hay hostales en el sistema" << endl;
+                                if (HuespedesAListar.empty())
+                                    cout << "No hay huespedes en el sistema" << endl;
+
+                            }
                             break;
 
                         };//case 1 | Realizar Reserva
@@ -1163,23 +1214,118 @@ int main(){
                         }break;
 
                         case 3:{ //Baja de Reserva
-
                             DTHostal * dth = ElegirHostal();
-                            DTHabitacion *dthab; // Puntero al DTHabitacion con el numero elegido en el hostal elegido
-                            DTReserva* dtres;
-                            int CodigoReserva;
-                            existe= false;
-                            ICH->setDatosHostal(dth);
-                            map<int,DTReserva*> SDTReservas = (*ICH).obtenerReservasDeHostal();
-                            if(!SDTReservas.empty()){
-                                cout<<"-----------------Reservas-----------------"<< endl;
+                            if (dth!=NULL){
+                                DTHabitacion *dthab; // Puntero al DTHabitacion con el numero elegido en el hostal elegido
+                                DTReserva* dtres;
+                                int CodigoReserva;
+                                existe= false;
+                                ICH->setDatosHostal(dth);
+                                map<int,DTReserva*> SDTReservas = (*ICH).obtenerReservasDeHostal();
+                                if(!SDTReservas.empty()){
+                                    cout<<"-----------------Reservas-----------------"<< endl;
+                                    for(itDTR = SDTReservas.begin(); itDTR != SDTReservas.end(); itDTR++){
+                                        cout << " Código: " << (*itDTR).second->getCodigo() << endl;
+                                        cout << " Check In: " <<(*itDTR).second->getCheckIn().getDia() <<"/" <<(*itDTR).second->getCheckIn().getMes() <<"/"<<(*itDTR).second->getCheckIn().getAnio() << " - " << (*itDTR).second->getCheckIn().getHora() <<":00" << endl;
+                                        cout << " Check Out: " <<(*itDTR).second->getCheckOut().getDia() <<"/" <<(*itDTR).second->getCheckOut().getMes() <<"/"<<(*itDTR).second->getCheckOut().getAnio() << " - " << (*itDTR).second->getCheckOut().getHora() <<":00" << endl;
+                                        cout<<"........................................................"<< endl;
+                                    }
+                                    cout<<"Ingrese el código de la reserva : \n";
+                                    cin >> CodigoReserva;
+                                    existe =false;
+                                    itDTR = SDTReservas.begin();
+                                    while(itDTR!=SDTReservas.end() && !existe){ //controlo que el numero ingresado corresponda a una habitacion disponible
+                                        if((*(*itDTR).second).getCodigo() == CodigoReserva){
+                                            existe = true;
+                                            dtres = (*itDTR).second;
+                                        };
+                                        itDTR++;
+                                    };
+                                    while(existe == false){
+                                        cout<< "###ERROR### Ingrese un codigo correcto: "<< endl;
+                                        cin >> CodigoReserva;
+                                        //CONTROLO QUE EL CODIGO SEA CORRECTO
+                                        existe= false;
+                                        itDTR = SDTReservas.begin();
+                                        while(itDTR!=SDTReservas.end() && !existe){ //controlo que el numero ingresado corresponda al codigo
+                                            if((*(*itDTR).second).getCodigo() == CodigoReserva){
+                                                existe = true;
+                                                dtres = (*itDTR).second;
+                                            };
+                                            itDTR++;
+                                        };
+                                    }
+                                    cout<< "Confirmar? : "<< endl;
+                                    cout<< "S/N: "<< endl;
+                                    cin >> MailHuesped;
+                                    if(MailHuesped == "S"){
+                                        ICR->confirmarBaja(dth,CodigoReserva);
+                                    }else if(MailHuesped == "N"){
+                                        ICH->setDatosHostal(NULL);
+                                    }else{
+                                        char elec;
+                                        bool Finalizado = false;
+                                        while(Finalizado == false){
+                                            cout<< "###ERROR###"<< endl;
+                                            cout<< "¿Desea confirmar? : "<< endl;
+                                            cout<< "S/N: "<< endl;
+                                            cin >> elec;
+                                            Finalizado = ((char)toupper(elec)=='S' || (char)toupper(elec)=='N');
+                                        }
+                                        if((char)toupper(elec)=='S'){
+                                            ICR->confirmarBaja(dth,CodigoReserva);
+                                        }if((char)toupper(elec)=='N'){
+                                            ICH->setDatosHostal(NULL);
+                                        }
+                                    }
+                                }else{
+                                    cout<< "El hostal no posee reservas" << endl;
+                                }
+                            }else{
+                                cout << "No hay hostales en el sistema" << endl;
+                            }
+                            break;
+                        }
+                        case 4:{ //Registrar Estadía
+                            DTHostal * dth = ElegirHostal();
+                            map<string,DTHuesped*> HuespedesAListar = ICU->obtenerHuespedes();
+                            if (dth!=NULL && !HuespedesAListar.empty()){
+                                DTReserva *dtres;
+                                map<string,DTHuesped*>::iterator itCU;
+                                map<int,DTReserva*> SDTReservas;
+                                int CodigoReserva;
+                                existe= false;
+                                cout<<"Ingrese el email del huesped: \n";
+                                cin >> MailHuesped;
+                                itCU = HuespedesAListar.begin();
+                                while(itCU!=HuespedesAListar.end() && !existe){ //controlo que el numero ingresado corresponda a una habitacion disponible
+                                    if((*(*itCU).second).getEmail() == MailHuesped){
+                                        existe = true;
+                                    };
+                                    itCU++;
+                                };
+                                while(existe == false){
+                                    cout<< "###ERROR### Ingrese un email correcto: "<< endl;
+                                    cin >> MailHuesped;
+                                    //CONTROLO QUE EL MAIL SEA CORRECTO
+                                    existe= false;
+                                    itCU = HuespedesAListar.begin();
+                                    while(itCU!=HuespedesAListar.end() && !existe){ //controlo que el numero ingresado corresponda a una habitacion disponible
+                                        if((*(*itCU).second).getEmail() == MailHuesped){
+                                            existe = true;
+                                        };
+                                        itCU++;
+                                    };
+                                }
+                                SDTReservas = ICR->ListarReservasNoCanceladasDeHuesped(dth, MailHuesped);
+                                cout<<"-----------------Reservas no canceladas-----------------"<< endl;
                                 for(itDTR = SDTReservas.begin(); itDTR != SDTReservas.end(); itDTR++){
                                     cout << " Código: " << (*itDTR).second->getCodigo() << endl;
-                                    cout << " Check In: " <<(*itDTR).second->getCheckIn().getDia() <<"/" <<(*itDTR).second->getCheckIn().getMes() <<"/"<<(*itDTR).second->getCheckIn().getAnio() << " - " << (*itDTR).second->getCheckIn().getHora() <<":00" << endl;
-                                    cout << " Check Out: " <<(*itDTR).second->getCheckOut().getDia() <<"/" <<(*itDTR).second->getCheckOut().getMes() <<"/"<<(*itDTR).second->getCheckOut().getAnio() << " - " << (*itDTR).second->getCheckOut().getHora() <<":00" << endl;
+                                    cout << " Check In: " <<(*itDTR).second->getCheckIn().getDia() <<"/" <<(*itDTR).second->getCheckIn().getMes() <<"/"<<(*itDTR).second->getCheckIn().getAnio() << " - " << (*itDTR).second->getCheckIn().getHora() << ":00" <<  endl;
+                                    cout << " Check Out: " <<(*itDTR).second->getCheckOut().getDia() <<"/" <<(*itDTR).second->getCheckOut().getMes() <<"/"<<(*itDTR).second->getCheckOut().getAnio() << " - " << (*itDTR).second->getCheckOut().getHora() << ":00" << endl;
                                     cout<<"........................................................"<< endl;
                                 }
-                                cout<<"Ingrese el código de la reserva : \n";
+                                cout<<"Ingrese el código de reserva sobre la que se realizará la estadía: \n";
                                 cin >> CodigoReserva;
                                 existe =false;
                                 itDTR = SDTReservas.begin();
@@ -1204,102 +1350,15 @@ int main(){
                                         itDTR++;
                                     };
                                 }
-                                cout<< "Confirmar? : "<< endl;
-                                cout<< "S/N: "<< endl;
-                                cin >> MailHuesped;
-                                if(MailHuesped == "S"){
-                                    ICR->confirmarBaja(dth,CodigoReserva);
-                                }else if(MailHuesped == "N"){
-                                    ICH->setDatosHostal(NULL);
-                                }else{
-                                    bool Finalizado = false;
-                                    while(Finalizado == false){
-                                        cout<< "###ERROR###"<< endl;
-                                        cout<< "¿Desea confirmar? : "<< endl;
-                                        cout<< "S/N: "<< endl;
-                                        cin >> MailHuesped;
-                                        Finalizado = (MailHuesped == "S" || MailHuesped == "S");
-                                    }
-                                    if(MailHuesped == "S"){
-                                        ICR->confirmarBaja(dth,CodigoReserva);
-                                    }if(MailHuesped == "N"){
-                                        ICH->setDatosHostal(NULL);
-                                    }
-                                }
-                                break;
+                                ICC->RegistrarEstadia(MailHuesped,CodigoReserva);
                             }else{
-                                cout<< "El hostal no posee reservas" << endl;
+                                if (dth==NULL)
+                                    cout << "No hay hostales en el sistema" << endl;
+                                if (HuespedesAListar.empty())
+                                    cout << "No hay huespedes en el sistema" << endl;
                             }
+
                             break;
-
-                        }
-                        case 4:{ //Registrar Estadía
-
-                            DTHostal * dth = ElegirHostal();
-                            DTReserva *dtres;
-                            map<string,DTHuesped*> HuespedesAListar = ICU->obtenerHuespedes();
-                            map<string,DTHuesped*>::iterator itCU;
-                            map<int,DTReserva*> SDTReservas;
-                            int CodigoReserva;
-                            existe= false;
-                            cout<<"Ingrese el mail del huesped: \n";
-                            cin >> MailHuesped;
-                            itCU = HuespedesAListar.begin();
-                            while(itCU!=HuespedesAListar.end() && !existe){ //controlo que el numero ingresado corresponda a una habitacion disponible
-                                if((*(*itCU).second).getEmail() == MailHuesped){
-                                    existe = true;
-                                };
-                                itCU++;
-                            };
-                            while(existe == false){
-                                cout<< "###ERROR### Ingrese un email correcto: "<< endl;
-                                cin >> MailHuesped;
-                                //CONTROLO QUE EL MAIL SEA CORRECTO
-                                existe= false;
-                                itCU = HuespedesAListar.begin();
-                                while(itCU!=HuespedesAListar.end() && !existe){ //controlo que el numero ingresado corresponda a una habitacion disponible
-                                    if((*(*itCU).second).getEmail() == MailHuesped){
-                                        existe = true;
-                                    };
-                                    itCU++;
-                                };
-                            }
-                            SDTReservas = ICR->ListarReservasNoCanceladasDeHuesped(dth, MailHuesped);
-                            cout<<"-----------------Reservas no canceladas-----------------"<< endl;
-                            for(itDTR = SDTReservas.begin(); itDTR != SDTReservas.end(); itDTR++){
-                                cout << " Código: " << (*itDTR).second->getCodigo() << endl;
-                                cout << " Check In: " <<(*itDTR).second->getCheckIn().getDia() <<"/" <<(*itDTR).second->getCheckIn().getMes() <<"/"<<(*itDTR).second->getCheckIn().getAnio() << " - " << (*itDTR).second->getCheckIn().getHora() << endl;
-                                cout << " Check Out: " <<(*itDTR).second->getCheckOut().getDia() <<"/" <<(*itDTR).second->getCheckOut().getMes() <<"/"<<(*itDTR).second->getCheckOut().getAnio() << " - " << (*itDTR).second->getCheckOut().getHora() << endl;
-                                cout<<"........................................................"<< endl;
-                            }
-                            cout<<"Ingrese el código de reserva sobre la que se realizará la estadía: \n";
-                            cin >> CodigoReserva;
-                            existe =false;
-                            itDTR = SDTReservas.begin();
-                            while(itDTR!=SDTReservas.end() && !existe){ //controlo que el numero ingresado corresponda a una habitacion disponible
-                                if((*(*itDTR).second).getCodigo() == CodigoReserva){
-                                    existe = true;
-                                    dtres = (*itDTR).second;
-                                };
-                                itDTR++;
-                            };
-                            while(existe == false){
-                                cout<< "###ERROR### Ingrese un codigo correcto: "<< endl;
-                                cin >> CodigoReserva;
-                                //CONTROLO QUE EL CODIGO SEA CORRECTO
-                                existe= false;
-                                itDTR = SDTReservas.begin();
-                                while(itDTR!=SDTReservas.end() && !existe){ //controlo que el numero ingresado corresponda al codigo
-                                    if((*(*itDTR).second).getCodigo() == CodigoReserva){
-                                        existe = true;
-                                        dtres = (*itDTR).second;
-                                    };
-                                    itDTR++;
-                                };
-                            }
-                            ICC->RegistrarEstadia(MailHuesped,CodigoReserva);
-                            break;
-
                         }
                         case 5:{ //Consultar estadia
                             map<string,DTHostal*> dthostales= (*ICH).obtenerHostales();
@@ -1568,41 +1627,45 @@ int main(){
                             string calif;
                             int nota;
                             DTHostal* selectedHost = ElegirHostal();
-                            (*ICH).IngresarDatosHostal(selectedHost);
-                            cout << "Ingrese el email del huesped cuya estadia desea calificar \n";
-                            cin >> emailHues;
-                            map<int,DTEstadia*> listaReservas = (*ICR).obtenerEstadiasFinalizadasDeHuespedEnHostal(emailHues);
-	                        map<int,DTEstadia*>::iterator it;
-                            int cont = 0;
-                            int aux;
-                            int estadias [listaReservas.size() +1];
-                            cout << "Elija la estadia que desee  \n";
-	                        for(it=listaReservas.begin(); it!=listaReservas.end(); it++){
-	                        	cont++;
-                                estadias[cont] = it->second->getCodigo();
-                                cout << cont <<"- Codigo de estadia: " << ((*it).second)->getCodigo() << endl;
-                                cout << "   Fecha de ingreso: " << ((*it).second)->getFechaEntrada().getDia() << "/" << ((*it).second)->getFechaEntrada().getMes() << "/"  << ((*it).second)->getFechaEntrada().getAnio() << " - " << ((*it).second)->getFechaEntrada().getHora() << ":00" << endl;
-                                cout << "   Fecha de salida: " << ((*it).second)->getFechaSalida()->getDia() << "/" << ((*it).second)->getFechaSalida()->getMes() << "/"  << ((*it).second)->getFechaSalida()->getAnio() << " - " << ((*it).second)->getFechaSalida()->getHora() << ":00" << endl;
-                                cout << endl;
-	                        }
-                            cout << "Eleccion: " ;
-                            while(!(cin>>aux) || aux > cont){
-                                cin.clear();
-                                cin.ignore(80, '\n');
-                            }
-                            it = listaReservas.find(estadias[aux]);
-                            DTEstadia* selectedEstad = it->second;
-                            cout << "Ingrese su nota \n";
-                            while(!(cin>>nota) || nota >5) {
-                                cin.clear();
-                                cin.ignore(80, '\n');
-                            }
-                            cout <<"Ingrese su comentario \n";
-                            cin.ignore();
-                            getline(cin,calif);
-                            (*ICC).agregarCalificacion(emailHues,calif,nota,estadias[aux]);
+                            if (selectedHost!=NULL){
+                                (*ICH).IngresarDatosHostal(selectedHost);
+                                cout << "Ingrese el email del huesped cuya estadia desea calificar \n";
+                                cin >> emailHues;
+                                map<int,DTEstadia*> listaReservas = (*ICR).obtenerEstadiasFinalizadasDeHuespedEnHostal(emailHues);
+                                map<int,DTEstadia*>::iterator it;
+                                int cont = 0;
+                                int aux;
+                                int estadias [listaReservas.size() +1];
+                                cout << "Elija la estadia que desee  \n";
+                                for(it=listaReservas.begin(); it!=listaReservas.end(); it++){
+                                    cont++;
+                                    estadias[cont] = it->second->getCodigo();
+                                    cout << cont <<"- Codigo de estadia: " << ((*it).second)->getCodigo() << endl;
+                                    cout << "   Fecha de ingreso: " << ((*it).second)->getFechaEntrada().getDia() << "/" << ((*it).second)->getFechaEntrada().getMes() << "/"  << ((*it).second)->getFechaEntrada().getAnio() << " - " << ((*it).second)->getFechaEntrada().getHora() << ":00" << endl;
+                                    cout << "   Fecha de salida: " << ((*it).second)->getFechaSalida()->getDia() << "/" << ((*it).second)->getFechaSalida()->getMes() << "/"  << ((*it).second)->getFechaSalida()->getAnio() << " - " << ((*it).second)->getFechaSalida()->getHora() << ":00" << endl;
+                                    cout << endl;
+                                }
+                                cout << "Eleccion: " ;
+                                while(!(cin>>aux) || aux > cont){
+                                    cin.clear();
+                                    cin.ignore(80, '\n');
+                                }
+                                it = listaReservas.find(estadias[aux]);
+                                DTEstadia* selectedEstad = it->second;
+                                cout << "Ingrese su nota \n";
+                                while(!(cin>>nota) || nota >5) {
+                                    cin.clear();
+                                    cin.ignore(80, '\n');
+                                }
+                                cout <<"Ingrese su comentario \n";
+                                cin.ignore();
+                                getline(cin,calif);
+                                (*ICC).agregarCalificacion(emailHues,calif,nota,estadias[aux]);
 
-                            (*ICH).liberarMemoria();
+                                (*ICH).liberarMemoria();
+                            }else{
+                                cout << "No hay hostales en el sistema" << endl;
+                            }
                         };
                         break;
                         case 2:{ //Comentar Calificacion
@@ -1655,17 +1718,23 @@ int main(){
 
             case 5:{ //Modificar Fecha de Sistema
 
+                Date fecha;
+                bool fechaV;
                 cout<<"Por favor, ingrese la fecha actual: \n";
-                cout << "Día:" << endl;
-                cin >> dia1;
-                cout << "Mes:" << endl;
-                cin >> mes1;
-                cout << "Anio:" << endl;
-                cin >> anio1;
-                cout << "Hora:" << endl;
-                cin >> hora1;
-
-                Date fecha = Date(dia1,mes1,anio1,hora1); 
+                do{
+                    cout << "Dia:";
+                    cin >> dia1;
+                    cout << "Mes:";
+                    cin >> mes1;
+                    cout << "Anio:";
+                    cin >> anio1;
+                    cout << "Hora:";
+                    cin >> hora1;
+                    fecha = Date(dia1,mes1,anio1,hora1); //DTFecha CheckIn
+                    fechaV = fechaValida(fecha);
+                    if (!fechaV)
+                        cout << "La fecha no es valida, por favor ingrese otra" << endl;
+                }while(!fechaV);  
 
                 (*fec).setFechaActual(fecha); 
 

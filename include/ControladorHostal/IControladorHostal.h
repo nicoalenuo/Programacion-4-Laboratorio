@@ -36,6 +36,7 @@ class IControladorHostal {
         virtual map<int,DTReserva*> ListarReservas(DTHostal*)=0;
         virtual bool existeHabConNumero(int,string)=0;
         virtual bool trabajaEmpleado(string,string)=0;
+        virtual DTHostal* hostalEnElQueTrabaja(string)=0;
         virtual map<string,DTEmpleado*> obtenerEmpleados(string)=0;
         virtual map<string,DTHostal*> obtenerTop3Hostales()=0;
         virtual map<int,DTCalificacion*> obtenerCalificacionesYComentarios(string)=0;

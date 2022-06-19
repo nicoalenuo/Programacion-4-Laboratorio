@@ -135,9 +135,22 @@ map<int,DTReserva*> ControladorHostal::ListarReservas(DTHostal* Hos){
         for(it2 = ReservasLocales.begin(); it2 != ReservasLocales.end(); it2++){
             Resultado.insert(*it2);
         }
-
     }
     return Resultado;
+}
+
+DTHostal* ControladorHostal::hostalEnElQueTrabaja(string email){
+    map<string,hostal*>::iterator it=hostales.begin();
+    DTHostal* resultado=NULL;
+    bool encontrado=false;
+    while (!encontrado && it!=hostales.end()){
+        if ((*(*it).second).trabajaEmpleado(email)){
+            encontrado=true;
+            resultado = (*(*it).second).darDatos();
+        }
+        it++;
+    }
+    return resultado;
 }
 
 void ControladorHostal::quitarCalificacionDeHostal(int id){

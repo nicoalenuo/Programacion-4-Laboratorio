@@ -44,6 +44,7 @@ class ControladorHostal:public IControladorHostal {
         map<int,DTReserva*> obtenerReservasDeHostal();
         map<int,DTEstadia*> obtenerEstadiasDeHostal();
         set<DTHabitacion*> obtenerHabitaciones();
+        DTHostal* hostalEnElQueTrabaja(string);
         map<int,DTCalificacion*> obtenerCalificacionesSinComentar(string);
         void quitarCalificacionDeHostal(int);
         map<string,hostal*> getHostales();

@@ -194,7 +194,7 @@ bool grupal::tieneEstadiaFinalizadaDeHuespedEnHostal(string email){
 
     if(!huesGrup.empty() && aux2){
         set<huespedGrupal*>::iterator it = huesGrup.begin();
-        while(aux != true && it != huesGrup.end()){
+        while(aux != true && it!=huesGrup.end()){
             if((*it)->tieneEstFinalizadaDeHus(email)){
                 aux = true;
             }
