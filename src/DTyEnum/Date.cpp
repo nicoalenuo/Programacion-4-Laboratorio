@@ -7,6 +7,7 @@ Date::Date(){
     dia=0;
     mes=0;
     anio=0;
+    hora=0;
 }
 bool Date::operator<(Date D2){
     bool Resultado = false;

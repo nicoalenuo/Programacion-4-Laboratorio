@@ -200,7 +200,7 @@ int main(){
                                 int cont=0;
                                 for(it=dthostales.begin();it!=dthostales.end();it++){
                                     cont++;
-                                    cout << cont << "- Hostal " << cont << endl;
+                                    cout << cont << "- Hostal " << endl;
                                     cout << "   Nombre: " << (*it).second->getNombre() << endl;
                                     cout << "   Direccion: " << (*it).second->getDireccion() << endl;
                                     cout << "   Telefono: " << (*it).second->getTelefono() << endl;
@@ -261,7 +261,7 @@ int main(){
                                         cout << "    Habitacion " << endl;
                                         cout << "Numero: " << (*it1).second->getNumero() << endl;
                                         cout << "Precio: " << (*it1).second->getPrecio() << endl;
-                                        cout << "Capacidad:" << (*it1).second->getCapacidad() << endl;
+                                        cout << "Capacidad: " << (*it1).second->getCapacidad() << endl;
                                         cout << endl;
                                     }
                                 }
@@ -275,9 +275,23 @@ int main(){
                                         cout << "    Reserva " << endl;
                                         cout << "Fecha de Ingreso: " << (*it2).second->getCheckIn().getDia() << "/" << (*it2).second->getCheckIn().getMes() << "/" << (*it2).second->getCheckIn().getAnio() << " - " << (*it2).second->getCheckIn().getHora() << ":00" << endl;
                                         cout << "Fecha de Salida: " << (*it2).second->getCheckOut().getDia() << "/" << (*it2).second->getCheckOut().getMes() << "/" << (*it2).second->getCheckOut().getAnio() << " - " << (*it2).second->getCheckOut().getHora() << ":00" << endl;
-                                        
-                                        cout << "Estado:" << (*it2).second->getEstado() << endl;
-                                        cout << "Costo:" << (*it2).second->getCosto() << endl;
+                                        EstadoReserva aux =(*(*it2).second).getEstado();
+                                        int aux2 = (int)aux;
+                                        switch(aux2){
+                                            case 0 :{
+                                                cout << "Estado: Abierto"<< endl;
+                                            };
+                                            break;
+                                            case 1 :{
+                                                cout << "Estado: Cerrado"<< endl;
+                                            };
+                                            break;
+                                            case 2 : {
+                                                cout << "Estado: Cancelado"<< endl;
+                                            };
+                                            break;
+                                        }
+                                        cout << "Costo: " << (*it2).second->getCosto() << endl;
                                         cout << endl;
                                     }
                                 }
@@ -972,20 +986,20 @@ int main(){
                                 cout<< endl;
                                 for(it2=dtreservas.begin();it2!=dtreservas.end();it2++){
                                     cout << "    Reserva" << endl;
-                                    cout << "Fecha de Ingreso: " << (*it2).second->getCheckIn().getDia() << "/" << (*it2).second->getCheckIn().getMes() << "/" << (*it2).second->getCheckIn().getAnio() << endl;
-                                    cout << "Fecha de Salida: " << (*it2).second->getCheckOut().getDia() << "/" << (*it2).second->getCheckOut().getMes() << "/" << (*it2).second->getCheckOut().getAnio() << endl;
+                                    cout << "Fecha de Ingreso: " << (*it2).second->getCheckIn().getDia() << "/" << (*it2).second->getCheckIn().getMes() << "/" << (*it2).second->getCheckIn().getAnio() << " - " << (*it2).second->getCheckIn().getHora() <<":00" << endl;
+                                    cout << "Fecha de Salida: " << (*it2).second->getCheckOut().getDia() << "/" << (*it2).second->getCheckOut().getMes() << "/" << (*it2).second->getCheckOut().getAnio() << " - " << (*it2).second->getCheckOut().getHora() <<":00" << endl;
                                      int aux2 = (int)(*(*it2).second).getEstado();
                                         switch(aux2){
                                             case 0 :{
-                                                cout << "Estado: Abierta"<< endl;
+                                                cout << "Estado: Abierto"<< endl;
                                             };
                                             break;
                                             case 1 :{
-                                                cout << "Estado: Cerrada"<< endl;
+                                                cout << "Estado: Cerrado"<< endl;
                                             };
                                             break;
                                             case 2 : {
-                                                cout << "Estado: Cancelada"<< endl;
+                                                cout << "Estado: Cancelado"<< endl;
                                             };
                                             break;
                                         }
@@ -1003,12 +1017,25 @@ int main(){
                                         cont=0;
                                         for(it3=dthuespedes.begin();it3!=dthuespedes.end();it3++){
                                             cont++;
-                                            cout << "Huesped " << cont << ":" << (*it3).second->getNombre() << endl;
+                                            cout << cont << "- Huesped: " << (*it3).second->getNombre() << endl;
                                         }
+                                        //eliminar memoria map dthuesped
+                                        for (it3=dthuespedes.begin () ; it3!=dthuespedes.end() ; it3++)
+                                            delete (*it3).second;
+                                        dthuespedes.clear();
                                     }
                                 }
+                                //eliminar memoria map dtreserva
+                                for (it2=dtreservas.begin () ; it2!=dtreservas.end() ; it2++)
+                                    delete (*it2).second;
+                                dtreservas.clear();
                             }
+                            //eliminar memoria map dthostal
+                            /*for (it=dthostales.begin () ; it!=dthostales.end() ; it++)
+                                delete (*it).second;*/
+                            dthostales.clear();
                             //liberarMemoria del Hostal
+                            //funciona comentado ¿perdera memoria? Si comento liberarMemoria de hostal o el for, el error se arregla
                             (*ICH).liberarMemoria();
 
 
@@ -1027,8 +1054,8 @@ int main(){
                                 cout<<"-----------------Reservas-----------------"<< endl;
                                 for(itDTR = SDTReservas.begin(); itDTR != SDTReservas.end(); itDTR++){
                                     cout << " Código: " << (*itDTR).second->getCodigo() << endl;
-                                    cout << " Check In: " <<(*itDTR).second->getCheckIn().getDia() <<"/" <<(*itDTR).second->getCheckIn().getMes() <<"/"<<(*itDTR).second->getCheckIn().getAnio() << endl;
-                                    cout << " Check Out: " <<(*itDTR).second->getCheckOut().getDia() <<"/" <<(*itDTR).second->getCheckOut().getMes() <<"/"<<(*itDTR).second->getCheckOut().getAnio() << endl;
+                                    cout << " Check In: " <<(*itDTR).second->getCheckIn().getDia() <<"/" <<(*itDTR).second->getCheckIn().getMes() <<"/"<<(*itDTR).second->getCheckIn().getAnio() << " - " << (*itDTR).second->getCheckIn().getHora() <<":00" << endl;
+                                    cout << " Check Out: " <<(*itDTR).second->getCheckOut().getDia() <<"/" <<(*itDTR).second->getCheckOut().getMes() <<"/"<<(*itDTR).second->getCheckOut().getAnio() << " - " << (*itDTR).second->getCheckOut().getHora() <<":00" << endl;
                                     cout<<"........................................................"<< endl;
                                 }
                                 cout<<"Ingrese el código de la reserva : \n";
@@ -1120,8 +1147,8 @@ int main(){
                             cout<<"-----------------Reservas no canceladas-----------------"<< endl;
                             for(itDTR = SDTReservas.begin(); itDTR != SDTReservas.end(); itDTR++){
                                 cout << " Código: " << (*itDTR).second->getCodigo() << endl;
-                                cout << " Check In: " <<(*itDTR).second->getCheckIn().getDia() <<"/" <<(*itDTR).second->getCheckIn().getMes() <<"/"<<(*itDTR).second->getCheckIn().getAnio() << endl;
-                                cout << " Check Out: " <<(*itDTR).second->getCheckOut().getDia() <<"/" <<(*itDTR).second->getCheckOut().getMes() <<"/"<<(*itDTR).second->getCheckOut().getAnio() << endl;
+                                cout << " Check In: " <<(*itDTR).second->getCheckIn().getDia() <<"/" <<(*itDTR).second->getCheckIn().getMes() <<"/"<<(*itDTR).second->getCheckIn().getAnio() << " - " << (*itDTR).second->getCheckIn().getHora() << endl;
+                                cout << " Check Out: " <<(*itDTR).second->getCheckOut().getDia() <<"/" <<(*itDTR).second->getCheckOut().getMes() <<"/"<<(*itDTR).second->getCheckOut().getAnio() << " - " << (*itDTR).second->getCheckOut().getHora() << endl;
                                 cout<<"........................................................"<< endl;
                             }
                             cout<<"Ingrese el código de reserva sobre la que se realizará la estadía: \n";
@@ -1260,7 +1287,6 @@ int main(){
                                         cout << "Fecha de Salida: " << dtde->getFechaSalidaDeEstadia()->getDia() << "/" << dtde->getFechaSalidaDeEstadia()->getMes() << "/" << dtde->getFechaSalidaDeEstadia()->getAnio() << " - " << dtde->getFechaSalidaDeEstadia()->getHora() << ":00" << endl;
                                     else
                                         cout << "Aun esta sin finalizar" << endl;
-                                    
                                     //Obtener Reserva de la estadia
                                     DTReserva* dtr= (*ICR).obtenerDTReservaDeEstadia((*ICC).getDatosEstadia());
                                     if(dynamic_cast<DTReservaGrupal*>(dtr)!=NULL){
@@ -1322,7 +1348,15 @@ int main(){
                                         cout << "Costo:" << dtres->getCosto() << endl;
                                     }
                                 }
+                                //eliminar memoria map dtestadia
+                                for (it1=dtestadias.begin () ; it1!=dtestadias.end() ; it1++)
+                                    delete (*it1).second;
+                                dtestadias.clear();
                             }
+                            //eliminar memoria map dthostal
+                            for (it=dthostales.begin () ; it!=dthostales.end() ; it++)
+                                delete (*it).second;
+                            dthostales.clear();
                             //liberarEstadia
                             (*ICC).liberarMemoria();
                             //liberarHostal
