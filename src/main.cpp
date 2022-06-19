@@ -9,7 +9,21 @@ using namespace std;
 #include "../include/fabrica.h"
 #include "../include/FechaSistema.h"
 
-//funcion auxiliar
+//funciones auxiliar
+bool fechaValida(Date d){
+    bool resultado=true;
+    if (d.getHora()<0 || d.getHora()>24)
+        resultado=false;
+    if (d.getDia()<0 || d.getDia()>30)
+        resultado=false;
+    if (d.getMes()<0 || d.getMes()>12)
+        resultado=false;
+    if (d.getAnio()<1900 || d.getAnio()>2100)
+        resultado=false;
+
+    return resultado;
+}
+
 DTHostal* ElegirHostal(){
 	cout<< "Por favor, seleccione un hostal de la siguiente lista: \n";
 	fabrica* f = fabrica::getInstance();
@@ -72,6 +86,18 @@ int main(){
     finalizar = false;
     codReserva = 0;
     //-----------------------//
+    cout << "Antes de ingresar, por favor, ingrese la fecha del sistema"<< endl;
+    cout << "Día:";
+    cin >> dia1;
+    cout << "Mes:";
+    cin >> mes1;
+    cout << "Anio:";
+    cin >> anio1;
+    cout << "Hora:";
+    cin >> hora1;
+    Date fechaInicio = Date(dia1,mes1,anio1,hora1);
+    (*fec).setFechaActual(fechaInicio); 
+
     while (!finalizar){
         finSubMenu = false;
         cout << "-------------------------------\n";
@@ -295,8 +321,10 @@ int main(){
                                         cout << endl;
                                     }
                                 }
-                                /*for (it = dthostales.begin() ; it!=dthostales.end() ; it++)
-                                    delete (*it).second;*/
+                                for (it = dthostales.begin() ; it!=dthostales.end() ; it++){
+                                    if ((*(*it).second).getNombre() != (*(*ICH).getDatosHostal()).getNombre())
+                                        delete (*it).second;
+                                }
                                 for (it1 = dthabitaciones.begin() ; it1!=dthabitaciones.end() ; it1++)
                                     delete (*it1).second;
                                 for (itcal = dtcalificaciones.begin() ; itcal!=dtcalificaciones.end() ; itcal++)
@@ -323,8 +351,18 @@ int main(){
                                 cout<<"No hay hostales registrados. \n";
                             }else{
                                 ind = 0;
-                                map<string,DTHostal*>::iterator it;
-                                for (it=top3.begin(); it!=top3.end(); it++){
+                                DTHostal* top3Ord[4];
+                                for (int i=0 ; i<=4 ; i++)
+                                    top3Ord[i] = NULL;
+                                int eleccion;
+                                map<string,DTHostal*>::iterator it;     
+                                map<string,DTHostal*>::iterator it2=top3.begin();
+                                while (it2!=top3.end()){
+                                    it=top3.begin();
+                                    for (it2=top3.begin(); it2!=top3.end(); it2++){
+                                        if ((*(*it2).second).getCalificacionPromedio()>(*(*it).second).getCalificacionPromedio())
+                                        it=it2;
+                                    }       
                                     ind++;
                                     cout << "No. " << ind << ": " << endl;
                                     cout << "Nombre : " << ((*it).second)->getNombre() << endl;
@@ -332,7 +370,29 @@ int main(){
                                     cout << "Telefono : " << ((*it).second)->getTelefono() << endl;
                                     cout << "Promedio : " << ((*it).second)->getCalificacionPromedio() << endl;
                                     cout << endl;
+
+                                    top3Ord[ind] = (*it).second;
+                                    top3.erase((*it).first);
+                                    it2=top3.begin();
                                 }
+                                cout << "Ingrese la opcion que desee ver las calificaciones y promedios, o ingrese 0 para continuar" << endl;
+                                cin >> eleccion;
+                                cout<<endl;
+                                if (eleccion!=0){
+                                    DTHostal* dth = top3Ord[eleccion];
+                                    map<int,DTCalificacion*>::iterator it3;
+                                    map<int,DTCalificacion*> cals = (*ICH).obtenerCalificacionesYComentarios((*dth).getNombre());
+                                    cout<< "Calificaciones y comentarios de " << (*dth).getNombre() << endl;
+                                    for (it3=cals.begin() ; it3!=cals.end() ; it3++){
+                                        cout << "Puntuacion: " << (*(*it3).second).getPuntuacion() << endl;
+                                        cout << "Comentario: " << (*(*it3).second).getComentario() << endl;
+                                        cout << endl;
+                                        delete (*it3).second;
+                                    }
+                                    cals.clear();
+                                }
+                                for (int i=0 ; i<=4 ; i++)
+                                    delete top3Ord[i];
                             }
                         };
                         break;
@@ -357,7 +417,7 @@ int main(){
                     cout << "Seleccione la operacion que desea realizar: \n";
                     cout << "1. Alta Empleado \n";
                     cout << "2. Alta Huesped \n";
-                    cout << "3. Asignar Empleado a Hostal \n";
+                    cout << "3. Asignar Empleados a Hostal \n";
                     cout << "4. Consultar Usuario \n";
                     cout << "5. Suscribir a Notificaciones \n";
                     cout << "6. Consultar Notificaciones \n";
@@ -499,38 +559,109 @@ int main(){
                         break;
                         //case 2 | Alta Huesped
 
-                        case 3: {//Asignar Empleado a Hostal
-                            DTHostal * dth = ElegirHostal();
-                            (*ICH).IngresarDatosHostal(dth);
+                        case 3: {//Asignar Empleados a Hostal
+                            map<string,DTHostal*> hostales = (*ICH).obtenerHostales();
                             map<string,DTEmpleado*> empsLibres = (*ICU).obtenerEmpleadosNoAsignados();
-                            map<string,DTEmpleado*>::iterator it;
-                            
-                            existe = false;
-                            aux = false;
-                            while(!existe){
-                                if(aux){
-                                    cout<<"El número ingresado no es correcto. \n";
-                                }
+                            if (hostales.size()==0){
+                                cout << "No hay hostales en el sistema" << endl;
+                            }
+                            else if(empsLibres.size()==0){
+                                cout << "No hay empleados sin asignar" << endl;
+                            }
+                            else{
+                                map<string,DTEmpleado*>::iterator it;
+                                map<string,DTHostal*>::iterator it2;
+                                existe = false;
+                                aux = false;
+                                while(!existe){
+                                    if(aux){
+                                        cout<<"El número ingresado no es correcto. \n";
+                                    }
+                                    ind = 0;
+                                    cout<<"Seleccione el número correspondiente al hostal al que le desea asignar empleados: \n";
+                                    for(it2=hostales.begin(); it2!=hostales.end(); it2++){
+                                        ind++;
+                                        cout<<ind<<"- Nombre: "<<((*it2).second)->getNombre() << endl;
+                                        cout << "   Email: "<<((*it2).second)->getDireccion()<< endl;
+                                        cout << "   Telefono: "<<((*it2).second)->getTelefono()<< endl;
+                                        cout << endl;
+                                    }
+                                    cin>>num;
+                                    if(num>ind || num==0){
+                                        existe = false;
+                                        aux = true;
+                                    }else{
+                                        existe=true;
+                                    }
+                                };
                                 ind = 1;
-                                cout<<"Seleccione el número correspondiente al empleado que desea asignar de la siguiente lista: \n";
-                                for(it=empsLibres.begin(); it!=empsLibres.end(); it++){
-                                    cout<<ind<<". Nombre: "<<((*it).second)->getNombre() <<", Email: "<<((*it).second)->getEmail()<< endl;
+                                it2 = hostales.begin();
+                                while(ind<num){
+                                    it2++;
                                     ind++;
                                 }
-                                cin>>num;
-                                if(num>ind || num==0){
+                                (*ICH).IngresarDatosHostal((*it2).second);
+
+                                bool asignarMas=true;
+                                char Confirmar;
+
+                                while (asignarMas){
                                     existe = false;
-                                    aux = true;
-                                };
-                            };
-                            ind = 1;
-                            it = empsLibres.begin();
-                            while(ind<num){
-                                it++;
-                                ind++;
-                            };
-                            (*ICU).AsignarEmpleadoAHostal((*it).second->getEmail());
-                            (*ICH).FinalizarAsignacionDeEmpleados();	
+                                    aux = false;
+                                    while(!existe){
+                                        if(aux){
+                                            cout<<"El número ingresado no es correcto. \n";
+                                        }
+                                        ind = 0;
+                                        cout<<"Seleccione el número correspondiente al empleado que desea asignar de la siguiente lista: \n";
+                                        for(it=empsLibres.begin(); it!=empsLibres.end(); it++){
+                                            ind++;
+                                            cout<<ind<<"- Nombre: "<<((*it).second)->getNombre() << endl;
+                                            cout << "   Email: "<<((*it).second)->getEmail()<< endl;
+                                            cout << endl;
+                                        }
+                                        cin>>num;
+                                        if(num>ind || num==0){
+                                            existe = false;
+                                            aux = true;
+                                        }else{
+                                            existe=true;
+                                        }
+                                    };
+                                    ind = 1;
+                                    it = empsLibres.begin();
+                                    while(ind<num){
+                                        it++;
+                                        ind++;
+                                    }
+                                    empsLibres.erase((*it).first);
+                                    (*ICU).AsignarEmpleadoAHostal((*it).second->getEmail());
+                                    delete (*it).second;
+
+                                    for (it=empsLibres.begin() ; it!=empsLibres.end() ; it++)
+                                        delete (*it).second;
+
+                                    empsLibres.clear();
+                                    if (empsLibres.size() == 0){
+                                        asignarMas=false;
+                                    }
+                                    else{
+                                        cout << "Desea asignar mas empleados a " << (*(*it2).second).getNombre() << endl;   
+                                        cin >> Confirmar;
+                                        if((char)toupper(Confirmar) == 'N')
+                                            asignarMas=false;
+                                    }
+                                        
+                                }
+                                for (it=empsLibres.begin() ; it!=empsLibres.end() ; it++)
+                                    delete (*it).second;
+                                /*for (it2=hostales.begin() ; it2!=hostales.end() ; it2++){
+                                    delete (*it2).second;
+                                }*/
+
+                                (*ICH).liberarMemoria();
+                            }	
+                            
                         };
                         break;
                         //case 3 | Asignar Empleado a Hostal
@@ -632,6 +763,9 @@ int main(){
                                         cout << "Direccion: " << dth->getDireccion() << endl;
                                         cout << "Telefono: " << dth->getTelefono() << endl;
                                         
+                                    }
+                                    else{
+                                        cout << "No trabaja en ningun hostal" << endl;
                                     }
                                     for (it3=hostales.begin () ; it3!=hostales.end() ; it3++)
                                         delete (*it3).second;
@@ -1462,7 +1596,7 @@ int main(){
             break;
             //case 5 | Modificar Fecha de Sistema
             case 6:{ //Cargar datos de prueba
-                    
+                    Date f = (*fec).getFechaActual();
                     //Alta Empleados
                     
                     //E1
@@ -1842,6 +1976,7 @@ int main(){
                     Comentario = "Desapareció y se fue sin pagar.";
                     (*ICC).ingresarRespuesta(Comentario,2);
                     
+                    (*fec).setFechaActual(f);
                 };
                 break;
                 //case 6 | Cargar datos de prueba

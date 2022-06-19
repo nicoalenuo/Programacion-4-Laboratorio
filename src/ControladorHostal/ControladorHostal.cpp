@@ -84,13 +84,6 @@ bool ControladorHostal::existeHabEnHostal(habitacion* hab,string nombreHostal){
     return (*h).tieneHab(hab);
 }
 
-void ControladorHostal::FinalizarAsignacionDeEmpleados(){
-    if (datosHostal!=NULL){
-        delete datosHostal;
-        datosHostal=NULL;
-    }
-}
-
 void ControladorHostal::cancelarFinalizarEstadiaActiva(){
     if (datosHostal!=NULL){
         delete datosHostal;
