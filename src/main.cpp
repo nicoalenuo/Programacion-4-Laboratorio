@@ -1632,7 +1632,8 @@ int main(){
                             it = listaCalifs.find(califs[aux]);
                             DTCalificacion* dtc = (*it).second;
                             cout << "Ingrese la respuesta \n";
-                            cin >>resp;// sin validar
+                            cin.ignore();
+                            getline(cin,resp);
                             (*ICC).ingresarRespuesta(resp,(*dtc).getId());
 
                         };
