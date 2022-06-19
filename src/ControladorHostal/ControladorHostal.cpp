@@ -234,3 +234,26 @@ hostal* ControladorHostal::obtenerHostal(DTHostal* dth){
     map<string,hostal*>::iterator it = (*this).hostales.find(dth->getNombre());
     return it->second;
 }
+
+map<string,hostal*> ControladorHostal::getHostales(){
+    return hostales;
+} 
+void ControladorHostal::agregarHostalAMap(hostal* h){
+    hostales.insert(pair<string,hostal*>((*h).getNombre(),h));
+}
+
+DTHostal* ControladorHostal::getDatosHostal(){
+    return ControladorHostal::datosHostal;
+}
+
+DTHabitacion* ControladorHostal::getDatosHabitacion(){
+    return datosHabitacion;
+}
+
+void ControladorHostal::setDatosHostal(DTHostal* h){
+    datosHostal=h;
+}
+
+void ControladorHostal::setDatosHabitacion(DTHabitacion* h){
+    datosHabitacion=h;
+}

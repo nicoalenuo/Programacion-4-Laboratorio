@@ -16,19 +16,11 @@ class huespedIndividual{
         estadia* estadiaAsoc;
     public:
         ~huespedIndividual();
-        huespedIndividual(huesped* hues);
-        huesped* getHuesped(){
-            return huespedAsoc;
-        }
-        estadia* getEstadia(){
-            return estadiaAsoc;
-        }
-        void setHuesped(huesped* h){
-            huespedAsoc=h;
-        }
-        void setEstadia(estadia* h){
-            estadiaAsoc=h;
-        }
+        huespedIndividual(huesped*);
+        huesped* getHuesped();
+        estadia* getEstadia();
+        void setHuesped(huesped*);
+        void setEstadia(estadia*);
 
         void finalizarEstadiaActiva(string);
         DTEstadia* darDatosEstadia();

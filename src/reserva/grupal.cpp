@@ -26,6 +26,66 @@ grupal::grupal(DTReservaGrupal* DTR, habitacion* Hab,map<string,DTHuesped*> SDTH
     cantHuespedes=(*DTR).getCantHuespedes();
 }
 
+int grupal::getCodigo(){
+    return codigo;
+}
+
+Date grupal::getCheckIn(){
+    return checkIn;
+}
+
+Date grupal::getCheckOut(){
+    return checkOut;
+}
+
+EstadoReserva grupal::getEstado(){
+    return estado;
+}
+
+float grupal::getCosto(){
+    return costo;
+}
+
+int grupal::getCantHuespedes(){
+    return cantHuespedes;
+}
+
+void grupal::setCodigo(int c){
+    codigo=c;
+}
+
+void grupal::setHabitacion(habitacion* h){
+    habitacionAsoc=h;
+}
+
+void grupal::setCheckIn(Date d){
+    checkIn=d;
+}
+
+void grupal::setCheckOut(Date d){
+    checkOut=d;
+}
+
+void grupal::setEstado(EstadoReserva er){
+    estado=er;
+}
+
+void grupal::setCosto(float c){
+    costo=c;
+}
+
+void grupal::setCantHuespedes(int ch){
+    cantHuespedes=ch;
+}
+
+habitacion* grupal::getHabitacion(){
+    return habitacionAsoc;
+}
+
+void grupal::agregarHuespedGrupalASet(huespedGrupal* hg){
+    huesGrup.insert(hg);
+}
+
 void grupal::finalizarSiEsReservaBuscada(string emailHuesped,string nombreHostal){
     fabrica* f = fabrica::getInstance();
     IControladorHostal* ch = (*f).getIControladorHostal();

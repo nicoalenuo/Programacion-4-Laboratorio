@@ -16,24 +16,12 @@ class notificacion{
         notificacion(string,int,string); 
         ~notificacion();
 
-        string getNombreAutor(){
-            return (*this).nombreAutor;
-        }
-        int getPuntuacion(){
-            return (*this).puntuacion;
-        }
-        string getComentario(){
-            return (*this).comentario;
-        }
-        void setNombreAutor(string nA){
-            (*this).nombreAutor=nA;
-        }
-        void setPuntuacion(int p){
-            (*this).puntuacion=p;
-        }
-        void setComentario(string com){
-            (*this).comentario=com;
-        }        
+        string getNombreAutor();
+        int getPuntuacion();
+        string getComentario();
+        void setNombreAutor(string);
+        void setPuntuacion(int);
+        void setComentario(string);    
 
         DTNotificacion* darDatos();
 };

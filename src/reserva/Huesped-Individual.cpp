@@ -5,6 +5,22 @@ huespedIndividual::huespedIndividual(huesped* hues){
     this->huespedAsoc = hues;
 }
 
+huesped* huespedIndividual::getHuesped(){
+    return huespedAsoc;
+}
+
+estadia* huespedIndividual::getEstadia(){
+    return estadiaAsoc;
+}
+
+void huespedIndividual::setHuesped(huesped* h){
+    huespedAsoc=h;
+}
+
+void huespedIndividual::setEstadia(estadia* h){
+    estadiaAsoc=h;
+}
+
 void huespedIndividual::finalizarEstadiaActiva(string emailHuesped){
     huesped* hus=getHuesped();
     string emailHus = (*hus).getEmail();

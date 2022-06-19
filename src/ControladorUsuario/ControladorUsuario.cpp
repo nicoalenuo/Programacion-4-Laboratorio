@@ -140,6 +140,19 @@ void ControladorUsuario::liberarMemoria(){
     }
 }
 
+void ControladorUsuario::agregarEmpleadoAMap(empleado* e){
+    empleados.insert(pair<string,empleado*>((*e).getEmail(),e));
+}
+
+void ControladorUsuario::agregarHuespedAMap(huesped* h){
+    huespedes.insert(pair<string,huesped*>((*h).getEmail(),h));
+}
+huesped* ControladorUsuario::getHuesped(DTHuesped* DTU){
+    map<string,huesped*>::iterator it;
+    it =  huespedes.find(DTU->getEmail());
+    return (*it).second;
+}
+
 bool ControladorUsuario::IngresarEmail(string email){ //devuelve true si el mail se ingresó
     return empleados.find(email)==empleados.end() && huespedes.find(email)==huespedes.end(); 
 }

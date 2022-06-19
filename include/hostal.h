@@ -27,31 +27,19 @@ class hostal{
     public:
         ~hostal();
         hostal(string,string,string);
-        string getNombre(){
-            return nombre;
-        }
-        string getDireccion(){
-            return direccion;
-        }
-        string getTelefono(){
-            return telefono;
-        }
-        void setNombre(string n){
-            nombre=n;
-        }
-        void setDireccion(string d){
-            direccion=d;
-        }
-        void setTelefono(string t){
-            telefono=t;
-        };
+        string getNombre();
+        string getDireccion();
+        string getTelefono();
+        void setNombre(string);
+        void setDireccion(string);
+        void setTelefono(string);
 
         void asignarEmpleado(empleado*);
         bool tieneHab(habitacion*);
         map<int,DTCalificacion*> obtenerCalsYComs();
         map<int,DTCalificacion*> obtenerCalifSinCom();
         map<int,DTHabitacion*> obtenerHabitacionesDisponiblesEntre(Date, Date);
-        void removerCalificacion(calificacion* c);
+        void removerCalificacion(calificacion*);
         map<int,DTReserva*> obtenerReservas();
         map<int,DTEstadia*> obtenerEstadias();
         DTDatosEstadia* obtenerDatos();
@@ -66,13 +54,9 @@ class hostal{
         habitacion* getHab(DTHabitacion*);
         map<string,DTEmpleado*> obtenerEmpleados();
         map<string,DTEmpleado*> quitarAsignados(map<string,DTEmpleado*>);
-        void agregarCalificacionAMap(calificacion * c){
-            calificaciones.insert(pair<int,calificacion*>((*c).getId(),c));
-        }
-        void agregarEmpleadoAMap(empleado* e){
-            empleados.insert(pair<string,empleado*>((*e).getEmail(),e));
-        }
-        void agregarHabitacionAMap(habitacion* h);
+        void agregarCalificacionAMap(calificacion *);
+        void agregarEmpleadoAMap(empleado*);
+        void agregarHabitacionAMap(habitacion*);
 };
 
 #endif

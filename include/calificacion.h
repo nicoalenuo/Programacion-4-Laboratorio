@@ -21,37 +21,17 @@ class calificacion{
         calificacion(int,int,string,Date);
         ~calificacion();
 
-        respuesta* getRespuesta(){
-            return respuestaAsoc;
-        } 
-        int getId(){
-            return id;
-        }
-        int getPuntuacion(){
-            return puntuacion;
-        }
-        string getComentario(){
-            return comentario;
-        }
-        Date getFecha(){
-            return fecha;
-        }
-        void setRespuesta(respuesta* r){
-            respuestaAsoc=r;
-        }
-        void setId(int i){
-            id=i;
-        }
-        void setPuntuacion(int p){
-            puntuacion=p;
-        }
-        void setComentario(string c){
-            comentario=c;
-        }
-        void setFecha(Date d){
-            fecha=d;
-        }
-
+        respuesta* getRespuesta();
+        int getId();
+        int getPuntuacion();
+        string getComentario();
+        Date getFecha();
+        void setRespuesta(respuesta*);
+        void setId(int);
+        void setPuntuacion(int);
+        void setComentario(string);
+        void setFecha(Date);
+        
         DTCalificacion* darDatos();
         bool sinRespuesta();
         void removerCalificacion();

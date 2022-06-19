@@ -201,6 +201,10 @@ map<string,DTHuesped*> ControladorReserva::obtenerHuespedesDeReserva(DTReservaGr
     return gru->obtenerHuespedesDeReserva();
 }
 
+void ControladorReserva::agregarReservaAMap(reserva * r){
+    reservas.insert(pair<int,reserva*>((*r).getCodigo(),r));
+}
+
 void ControladorReserva::liberarMemoria(){
     if (datosReserva!=NULL){
         delete datosReserva;

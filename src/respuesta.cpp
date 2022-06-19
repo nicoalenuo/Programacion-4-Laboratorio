@@ -4,6 +4,14 @@ respuesta::respuesta(string comentario){
     (*this).comentario=comentario;
 }
 
+string respuesta::getComentario(){
+    return (*this).comentario;
+}
+
+void respuesta::setComentario(string com){
+    (*this).comentario=com;
+}
+
 respuesta::~respuesta(){
 }
 

@@ -11,6 +11,38 @@ estadia::estadia(int codigoAct){
     this->codigo = codigoAct;
 }
 
+calificacion* estadia::getCalificacion(){
+    return calificacionAsoc;
+}
+
+Date estadia::getFechaEntrada(){
+    return fechaEntrada;
+}
+
+Date* estadia::getFechaSalida(){
+    return fechaSalida;
+}
+
+int estadia::getCodigo(){
+    return codigo;
+}
+
+void estadia::setCalificacion(calificacion* c){
+    calificacionAsoc=c;
+}
+
+void estadia::setFechaEntrada(Date fe){
+    fechaEntrada=fe;
+}
+
+void estadia::setFechaSalida(Date* fs){
+    fechaSalida=fs;
+}
+
+void estadia::setCodigo(int c){
+    codigo=c;
+}
+
 bool estadia::estaActiva(){
     return fechaSalida==NULL;
 }

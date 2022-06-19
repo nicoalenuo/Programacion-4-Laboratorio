@@ -29,21 +29,11 @@ class habitacion{
         habitacion(int,float,int);
 
         int getNumero();
-        float getPrecio(){
-            return precio;
-        }
-        int getCapacidad(){
-            return capacidad;
-        }
-        void setNumero(int n){
-            numero=n;
-        }
-        void setPrecio(float p){
-            precio=p;
-        }
-        void setCapacidad(int c){
-            capacidad=c;
-        }
+        float getPrecio();
+        int getCapacidad();
+        void setNumero(int);
+        void setPrecio(float);
+        void setCapacidad(int);
 
         DTHabitacion* darDatos();
         void agregarReserva(reserva*);

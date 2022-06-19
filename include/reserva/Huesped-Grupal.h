@@ -17,19 +17,11 @@ class huespedGrupal{
     public:
         ~huespedGrupal();
         huespedGrupal(huesped*);
-        huesped* getHuesped(){
-            return huespedAsoc;
-        }
-        estadia* getEstadia(){
-            return estadiaAsoc;
-        }
-        void setHuesped(huesped* h){
-            huespedAsoc=h;
-        }
-        void setEstadia(estadia* h){
-            estadiaAsoc=h;
-        }
-        
+        huesped* getHuesped();
+        estadia* getEstadia();
+        void setHuesped(huesped*);
+        void setEstadia(estadia*);
+
         void finalizarEstadiaActiva(string);
         DTEstadia* darDatosEstadia();
         DTReserva* obtenerReserva();

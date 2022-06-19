@@ -16,24 +16,12 @@ class DTEstadia {
         DTEstadia(Date,Date*,int);
         ~DTEstadia();
         
-        Date getFechaEntrada(){
-            return fechaEntrada;
-        }
-        Date* getFechaSalida(){
-            return fechaSalida;
-        }
-        int getCodigo(){
-            return codigo;
-        }
-        void setFechaEntrada(Date fe){
-            fechaEntrada=fe;
-        }
-        void setFechaSalida(Date* fs){
-            fechaSalida=fs;
-        }
-        void setCodigo(int c){
-            codigo=c;
-        }
+        Date getFechaEntrada();
+        Date* getFechaSalida();
+        int getCodigo();
+        void setFechaEntrada(Date);
+        void setFechaSalida(Date*);
+        void setCodigo(int);
 };
 
 #endif

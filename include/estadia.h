@@ -20,30 +20,14 @@ class estadia{
         estadia(int);
         ~estadia();
 
-        calificacion* getCalificacion(){
-            return calificacionAsoc;
-        }
-        Date getFechaEntrada(){
-            return fechaEntrada;
-        }
-        Date* getFechaSalida(){
-            return fechaSalida;
-        }
-        int getCodigo(){
-            return codigo;
-        }
-        void setCalificacion(calificacion* c){
-            calificacionAsoc=c;
-        }
-        void setFechaEntrada(Date fe){
-            fechaEntrada=fe;
-        }
-        void setFechaSalida(Date* fs){
-            fechaSalida=fs;
-        }
-        void setCodigo(int c){
-            codigo=c;
-        }
+        calificacion* getCalificacion();
+        Date getFechaEntrada();
+        Date* getFechaSalida();
+        int getCodigo();
+        void setCalificacion(calificacion*);
+        void setFechaEntrada(Date);
+        void setFechaSalida(Date*);
+        void setCodigo(int);
 
         DTEstadia* darDatos();
         bool estaActiva();

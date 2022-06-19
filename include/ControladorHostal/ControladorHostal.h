@@ -46,26 +46,14 @@ class ControladorHostal:public IControladorHostal {
         set<DTHabitacion*> obtenerHabitaciones();
         map<int,DTCalificacion*> obtenerCalificacionesSinComentar(string);
         void quitarCalificacionDeHostal(int);
-        map<string,hostal*> getHostales(){
-            return hostales;
-        } 
-        void agregarHostalAMap(hostal* h){
-            hostales.insert(pair<string,hostal*>((*h).getNombre(),h));
-        }
+        map<string,hostal*> getHostales();
+        void agregarHostalAMap(hostal* h);
         habitacion* getHabDeHostal(DTHabitacion*);  
         hostal* DarHostalDeHabitacion(habitacion*);
-        DTHostal* getDatosHostal(){
-            return datosHostal;
-        }
-        DTHabitacion* getDatosHabitacion(){
-            return datosHabitacion;
-        }
-        void setDatosHostal(DTHostal* h){
-            datosHostal=h;
-        }
-        void setDatosHabitacion(DTHabitacion* h){
-            datosHabitacion=h;
-        }
+        DTHostal* getDatosHostal();
+        DTHabitacion* getDatosHabitacion();
+        void setDatosHostal(DTHostal*);
+        void setDatosHabitacion(DTHabitacion*);
 };  
 
 #endif

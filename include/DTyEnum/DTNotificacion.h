@@ -15,30 +15,13 @@ class DTNotificacion{
         DTNotificacion(string,string,int);
         ~DTNotificacion();
 
-        string getNombreAutor() {
-            return (*this).nombreAutor;
-        }
-
-        void setNombreAutor(string nombreAutor) {
-            (*this).nombreAutor = nombreAutor;
-        }
-
-        string getComentario() {
-            return (*this).comentario;
-        }
-
-        void setComentario(string comentario) {
-            (*this).comentario = comentario;
-        }
-
-        int getPuntuacion() {
-            return (*this).puntuacion;
-        }
-
-        void setPuntuacion(int puntuacion) {
-            (*this).puntuacion = puntuacion;
-        }
-
+        string getNombreAutor();
+        void setNombreAutor(string);
+        string getComentario();
+        void setComentario(string);
+        int getPuntuacion();
+        void setPuntuacion(int);
+        
 };
 
 #endif

@@ -42,18 +42,9 @@ class ControladorUsuario:public IControladorUsuario {
         void desuscribirEmpleado(string);
         
         DTUsuario* obtenerDatosUsuario();
-        void agregarEmpleadoAMap(empleado* e){
-            empleados.insert(pair<string,empleado*>((*e).getEmail(),e));
-        }
-        
-        void agregarHuespedAMap(huesped* h){
-            huespedes.insert(pair<string,huesped*>((*h).getEmail(),h));
-        }
-        huesped* getHuesped(DTHuesped* DTU){
-            map<string,huesped*>::iterator it;
-            it =  huespedes.find(DTU->getEmail());
-            return (*it).second;
-        }
+        void agregarEmpleadoAMap(empleado*);
+        void agregarHuespedAMap(huesped*);
+        huesped* getHuesped(DTHuesped*);
 };
 
 #endif

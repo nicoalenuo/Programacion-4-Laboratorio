@@ -8,6 +8,26 @@ void habitacion::agregarReservaAMap(reserva * r){
 habitacion::~habitacion(){
 }
 
+float habitacion::getPrecio(){
+        return precio;
+}
+
+int habitacion::getCapacidad(){
+        return capacidad;
+}
+
+void habitacion::setNumero(int n){
+        numero=n;
+}
+
+void habitacion::setPrecio(float p){
+        precio=p;
+}
+
+void habitacion::setCapacidad(int c){
+        capacidad=c;
+}
+
 habitacion::habitacion(int numero, float precio, int capacidad){
         (*this).numero = numero;
         (*this).precio = precio;

@@ -17,30 +17,14 @@ class DTCalificacion {
         DTCalificacion(int,int,string,Date);
         ~DTCalificacion();
         
-        int getId(){ //ACA DECIA GETIC
-            return (*this).id;
-        }
-        void setId(int id){
-            (*this).id = id;
-        }
-        int getPuntuacion(){
-            return (*this).puntuacion;
-        }
-        void setPuntuacion(int puntuacion){
-            (*this).puntuacion = puntuacion;
-        }
-        string getComentario(){
-            return (*this).comentario;
-        }
-        void setComentario(string comentario){
-            (*this).comentario = comentario;
-        }
-        Date getFecha(){
-            return (*this).fecha;
-        }
-        void setFecha(Date fecha){
-            (*this).fecha = fecha;
-        }
+        int getId();
+        void setId(int);
+        int getPuntuacion();
+        void setPuntuacion(int);
+        string getComentario();
+        void setComentario(string);
+        Date getFecha();
+        void setFecha(Date);
 };
 
 #endif

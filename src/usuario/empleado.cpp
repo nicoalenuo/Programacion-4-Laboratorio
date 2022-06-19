@@ -14,6 +14,42 @@ empleado::empleado(string nombre, string email, string password,Cargo c){
     (*this).TipoCargo=c;
 }
 
+string empleado::getNombre(){
+    return nombre;
+}
+
+string empleado::getEmail(){
+    return email;
+}
+
+string empleado::getPassword(){
+    return password;
+}
+
+Cargo empleado::getTipoCargo(){
+    return TipoCargo;
+}
+
+void empleado::setNombre(string n){
+    nombre=n;
+}
+
+void empleado::setEmail(string e){
+    email=e;
+}
+
+void empleado::setPassword(string p){
+    password=p;
+}
+
+void empleado::setTipoCargo(Cargo c){
+    TipoCargo=c;
+}
+
+void empleado::agregarNotificacionASet(notificacion * n){
+    notificaciones.insert(n);
+}
+
 DTEmpleado* empleado::darDatos(){
     DTEmpleado* resultado=new DTEmpleado((*this).nombre , (*this).email , (*this).password , (*this).TipoCargo);
     return resultado;

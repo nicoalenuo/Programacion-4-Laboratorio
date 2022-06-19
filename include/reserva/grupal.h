@@ -18,49 +18,20 @@ class grupal:public reserva{
         ~grupal();
          grupal(DTReservaGrupal*, habitacion*,map<string,DTHuesped*>,DTHuesped*);
 
-        int getCodigo(){
-            return codigo;
-        }
-        Date getCheckIn(){
-            return checkIn;
-        }
-        Date getCheckOut(){
-            return checkOut;
-        }
-        EstadoReserva getEstado(){
-            return estado;
-        }
-        float getCosto(){
-            return costo;
-        }
-        int getCantHuespedes(){
-            return cantHuespedes;
-        }
-        void setCodigo(int c){
-            codigo=c;
-        }
-        void setHabitacion(habitacion* h){
-            habitacionAsoc=h;
-        }
-        void setCheckIn(Date d){
-            checkIn=d;
-        }
-        void setCheckOut(Date d){
-            checkOut=d;
-        }
-        void setEstado(EstadoReserva er){
-            estado=er;
-        }
-        void setCosto(float c){
-            costo=c;
-        }
-        void setCantHuespedes(int ch){
-            cantHuespedes=ch;
-        }
-        habitacion* getHabitacion(){
-            return habitacionAsoc;
-        }
-
+        int getCodigo();
+        Date getCheckIn();
+        Date getCheckOut();
+        EstadoReserva getEstado();
+        float getCosto();
+        int getCantHuespedes();
+        void setCodigo(int);
+        void setHabitacion(habitacion*);
+        void setCheckIn(Date);
+        void setCheckOut(Date);
+        void setEstado(EstadoReserva);
+        void setCosto(float);
+        void setCantHuespedes(int);
+        habitacion* getHabitacion();
         DTReservaGrupal* darDatos();
         void finalizarSiEsReservaBuscada(string, string);
         bool perteneceHusped(string);
@@ -72,9 +43,7 @@ class grupal:public reserva{
         bool tieneEstadiaFinalizadaDeHuespedEnHostal(string);
         huespedGrupal* GetHuespedGrupalDeUsuario(string);
         DTEstadia* darEstadiaDeHuesped(string);
-        void agregarHuespedGrupalASet(huespedGrupal * hg){
-            huesGrup.insert(hg);
-        }
+        void agregarHuespedGrupalASet(huespedGrupal*);
         DTHostal* getDTHostal();
         DTReserva* getDTReserva();
         bool tieneEstadia(DTEstadia*);

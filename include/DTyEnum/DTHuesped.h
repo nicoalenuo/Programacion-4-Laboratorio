@@ -14,35 +14,14 @@ class DTHuesped:public DTUsuario{
         DTHuesped(string,string,string,bool);
         ~DTHuesped();
         
-        string getNombre() {
-            return (*this).nombre;
-        }
-        void setNombre(string nombre) {
-            (*this).nombre = nombre;
-        }
-
-        string getEmail() {
-            return (*this).email;
-        }
-
-        void setEmail(string email) {
-            (*this).email = email;
-        }
-
-        string getPassword() {
-            return (*this).password;
-        }
-
-        void setPassword(string password) {
-            (*this).password = password;
-        }
-        bool getEsFinger() {
-            return (*this).esFinger;
-        }
-
-        void setEsFinger(bool esFinger) {
-            (*this).esFinger = esFinger;
-        }
+        string getNombre();
+        void setNombre(string);
+        string getEmail();
+        void setEmail(string);
+        string getPassword();
+        void setPassword(string);
+        bool getEsFinger();
+        void setEsFinger(bool);
 
 };
 

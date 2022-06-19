@@ -14,12 +14,8 @@ class respuesta{
         respuesta(string);
         ~respuesta();
 
-        string getComentario(){
-            return (*this).comentario;
-        }
-        void setComentario(string com){
-            (*this).comentario=com;
-        }
+        string getComentario();
+        void setComentario(string);
 
         DTRespuesta* darDatos();
 };

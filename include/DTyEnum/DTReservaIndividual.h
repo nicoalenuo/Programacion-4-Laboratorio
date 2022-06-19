@@ -14,44 +14,16 @@ class DTReservaIndividual:public DTReserva {
         DTReservaIndividual(int, Date, Date, EstadoReserva,float);
         ~DTReservaIndividual();
 
-        int getCodigo() {
-            return (*this).codigo;
-        }
-
-        void setCodigo(int codigo) {
-            (*this).codigo = codigo;
-        }
-
-        Date getCheckIn() {
-            return (*this).checkIn;
-        }
-
-        void setCheckIn(Date checkIn) {
-            (*this).checkIn = checkIn;
-        }
-
-        Date getCheckOut() {
-            return (*this).checkOut;
-        }
-
-        void setCheckOut(Date checkOut) {
-            (*this).checkOut = checkOut;
-        }
-
-        EstadoReserva getEstado() {
-            return (*this).estado;
-        }
-
-        void setEstado(EstadoReserva estado) {
-            (*this).estado = estado;
-        }
-        float getCosto() {
-            return (*this).costo;
-        }
-
-        void setCosto(float Costo) {
-            (*this).costo = Costo;
-        }
+        int getCodigo();
+        void setCodigo(int);
+        Date getCheckIn();
+        void setCheckIn(Date);
+        Date getCheckOut();
+        void setCheckOut(Date);
+        EstadoReserva getEstado();
+        void setEstado(EstadoReserva);
+        float getCosto();
+        void setCosto(float);
 };
 
 #endif

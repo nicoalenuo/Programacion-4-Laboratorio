@@ -16,42 +16,18 @@ class individual:public reserva{
         ~individual();
         individual(DTReservaIndividual*, habitacion*,DTHuesped*);
 
-        habitacion* getHabitacion(){
-            return habitacionAsoc;
-        }
-        int getCodigo(){
-            return codigo;
-        }
-        Date getCheckIn(){
-            return checkIn;
-        }
-        Date getCheckOut(){
-            return checkOut;
-        }
-        EstadoReserva getEstado(){
-            return estado;
-        }
-        float getCosto(){
-            return costo;
-        }
-        void setHabitacion(habitacion* h){
-            habitacionAsoc=h;
-        }
-        void setCodigo(int c){
-            codigo=c;
-        }
-        void setCheckIn(Date ci){
-            checkIn=ci;
-        }
-        void setCheckOut(Date co){
-            checkOut=co;
-        }
-        void setEstado(EstadoReserva e){
-            estado=e;
-        }
-        void setCosto(float c){
-            costo=c;
-        }
+        habitacion* getHabitacion();
+        int getCodigo();
+        Date getCheckIn();
+        Date getCheckOut();
+        EstadoReserva getEstado();
+        float getCosto();
+        void setHabitacion(habitacion*);
+        void setCodigo(int);
+        void setCheckIn(Date);
+        void setCheckOut(Date);
+        void setEstado(EstadoReserva);
+        void setCosto(float);
         
         DTReservaIndividual* darDatos();
         void finalizarSiEsReservaBuscada(string, string);
@@ -62,12 +38,8 @@ class individual:public reserva{
         DTReserva* obtenerResrvaDeEst();
         bool tieneEstadiaFinalizadaDeHuespedEnHostal(string);
         DTEstadia* darEstadiaDeHuesped(string);
-        huespedIndividual* getHuespedIndividual(){
-            return huesInd;
-        }
-        void setHuespedIndividual(huespedIndividual* hi){
-            huesInd = hi;
-        }
+        huespedIndividual* getHuespedIndividual();
+        void setHuespedIndividual(huespedIndividual*);
         DTHostal* getDTHostal();
         DTReserva* getDTReserva();
         bool tieneEstadia(DTEstadia*);

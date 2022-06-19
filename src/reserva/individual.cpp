@@ -5,6 +5,62 @@ individual::~individual(){
    // [FATLTA HACER]
 }
 
+habitacion* individual::getHabitacion(){
+    return habitacionAsoc;
+}
+
+int individual::getCodigo(){
+    return codigo;
+}
+
+Date individual::getCheckIn(){
+    return checkIn;
+}
+
+Date individual::getCheckOut(){
+    return checkOut;
+}
+
+EstadoReserva individual::getEstado(){
+    return estado;
+}
+
+float individual::getCosto(){
+    return costo;
+}
+
+void individual::setHabitacion(habitacion* h){
+    habitacionAsoc=h;
+}
+
+void individual::setCodigo(int c){
+    codigo=c;
+}
+
+void individual::setCheckIn(Date ci){
+    checkIn=ci;
+}
+
+void individual::setCheckOut(Date co){
+    checkOut=co;
+}
+
+void individual::setEstado(EstadoReserva e){
+    estado=e;
+}
+
+void individual::setCosto(float c){
+    costo=c;
+}
+
+huespedIndividual* individual::getHuespedIndividual(){
+    return huesInd;
+}
+
+void individual::setHuespedIndividual(huespedIndividual* hi){
+    huesInd = hi;
+}
+
 individual::individual(DTReservaIndividual* DTR, habitacion* Hab,DTHuesped* Propietario){
     fabrica* Fab =fabrica::getInstance();
     IControladorUsuario* CU = Fab->getIControladorUsuario();

@@ -44,9 +44,7 @@ class ControladorReserva:public IControladorReserva {
         DTDatosEstadia* obtenerDatosEstadia();
         reserva* obtenerReservaDeEstadia(DTEstadia*);
         DTReserva* obtenerDTReservaDeEstadia(DTEstadia*);
-        void agregarReservaAMap(reserva * r){
-            reservas.insert(pair<int,reserva*>((*r).getCodigo(),r));
-        }
+        void agregarReservaAMap(reserva*);
         void liberarMemoria();
 };
 

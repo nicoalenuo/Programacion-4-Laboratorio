@@ -12,13 +12,8 @@ class DTRespuesta {
         DTRespuesta(string);
         ~DTRespuesta();
         
-        string getComentario() {
-            return (*this).comentario;
-        }
-
-        void setComentario(string comentario) {
-            (*this).comentario = comentario;
-        }
+        string getComentario();
+        void setComentario(string);
 
 };
 

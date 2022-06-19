@@ -18,30 +18,14 @@ class empleado:public usuario, public IObserver {
         ~empleado();
         empleado(string,string,string,Cargo);
 
-        string getNombre(){
-            return nombre;
-        }
-        string getEmail(){
-            return email;
-        }
-        string getPassword(){
-            return password;
-        }
-        Cargo getTipoCargo(){
-            return TipoCargo;
-        }
-        void setNombre(string n){
-            nombre=n;
-        }
-        void setEmail(string e){
-            email=e;
-        }
-        void setPassword(string p){
-            password=p;
-        }
-        void setTipoCargo(Cargo c){
-            TipoCargo=c;
-        }
+        string getNombre();
+        string getEmail();
+        string getPassword();
+        Cargo getTipoCargo();
+        void setNombre(string);
+        void setEmail(string);
+        void setPassword(string);
+        void setTipoCargo(Cargo);
 
         DTEmpleado* darDatos();
         bool estaAsignado();
@@ -50,9 +34,7 @@ class empleado:public usuario, public IObserver {
         //Cosas que agregue
         void desuscribirse();
         set<DTNotificacion*> darNotificaciones();
-        void agregarNotificacionASet(notificacion * n){
-            notificaciones.insert(n);
-        }
+        void agregarNotificacionASet(notificacion*);
 };
 
 #endif

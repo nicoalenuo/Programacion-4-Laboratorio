@@ -5,6 +5,22 @@ huespedGrupal::huespedGrupal(huesped* u){
     this->huespedAsoc = u;
 }
 
+huesped* huespedGrupal::getHuesped(){
+    return huespedAsoc;
+}
+
+estadia* huespedGrupal::getEstadia(){
+    return estadiaAsoc;
+}
+
+void huespedGrupal::setHuesped(huesped* h){
+    huespedAsoc=h;
+}
+
+void huespedGrupal::setEstadia(estadia* h){
+    estadiaAsoc=h;
+}
+
 void huespedGrupal::finalizarEstadiaActiva(string emailHuesped){
     huesped* hus=getHuesped();
     string emailHus = (*hus).getEmail();

@@ -21,41 +21,16 @@ class DTDatosEstadia {
         DTDatosEstadia(DTHostal*,DTHabitacion*,DTHuesped*,Date,Date*);
         ~DTDatosEstadia();
         
-        DTHostal* getHostalDeEstadia(){
-            return (*this).hostal;
-        }
-        DTHuesped* getHuespedDeEstadia(){
-            return (*this).huesped;
-        }
-        DTHabitacion* getHabitacionDeEstadia(){
-            return (*this).habitacion;
-        }
-        Date getFechaEntradaDeEstadia(){
-            return (*this).checkIn;
-        }
-        Date* getFechaSalidaDeEstadia(){
-            return (*this).checkOut;
-        }
-
-        void setHostal(DTHostal* host){
-            (*this).hostal = host;
-        }
-
-        void setHuesped(DTHuesped* hues){
-            (*this).huesped = hues;
-        }
-//ACA LO CAMBIE
-        void setHabitacion(DTHabitacion* hab){
-            (*this).habitacion = hab;
-        }
-
-        void setCheckIn(Date inicio){
-            (*this).checkIn = inicio;
-        }
-
-        void setCheckOut(Date* final){
-            (*this).checkOut = final;
-        }
+        DTHostal* getHostalDeEstadia();
+        DTHuesped* getHuespedDeEstadia();
+        DTHabitacion* getHabitacionDeEstadia();
+        Date getFechaEntradaDeEstadia();
+        Date* getFechaSalidaDeEstadia();
+        void setHostal(DTHostal*);
+        void setHuesped(DTHuesped*);
+        void setHabitacion(DTHabitacion*);
+        void setCheckIn(Date);
+        void setCheckOut(Date*);
 };
 
 #endif

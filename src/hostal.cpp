@@ -11,6 +11,38 @@ hostal::hostal(string nombre, string direccion,string telefono){
     (*this).telefono=telefono;
 }
 
+string hostal::getNombre(){
+    return nombre;
+}
+
+string hostal::getDireccion(){
+    return direccion;
+}
+
+string hostal::getTelefono(){
+    return telefono;
+}
+
+void hostal::setNombre(string n){
+    nombre=n;
+}
+
+void hostal::setDireccion(string d){
+    direccion=d;
+}
+
+void hostal::setTelefono(string t){
+    telefono=t;
+};
+
+void hostal::agregarCalificacionAMap(calificacion * c){
+    calificaciones.insert(pair<int,calificacion*>((*c).getId(),c));
+}
+
+void hostal::agregarEmpleadoAMap(empleado* e){
+    empleados.insert(pair<string,empleado*>((*e).getEmail(),e));
+}
+
 DTHostal* hostal::darDatos(){
     float calificacionPromedio=0;
     int punt;
