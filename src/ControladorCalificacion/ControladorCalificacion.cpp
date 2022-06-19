@@ -143,6 +143,19 @@ DTCalificacion* ControladorCalificacion::obtenerCalificacion(DTEstadia* dte){
     return dtc;
 }
 
+DTCalificacion* ControladorCalificacion::getDatosCalificacion(){
+    return datosCalificacion;
+}
+DTEstadia* ControladorCalificacion::getDatosEstadia(){
+    return datosEstadia;
+}
+void ControladorCalificacion::setDatosCalificacion(DTCalificacion* dtc){
+    datosCalificacion=dtc;
+}
+void ControladorCalificacion::setDatosEstadia(DTEstadia* dte){
+    datosEstadia=dte;
+}
+
 ////////////////////////////////////////////////
 
         map<int,DTEstadia*> ControladorCalificacion::obtenerEstadiasHuesped(string){

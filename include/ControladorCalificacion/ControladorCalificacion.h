@@ -27,18 +27,10 @@ class ControladorCalificacion:public IControladorCalificacion {
     public:
         static ControladorCalificacion* getInstance();
         ~ControladorCalificacion();
-        DTCalificacion* getDatosCalificacion(){
-            return datosCalificacion;
-        }
-        DTEstadia* getDatosEstadia(){
-            return datosEstadia;
-        }
-        void setDatosCalificacion(DTCalificacion* dtc){
-            datosCalificacion=dtc;
-        }
-        void setDatosEstadia(DTEstadia* dte){
-            datosEstadia=dte;
-        }
+        DTCalificacion* getDatosCalificacion();
+        DTEstadia* getDatosEstadia();
+        void setDatosCalificacion(DTCalificacion* dtc);
+        void setDatosEstadia(DTEstadia* dte);
         void eliminarSuscripto(IObserver*);
         void agregarSuscripto(IObserver*);
         void eliminarCalificacion(int);
