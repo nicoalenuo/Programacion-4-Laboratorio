@@ -560,7 +560,6 @@ int main(){
                             string emaliHues;
                             string calif;
                             int nota;
-                            int codigoEst;
                             cout << "selecciones unhostal \n";
                             DTHostal* selectedHost = ElegirHostal();
                             cout << "ingrese el email del huesped cuya estadia desea calificar \n";
@@ -571,16 +570,30 @@ int main(){
                             map<int,DTEstadia*> listaReservas = (*ICR).obtenerEstadiaHuesped(emaliHues);
 	                        map<int,DTEstadia*>::iterator it;
                             int cont = 0;
+                            int aux;
+                            int estadias [listaReservas.size() +1];
                             cout << "elija la reserva que desee  \n";
 	                        for(it=listaReservas.begin(); it!=listaReservas.end(); ++it){
 	                        	cont++;
+                                estadias[cont] = it->second->getCodigo();
                                 cout << cont <<". Codigo de estadia: " << ((*it).second)->getCodigo() << endl;
 	                        }
-                            cin>>codigoEst;//no validado
+                            while(!(cin>>aux) || aux > cont){
+                                cin.clear();
+                                cin.ignore(80, '\n');
+                            }
+                            it = listaReservas.find(estadias[aux]);
+                            DTEstadia* selectedEstad = it->second;
                             cout <<"ingrese su calificacion \n";
-                            cin>>calif;
+                            while(!(cin>>calif)) {
+                                cin.clear();
+                                cin.ignore(80, '\n');
+                            }
                             cout << " ingrese su nota \n";
-                            cin>>nota;
+                            while(!(cin>>nota) || nota >5) {
+                                cin.clear();
+                                cin.ignore(80, '\n');
+                            }
                             (*ICC).agregarCalificacion(emaliHues,calif,nota);
                         };
                         break;
@@ -589,18 +602,25 @@ int main(){
                             IControladorCalificacion *ICC = (*f).getIControladorCalificacion();
                             map<int,DTCalificacion*> lisataCalifs;
                             map<int,DTCalificacion*>::iterator it;
-                            int calif;
                             string resp;
                             string emailEmpleado;
                             cout <<"ingrese un email empleado que trabaje en el hostal deseado \n";
                             cin>>emailEmpleado;//sin validar
                             lisataCalifs = (*ICC).obtenerCalificaciones(emailEmpleado);
                             cout << "elija la calificacion que desee  \n";
+                            int cont = 0;
+                            int aux;
+                            int califs [lisataCalifs.size()+1];
                             for(it=lisataCalifs.begin(); it!=lisataCalifs.end(); ++it){
-                                cout << ". Codio de calif" << ((*it).second)->getId() << endl;
+                                cont++;
+                                califs[cont] = it->second->getId();
+                                cout << cont << ". Codio de calif" << ((*it).second)->getId() << endl;
                             }
-                            cin >>calif;// sin validar
-                            it = lisataCalifs.find(calif);
+                            while(!(cin>>aux) || aux > cont) {
+                                cin.clear();
+                                cin.ignore(80, '\n');
+                            }
+                            it = lisataCalifs.find(califs[aux]);
                             DTCalificacion* dtc = (*it).second;
                             cout << "ahora ingrese la respuesta que desee ingresar \n";
                             cin >>resp;// sin validar
