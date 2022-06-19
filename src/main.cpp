@@ -1422,11 +1422,11 @@ int main(){
                                         map<string,DTHuesped*>::iterator it2= dthuespedes.begin();
                                         cont=0;
                                         do{
-                                            if((*it2).second->getEsFinger()==true){
+                                            if((*it2).second->getEsFinger()){
                                                 cont++;
                                             }
                                             it2++;
-                                        }while(cont<2 || it2!=dthuespedes.end());
+                                        }while(cont<2 && it2!=dthuespedes.end());
                                         if(cont>=2){
                                             cout << "Tiene promocion." << endl;
                                         }else{
@@ -1473,7 +1473,7 @@ int main(){
                                         cout << "    Reserva " << endl;
                                         cout << "Fecha de Ingreso: " << dtres->getCheckIn().getDia() << "/" << dtres->getCheckIn().getMes() << "/" << dtres->getCheckIn().getAnio() << " - " << dtres->getCheckIn().getHora() << ":00" << endl;
                                         cout << "Fecha de Salida: " << dtres->getCheckOut().getDia() << "/" << dtres->getCheckOut().getMes() << "/" << dtres->getCheckOut().getAnio() << " - " << dtres->getCheckOut().getHora() << ":00" << endl;
-                                        aux = (*dtres).getEstado();
+                                        EstadoReserva aux = (*dtres).getEstado();
                                         int aux2 = (int)aux;
                                         switch(aux2){
                                             case 0 :{
