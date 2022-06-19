@@ -81,15 +81,22 @@ void individual::darBajaReserva(){
     HI= NULL;
 }
 
-bool individual::tieneEstadiaFinalizadaDeHuesped(string email){
-    return huesInd->tieneEstFinalizadaDeHus(email);
+bool individual::tieneEstadiaFinalizadaDeHuespedEnHostal(string email){
+    fabrica* f = fabrica::getInstance();
+    IControladorHostal* ICH = (*f).getIControladorHostal();
+    DTHostal* dth = (*ICH).getDatosHostal();
+    habitacion* hab = getHabitacion();
+
+    bool aux = (*ICH).existeHabEnHostal(hab,(*dth).getNombre());
+    if (aux)
+        return huesInd->tieneEstFinalizadaDeHus(email);
+    else
+        return false;
 }
 
 DTEstadia* individual::darEstadiaDeHuesped(string email){
-    if(tieneEstadiaFinalizadaDeHuesped(email)==true){
-        DTEstadia* est = huesInd->obtenerEstadia();
-        return est;
-    }else{ return NULL; }
+    DTEstadia* est = huesInd->obtenerEstadia();
+    return est;
 }
 
 

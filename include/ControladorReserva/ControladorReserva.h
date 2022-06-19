@@ -40,7 +40,7 @@ class ControladorReserva:public IControladorReserva {
         void confirmarBaja(DTHostal*, int);
         void finalizarEstadiaActiva(string, string);
         map<string,DTHuesped*> obtenerHuespedesDeReserva(DTReservaGrupal*); 
-        map<int,DTEstadia*> obtenerEstadiaHuesped(string);
+        map<int,DTEstadia*> obtenerEstadiasFinalizadasDeHuespedEnHostal(string);
         DTDatosEstadia* obtenerDatosEstadia();
         reserva* obtenerReservaDeEstadia(DTEstadia*);
         DTReserva* obtenerDTReservaDeEstadia(DTEstadia*);

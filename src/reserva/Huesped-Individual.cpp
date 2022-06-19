@@ -25,7 +25,10 @@ DTEstadia* huespedIndividual::obtenerEstadia(){
 }
 
 bool huespedIndividual::tieneEstadia(DTEstadia* dte){
-    return (*estadiaAsoc).getCodigo() == (*dte).getCodigo();
+    if (estadiaAsoc!=NULL)
+        return (*estadiaAsoc).getCodigo() == (*dte).getCodigo();
+    else
+        return false;
 }
 
 DTHuesped* huespedIndividual::darDatosHuesped(){

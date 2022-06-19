@@ -99,15 +99,31 @@ DTHabitacion* ControladorReserva::obtenerHabitacionDeReserva(DTReserva* dtr){
 map<int,DTReserva*> ControladorReserva::ListarReservasNoCanceladasDeHuesped(DTHostal* Hostal, string Mail){
     map<int,DTReserva*> Resultado;
     map<int,reserva*>::iterator it;
+    estadia* e;
     for(it = reservas.begin(); it!= reservas.end();it++){
-    DTHostal * DTh = ((*it).second)->getDTHostal(); 
-    DTReserva * DTr = ((*it).second)->getDTReserva();
-    if(Hostal->getNombre() == DTh->getNombre() && DTr->getEstado() != Cancelado){
-        bool p = (*it).second->perteneceHusped(Mail);
-        if(p){ 
-            Resultado.insert(pair<int,DTReserva*>((*it).second->getCodigo(),(*it).second->getDTReserva()));
+        reserva* r = (*it).second;
+        bool sePuede = false;
+        if (dynamic_cast<individual*>(r)!=NULL){
+            individual* ind = static_cast<individual*>(r);
+            huespedIndividual* hI = (*ind).getHuespedIndividual();
+            e = (*hI).getEstadia();
+            sePuede = (e==NULL);
+        }else{
+            grupal* grup= static_cast<grupal*>(r);
+            huespedGrupal* hG = (*grup).GetHuespedGrupalDeUsuario(Mail);
+            if (hG!=NULL){
+                e = (*hG).getEstadia();
+                sePuede = (e==NULL);
+            }
         }
-    }
+        DTHostal * DTh = ((*it).second)->getDTHostal(); 
+        DTReserva * DTr = ((*it).second)->getDTReserva();
+        if(Hostal->getNombre() == DTh->getNombre() && DTr->getEstado() != Cancelado && sePuede){
+            bool p = (*it).second->perteneceHusped(Mail);
+            if(p){ 
+                Resultado.insert(pair<int,DTReserva*>((*it).second->getCodigo(),(*it).second->getDTReserva()));
+            }
+        }
     }
     return Resultado;
 }
@@ -141,14 +157,14 @@ DTDatosEstadia* ControladorReserva::obtenerDatosEstadia(){//Existe DTHostal y DT
 
 reserva* ControladorReserva::obtenerReservaDeEstadia(DTEstadia* dte){
     reserva* r;
-    bool encontrado= false; 
+    bool encontrado = false; 
     map<int,reserva*>::iterator it= reservas.begin();
-    while(encontrado != false){
-        encontrado= (*it).second->tieneEstadia(dte);
+    while(encontrado == false){
+        encontrado = (*it).second->tieneEstadia(dte);
         if (!encontrado)
             it++;
     }
-    r=(*it).second;
+    r = (*it).second;
     return r;
 }
 
@@ -167,10 +183,10 @@ void ControladorReserva::confirmarBaja(DTHostal* Host, int Codigo){
     delete r;
 }
 
-map<int,DTEstadia*> ControladorReserva::obtenerEstadiaHuesped(string email){
+map<int,DTEstadia*> ControladorReserva::obtenerEstadiasFinalizadasDeHuespedEnHostal(string email){
     map<int,DTEstadia*> send;
-    for(map<int,reserva*>::iterator it = reservas.begin(); it != reservas.end(); ++it){
-        if(it->second->tieneEstadiaFinalizadaDeHuesped(email)){
+    for(map<int,reserva*>::iterator it = reservas.begin(); it != reservas.end(); it++){
+        if(it->second->tieneEstadiaFinalizadaDeHuespedEnHostal(email)){        
             DTEstadia* aux = it->second->darEstadiaDeHuesped(email);
             send.insert(pair<int,DTEstadia*>(aux->getCodigo(),aux));
         }

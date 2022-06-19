@@ -37,6 +37,11 @@ map<string,DTEmpleado*> ControladorHostal::quitarAsignados(map<string,DTEmpleado
     return emps;
 }
 
+bool ControladorHostal::trabajaEmpleado(string nombreHostal,string email){
+    hostal* h = (*hostales.find(nombreHostal)).second;
+    return (*h).trabajaEmpleado(email);
+}
+
 map<int,DTHabitacion*> ControladorHostal::obtenerHabitacionesDeHostal(){
     map<int,DTHabitacion*> resultado;
     map<string,hostal*>::iterator it;
@@ -141,7 +146,7 @@ void ControladorHostal::quitarCalificacionDeHostal(int id){
         (*(*it).second).quitarSiTieneCalificacion(id);
 }
 
-map<int,DTCalificacion*> ControladorHostal::obtenerCalificaciones(string empleado){
+map<int,DTCalificacion*> ControladorHostal::obtenerCalificacionesSinComentar(string empleado){
     map<int,DTCalificacion*> send;
     bool aux = false;
     map<string,hostal*>::iterator it = (*this).hostales.begin();

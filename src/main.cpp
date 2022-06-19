@@ -434,7 +434,6 @@ int main(){
                             cin.ignore();
                             getline(cin, Nombre);
                             cout<<"Contraseña: \n";
-                            cin.ignore();
                             getline(cin, pass);
                             cargoCorrecto = false;
                             cout<<"Seleccione el cargo: \n";
@@ -582,7 +581,7 @@ int main(){
                                     for(it2=hostales.begin(); it2!=hostales.end(); it2++){
                                         ind++;
                                         cout<<ind<<"- Nombre: "<<((*it2).second)->getNombre() << endl;
-                                        cout << "   Email: "<<((*it2).second)->getDireccion()<< endl;
+                                        cout << "   Direccion: "<<((*it2).second)->getDireccion()<< endl;
                                         cout << "   Telefono: "<<((*it2).second)->getTelefono()<< endl;
                                         cout << endl;
                                     }
@@ -600,7 +599,9 @@ int main(){
                                     it2++;
                                     ind++;
                                 }
+                                DTHostal* dth=(*it2).second;
                                 (*ICH).IngresarDatosHostal((*it2).second);
+                                hostales.erase((*it2).first);
 
                                 bool asignarMas=true;
                                 char Confirmar;
@@ -638,15 +639,11 @@ int main(){
                                     (*ICU).AsignarEmpleadoAHostal((*it).second->getEmail());
                                     delete (*it).second;
 
-                                    for (it=empsLibres.begin() ; it!=empsLibres.end() ; it++)
-                                        delete (*it).second;
-
-                                    empsLibres.clear();
                                     if (empsLibres.size() == 0){
                                         asignarMas=false;
                                     }
                                     else{
-                                        cout << "Desea asignar mas empleados a " << (*(*it2).second).getNombre() << endl;   
+                                        cout << "Desea asignar mas empleados a " << (*dth).getNombre() << "? S/N"<< endl;   
                                         cin >> Confirmar;
                                         if((char)toupper(Confirmar) == 'N')
                                             asignarMas=false;
@@ -655,16 +652,18 @@ int main(){
                                 }
                                 for (it=empsLibres.begin() ; it!=empsLibres.end() ; it++)
                                     delete (*it).second;
-                                /*for (it2=hostales.begin() ; it2!=hostales.end() ; it2++){
+                                for (it2=hostales.begin() ; it2!=hostales.end() ; it2++){
                                     delete (*it2).second;
-                                }*/
-
-                                (*ICH).liberarMemoria();
+                                }
+                                empsLibres.clear();
+                                hostales.clear();
+   
                             }	
+                            (*ICH).liberarMemoria();
                             
                         };
                         break;
-                        //case 3 | Asignar Empleado a Hostal
+                        //case 3 | Asignar Empleados a Hostal
 
                         case 4:{ //Consultar Usuario
                             map<string,DTUsuario*> dtusuarios = (*ICU).obtenerUsuarios();
@@ -698,6 +697,7 @@ int main(){
                                 }while(elegir > dtusuarios.size() || elegir <=0);
                                 //guardar DTUsuario en memoria
                                 (*ICU).IngresarDatosUsuario((*it).second);
+                                cout << (*(*it).second).getEmail() << endl;
                                 //mostrar el usuario
                                 cout << "    Usuario elegido" << endl;
                                 cout << "Nombre: " << (*ICU).obtenerDatosUsuario()->getNombre() << endl;
@@ -734,28 +734,16 @@ int main(){
                                     map<string,DTHostal*> hostales= (*ICH).obtenerHostales();
                                     map<string,DTHostal*>::iterator it1=hostales.begin();
                                     map<string,DTEmpleado*>::iterator it2;
-                                    map<string,DTHostal*>::iterator it3;
                                     map<string,DTEmpleado*> emps;
                                     bool encontrado=false;
-                                    DTHostal* dth;
+                                    DTHostal* dth=NULL;
                                     while(!encontrado && it1!=hostales.end()){
-                                        emps = (*ICH).obtenerEmpleados((*(*it1).second).getNombre());
-                                        it2= emps.begin();
-                                        while(!encontrado && it2!=emps.end()){
-                                            if((*it2).second->getEmail()== dte->getEmail()){
-                                                dth= (*it1).second;
-                                                encontrado= true;
-                                                aux = (*it2).second->getTipoCargo();
-                                            }else{
-                                                it2++;
-                                            }
-                                        }
-                                        for (it2=emps.begin () ; it2!=emps.end() ; it2++)
-                                                delete (*it2).second;
-                                        
+                                        encontrado = (*ICH).trabajaEmpleado((*(*it1).second).getNombre() , (*dte).getEmail());
+                                        if (encontrado)
+                                            dth = (*it1).second;
                                         it1++;
                                     }
-                                    if(it1!=hostales.end()){
+                                    if(dth!=NULL){
                                         //mostar el hostal
                                         cout << endl;
                                         cout << "    Hostal " << endl;
@@ -767,13 +755,12 @@ int main(){
                                     else{
                                         cout << "No trabaja en ningun hostal" << endl;
                                     }
-                                    for (it3=hostales.begin () ; it3!=hostales.end() ; it3++)
-                                        delete (*it3).second;
-                                    hostales.clear();
-                                }   
+                                    for (it1=hostales.begin () ; it1!=hostales.end() ; it1++)
+                                        delete (*it1).second;
                                 //Libera memoria del usuario
                                 (*ICU).liberarMemoria();
-                            };
+                                }
+                            }
                                 
                         };
                         break;
@@ -1314,7 +1301,7 @@ int main(){
                             break;
 
                         }
-                        case 5:{ //Consultar Estadia
+                        case 5:{ //Consultar estadia
                             map<string,DTHostal*> dthostales= (*ICH).obtenerHostales();
                             //elegir un hostal
                             map<string,DTHostal*>::iterator it = dthostales.begin();
@@ -1347,6 +1334,7 @@ int main(){
                                 }while(elegir > dthostales.size() || elegir <=0);
                                 //guarda DTHostal en memoria
                                 (*ICH).setDatosHostal((*it).second);
+                                dthostales.erase((*(*it).second).getNombre());
                                 //obtenerEstadiasDeHostal
                                 map<int,DTEstadia*> dtestadias=(*ICH).obtenerEstadiasDeHostal();
                                 map<int,DTEstadia*>::iterator it1;
@@ -1393,15 +1381,17 @@ int main(){
                                     }while(elegir > dtestadias.size() || elegir <=0);
                                     //Guardar en memoria una DTEstadia
                                     (*ICC).setDatosEstadia((*it1).second);
+                                    dtestadias.erase((*it1).first);
                                     //obtenerDatosEstadia
                                     DTDatosEstadia* dtde= (*ICR).obtenerDatosEstadia();
                                     //mostar el hostal
-                                    cout << "Hostal " << endl;
+                                    cout << "    Hostal " << endl;
                                     cout << "Nombre: " << (*ICH).getDatosHostal()->getNombre() << endl;
                                     cout << "Direccion: " << (*ICH).getDatosHostal()->getDireccion() << endl;
                                     cout << "Telefono: " << (*ICH).getDatosHostal()->getTelefono() << endl;
+                                    cout << endl;
                                     //mostrar Huesped
-                                    cout << "Huesped" << endl;
+                                    cout << "    Huesped" << endl;
                                     cout << "Nombre : " << dtde->getHuespedDeEstadia()->getNombre() << endl;
                                     cout << "Email : " << dtde->getHuespedDeEstadia()->getEmail() << endl;
                                     if(dtde->getHuespedDeEstadia()->getEsFinger()==true){
@@ -1409,18 +1399,21 @@ int main(){
                                     }else{
                                         cout << "No es Finger." << endl;
                                     }
+                                    cout << endl;
                                     //mostrar Habitacion
-                                    cout << "Habitacion " << endl;
+                                    cout << "    Habitacion " << endl;
                                     cout << "Numero: " << dtde->getHabitacionDeEstadia()->getNumero() << endl;
                                     cout << "Precio: " << dtde->getHabitacionDeEstadia()->getPrecio() << endl;
                                     cout << "Capacidad:" << dtde->getHabitacionDeEstadia()->getCapacidad() << endl;
                                     //mostrar chechIn
+                                    cout << endl;
                                     cout << "Fecha de Ingreso: " << dtde->getFechaEntradaDeEstadia().getDia() << "/" << dtde->getFechaEntradaDeEstadia().getMes() << "/" << dtde->getFechaEntradaDeEstadia().getAnio() << " - " << dtde->getFechaEntradaDeEstadia().getHora() << ":00" << endl;
                                     //mostrar chechOut
                                     if ( dtde->getFechaSalidaDeEstadia() != NULL )
                                         cout << "Fecha de Salida: " << dtde->getFechaSalidaDeEstadia()->getDia() << "/" << dtde->getFechaSalidaDeEstadia()->getMes() << "/" << dtde->getFechaSalidaDeEstadia()->getAnio() << " - " << dtde->getFechaSalidaDeEstadia()->getHora() << ":00" << endl;
                                     else
                                         cout << "Aun esta sin finalizar" << endl;
+                                    cout << endl;
                                     //Obtener Reserva de la estadia
                                     DTReserva* dtr= (*ICR).obtenerDTReservaDeEstadia((*ICC).getDatosEstadia());
                                     if(dynamic_cast<DTReservaGrupal*>(dtr)!=NULL){
@@ -1443,13 +1436,14 @@ int main(){
                                         cout << "No tiene promocion." << endl;
                                     }
                                     //obtenerCodigoDeEstadia
-                                    cout << "Codigo: " << (*ICC).obtenerCodigoDeEstadia() << endl;
+                                    cout << endl;
+                                    cout << "Codigo de la estadia: " << (*ICC).obtenerCodigoDeEstadia() << endl;
                                     //obtenerCalificacionDeEstadia
                                     DTCalificacion* dtc= (*ICC).obtenerCalificacionDeEstadia();
                                     //Si existe calificacion y el usuario quiere verla
                                     char confirmar;
                                     if(dtc!=NULL){
-                                        cout << "Desea ver la calificacion? S/N" << endl;
+                                        cout << "Desea ver la calificacion? S/N: ";
                                         cin >> confirmar;
                                         //mostrar Calificacion
                                         if((char)toupper(confirmar) == 'S'){
@@ -1460,7 +1454,7 @@ int main(){
                                         }
                                         DTRespuesta* dtr= (*ICC).obtenerRespuesta(dtc);
                                         if(dtr!=NULL){
-                                            cout << "Desea ver la respuesta? S/N" << endl;
+                                            cout << "Desea ver la respuesta? S/N: ";
                                             cin >> confirmar;
                                             //mostrar Respuesta
                                             if((char)toupper(confirmar) == 'S'){
@@ -1470,16 +1464,32 @@ int main(){
                                             }
                                         }
                                     }
-                                    cout << "Desea ver la reserva? S/N" << endl;
-                                    cin >> confirmar;
+                                    cout << "Desea ver la reserva? S/N: ";
+                                    cin >> confirmar;  
+                                    EstadoReserva aux;
                                     //mostar Reserva
                                     if((char)toupper(confirmar) == 'S'){
                                         DTReserva* dtres= (*ICR).obtenerDTReservaDeEstadia((*ICC).getDatosEstadia());
-                                        cout << "Reserva: " << endl;
+                                        cout << "    Reserva " << endl;
                                         cout << "Fecha de Ingreso: " << dtres->getCheckIn().getDia() << "/" << dtres->getCheckIn().getMes() << "/" << dtres->getCheckIn().getAnio() << " - " << dtres->getCheckIn().getHora() << ":00" << endl;
                                         cout << "Fecha de Salida: " << dtres->getCheckOut().getDia() << "/" << dtres->getCheckOut().getMes() << "/" << dtres->getCheckOut().getAnio() << " - " << dtres->getCheckOut().getHora() << ":00" << endl;
-                                        cout << "Estado:" << dtres->getEstado() << endl;
-                                        cout << "Costo:" << dtres->getCosto() << endl;
+                                        aux = (*dtres).getEstado();
+                                        int aux2 = (int)aux;
+                                        switch(aux2){
+                                            case 0 :{
+                                                cout << "Estado: Abierto"<< endl;
+                                            };
+                                            break;
+                                            case 1 :{
+                                                cout << "Estado: Cerrado"<< endl;
+                                            };
+                                            break;
+                                            case 2 : {
+                                                cout << "Estado: Cancelado"<< endl;
+                                            };
+                                            break;
+                                        }
+                                        cout << "Costo: " << dtres->getCosto() << endl;
                                     }
                                 }
                                 //eliminar memoria map dtestadia
@@ -1542,6 +1552,7 @@ int main(){
 
             case 4:{ //Administracion de Calificaciones
                 while(!finSubMenu){
+                    cout << "-------------------------------\n";
                     cout << "Seleccione la operacion que desea realizar: \n";
                     cout << "1. Calificar Estadía \n";
                     cout << "2. Comentar Calificacion \n";
@@ -1553,10 +1564,79 @@ int main(){
 
                     switch (Opcion2){
                         case 1:{ //Calificar Estadía
+                            string emailHues;
+                            string calif;
+                            int nota;
+                            DTHostal* selectedHost = ElegirHostal();
+                            (*ICH).IngresarDatosHostal(selectedHost);
+                            cout << "Ingrese el email del huesped cuya estadia desea calificar \n";
+                            cin >> emailHues;
+                            map<int,DTEstadia*> listaReservas = (*ICR).obtenerEstadiasFinalizadasDeHuespedEnHostal(emailHues);
+	                        map<int,DTEstadia*>::iterator it;
+                            int cont = 0;
+                            int aux;
+                            int estadias [listaReservas.size() +1];
+                            cout << "Elija la estadia que desee  \n";
+	                        for(it=listaReservas.begin(); it!=listaReservas.end(); it++){
+	                        	cont++;
+                                estadias[cont] = it->second->getCodigo();
+                                cout << cont <<"- Codigo de estadia: " << ((*it).second)->getCodigo() << endl;
+                                cout << "   Fecha de ingreso: " << ((*it).second)->getFechaEntrada().getDia() << "/" << ((*it).second)->getFechaEntrada().getMes() << "/"  << ((*it).second)->getFechaEntrada().getAnio() << " - " << ((*it).second)->getFechaEntrada().getHora() << ":00" << endl;
+                                cout << "   Fecha de salida: " << ((*it).second)->getFechaSalida()->getDia() << "/" << ((*it).second)->getFechaSalida()->getMes() << "/"  << ((*it).second)->getFechaSalida()->getAnio() << " - " << ((*it).second)->getFechaSalida()->getHora() << ":00" << endl;
+                                cout << endl;
+	                        }
+                            cout << "Eleccion: " ;
+                            while(!(cin>>aux) || aux > cont){
+                                cin.clear();
+                                cin.ignore(80, '\n');
+                            }
+                            it = listaReservas.find(estadias[aux]);
+                            DTEstadia* selectedEstad = it->second;
+                            cout << "Ingrese su nota \n";
+                            while(!(cin>>nota) || nota >5) {
+                                cin.clear();
+                                cin.ignore(80, '\n');
+                            }
+                            cout <<"Ingrese su comentario \n";
+                            while(!(cin>>calif)) {
+                                cin.clear();
+                                cin.ignore(80, '\n');
+                            }
+                            (*ICC).agregarCalificacion(emailHues,calif,nota,estadias[aux]);
 
+                            (*ICH).liberarMemoria();
+                        
                         };
                         break;
                         case 2:{ //Comentar Calificacion
+                            map<int,DTCalificacion*> listaCalifs;
+                            map<int,DTCalificacion*>::iterator it;
+                            string resp;
+                            string emailEmpleado;
+                            cout <<"Ingrese un email empleado que trabaje en el hostal deseado \n";
+                            cin>>emailEmpleado;//sin validar
+                            listaCalifs = (*ICH).obtenerCalificacionesSinComentar(emailEmpleado);
+                            cout << "Elija la calificacion que desee  \n";
+                            int cont = 0;
+                            int aux;
+                            int califs [listaCalifs.size()+1];
+                            for(it=listaCalifs.begin(); it!=listaCalifs.end(); ++it){
+                                cont++;
+                                califs[cont] = it->second->getId();
+                                cout << cont << "- Codigo: " << ((*it).second)->getId() << endl;
+                                cout << "   Fecha: " << ((*it).second)->getFecha().getDia() << "/" << ((*it).second)->getFecha().getMes() << "/"  << ((*it).second)->getFecha().getAnio() << " - " << ((*it).second)->getFecha().getHora() << ":00" << endl;
+                                cout << endl;
+                            }
+                            cout << "Eleccion: ";
+                            while(!(cin>>aux) || aux > cont) {
+                                cin.clear();
+                                cin.ignore(80, '\n');
+                            }
+                            it = listaCalifs.find(califs[aux]);
+                            DTCalificacion* dtc = (*it).second;
+                            cout << "Ingrese la respuesta \n";
+                            cin >>resp;// sin validar
+                            (*ICC).ingresarRespuesta(resp,(*dtc).getId());
 
                         };
                         break;
@@ -1566,7 +1646,7 @@ int main(){
                         break;
                         default:{
 
-                        }   
+                        } break;  
 
                     }; //switch (Opcion2)                    
                 }//while(!finSubMenu)

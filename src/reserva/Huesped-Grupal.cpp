@@ -25,7 +25,11 @@ DTEstadia* huespedGrupal::obtenerEstadia(){
 }
 
 bool huespedGrupal::tieneEstadia(DTEstadia* dte){
-    return (*estadiaAsoc).getCodigo() == (*dte).getCodigo();
+    if (estadiaAsoc!=NULL)
+        return (*estadiaAsoc).getCodigo() == (*dte).getCodigo();
+    else
+        return false;
+
 }
 
 DTHuesped* huespedGrupal::darDatosHuesped(){
@@ -35,7 +39,7 @@ DTHuesped* huespedGrupal::darDatosHuesped(){
 
 bool huespedGrupal::tieneEstFinalizadaDeHus(string email){
     if(huespedAsoc != NULL and estadiaAsoc != NULL and huespedAsoc->getEmail() == email){
-        return estadiaAsoc->estaActiva();
+        return (!estadiaAsoc->estaActiva());
     }else{ return false; }
 }
 

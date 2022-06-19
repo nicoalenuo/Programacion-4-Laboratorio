@@ -97,9 +97,10 @@ map<int,DTEstadia*> grupal::obtenerEstadias(){
 
 bool grupal::tieneEstadia(DTEstadia* dte){
     bool encontrado=false;
-    set<huespedGrupal*>::iterator it;
-    for (it=huesGrup.begin() ; it!=huesGrup.end() ; it++){
+    set<huespedGrupal*>::iterator it=huesGrup.begin();
+    while (it!=huesGrup.end() && !encontrado){
         encontrado = (*(*it)).tieneEstadia(dte);
+        it++;
     }
 
     return encontrado;
@@ -109,7 +110,7 @@ DTHuesped* grupal::darHuespedConEstadia(DTEstadia* dte){
     set<huespedGrupal*>::iterator it=huesGrup.begin();
     bool encontrado=false;
     while (!encontrado){
-        (*(*it)).tieneEstadia(dte);
+        encontrado = (*(*it)).tieneEstadia(dte);
         if (!encontrado)
             it++;
     }
@@ -122,9 +123,16 @@ DTHabitacion* grupal::darDatosHabitacion(){
     return hab;
 }
 
-bool grupal::tieneEstadiaFinalizadaDeHuesped(string email){
+bool grupal::tieneEstadiaFinalizadaDeHuespedEnHostal(string email){
+    fabrica* f = fabrica::getInstance();
+    IControladorHostal* ICH = (*f).getIControladorHostal();
+    DTHostal* dth = (*ICH).getDatosHostal();
+    habitacion* hab = getHabitacion();
+
     bool aux = false;
-    if(!huesGrup.empty()){
+    bool aux2 = (*ICH).existeHabEnHostal(hab,(*dth).getNombre());
+
+    if(!huesGrup.empty() && aux2){
         set<huespedGrupal*>::iterator it = huesGrup.begin();
         while(aux != true && it != huesGrup.end()){
             if((*it)->tieneEstFinalizadaDeHus(email)){

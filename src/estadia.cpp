@@ -17,8 +17,8 @@ bool estadia::estaActiva(){
 
 void estadia::finalizarEstadiaActiva(){
     FechaSistema* fs=FechaSistema::getInstance();
-    Date* fechaActual = new Date(((*fs).getFechaActual()).getDia(),((*fs).getFechaActual()).getMes(),((*fs).getFechaActual()).getAnio(),((*fs).getFechaActual()).getHora());
     if (estaActiva()){
+        Date* fechaActual = new Date(((*fs).getFechaActual()).getDia(),((*fs).getFechaActual()).getMes(),((*fs).getFechaActual()).getAnio(),((*fs).getFechaActual()).getHora());
         setFechaSalida(fechaActual);
     }
 }

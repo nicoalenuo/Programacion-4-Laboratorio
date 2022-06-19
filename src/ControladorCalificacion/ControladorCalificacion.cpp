@@ -44,6 +44,7 @@ void ControladorCalificacion::RegistrarEstadia(string email, int codR){
     IControladorReserva* CH = (*Fab).getIControladorReserva();
 
     reserva* r = CH->getReserva(codR);
+    (*r).setEstado(Cerrado);
     if(dynamic_cast<individual*>(r)!=NULL){
         individual* rI = static_cast<individual*>(r);
         huespedIndividual* HI = rI->getHuespedIndividual();
@@ -62,10 +63,12 @@ void ControladorCalificacion::RegistrarEstadia(string email, int codR){
 }
 
 void ControladorCalificacion::agregarCalificacion(string email,string coment,int nota, int codEst){
+
     fabrica* fab = fabrica::getInstance();
     FechaSistema* fSist = FechaSistema::getInstance(); 
     IControladorUsuario* usr = fab->getIControladorUsuario();
     IControladorHostal* hst = fab->getIControladorHostal();
+
     DTHostal* dtsHostal=(*hst).getDatosHostal();
     DTHuesped* hues = usr->obtenerHuespedConEmail(email);
     hostal* host = hst->obtenerHostal(dtsHostal);
@@ -77,6 +80,8 @@ void ControladorCalificacion::agregarCalificacion(string email,string coment,int
     host->agregarCalificacionAMap(cal);
     map<int,estadia*>::iterator it = estadias.find(codEst);
     it->second->setCalificacion(cal);
+
+
 }
 
 void ControladorCalificacion::ingresarRespuesta(string resp, int codCal){
@@ -144,9 +149,6 @@ DTCalificacion* ControladorCalificacion::obtenerCalificacion(DTEstadia* dte){
             map<int,DTEstadia*> a;
             return a;
         }
-        map<int,DTCalificacion*> ControladorCalificacion::obtenerCalificaciones(string){
-            map<int,DTCalificacion*> a;
-            return a;
-        }
+
         void ControladorCalificacion::eliminarCalificacion(){}
         float ControladorCalificacion::obtenerPromocionDeEstadia(){return 1;}

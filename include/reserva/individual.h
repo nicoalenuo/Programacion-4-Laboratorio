@@ -60,7 +60,7 @@ class individual:public reserva{
         map<int, DTEstadia*> obtenerEstadias();
         DTEstadia* obtenerEstadia();
         DTReserva* obtenerResrvaDeEst();
-        bool tieneEstadiaFinalizadaDeHuesped(string);
+        bool tieneEstadiaFinalizadaDeHuespedEnHostal(string);
         DTEstadia* darEstadiaDeHuesped(string);
         huespedIndividual* getHuespedIndividual(){
             return huesInd;
