@@ -1598,14 +1598,11 @@ int main(){
                                 cin.ignore(80, '\n');
                             }
                             cout <<"Ingrese su comentario \n";
-                            while(!(cin>>calif)) {
-                                cin.clear();
-                                cin.ignore(80, '\n');
-                            }
+                            cin.ignore();
+                            getline(cin,calif);
                             (*ICC).agregarCalificacion(emailHues,calif,nota,estadias[aux]);
 
                             (*ICH).liberarMemoria();
-                        
                         };
                         break;
                         case 2:{ //Comentar Calificacion
@@ -1646,9 +1643,9 @@ int main(){
                         break;
                         default:{
 
-                        } break;  
+                        }; break;  
 
-                    }; //switch (Opcion2)                    
+                    };  //switch (Opcion2)                    
                 }//while(!finSubMenu)
 
             };
