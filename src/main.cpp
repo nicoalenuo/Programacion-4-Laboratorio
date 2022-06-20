@@ -1097,15 +1097,16 @@ int main(){
                                             }
                                         }
                                     }
+                                    char elec;
                                     cout<< "¿Desea confirmar la reserva? : "<< endl;
                                     cout<< "S/N: "<< endl;
-                                    cin >> MailHuesped;
-                                    if(MailHuesped == "S"){
+                                    cin >> elec;
+                                    if((char)toupper(elec) == 'S'){
                                         ICR->confirmarReserva();
-                                    }else if(MailHuesped == "N"){
+                                    }else if((char)toupper(elec) == 'N'){
                                         ICR->liberarMemoria();
                                     }else{
-                                        char elec;
+                                        
                                         bool Finalizado = false;
                                         while(Finalizado == false){
                                             cout<< "###ERROR###"<< endl;
@@ -1273,15 +1274,15 @@ int main(){
                                             itDTR++;
                                         };
                                     }
+                                    char elec;
                                     cout<< "Confirmar? : "<< endl;
                                     cout<< "S/N: "<< endl;
-                                    cin >> MailHuesped;
-                                    if(MailHuesped == "S"){
+                                    cin >> elec;
+                                    if((char)toupper(elec) == 'S'){
                                         ICR->confirmarBaja(dth,CodigoReserva);
-                                    }else if(MailHuesped == "N"){
+                                    }else if((char)toupper(elec) == 'N'){
                                         ICH->setDatosHostal(NULL);
                                     }else{
-                                        char elec;
                                         bool Finalizado = false;
                                         while(Finalizado == false){
                                             cout<< "###ERROR###"<< endl;
@@ -1429,17 +1430,6 @@ int main(){
                                             cout << "Aun esta sin finalizar." << endl;
                                         }
                                         cout << "Codigo: " << (*it1).second->getCodigo() << endl;
-                                        cout << "Calificacion" << endl;
-                                        DTCalificacion* dtc= (*ICC).obtenerCalificacion((*it1).second);
-                                        if (dtc!=NULL){
-                                            cout << "Comentario : " << dtc->getComentario() << endl;
-                                            cout << "Puntaje : " << dtc->getPuntuacion() << endl;
-                                        }
-                                        else
-                                            cout<< "La estadia no tiene calificacion" << endl;
-
-                                        cout << endl;
-                                        
                                     }
                                     //elegir la estadia
                                     do{
@@ -1520,13 +1510,13 @@ int main(){
                                     //Si existe calificacion y el usuario quiere verla
                                     char confirmar;
                                     if(dtc!=NULL){
-                                        cout << "Desea ver la calificacion? S/N: ";
+                                        cout << "Desea ver la calificación? S/N: ";
                                         cin >> confirmar;
                                         //mostrar Calificacion
                                         if((char)toupper(confirmar) == 'S'){
                                             cout << "    Calificacion " << endl;
                                             cout << "Comentario: " << dtc->getComentario() << endl;
-                                            cout << "Puntuacion: " << dtc->getPuntuacion() << endl;
+                                            cout << "Puntuación: " << dtc->getPuntuacion() << endl;
                                             cout << endl;
                                         }
                                         DTRespuesta* dtr= (*ICC).obtenerRespuesta(dtc);
@@ -1671,7 +1661,7 @@ int main(){
                                     }
                                     it = listaReservas.find(estadias[aux]);
                                     DTEstadia* selectedEstad = it->second;
-                                    cout << "Ingrese su nota \n";
+                                    cout << "Ingrese su puntuacion \n";
                                     while(!(cin>>nota) || nota >5) {
                                         cin.clear();
                                         cin.ignore(80, '\n');
@@ -1699,18 +1689,20 @@ int main(){
                             cin>>emailEmpleado;
                             listaCalifs = (*ICH).obtenerCalificacionesSinComentar(emailEmpleado);
                             if (!listaCalifs.empty()){
-                                    cout << "Elija la calificacion que desee  \n";
+                                    cout << "Elija la calificacion que desee responder \n";
                                     int cont = 0;
                                     int aux;
                                     int califs [listaCalifs.size()+1];
                                     for(it=listaCalifs.begin(); it!=listaCalifs.end(); ++it){
                                         cont++;
                                         califs[cont] = it->second->getId();
-                                        cout << cont << "- Codigo: " << ((*it).second)->getId() << endl;
+                                        cout << cont << "- Código: " << ((*it).second)->getId() << endl;
+                                        cout << cont << "   Puntuación: " << ((*it).second)->getPuntuacion() << endl;
+                                        cout << cont << "   Comentario: " << ((*it).second)->getComentario() << endl;
                                         cout << "   Fecha: " << ((*it).second)->getFecha().getDia() << "/" << ((*it).second)->getFecha().getMes() << "/"  << ((*it).second)->getFecha().getAnio() << " - " << ((*it).second)->getFecha().getHora() << ":00" << endl;
                                         cout << endl;
                                     }
-                                    cout << "Eleccion: ";
+                                    cout << "Elección: ";
                                     while(!(cin>>aux) || aux > cont) {
                                         cin.clear();
                                         cin.ignore(80, '\n');
