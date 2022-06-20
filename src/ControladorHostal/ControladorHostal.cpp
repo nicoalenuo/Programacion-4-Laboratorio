@@ -70,7 +70,9 @@ map<string,DTHostal*> ControladorHostal::obtenerTop3Hostales(){
             }
         }
         hostales.erase((*mayorProm).getNombre());
-        resultado.insert(pair<string,DTHostal*>((*mayorProm).getNombre(),mayorProm));
+        if ((*mayorProm).getCalificacionPromedio()!=0){
+            resultado.insert(pair<string,DTHostal*>((*mayorProm).getNombre(),mayorProm));
+        }
     }
     for (it=hostales.begin() ; it!=hostales.end() ; it++)
         delete (*it).second;
