@@ -118,8 +118,8 @@ void ControladorCalificacion::quitarEstadia(int codigo){
 }
 
 DTRespuesta* ControladorCalificacion::obtenerRespuesta(DTCalificacion* c){
-    map<int,estadia*>::iterator it= estadias.find(c->getId());
-    calificacion* cal= (*it).second->getCalificacion();
+    map<int,calificacion*>::iterator it= calificaciones.find(c->getId());
+    calificacion* cal= (*it).second;
     DTRespuesta* dtr=NULL;
     if (cal!=NULL){
         respuesta* r= cal->getRespuesta();

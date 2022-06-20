@@ -652,9 +652,10 @@ int main(){
                                         it++;
                                         ind++;
                                     }
+                                    DTEmpleado* dte = (*it).second;
                                     empsLibres.erase((*it).first);
-                                    (*ICU).AsignarEmpleadoAHostal((*it).second->getEmail());
-                                    delete (*it).second;
+                                    (*ICU).AsignarEmpleadoAHostal((*dte).getEmail());
+                                    delete dte;
 
                                     if (empsLibres.size() == 0){
                                         asignarMas=false;
@@ -804,7 +805,7 @@ int main(){
                                         cout << "   No trabaja en ningun hostal" << endl;
                                     cout << endl;
                                 }
-                                cout << "Eleccion: " << endl;
+                                cout << "Elección: " << endl;
                                 cin >> eleccion;
                                 it = empleados.begin();
                                 for (i=1 ; i<eleccion ; i++){
@@ -1430,6 +1431,7 @@ int main(){
                                             cout << "Aun esta sin finalizar." << endl;
                                         }
                                         cout << "Codigo: " << (*it1).second->getCodigo() << endl;
+                                        cout << endl;
                                     }
                                     //elegir la estadia
                                     do{
@@ -1454,7 +1456,7 @@ int main(){
                                     //mostar el hostal
                                     cout << "    Hostal " << endl;
                                     cout << "Nombre: " << (*ICH).getDatosHostal()->getNombre() << endl;
-                                    cout << "Direccion: " << (*ICH).getDatosHostal()->getDireccion() << endl;
+                                    cout << "Dirección: " << (*ICH).getDatosHostal()->getDireccion() << endl;
                                     cout << "Telefono: " << (*ICH).getDatosHostal()->getTelefono() << endl;
                                     cout << endl;
                                     //mostrar Huesped
