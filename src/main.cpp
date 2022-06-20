@@ -41,7 +41,7 @@ DTHostal* ElegirHostal(){
                 cont++;
                 cout << cont <<". Nombre: " << ((*it).second)->getNombre() << endl;
             };
-            cout<<"Eleccion: \n";
+            cout<<"Elección: \n";
             cin>>numHostal;
             if(numHostal>cont || numHostal==0){
                 cout<<"El valor ingresado no es correcto, por favor ingrese otro: \n";
@@ -98,7 +98,7 @@ int main(){
         cin >> dia1;
         cout << "Mes:";
         cin >> mes1;
-        cout << "Anio:";
+        cout << "Año:";
         cin >> anio1;
         cout << "Hora:";
         cin >> hora1;
@@ -392,7 +392,7 @@ int main(){
                                     top3.erase((*it).first);
                                     it2=top3.begin();
                                 }
-                                cout << "Ingrese la numero del hostal que desee ver calificaciones y comentarios, o ingrese 0 para continuar" << endl;
+                                cout << "Ingrese el número del hostal del que desee ver calificaciones y comentarios, o ingrese 0 para continuar" << endl;
                                 cin >> eleccion;
                                 cout<<endl;
                                 if (eleccion!=0){
@@ -401,7 +401,7 @@ int main(){
                                     map<int,DTCalificacion*> cals = (*ICH).obtenerCalificacionesYComentarios((*dth).getNombre());
                                     cout<< "Calificaciones y comentarios de " << (*dth).getNombre() << endl;
                                     for (it3=cals.begin() ; it3!=cals.end() ; it3++){
-                                        cout << "Puntuacion: " << (*(*it3).second).getPuntuacion() << endl;
+                                        cout << "Puntuación: " << (*(*it3).second).getPuntuacion() << endl;
                                         cout << "Comentario: " << (*(*it3).second).getComentario() << endl;
                                         cout << endl;
                                         delete (*it3).second;
@@ -560,13 +560,13 @@ int main(){
                                     DTUsuario* dth = new DTHuesped(Nombre,email,pass,cargo);
                                     (*ICU).IngresarDatosUsuario(dth);
                                     (*ICU).confirmarAltaUsuario();
-                                    cout<<"Se confirmo el alta de Huesped "<<(*dth).getNombre() <<", email: "<< (*dth).getEmail()<<endl;
+                                    cout<<"Se confirmó el alta de Huesped "<<(*dth).getNombre() <<", email: "<< (*dth).getEmail()<<endl;
                     
                                 }else{
                                     if ((char) toupper(confirmarAlta) == 'N')
-                                        cout<<"Se cancelo el alta \n";
+                                        cout<<"Se canceló el alta \n";
                                     else
-                                        cout << "La opcion ingresada no es valida.\n";
+                                        cout << "La opción ingresada no es válida.\n";
                                 };
                             }while((char) toupper(confirmarAlta) != 'S' && (char) toupper(confirmarAlta) != 'N');   
                                           
@@ -951,14 +951,14 @@ int main(){
                                     cin >> dia1;
                                     cout << "Mes:";
                                     cin >> mes1;
-                                    cout << "Anio:";
+                                    cout << "Año:";
                                     cin >> anio1;
                                     cout << "Hora:";
                                     cin >> hora1;
                                     ChIn = Date(dia1,mes1,anio1,hora1); //DTFecha CheckIn
                                     fechaV = fechaValida(ChIn);
                                     if (!fechaV)
-                                        cout << "La fecha no es valida, por favor ingrese otra" << endl;
+                                        cout << "La fecha no es válida, por favor ingrese otra" << endl;
                                 }while(!fechaV);  
                                 cout<<"Por favor, ingrese la fecha de CheckOut: \n";
                                 do{
@@ -966,14 +966,14 @@ int main(){
                                     cin >> dia2;
                                     cout << "Mes:";
                                     cin >> mes2;
-                                    cout << "Anio:";
+                                    cout << "Año:";
                                     cin >> anio2;
                                     cout << "Hora:";
                                     cin >> hora2;
                                     ChOut = Date(dia2,mes2,anio2,hora2); //DTFecha CheckIn
                                     fechaV = fechaValida(ChOut);
                                     if (!fechaV)
-                                        cout << "La fecha no es valida, por favor ingrese otra" << endl;
+                                        cout << "La fecha no es válida, por favor ingrese otra" << endl;
                                 }while(!fechaV);
                                 cout<<"Por favor, ingrese el tipo de reserva: \n";
                                 cout<<"1- Individual \n";
@@ -984,12 +984,16 @@ int main(){
                                 map<int,DTHabitacion*> habs = (*ICR).obtenerHabitacionesDisponibles();
                                 if(!habs.empty()){
                                     
-                                    cout<<"Por favor, ingreseel número de la habitacion que desea reservar: \n";
+                                    cout<<"Por favor, ingrese el número de la habitacion que desea reservar: \n";
                                     cout << endl;
                                     for(j=habs.begin(); j!=habs.end(); j++){
-                                        cout<<"Numero: " << ((*(*j).second)).getNumero() << endl;
+                                        cout<<"Número: " << ((*(*j).second)).getNumero() << endl;
                                         cout<<"Precio: " << ((*(*j).second)).getPrecio() << endl;
                                         cout<<"Capacidad: " << ((*(*j).second)).getCapacidad() << endl;
+                                        if (((*(*j).second)).getCapacidad()!=0)
+                                            cout<<"Calificación Promedio: " << ((*(*j).second)).getCapacidad() << endl;
+                                        else
+                                            cout << "No tiene calificaciones" << endl;
                                         cout<< endl;
                                     };
                     
@@ -1005,15 +1009,15 @@ int main(){
                                         j++;
                                     };
                                     while(!existe){ //si se ingreso un numero incorrecto, muestro las hab y pido reingresar
-                                        cout<<"El número de habitacion ingresado no corresponde a una habitacion disponible.\n";
+                                        cout<<"El número de habitación ingresado no corresponde a una habitación disponible.\n";
                                         cout << endl;
                                         for(j=habs.begin(); j!=habs.end(); j++){
-                                            cout<<"Numero: " << (*(*j).second).getNumero() <<endl;
+                                            cout<<"Número: " << (*(*j).second).getNumero() <<endl;
                                             cout<<"Precio: " << (*(*j).second).getPrecio() <<endl;
                                             cout<<"Capacidad: " << (*(*j).second).getCapacidad() <<endl;
                                             cout<< endl;
                                         };
-                                        cout<< "Por favor, ingrese un número de habitacion de la lista: \n";
+                                        cout<< "Por favor, ingrese un número de habitación de la lista: \n";
                                     
                                         cin>>num;
                                         //controlar que sea un int
@@ -1064,7 +1068,6 @@ int main(){
                                     ICR->DesignarPropietarioDeReserva(Hues);
 
                                     if(tipoR == 2){//GRUPAL
-                                        cout << "a" << endl;
                                         eleccion = 1;
                                         while(eleccion!=0){
                                             do{
@@ -1651,33 +1654,37 @@ int main(){
                                 int cont = 0;
                                 int aux;
                                 int estadias [listaReservas.size() +1];
-                                cout << "Elija la estadia que desee  \n";
-                                for(it=listaReservas.begin(); it!=listaReservas.end(); it++){
-                                    cont++;
-                                    estadias[cont] = it->second->getCodigo();
-                                    cout << cont <<"- Codigo de estadia: " << ((*it).second)->getCodigo() << endl;
-                                    cout << "   Fecha de ingreso: " << ((*it).second)->getFechaEntrada().getDia() << "/" << ((*it).second)->getFechaEntrada().getMes() << "/"  << ((*it).second)->getFechaEntrada().getAnio() << " - " << ((*it).second)->getFechaEntrada().getHora() << ":00" << endl;
-                                    cout << "   Fecha de salida: " << ((*it).second)->getFechaSalida()->getDia() << "/" << ((*it).second)->getFechaSalida()->getMes() << "/"  << ((*it).second)->getFechaSalida()->getAnio() << " - " << ((*it).second)->getFechaSalida()->getHora() << ":00" << endl;
-                                    cout << endl;
-                                }
-                                cout << "Eleccion: " ;
-                                while(!(cin>>aux) || aux > cont){
-                                    cin.clear();
-                                    cin.ignore(80, '\n');
-                                }
-                                it = listaReservas.find(estadias[aux]);
-                                DTEstadia* selectedEstad = it->second;
-                                cout << "Ingrese su nota \n";
-                                while(!(cin>>nota) || nota >5) {
-                                    cin.clear();
-                                    cin.ignore(80, '\n');
-                                }
-                                cout <<"Ingrese su comentario \n";
-                                cin.ignore();
-                                getline(cin,calif);
-                                (*ICC).agregarCalificacion(emailHues,calif,nota,estadias[aux]);
+                                if (!listaReservas.empty()){
+                                    cout << "Elija la estadia que desee  \n";
+                                    for(it=listaReservas.begin(); it!=listaReservas.end(); it++){
+                                        cont++;
+                                        estadias[cont] = it->second->getCodigo();
+                                        cout << cont <<"- Codigo de estadia: " << ((*it).second)->getCodigo() << endl;
+                                        cout << "   Fecha de ingreso: " << ((*it).second)->getFechaEntrada().getDia() << "/" << ((*it).second)->getFechaEntrada().getMes() << "/"  << ((*it).second)->getFechaEntrada().getAnio() << " - " << ((*it).second)->getFechaEntrada().getHora() << ":00" << endl;
+                                        cout << "   Fecha de salida: " << ((*it).second)->getFechaSalida()->getDia() << "/" << ((*it).second)->getFechaSalida()->getMes() << "/"  << ((*it).second)->getFechaSalida()->getAnio() << " - " << ((*it).second)->getFechaSalida()->getHora() << ":00" << endl;
+                                        cout << endl;
+                                    }
+                                    cout << "Eleccion: " ;
+                                    while(!(cin>>aux) || aux > cont){
+                                        cin.clear();
+                                        cin.ignore(80, '\n');
+                                    }
+                                    it = listaReservas.find(estadias[aux]);
+                                    DTEstadia* selectedEstad = it->second;
+                                    cout << "Ingrese su nota \n";
+                                    while(!(cin>>nota) || nota >5) {
+                                        cin.clear();
+                                        cin.ignore(80, '\n');
+                                    }
+                                    cout <<"Ingrese su comentario \n";
+                                    cin.ignore();
+                                    getline(cin,calif);
+                                    (*ICC).agregarCalificacion(emailHues,calif,nota,estadias[aux]);
 
-                                (*ICH).liberarMemoria();
+                                    (*ICH).liberarMemoria();
+                                }else{
+                                    cout << "No hay estadias que se puedan calificar" << endl;
+                                }
                             }else{
                                 cout << "No hay hostales en el sistema" << endl;
                             }
@@ -1688,32 +1695,35 @@ int main(){
                             map<int,DTCalificacion*>::iterator it;
                             string resp;
                             string emailEmpleado;
-                            cout <<"Ingrese un email empleado que trabaje en el hostal deseado \n";
-                            cin>>emailEmpleado;//sin validar
+                            cout <<"Ingrese el email del empleado que responderá una calificacion \n";
+                            cin>>emailEmpleado;
                             listaCalifs = (*ICH).obtenerCalificacionesSinComentar(emailEmpleado);
-                            cout << "Elija la calificacion que desee  \n";
-                            int cont = 0;
-                            int aux;
-                            int califs [listaCalifs.size()+1];
-                            for(it=listaCalifs.begin(); it!=listaCalifs.end(); ++it){
-                                cont++;
-                                califs[cont] = it->second->getId();
-                                cout << cont << "- Codigo: " << ((*it).second)->getId() << endl;
-                                cout << "   Fecha: " << ((*it).second)->getFecha().getDia() << "/" << ((*it).second)->getFecha().getMes() << "/"  << ((*it).second)->getFecha().getAnio() << " - " << ((*it).second)->getFecha().getHora() << ":00" << endl;
-                                cout << endl;
+                            if (!listaCalifs.empty()){
+                                    cout << "Elija la calificacion que desee  \n";
+                                    int cont = 0;
+                                    int aux;
+                                    int califs [listaCalifs.size()+1];
+                                    for(it=listaCalifs.begin(); it!=listaCalifs.end(); ++it){
+                                        cont++;
+                                        califs[cont] = it->second->getId();
+                                        cout << cont << "- Codigo: " << ((*it).second)->getId() << endl;
+                                        cout << "   Fecha: " << ((*it).second)->getFecha().getDia() << "/" << ((*it).second)->getFecha().getMes() << "/"  << ((*it).second)->getFecha().getAnio() << " - " << ((*it).second)->getFecha().getHora() << ":00" << endl;
+                                        cout << endl;
+                                    }
+                                    cout << "Eleccion: ";
+                                    while(!(cin>>aux) || aux > cont) {
+                                        cin.clear();
+                                        cin.ignore(80, '\n');
+                                    }
+                                    it = listaCalifs.find(califs[aux]);
+                                    DTCalificacion* dtc = (*it).second;
+                                    cout << "Ingrese la respuesta \n";
+                                    cin.ignore();
+                                    getline(cin,resp);
+                                    (*ICC).ingresarRespuesta(resp,(*dtc).getId());
+                            }else{
+                                cout << "No hay calificaciones que pueda responder" << endl;
                             }
-                            cout << "Eleccion: ";
-                            while(!(cin>>aux) || aux > cont) {
-                                cin.clear();
-                                cin.ignore(80, '\n');
-                            }
-                            it = listaCalifs.find(califs[aux]);
-                            DTCalificacion* dtc = (*it).second;
-                            cout << "Ingrese la respuesta \n";
-                            cin.ignore();
-                            getline(cin,resp);
-                            (*ICC).ingresarRespuesta(resp,(*dtc).getId());
-
                         };
                         break;
                         case 3:{ //Volver
