@@ -3,11 +3,14 @@
 ControladorHostal* ControladorHostal::instancia = NULL;
 
 ControladorHostal::~ControladorHostal(){
+    map<string,hostal*>::iterator itH;
+    for (itH = hostales.begin() ; itH != hostales.end() ; itH++)
+        delete (*itH).second;
+    hostales.clear();
+    liberarMemoria();
 }
 
 ControladorHostal::ControladorHostal(){
-    hostales={};
-
     datosHostal=NULL;
     datosHabitacion=NULL;
 }

@@ -1,6 +1,11 @@
 #include "../include/hostal.h"
 
 hostal::~hostal(){
+    map<int,habitacion*>::iterator itH;
+    for (itH = habitaciones.begin() ; itH != habitaciones.end() ; itH++)
+        delete (*itH).second;
+    habitaciones.clear();
+    
 }
 
 hostal::hostal(string nombre, string direccion,string telefono){

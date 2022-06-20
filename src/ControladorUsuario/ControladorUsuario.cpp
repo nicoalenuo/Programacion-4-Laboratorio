@@ -5,6 +5,17 @@
 ControladorUsuario* ControladorUsuario::instancia = NULL;
 
 ControladorUsuario::~ControladorUsuario(){
+    map<string,huesped*>::iterator itH;
+    map<string,empleado*>::iterator itE;
+    for (itH = huespedes.begin() ; itH != huespedes.end() ; itH++)
+        delete (*itH).second;
+    for (itE = empleados.begin() ; itE != empleados.end() ; itE++)
+        delete (*itE).second;
+    huespedes.clear();
+    empleados.clear();
+    liberarMemoria();
+    
+    
 }
 
 ControladorUsuario::ControladorUsuario(){

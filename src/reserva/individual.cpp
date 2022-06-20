@@ -2,7 +2,7 @@
 #include "../../include/fabrica.h"
 
 individual::~individual(){
-   // [FATLTA HACER]
+   //delete huesInd;
 }
 
 individual::individual(DTReservaIndividual* DTR, habitacion* Hab,DTHuesped* Propietario){

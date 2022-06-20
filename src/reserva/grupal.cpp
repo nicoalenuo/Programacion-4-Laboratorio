@@ -2,7 +2,9 @@
 #include "../../include/fabrica.h"
 
 grupal::~grupal(){
-   // [FATLTA HACER]
+    /*set<huespedGrupal*>::iterator itHG;
+    for (itHG = huesGrup.begin() ; itHG != huesGrup.end() ; itHG++)
+        delete (*itHG);*/
 }
 
 grupal::grupal(DTReservaGrupal* DTR, habitacion* Hab,map<string,DTHuesped*> SDTH,DTHuesped* Propietario){

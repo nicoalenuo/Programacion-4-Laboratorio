@@ -4,6 +4,11 @@
 ControladorReserva* ControladorReserva::instancia = NULL;
 
 ControladorReserva::~ControladorReserva(){
+    map<int,reserva*>::iterator itR;
+    for (itR = reservas.begin() ; itR!=reservas.end() ; itR++)
+        delete (*itR).second;
+    reservas.clear();
+    liberarMemoria();
 }
 
 ControladorReserva::ControladorReserva(){

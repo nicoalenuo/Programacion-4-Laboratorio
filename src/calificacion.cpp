@@ -7,6 +7,11 @@ DTCalificacion* calificacion::darDatos(){
     return resultado;
 }
 
+calificacion::~calificacion(){
+    if (respuestaAsoc!=NULL)
+        delete respuestaAsoc;
+}
+
 calificacion::calificacion(int id,int puntuacion,string comentario,Date fecha){
     (*this).id=id;
     (*this).puntuacion=puntuacion;
@@ -22,9 +27,6 @@ bool calificacion::sinRespuesta(){
 void calificacion::ingresarRespuesta(string res){
     respuesta* set = new respuesta(res);
     setRespuesta(set);
-}
-
-calificacion::~calificacion(){
 }
 
 void calificacion::eliminarCalificacion(){

@@ -6,8 +6,20 @@
 ControladorCalificacion* ControladorCalificacion::instancia = NULL;
 
 ControladorCalificacion::~ControladorCalificacion(){
+<<<<<<< Updated upstream
     datosCalificacion = NULL;
     datosEstadia = NULL;
+=======
+    map<int,calificacion*>::iterator itC;
+    map<int,estadia*>::iterator itE;
+    for (itC = calificaciones.begin() ; itC != calificaciones.end() ; itC++)
+        delete (*itC).second;
+    for (itE = estadias.begin() ; itE != estadias.end() ; itE++)
+        delete (*itE).second;
+    calificaciones.clear();
+    estadias.clear();
+    liberarMemoria();
+>>>>>>> Stashed changes
 }
 
 ControladorCalificacion::ControladorCalificacion(){

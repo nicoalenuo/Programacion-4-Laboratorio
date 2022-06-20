@@ -5,6 +5,9 @@ fabrica* fabrica::instancia = NULL;
 fabrica::fabrica(){
 }
 
+fabrica::~fabrica(){
+}
+
 fabrica* fabrica::getInstance(){
     if (instancia == NULL)
         instancia = new fabrica();

@@ -1,9 +1,9 @@
 #include "../../include/fabrica.h"
 
 empleado::~empleado(){
-    set<notificacion*>::iterator it;
-    for (it=notificaciones.begin() ; it!=notificaciones.end() ; it++){
-        delete (*it);
+    set<notificacion*>::iterator itN;
+    for (itN=notificaciones.begin() ; itN!=notificaciones.end() ; itN++){
+        delete (*itN);
     }
 }
 
@@ -36,10 +36,15 @@ set<DTNotificacion*> empleado::darNotificaciones(){
     set<notificacion*>::iterator it;
     for (it=notificaciones.begin() ; it!=notificaciones.end() ; it++){
         nots.insert((*(*it)).darDatos());
+<<<<<<< Updated upstream
         notificacion* aBorrar = (*it);
         notificaciones.erase(aBorrar);
         delete aBorrar;
+=======
+        delete (*it);
+>>>>>>> Stashed changes
     }
+    notificaciones.clear();
     return nots;
 }
 

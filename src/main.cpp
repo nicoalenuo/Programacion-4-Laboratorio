@@ -619,7 +619,83 @@ int main(){
 
                         }
                         case 3:{ //Baja de Reserva
+<<<<<<< Updated upstream
 
+=======
+                            DTHostal * dth = ElegirHostal();
+                            if (dth!=NULL){
+                                DTHabitacion *dthab; // Puntero al DTHabitacion con el numero elegido en el hostal elegido
+                                DTReserva* dtres;
+                                int CodigoReserva;
+                                existe= false;
+                                ICH->setDatosHostal(dth);
+                                map<int,DTReserva*> SDTReservas = (*ICH).obtenerReservasDeHostal();
+                                if(!SDTReservas.empty()){
+                                    cout<<"-----------------Reservas-----------------"<< endl;
+                                    for(itDTR = SDTReservas.begin(); itDTR != SDTReservas.end(); itDTR++){
+                                        cout << " Código: " << (*itDTR).second->getCodigo() << endl;
+                                        cout << " Check In: " <<(*itDTR).second->getCheckIn().getDia() <<"/" <<(*itDTR).second->getCheckIn().getMes() <<"/"<<(*itDTR).second->getCheckIn().getAnio() << " - " << (*itDTR).second->getCheckIn().getHora() <<":00" << endl;
+                                        cout << " Check Out: " <<(*itDTR).second->getCheckOut().getDia() <<"/" <<(*itDTR).second->getCheckOut().getMes() <<"/"<<(*itDTR).second->getCheckOut().getAnio() << " - " << (*itDTR).second->getCheckOut().getHora() <<":00" << endl;
+                                        cout<<"........................................................"<< endl;
+                                    }
+                                    cout<<"Ingrese el código de la reserva : \n";
+                                    cin >> CodigoReserva;
+                                    existe =false;
+                                    itDTR = SDTReservas.begin();
+                                    while(itDTR!=SDTReservas.end() && !existe){ //controlo que el numero ingresado corresponda a una habitacion disponible
+                                        if((*(*itDTR).second).getCodigo() == CodigoReserva){
+                                            existe = true;
+                                            dtres = (*itDTR).second;
+                                        };
+                                        itDTR++;
+                                    };
+                                    while(existe == false){
+                                        cout<< "###ERROR### Ingrese un codigo correcto: "<< endl;
+                                        cin >> CodigoReserva;
+                                        //CONTROLO QUE EL CODIGO SEA CORRECTO
+                                        existe= false;
+                                        itDTR = SDTReservas.begin();
+                                        while(itDTR!=SDTReservas.end() && !existe){ //controlo que el numero ingresado corresponda al codigo
+                                            if((*(*itDTR).second).getCodigo() == CodigoReserva){
+                                                existe = true;
+                                                dtres = (*itDTR).second;
+                                            };
+                                            itDTR++;
+                                        };
+                                    }
+                                    char elec;
+                                    cout<< "Confirmar? : "<< endl;
+                                    cout<< "S/N: "<< endl;
+                                    cin >> elec;
+                                    if((char)toupper(elec) == 'S'){
+                                        ICR->confirmarBaja(dth,CodigoReserva);
+                                    }else if((char)toupper(elec) == 'N'){
+                                        (*ICR).liberarMemoria();
+                                        (*ICH).liberarMemoria();
+                                    }else{
+                                        bool Finalizado = false;
+                                        while(Finalizado == false){
+                                            cout<< "###ERROR###"<< endl;
+                                            cout<< "¿Desea confirmar? : "<< endl;
+                                            cout<< "S/N: "<< endl;
+                                            cin >> elec;
+                                            Finalizado = ((char)toupper(elec)=='S' || (char)toupper(elec)=='N');
+                                        }
+                                        if((char)toupper(elec)=='S'){
+                                            ICR->confirmarBaja(dth,CodigoReserva);
+                                        }if((char)toupper(elec)=='N'){
+                                            (*ICR).liberarMemoria();
+                                            (*ICH).liberarMemoria();
+                                        }
+                                    }
+                                }else{
+                                    cout<< "El hostal no posee reservas" << endl;
+                                }
+                            }else{
+                                cout << "No hay hostales en el sistema" << endl;
+                            }
+                            break;
+>>>>>>> Stashed changes
                         }
                         case 4:{ //Registrar Estadía
 
@@ -1124,5 +1200,14 @@ int main(){
             }
         }//switch(Opcion1)
     }//while (!finalizar)
+<<<<<<< Updated upstream
     cout<<"Gracias por operar con nosotros, vuelva pronto!";
+=======
+    delete ICH;
+    delete ICC;
+    delete ICU;
+    delete ICR;
+    delete f;
+    cout<<"Gracias por operar con nosotros, vuelva pronto! \n";
+>>>>>>> Stashed changes
 }//int main()
