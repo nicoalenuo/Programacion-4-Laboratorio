@@ -28,14 +28,10 @@ class individual:public reserva{
         void setCheckOut(Date);
         void setEstado(EstadoReserva);
         void setCosto(float);
-        
-        DTReservaIndividual* darDatos();
         void finalizarSiEsReservaBuscada(string, string);
         bool perteneceHusped(string);
         void darBajaReserva();
         map<int, DTEstadia*> obtenerEstadias();
-        DTEstadia* obtenerEstadia();
-        DTReserva* obtenerResrvaDeEst();
         bool tieneEstadiaFinalizadaDeHuespedEnHostal(string);
         DTEstadia* darEstadiaDeHuesped(string);
         huespedIndividual* getHuespedIndividual();

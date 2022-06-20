@@ -58,5 +58,4 @@ void DTReservaGrupal::setCosto(float Costo) {
 }
 
 DTReservaGrupal::~DTReservaGrupal(){
-   // [FATLTA HACER]
 }

@@ -72,9 +72,9 @@ set<DTNotificacion*> empleado::darNotificaciones(){
     set<notificacion*>::iterator it;
     for (it=notificaciones.begin() ; it!=notificaciones.end() ; it++){
         nots.insert((*(*it)).darDatos());
-        notificacion* aBorrar = (*it);
-        delete aBorrar;
+        delete (*it);
     }
+    notificaciones.clear();
     return nots;
 }
 

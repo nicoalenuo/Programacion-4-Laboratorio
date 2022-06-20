@@ -155,11 +155,4 @@ DTEstadia* individual::darEstadiaDeHuesped(string email){
     DTEstadia* est = huesInd->obtenerEstadia();
     return est;
 }
-
-
-/////////////////////////////////////////
-
-        DTReservaIndividual* individual::darDatos(){return NULL;}
-        DTEstadia* individual::obtenerEstadia(){return NULL;}
-        DTReserva* individual::obtenerResrvaDeEst(){return NULL;}
        

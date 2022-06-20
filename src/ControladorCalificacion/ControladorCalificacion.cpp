@@ -130,7 +130,7 @@ DTRespuesta* ControladorCalificacion::obtenerRespuesta(DTCalificacion* c){
     return dtr;
 }
 
-void ControladorCalificacion::eliminarCalificacion(int id){//borra del map la calificacion, pero no de memoria, eso se hace en EliminarCalificacion de Calificacion
+void ControladorCalificacion::eliminarCalificacion(int id){
     calificaciones.erase(id);
 }
 
@@ -155,13 +155,3 @@ void ControladorCalificacion::setDatosCalificacion(DTCalificacion* dtc){
 void ControladorCalificacion::setDatosEstadia(DTEstadia* dte){
     datosEstadia=dte;
 }
-
-////////////////////////////////////////////////
-
-        map<int,DTEstadia*> ControladorCalificacion::obtenerEstadiasHuesped(string){
-            map<int,DTEstadia*> a;
-            return a;
-        }
-
-        void ControladorCalificacion::eliminarCalificacion(){}
-        float ControladorCalificacion::obtenerPromocionDeEstadia(){return 1;}

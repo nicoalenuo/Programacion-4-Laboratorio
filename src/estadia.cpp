@@ -2,6 +2,10 @@
 #include "../include/fabrica.h"
 #include "../include/FechaSistema.h"
 
+estadia::~estadia(){
+    
+}
+
 estadia::estadia(int codigoAct){
     FechaSistema* fs = FechaSistema::getInstance();
     calificacionAsoc=NULL;
@@ -77,8 +81,4 @@ void estadia::eliminarEstadia(){
         delete fechaSalida;
         
     (*icc).quitarEstadia(codigo);
-}
-
-estadia::~estadia(){
-    
 }

@@ -241,9 +241,3 @@ map<string,DTHuesped*> grupal::obtenerHuespedesDeReserva(){
     }
     return resultado;
 }
-
-/////////////////////////////////////////////
-
-DTEstadia* grupal::obtenerEstadia(){return NULL;}
-
-DTReserva* grupal::obtenerResrvaDeEst(){return NULL;}

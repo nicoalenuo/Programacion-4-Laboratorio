@@ -201,7 +201,7 @@ int main(){
                                         cout<<"Ya existe una habitación con el numero "<<num<< " en el hostal "<<dth->getNombre()<<endl;
                                         cout<<"Por favor ingrese otro numero: \n";
                                     }                       
-                                                            
+                                                     
                                 }while(existe);
                                 cout << "Precio de la habitacion: ";
                                 cin>>precio;

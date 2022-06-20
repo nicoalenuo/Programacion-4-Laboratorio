@@ -49,5 +49,5 @@ void DTReservaIndividual::setCosto(float Costo) {
 }
 
 DTReservaIndividual::~DTReservaIndividual(){
-   // [FATLTA HACER]
+    
 }
