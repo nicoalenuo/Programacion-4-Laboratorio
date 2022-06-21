@@ -253,10 +253,10 @@ int main(){
                                 do{
                                     cont = 1;
                                     it=dthostales.begin();
-                                    cout << "Elija un hostal de acuerdo a su numero" << endl;
+                                    cout << "Elija un hostal de acuerdo a su número" << endl;
                                     cin >> elegir;
                                     if(elegir > dthostales.size() || elegir<=0){
-                                        cout << "El numero elegido no pertenece a la lista" << endl;
+                                        cout << "El número elegido no pertenece a la lista" << endl;
                                     }else{
                                         while(cont<elegir){
                                             cont++;
@@ -269,7 +269,7 @@ int main(){
                                 //mostar el hostal
                                 cout << "    Hostal" << endl;
                                 cout << "Nombre: " << (*ICH).getDatosHostal()->getNombre() << endl;
-                                cout << "Direccion: " << (*ICH).getDatosHostal()->getDireccion() << endl;
+                                cout << "Dirección: " << (*ICH).getDatosHostal()->getDireccion() << endl;
                                 cout << "Telefono: " << (*ICH).getDatosHostal()->getTelefono() << endl;
                                 //mostrar el promedio de calificaciones del hostal
                                 if((*ICH).getDatosHostal()->getCalificacionPromedio()!=0){
@@ -288,9 +288,9 @@ int main(){
                                 }else{
                                     for(itcal=dtcalificaciones.begin();itcal!=dtcalificaciones.end();itcal++){
                                         dtcal= (*itcal).second;
-                                        cout << "    Calificacion " << endl;
+                                        cout << "    Calificación " << endl;
                                         cout << "Comentario: " << dtcal->getComentario() << endl;
-                                        cout << "Puntuacion: " << dtcal->getPuntuacion() << endl;
+                                        cout << "Puntuación: " << dtcal->getPuntuacion() << endl;
                                         cout << endl;
                                     }
                                 }
@@ -301,8 +301,8 @@ int main(){
                                     cout << "No existen habitaciones en este hostal" << endl;
                                 }else{
                                     for(it1=dthabitaciones.begin();it1!=dthabitaciones.end();it1++){
-                                        cout << "    Habitacion " << endl;
-                                        cout << "Numero: " << (*it1).second->getNumero() << endl;
+                                        cout << "    Habitación " << endl;
+                                        cout << "Número: " << (*it1).second->getNumero() << endl;
                                         cout << "Precio: " << (*it1).second->getPrecio() << endl;
                                         cout << "Capacidad: " << (*it1).second->getCapacidad() << endl;
                                         cout << endl;
@@ -383,8 +383,8 @@ int main(){
                                     ind++;
                                     cout << "No. " << ind << ": " << endl;
                                     cout << "Nombre : " << ((*it).second)->getNombre() << endl;
-                                    cout << "Direccion : " << ((*it).second)->getDireccion() << endl;
-                                    cout << "Telefono : " << ((*it).second)->getTelefono() << endl;
+                                    cout << "Dirección : " << ((*it).second)->getDireccion() << endl;
+                                    cout << "Teléfono : " << ((*it).second)->getTelefono() << endl;
                                     cout << "Promedio : " << ((*it).second)->getCalificacionPromedio() << endl;
                                     cout << endl;
 
@@ -420,7 +420,7 @@ int main(){
                         break;
                         //Volver a menú 1
                         default:{
-                            cout<< "Por favor, seleccione una opcion entre 1 y 5. \n";
+                            cout<< "Por favor, seleccione una opción entre 1 y 5. \n";
                         };
                         break;
 
@@ -431,7 +431,7 @@ int main(){
             case 2:{ //Administracion de Usuarios
                 while(!finSubMenu){
                     cout << "-------------------------------\n";
-                    cout << "Seleccione la operacion que desea realizar: \n";
+                    cout << "Seleccione la operación que desea realizar: \n";
                     cout << "1. Alta Empleado \n";
                     cout << "2. Alta Huesped \n";
                     cout << "3. Asignar Empleados a Hostal \n";
@@ -538,7 +538,7 @@ int main(){
                                     if ((char) toupper(esFingerAux) == 'N')
                                         esFinger = false;
                                     else
-                                        cout << "La opcion ingresada no es válida.\n";
+                                        cout << "La opción ingresada no es válida.\n";
                                 };
                             }while((char) toupper(esFingerAux) != 'S' && (char) toupper(esFingerAux) != 'N');
                             cout<<"Email: \n";
@@ -598,8 +598,8 @@ int main(){
                                     for(it2=hostales.begin(); it2!=hostales.end(); it2++){
                                         ind++;
                                         cout<<ind<<"- Nombre: "<<((*it2).second)->getNombre() << endl;
-                                        cout << "   Direccion: "<<((*it2).second)->getDireccion()<< endl;
-                                        cout << "   Telefono: "<<((*it2).second)->getTelefono()<< endl;
+                                        cout << "   Dirección: "<<((*it2).second)->getDireccion()<< endl;
+                                        cout << "   Teléfono: "<<((*it2).second)->getTelefono()<< endl;
                                         cout << endl;
                                     }
                                     cin>>num;
@@ -698,14 +698,14 @@ int main(){
                                     cout << "   Email: " << (*it).second->getEmail() << endl;
                                     cout << endl;
                                 }
-                                cout << "Elija un usuario de acuerdo a su numero" << endl;
+                                cout << "Elija un usuario de acuerdo a su número" << endl;
                                 int elegir;
                                 do{
                                     cont = 1;
                                     it=dtusuarios.begin();
                                     cin >> elegir;
                                     if(elegir > dtusuarios.size() || elegir<=0){
-                                        cout << "El numero elegido no pertenece a la lista" << endl;
+                                        cout << "El número elegido no pertenece a la lista" << endl;
                                     }else{
                                         while(cont<elegir){
                                             cont++;
@@ -855,9 +855,10 @@ int main(){
                                 set<DTNotificacion*> notificaciones = (*ICU).consultarNotificaciones((*(*it).second).getEmail());
 
                                 for (it2=notificaciones.begin() ; it2!=notificaciones.end() ; it2++){
-                                    cout << (*(*it2)).getNombreAutor() << endl;
-                                    cout << (*(*it2)).getPuntuacion() << endl;
-                                    cout << (*(*it2)).getComentario() << endl;
+                                    cout << "Nombre del autor: "<<(*(*it2)).getNombreAutor() << endl;
+                                    cout << "Puntuación: "<<(*(*it2)).getPuntuacion() << endl;
+                                    cout << "Comentario: "<<(*(*it2)).getComentario() << endl;
+                                    cout<<endl;
                                     delete (*it2);
                                 }
                                 
@@ -991,10 +992,6 @@ int main(){
                                         cout<<"Número: " << ((*(*j).second)).getNumero() << endl;
                                         cout<<"Precio: " << ((*(*j).second)).getPrecio() << endl;
                                         cout<<"Capacidad: " << ((*(*j).second)).getCapacidad() << endl;
-                                        if (((*(*j).second)).getCapacidad()!=0)
-                                            cout<<"Calificación Promedio: " << ((*(*j).second)).getCapacidad() << endl;
-                                        else
-                                            cout << "No tiene calificaciones" << endl;
                                         cout<< endl;
                                     };
                     
@@ -1042,17 +1039,17 @@ int main(){
                                     int cont;
                                     int cont2=0;
                                     do{
-                                    cont=1;
-                                    cout<< "Seleccione el numero correspondiente al huesped que desea ingresar en la reserva"<< endl;
-                                    for(itCU = HuespedesAListar.begin();itCU != HuespedesAListar.end(); itCU++ ){
-                                        cout << cont << "- Nombre: " << (*itCU).second->getNombre() << endl;
-                                        cout << "   Email: " <<(*itCU).second->getEmail() << endl;
-                                        cout<< endl;
-                                        cont++;
-                                    }
-                                    cin >> eleccion;
-                                    if (!(0<eleccion && eleccion<cont))
-                                        cout << "Por favor, seleccione una opcion valida" << endl;
+                                        cont=1;
+                                        cout<< "Seleccione el número correspondiente al huesped que desea ingresar en la reserva"<< endl;
+                                        for(itCU = HuespedesAListar.begin();itCU != HuespedesAListar.end(); itCU++ ){
+                                            cout << cont << "- Nombre: " << (*itCU).second->getNombre() << endl;
+                                            cout << "   Email: " <<(*itCU).second->getEmail() << endl;
+                                            cout<< endl;
+                                            cont++;
+                                        }
+                                        cin >> eleccion;
+                                        if (!(0<eleccion && eleccion<cont))
+                                            cout << "Por favor, seleccione una opcion válida" << endl;
                                     
                                     }while(!(0<eleccion && eleccion<cont));
 
@@ -1110,7 +1107,7 @@ int main(){
                                         
                                         bool Finalizado = false;
                                         while(Finalizado == false){
-                                            cout<< "###ERROR###"<< endl;
+                                            cout<< "La opción ingresada no es válida."<< endl;
                                             cout<< "¿Desea confirmar la reserva? : "<< endl;
                                             cout<< "S/N: "<< endl;
                                             cin >> elec;
@@ -1157,10 +1154,10 @@ int main(){
                                 do{
                                     cont = 1;
                                     it=dthostales.begin();
-                                    cout << "Elija un hostal de acuerdo a su numero" << endl;
+                                    cout << "Elija un hostal de acuerdo a su número" << endl;
                                     cin >> elegir;
                                     if(elegir > dthostales.size() || elegir<=0){
-                                        cout << "El numero elegido no pertenece a la lista" << endl;
+                                        cout << "El número elegido no pertenece a la lista" << endl;
                                     }else{
                                         while(cont<elegir){
                                             cont++;
@@ -1199,7 +1196,7 @@ int main(){
                                     //obtener habitacion de la reserva
                                     DTHabitacion* dthab= (*ICR).obtenerHabitacionDeReserva((*it2).second);
                                     //obtenerNumeroDeHabitacion(habitacion)
-                                    cout << "Numero de habitacion: " << dthab->getNumero() << endl;
+                                    cout << "Número de habitacion: " << dthab->getNumero() << endl;
                                     cout << endl;
                                     //Si la reserva es Grupal
                                     if(dynamic_cast<DTReservaGrupal*>((*it2).second)!=NULL){
@@ -1222,12 +1219,9 @@ int main(){
                                     delete (*it2).second;
                                 dtreservas.clear();
                             }
-                            //eliminar memoria map dthostal
-                            /*for (it=dthostales.begin () ; it!=dthostales.end() ; it++)
-                                delete (*it).second;*/
+                            
                             dthostales.clear();
-                            //liberarMemoria del Hostal
-                            //funciona comentado ¿perdera memoria? Si comento liberarMemoria de hostal o el for, el error se arregla
+                          
                             (*ICH).liberarMemoria();
 
 
@@ -1262,7 +1256,7 @@ int main(){
                                         itDTR++;
                                     };
                                     while(existe == false){
-                                        cout<< "###ERROR### Ingrese un codigo correcto: "<< endl;
+                                        cout<< "El código ingresado es incorrecto, ingréselo nuevamente: "<< endl;
                                         cin >> CodigoReserva;
                                         //CONTROLO QUE EL CODIGO SEA CORRECTO
                                         existe= false;
@@ -1286,7 +1280,7 @@ int main(){
                                     }else{
                                         bool Finalizado = false;
                                         while(Finalizado == false){
-                                            cout<< "###ERROR###"<< endl;
+                                            cout<< "La opción ingresada no es válida."<< endl;
                                             cout<< "¿Desea confirmar? : "<< endl;
                                             cout<< "S/N: "<< endl;
                                             cin >> elec;
@@ -1325,7 +1319,7 @@ int main(){
                                     itCU++;
                                 };
                                 while(existe == false){
-                                    cout<< "###ERROR### Ingrese un email correcto: "<< endl;
+                                    cout<< "El email ingresado no es correcto, igréselo nuevamente: "<< endl;
                                     cin >> MailHuesped;
                                     //CONTROLO QUE EL MAIL SEA CORRECTO
                                     existe= false;
@@ -1338,39 +1332,44 @@ int main(){
                                     };
                                 }
                                 SDTReservas = ICR->ListarReservasNoCanceladasDeHuesped(dth, MailHuesped);
-                                cout<<"-----------------Reservas no canceladas-----------------"<< endl;
-                                for(itDTR = SDTReservas.begin(); itDTR != SDTReservas.end(); itDTR++){
-                                    cout << " Código: " << (*itDTR).second->getCodigo() << endl;
-                                    cout << " Check In: " <<(*itDTR).second->getCheckIn().getDia() <<"/" <<(*itDTR).second->getCheckIn().getMes() <<"/"<<(*itDTR).second->getCheckIn().getAnio() << " - " << (*itDTR).second->getCheckIn().getHora() << ":00" <<  endl;
-                                    cout << " Check Out: " <<(*itDTR).second->getCheckOut().getDia() <<"/" <<(*itDTR).second->getCheckOut().getMes() <<"/"<<(*itDTR).second->getCheckOut().getAnio() << " - " << (*itDTR).second->getCheckOut().getHora() << ":00" << endl;
-                                    cout<<"........................................................"<< endl;
-                                }
-                                cout<<"Ingrese el código de reserva sobre la que se realizará la estadía: \n";
-                                cin >> CodigoReserva;
-                                existe =false;
-                                itDTR = SDTReservas.begin();
-                                while(itDTR!=SDTReservas.end() && !existe){ //controlo que el numero ingresado corresponda a una habitacion disponible
-                                    if((*(*itDTR).second).getCodigo() == CodigoReserva){
-                                        existe = true;
-                                        dtres = (*itDTR).second;
-                                    };
-                                    itDTR++;
-                                };
-                                while(existe == false){
-                                    cout<< "###ERROR### Ingrese un codigo correcto: "<< endl;
+                                if(!SDTReservas.empty()){
+                                    cout<<"-----------------Reservas no canceladas-----------------"<< endl;
+                                    
+                                    for(itDTR = SDTReservas.begin(); itDTR != SDTReservas.end(); itDTR++){
+                                        cout << " Código: " << (*itDTR).second->getCodigo() << endl;
+                                        cout << " Check In: " <<(*itDTR).second->getCheckIn().getDia() <<"/" <<(*itDTR).second->getCheckIn().getMes() <<"/"<<(*itDTR).second->getCheckIn().getAnio() << " - " << (*itDTR).second->getCheckIn().getHora() << ":00" <<  endl;
+                                        cout << " Check Out: " <<(*itDTR).second->getCheckOut().getDia() <<"/" <<(*itDTR).second->getCheckOut().getMes() <<"/"<<(*itDTR).second->getCheckOut().getAnio() << " - " << (*itDTR).second->getCheckOut().getHora() << ":00" << endl;
+                                        cout<<"........................................................"<< endl;
+                                    }
+                                    cout<<"Ingrese el código de reserva sobre la que se realizará la estadía: \n";
                                     cin >> CodigoReserva;
-                                    //CONTROLO QUE EL CODIGO SEA CORRECTO
-                                    existe= false;
+                                    existe =false;
                                     itDTR = SDTReservas.begin();
-                                    while(itDTR!=SDTReservas.end() && !existe){ //controlo que el numero ingresado corresponda al codigo
+                                    while(itDTR!=SDTReservas.end() && !existe){ //controlo que el numero ingresado corresponda a una habitacion disponible
                                         if((*(*itDTR).second).getCodigo() == CodigoReserva){
                                             existe = true;
                                             dtres = (*itDTR).second;
                                         };
                                         itDTR++;
                                     };
-                                }
-                                ICC->RegistrarEstadia(MailHuesped,CodigoReserva);
+                                    while(existe == false){
+                                        cout<< "El código es incorrecto, ingréselo nuevamente: "<< endl;
+                                        cin >> CodigoReserva;
+                                        //CONTROLO QUE EL CODIGO SEA CORRECTO
+                                        existe= false;
+                                        itDTR = SDTReservas.begin();
+                                        while(itDTR!=SDTReservas.end() && !existe){ //controlo que el numero ingresado corresponda al codigo
+                                            if((*(*itDTR).second).getCodigo() == CodigoReserva){
+                                                existe = true;
+                                                dtres = (*itDTR).second;
+                                            };
+                                            itDTR++;
+                                        };
+                                    }
+                                    ICC->RegistrarEstadia(MailHuesped,CodigoReserva);
+                                }else{
+                                    cout<<"No hay reservas no canceladas para el huesped ingresado.\n";
+                                };
                             }else{
                                 if (dth==NULL)
                                     cout << "No hay hostales en el sistema" << endl;
@@ -1699,8 +1698,8 @@ int main(){
                                         cont++;
                                         califs[cont] = it->second->getId();
                                         cout << cont << "- Código: " << ((*it).second)->getId() << endl;
-                                        cout << cont << "   Puntuación: " << ((*it).second)->getPuntuacion() << endl;
-                                        cout << cont << "   Comentario: " << ((*it).second)->getComentario() << endl;
+                                        cout <<  "   Puntuación: " << ((*it).second)->getPuntuacion() << endl;
+                                        cout <<  "   Comentario: " << ((*it).second)->getComentario() << endl;
                                         cout << "   Fecha: " << ((*it).second)->getFecha().getDia() << "/" << ((*it).second)->getFecha().getMes() << "/"  << ((*it).second)->getFecha().getAnio() << " - " << ((*it).second)->getFecha().getHora() << ":00" << endl;
                                         cout << endl;
                                     }
@@ -2158,4 +2157,43 @@ int main(){
         }//switch(Opcion1)
     }//while (!finalizar)
     cout<<"Gracias por operar con nosotros, vuelva pronto! \n";
+    cout<<endl;
+    cout<<"                  ████        ████                                          \n";    
+    cout<<"                ██▒▒██    ░░██▒▒██                                          \n";  
+    cout<<"              ██▒▒██    ██▓▓▒▒██                                            \n";  
+    cout<<"            ██▒▒██    ██▒▒▒▒██                                              \n";  
+    cout<<"            ██▒▒██    ██▒▒▒▒██                                              \n";  
+    cout<<"            ██▒▒██    ██▒▒▓▓██                                              \n";  
+    cout<<"            ██▒▒██    ██▒▒▓▓██                                              \n";  
+    cout<<"            ██████████████████                                              \n";  
+    cout<<"      ██████              ░░░░██                                            \n";  
+    cout<<"    ██  ██                    ████                                          \n";  
+    cout<<"  ██  ░░██                        ██                                        \n";  
+    cout<<"██░░░░██                      ██░░  ██                                      \n";  
+    cout<<"  ██████                      ████░░░░██                                    \n";  
+    cout<<"    ██                        ██  ████                                      \n";  
+    cout<<"    ██      ██    ██          ██                                    ████    \n";  
+    cout<<"    ██      ██    ██          ██                                  ██    ██  \n";  
+    cout<<"    ██                          ██                                  ██    ██\n";  
+    cout<<"  ██░░                    ░░░░    ██████                            ██    ██\n";  
+    cout<<"  ██  ░░        ░░░░░░░░░░░░░░░░░░      ██████░░          ██████████    ██  \n";  
+    cout<<"  ██            ░░░░░░░░░░▒▒██░░  ░░░░░░░░  ░░████████████  ░░        ██    \n";  
+    cout<<"  ██            ░░░░░░░░░░▒▒██░░░░░░░░░░░░░░░░  ░░  ░░░░░░░░░░░░░░      ██  \n";  
+    cout<<"  ██                  ░░██▒▒  ██░░            ░░                        ██  \n";  
+    cout<<"  ██    ▒▒▒▒▒▒▒▒      ██        ██                                        ██\n";  
+    cout<<"    ██    ▒▒▒▒        ██        ██░░                                      ██\n";  
+    cout<<"      ██            ██          ██░░░░                                    ██\n";  
+    cout<<"        ██        ██            ██░░░░                                    ██\n";  
+    cout<<"          ██████████              ██░░░░                                  ██\n";  
+    cout<<"            ██░░░░██                ██░░░░                                ██\n";  
+    cout<<"            ██░░██                  ████░░░░    ░░░░░░░░░░░░░░░░░░░░      ██\n";  
+    cout<<"              ██                    ██░░████░░  ░░████████████████░░░░    ██  \n";  
+    cout<<"                                    ██░░██  ██  ██          ██░░░░██░░░░  ██  \n";
+    cout<<"   ---Grupo 29 Los Milanesa---      ██░░██  ██  ██          ██░░░░░░██░░░░  ██\n";
+    cout<<"        Federico de Armas           ██░░██  ██  ██            ██░░░░████░░  ██\n";
+    cout<<"        Nicolás Núñez               ██░░██  ██  ██              ██░░██  ██  ██\n";
+    cout<<"        Kevin Machado               ██░░██  ██  ██              ██░░██  ██░░██\n";
+    cout<<"        Camila Ayuto                ██░░██  ██  ██              ██░░██  ██░░██\n";
+    cout<<"        Emanuel Estellano           ██████  ██████              ██████  ██████\n";
+    cout<<"                                    ██░░██  ██▒▒██              ██▒▒██  ██▒▒██\n";  
 }//int main()
